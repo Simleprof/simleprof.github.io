@@ -73,6 +73,17 @@ button.note.off{font:inherit;color:inherit;text-align:left;cursor:default}
 .mdp label{flex:1;min-width:180px;font-size:15px;font-weight:700}
 .mdp input{display:block;width:100%;margin-top:4px;padding:10px;font:inherit;font-size:16px;border:2px solid var(--line);background:#fff;color:#0e0e0e}
 .mdp button{padding:10px 16px;font:inherit;font-weight:900;background:var(--jaune);color:#0e0e0e;border:3px solid var(--line);cursor:pointer}
+/* Le choix du haut : Notes de cours ou Exercices (même choix en haut de chaque note) */
+.vue-choix{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--line);box-shadow:var(--ombre)}
+.vue-choix button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 8px;background:var(--card);font-weight:900;font-size:clamp(19px,5.4vw,26px);text-transform:uppercase;letter-spacing:-.02em;line-height:1.05}
+.vue-choix button+button{border-left:3px solid var(--line)}
+.vue-choix button.on{background:var(--jaune);color:#0e0e0e}
+.vue-choix small{font-family:var(--mono);font-size:15px;font-weight:700;text-transform:none;letter-spacing:0}
+.vue-notes .notes-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.vue-notes .note{padding:16px;box-shadow:var(--ombre)}
+.vue-notes .note b{font-size:20px}
+.vue-notes .note.off{box-shadow:none}
+.vers-ex{display:block;width:100%;padding:16px;border:3px solid var(--line);background:var(--card);font-weight:900;font-size:18px;text-align:left;box-shadow:3px 3px 0 var(--line)}
 /* Un seul geste pour commencer ; les types d'activité sont repliés dans un menu */
 .go-g{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .gros.go{flex-direction:column;padding:22px 8px;font-size:clamp(19px,5.4vw,24px);white-space:nowrap;background:var(--jaune);color:#0e0e0e}
@@ -248,14 +259,14 @@ const HUB = {
   notes: [
     { id: "n11", titre: "1.1", sujet: "Consommation", fichier: "notes-1-1.html", sortie: true },
     { id: "n12", titre: "1.2", sujet: "Publicité", fichier: "notes-1-2.html", sortie: true },
-    { id: "n13", titre: "1.3", sujet: "S'informer · recours", fichier: "notes-1-3.html", sortie: false },
+    { id: "n13", titre: "1.3", sujet: "S'informer · recours", fichier: "notes-1-3.html", sortie: true },
     { id: "n14", titre: "1.4 + chapitre 2", sujet: "Budget · crédit", fichier: "notes-1-4-chapitre-2.html", sortie: false }
   ]
 };
 // Les examens (pour le bouton « Seulement la matière de ton examen ») : un examen se donne pendant une semaine (son lundi).
 const EXAMENS = [
   { titre: "Examen de mi-étape 1", semaine: "2026-10-26", sections: ["1.1", "1.2"] },
-  { titre: "Examen d'étape 1", semaine: "2026-11-09", sections: ["1.1", "1.2", "1.3", "1.4"] }
+  { titre: "Examen d'étape 1", semaine: "2026-11-09", sections: ["1.1", "1.2", "1.3"] }
 ];
 
 /* =====================================================================
@@ -690,11 +701,23 @@ function renderTrain() {
     return `<button class="act" data-act="${a.id}" style="--c:${a.c2}"${n ? "" : " disabled"}>
       <b class="a-n">${String(i + 1).padStart(2, "0")}</b>${faits[a.id] && n ? '<i class="a-fait">✓ Fait</i>' : ""}
       <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICO[a.ic]}</svg>
-      <strong>${esc(a.nom)}</strong><small>${n ? Math.min(SERIE, n) + " questions" : "Pas dans ce choix"}</small></button>`; };
-  $t("train").innerHTML = `
+      <strong>${esc(a.nom)}</strong><small>${n ? Math.min(SERIE, n) + (Math.min(SERIE, n) > 1 ? " questions" : " question") : "Pas dans ce choix"}</small></button>`; };
+  // En haut, l'élève choisit : lire ses notes ou s'exercer. Le choix reste sur l'appareil (1re visite : les notes).
+  const vue = store.get("vue") === "exercices" ? "exercices" : "notes";
+  const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Exercices", "Me tester"]]
+    .map(([v, t, s]) => `<button data-vue="${v}" class="${vue === v ? "on" : ""}" aria-pressed="${vue === v}">${t}<small>${s}</small></button>`).join("")}</nav>`;
+  if (vue === "notes") {
+    $t("train").innerHTML = `${choix}
+      <header class="hero"><p class="sticker">Chapitre 1 · La consommation</p><h1>Lis tes notes<em>.</em></h1>
+        <p class="hero-d">Une note par section. Lis un thème, fais sa petite vérif, continue. Ensuite, passe aux exercices.</p></header>
+      <div class="vue-notes">${notesHtml()}</div>
+      <button class="vers-ex" data-vue="exercices">Prêt? Passe aux exercices →</button>
+      <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
+    return;
+  }
+  $t("train").innerHTML = `${choix}
     <header class="hero"><p class="sticker">Chapitre 1 · La consommation</p><h1>Teste ce que tu sais<em>.</em></h1>
       <p class="hero-d">Choisis tes sections, puis lance-toi. Une erreur? Tu as la bonne réponse et la page de ton cahier.</p></header>
-    ${notesHtml()}
     <section><h2 class="lab">Tes sections</h2><div class="secs-g">
       <button class="sx tout${tout ? " on" : ""}" data-sx="tout" aria-pressed="${tout}">Tout le chapitre</button>
       ${Object.entries(SECTIONS).map(([s, t]) => { const on = !tout && ss.includes(s);
@@ -709,7 +732,7 @@ function renderTrain() {
 // Mes notes de cours : celles qui sont sorties s'ouvrent ; les autres disent « Bientôt » (sans date).
 // Un clic sur « Bientôt » ouvre la bulle du mot de passe de l'enseignant (la note en ligne est chiffrée).
 function notesHtml() {
-  return `<section><h2 class="lab">Mes notes de cours</h2><div class="notes-l">${HUB.notes.map(n => n.fichier && n.sortie
+  return `<section><div class="notes-l">${HUB.notes.map(n => n.fichier && n.sortie
     ? `<a class="note" href="${encodeURI(n.fichier)}"><b>📘 ${esc(n.titre)}</b><small>${esc(n.sujet)}</small></a>`
     : n.fichier
       ? `<button class="note off" data-verrou="${n.id}" aria-label="${esc(n.titre)} : bientôt"><b>🔒 ${esc(n.titre)}</b><small>Bientôt</small></button>`
@@ -750,7 +773,8 @@ function fin() {
 $t("train").addEventListener("click", e => {
   const b = e.target.closest("button");
   if (!b || b.disabled) return;
-  if (b.dataset.verrou) bulleMdp(b.dataset.verrou);
+  if (b.dataset.vue) { store.set("vue", b.dataset.vue); history.replaceState(null, "", "#" + b.dataset.vue); renderTrain(); scrollTo({ top: 0 }); }
+  else if (b.dataset.verrou) bulleMdp(b.dataset.verrou);
   else if (b.dataset.sx) choisirSec(b.dataset.sx);
   else if (b.dataset.act) lancer(b.dataset.act);
   else if (b.dataset.ex) lancer(b.dataset.ex);
@@ -768,6 +792,14 @@ $t("train").addEventListener("submit", e => {
 // Lien d'une note de cours (?s=1.2, ou ?s=1,2) : ces sections-là, et la série de 5 démarre tout de suite.
 const demandees = (new URLSearchParams(location.search).get("s") || "").split(",").filter(s => SECTIONS[s]);
 if (demandees.length) store.set("sections", demandees);
+// Le choix du haut d'une note : #notes, #exercices, ou #exercices=1.1 (cette section déjà choisie). Ancien lien : #teste-toi.
+const ancre = location.hash.match(/^#(notes|exercices|teste-toi)(?:=([\d.,]+))?$/);
+if (ancre) {
+  store.set("vue", ancre[1] === "notes" ? "notes" : "exercices");
+  const ss = (ancre[2] || "").split(",").filter(s => SECTIONS[s]);
+  if (ss.length) store.set("sections", ss);
+}
+if (demandees.length) store.set("vue", "exercices");
 renderTrain();
 if (demandees.length) lancer("examen5");
 
