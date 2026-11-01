@@ -275,7 +275,8 @@ const EXAMENS = [
    une erreur donne la bonne réponse et la page du cahier. Chaque question finit par [section, page].
    Source : les notes de cours 1.1 à 1.4 et le cahier (p. 4 à 37). Jamais une question d'examen recopiée.
    ===================================================================== */
-const SECTIONS = { "1.1": "Consommer, c'est choisir", "1.2": "La publicité", "1.3": "Outils, droits et recours", "1.4": "Le budget" };
+const SECTIONS = { "1.1": "Consommer, c'est choisir", "1.2": "La publicité", "1.3": "Outils, droits et recours" };
+// 1.4 (Le budget) retirée le 2026-11-01 : elle passe à l'étape 2. Ses questions restent dans les banques ; la remettre ici : "1.4": "Le budget".
 const SERIE = 5;
 
 // Glisse : [énoncé, bonne réponse (0 = à gauche, 1 = à droite), explication, section, page]
@@ -697,6 +698,8 @@ function renderTrain() {
   const today = parse(iso(NOW));
   const nx = EXAMENS.filter(x => finSemaine(x) >= today).sort((a, b) => parse(a.semaine) - parse(b.semaine))[0];
   const nxs = nx ? nx.sections : [];
+  // Une activité sans aucune question dans les sections offertes (ex. : Classe la dépense, toute en 1.4) n'apparaît pas.
+  const actives = ACTS.filter(a => (Q[a.id] ? Q[a.id]() : []).some(q => TOUTES.includes(q.s)));
   const tuile = (a, i) => { const n = questions(a.id).length;
     return `<button class="act" data-act="${a.id}" style="--c:${a.c2}"${n ? "" : " disabled"}>
       <b class="a-n">${String(i + 1).padStart(2, "0")}</b>${faits[a.id] && n ? '<i class="a-fait">✓ Fait</i>' : ""}
@@ -724,7 +727,7 @@ function renderTrain() {
         return `<button class="sx${on ? " on" : ""}" data-sx="${s}" aria-pressed="${on}"><b>${s}</b><small>${esc(t)}</small></button>`; }).join("")}
     </div>${nxs.length && nxs.join() !== ss.join() ? `<button class="sx-exam" data-sx="${nxs.join(",")}">🎯 Seulement la matière de ton ${esc(nx.titre.charAt(0).toLowerCase() + nx.titre.slice(1))} (${nxs.join(", ")})</button>` : ""}</section>
     <section class="go-g"><button class="gros go" data-ex="examen5">Teste-toi<small>5 questions</small></button><button class="gros go" data-ex="examen10">Teste-toi<small>10 questions</small></button></section>
-    <details class="types" id="types"${store.get("types") ? " open" : ""}><summary>Ou choisis un type d'activité <i>${ACTS.length}</i></summary><div class="grille">${ACTS.map(tuile).join("")}</div></details>
+    <details class="types" id="types"${store.get("types") ? " open" : ""}><summary>Ou choisis un type d'activité <i>${actives.length}</i></summary><div class="grille">${actives.map(tuile).join("")}</div></details>
     <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
   // Le menu des types d'activité reste ouvert ou fermé, comme l'élève l'a laissé.
   $t("types").addEventListener("toggle", e => store.set("types", e.target.open));
