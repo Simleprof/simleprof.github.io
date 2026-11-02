@@ -162,9 +162,10 @@ strong { font-weight: 700; }
 
 /* Cercles proportionnels */
 .circles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; gap: 8px; text-align: center; }
-.circles .c { display: grid; grid-template-rows: 116px auto auto auto; justify-items: center; gap: 6px; }
+.circles .c { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 116px auto auto auto; justify-items: center; gap: 6px; }
 .circles .ball { align-self: end; }
 .circles .ball { border-radius: 50%; background: var(--accent); opacity: .9; }
+@media (max-width: 480px) { .circles .ball { transform: scale(.65); transform-origin: 50% 100%; } }   /* toute la rangée rapetisse : les proportions restent justes */
 .circles .v { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; line-height: 1; }
 .circles .w { font-family: var(--mono); font-size: .72rem; color: var(--muted); letter-spacing: .04em; }
 .circles .d { font-size: .82rem; color: var(--muted); max-width: 18ch; line-height: 1.35; }
