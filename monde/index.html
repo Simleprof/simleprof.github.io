@@ -60,6 +60,13 @@ body:has(.jeu) .couv h1{font-size:26px;margin-top:4px}
 .v-d{font-style:normal;color:var(--ink-3);font-size:15px}
 .tampon-v{position:absolute;right:12px;top:50%;transform:translateY(-50%) rotate(-12deg);font-family:var(--mono);font-size:15px;color:var(--vert);border:2px solid var(--vert);border-radius:50%;width:74px;height:74px;display:grid;place-items:center;text-align:center;line-height:1.1;opacity:.85;font-style:normal}
 .v-n{position:absolute;right:16px;bottom:10px;font-style:normal;font-family:var(--mono);font-size:15px;color:var(--ink-3)}
+/* Le choix du haut : Notes de cours ou Exercices (le même qu'en Finances, et en haut de chaque note) */
+.vue-choix{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--cover);border-radius:12px;overflow:hidden;background:var(--card)}
+.vue-choix button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 8px;font-family:var(--serif);font-weight:800;font-size:clamp(20px,5.6vw,26px);line-height:1.1}
+.vue-choix button+button{border-left:1.5px solid var(--cover)}
+.vue-choix button.on{background:var(--cover);color:var(--gold)}
+.vue-choix small{font-family:var(--mono);font-size:15px;font-weight:500}
+.vers-ex{align-self:flex-start;padding:12px 18px;border:1.5px solid var(--ink);border-radius:999px;font-weight:700;font-size:17px;background:var(--card)}
 /* Mes notes de cours */
 .notes-l{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (min-width: 700px){ .notes-l{grid-template-columns:repeat(4,1fr)} }
@@ -607,10 +614,21 @@ function renderTrain() {
   const visa = (a, i) => { const n = questions(a.id).length, f = faits[a.id];
     return `<button class="visa" data-act="${a.id}" style="--vc:${ENCRES[i % ENCRES.length]}"${n ? "" : " disabled"}><b class="v-code">${a.rub}</b><strong class="v-t">${esc(a.nom)}</strong><i class="v-d">${n ? esc(a.desc) : "Pas dans ce choix"}</i>
       ${f && n ? `<i class="tampon-v">VALIDÉ<br>${esc(typeof f === "string" ? fmt(parse(f), { day: "numeric", month: "short" }) : "✓")}</i>` : n ? `<i class="v-n">${Math.min(SERIE, n)} q.</i>` : ""}</button>`; };
-  $t("train").innerHTML = `
+  // En haut, l'élève choisit : lire ses notes ou s'exercer (le même choix qu'en Finances). 1re visite : les notes.
+  const vue = store.get("vue") === "exercices" ? "exercices" : "notes";
+  const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Exercices", "Me tester"]]
+    .map(([v, t, s]) => `<button data-vue="${v}" class="${vue === v ? "on" : ""}" aria-pressed="${vue === v}">${t}<small>${s}</small></button>`).join("")}</nav>`;
+  if (vue === "notes") {
+    $t("train").innerHTML = `${choix}
+      <section class="intro"><h2>Lis tes notes.</h2><p>Enjeu 1 · La population. Lis une section, puis passe aux exercices.</p></section>
+      ${notesHtml()}
+      <button class="vers-ex" data-vue="exercices">Prêt? Passe aux exercices →</button>
+      <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
+    return;
+  }
+  $t("train").innerHTML = `${choix}
     <section class="intro"><h2>Enjeu 1 · La population</h2><p>Choisis tes destinations, puis décolle. Une erreur? La bonne réponse, et les pages du manuel à relire.</p></section>
-    ${notesHtml()}
-    <section><b class="lab">Entraînement · tes destinations</b><div class="secs-g">
+    <section><b class="lab">Tes destinations</b><div class="secs-g">
       <button class="sx${tout ? " on" : ""}" data-sx="tout" aria-pressed="${tout}">Tout l'enjeu</button>
       ${Object.entries(SECTIONS).map(([s, t]) => { const on = !tout && ss.includes(s);
         return `<button class="sx${on ? " on" : ""}" data-sx="${s}" aria-pressed="${on}">${s} · ${esc(t)}</button>`; }).join("")}
@@ -658,7 +676,8 @@ function fin() {
 $t("train").addEventListener("click", e => {
   const b = e.target.closest("button");
   if (!b || b.disabled) return;
-  if (b.dataset.sx) choisirSec(b.dataset.sx);
+  if (b.dataset.vue) { store.set("vue", b.dataset.vue); history.replaceState(null, "", "#" + b.dataset.vue); renderTrain(); scrollTo({ top: 0 }); }
+  else if (b.dataset.sx) choisirSec(b.dataset.sx);
   else if (b.dataset.act) lancer(b.dataset.act);
   else if (b.dataset.ex) lancer(b.dataset.ex);
   else if (b.hasAttribute("data-menu")) { renderTrain(); scrollTo({ top: 0 }); }
@@ -667,6 +686,14 @@ $t("train").addEventListener("click", e => {
 // Lien d'une note de cours (?s=1.2, ou ?s=1,2) : ces sections-là, et la série de 5 démarre tout de suite.
 const demandees = (new URLSearchParams(location.search).get("s") || "").split(",").filter(s => SECTIONS[s]);
 if (demandees.length) store.set("sections", demandees);
+// Le choix du haut d'une note : #notes, #exercices, ou #exercices=3 (cette section déjà choisie).
+const ancre = location.hash.match(/^#(notes|exercices)(?:=([\d.,]+))?$/);
+if (ancre) {
+  store.set("vue", ancre[1]);
+  const ss = (ancre[2] || "").split(",").filter(s => SECTIONS[s]);
+  if (ss.length) store.set("sections", ss);
+}
+if (demandees.length) store.set("vue", "exercices");
 renderTrain();
 if (demandees.length) lancer("examen5");
 

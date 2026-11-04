@@ -707,14 +707,14 @@ function renderTrain() {
       <strong>${esc(a.nom)}</strong><small>${n ? Math.min(SERIE, n) + (Math.min(SERIE, n) > 1 ? " questions" : " question") : "Pas dans ce choix"}</small></button>`; };
   // En haut, l'élève choisit : lire ses notes ou s'exercer. Le choix reste sur l'appareil (1re visite : les notes).
   const vue = store.get("vue") === "exercices" ? "exercices" : "notes";
-  const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Entraînement", "Me tester"]]
+  const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Exercices", "Me tester"]]
     .map(([v, t, s]) => `<button data-vue="${v}" class="${vue === v ? "on" : ""}" aria-pressed="${vue === v}">${t}<small>${s}</small></button>`).join("")}</nav>`;
   if (vue === "notes") {
     $t("train").innerHTML = `${choix}
       <header class="hero"><p class="sticker">Chapitre 1 · La consommation</p><h1>Lis tes notes<em>.</em></h1>
-        <p class="hero-d">Une note par section. Lis un thème, fais sa petite vérif, continue. Ensuite, passe à l’entraînement.</p></header>
+        <p class="hero-d">Une note par section. Lis un thème, fais sa petite vérif, continue. Ensuite, passe aux exercices.</p></header>
       <div class="vue-notes">${notesHtml()}</div>
-      <button class="vers-ex" data-vue="exercices">Prêt? Passe à l’entraînement →</button>
+      <button class="vers-ex" data-vue="exercices">Prêt? Passe aux exercices →</button>
       <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
     return;
   }
