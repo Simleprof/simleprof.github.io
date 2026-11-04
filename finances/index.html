@@ -73,7 +73,7 @@ button.note.off{font:inherit;color:inherit;text-align:left;cursor:default}
 .mdp label{flex:1;min-width:180px;font-size:15px;font-weight:700}
 .mdp input{display:block;width:100%;margin-top:4px;padding:10px;font:inherit;font-size:16px;border:2px solid var(--line);background:#fff;color:#0e0e0e}
 .mdp button{padding:10px 16px;font:inherit;font-weight:900;background:var(--jaune);color:#0e0e0e;border:3px solid var(--line);cursor:pointer}
-/* Le choix du haut : Notes de cours ou Exercices (même choix en haut de chaque note) */
+/* Le choix du haut : Notes de cours ou Entraînement (même choix en haut de chaque note) */
 .vue-choix{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--line);box-shadow:var(--ombre)}
 .vue-choix button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 8px;background:var(--card);font-weight:900;font-size:clamp(19px,5.4vw,26px);text-transform:uppercase;letter-spacing:-.02em;line-height:1.05}
 .vue-choix button+button{border-left:3px solid var(--line)}
@@ -707,14 +707,14 @@ function renderTrain() {
       <strong>${esc(a.nom)}</strong><small>${n ? Math.min(SERIE, n) + (Math.min(SERIE, n) > 1 ? " questions" : " question") : "Pas dans ce choix"}</small></button>`; };
   // En haut, l'élève choisit : lire ses notes ou s'exercer. Le choix reste sur l'appareil (1re visite : les notes).
   const vue = store.get("vue") === "exercices" ? "exercices" : "notes";
-  const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Exercices", "Me tester"]]
+  const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Entraînement", "Me tester"]]
     .map(([v, t, s]) => `<button data-vue="${v}" class="${vue === v ? "on" : ""}" aria-pressed="${vue === v}">${t}<small>${s}</small></button>`).join("")}</nav>`;
   if (vue === "notes") {
     $t("train").innerHTML = `${choix}
       <header class="hero"><p class="sticker">Chapitre 1 · La consommation</p><h1>Lis tes notes<em>.</em></h1>
-        <p class="hero-d">Une note par section. Lis un thème, fais sa petite vérif, continue. Ensuite, passe aux exercices.</p></header>
+        <p class="hero-d">Une note par section. Lis un thème, fais sa petite vérif, continue. Ensuite, passe à l’entraînement.</p></header>
       <div class="vue-notes">${notesHtml()}</div>
-      <button class="vers-ex" data-vue="exercices">Prêt? Passe aux exercices →</button>
+      <button class="vers-ex" data-vue="exercices">Prêt? Passe à l’entraînement →</button>
       <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
     return;
   }

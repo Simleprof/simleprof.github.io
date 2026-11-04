@@ -610,7 +610,7 @@ function renderTrain() {
   $t("train").innerHTML = `
     <section class="intro"><h2>Enjeu 1 · La population</h2><p>Choisis tes destinations, puis décolle. Une erreur? La bonne réponse, et les pages du manuel à relire.</p></section>
     ${notesHtml()}
-    <section><b class="lab">Tes destinations</b><div class="secs-g">
+    <section><b class="lab">Entraînement · tes destinations</b><div class="secs-g">
       <button class="sx${tout ? " on" : ""}" data-sx="tout" aria-pressed="${tout}">Tout l'enjeu</button>
       ${Object.entries(SECTIONS).map(([s, t]) => { const on = !tout && ss.includes(s);
         return `<button class="sx${on ? " on" : ""}" data-sx="${s}" aria-pressed="${on}">${s} · ${esc(t)}</button>`; }).join("")}
