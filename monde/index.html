@@ -60,6 +60,15 @@ body:has(.jeu) .couv h1{font-size:26px;margin-top:4px}
 .v-d{font-style:normal;color:var(--ink-3);font-size:15px}
 .tampon-v{position:absolute;right:12px;top:50%;transform:translateY(-50%) rotate(-12deg);font-family:var(--mono);font-size:15px;color:var(--vert);border:2px solid var(--vert);border-radius:50%;width:74px;height:74px;display:grid;place-items:center;text-align:center;line-height:1.1;opacity:.85;font-style:normal}
 .v-n{position:absolute;right:16px;bottom:10px;font-style:normal;font-family:var(--mono);font-size:15px;color:var(--ink-3)}
+/* Les étapes (2026-11-04) : 1 · 2 · 3 toujours au même endroit, comme en Finances ; l'étape en cours, plus large et en gros.
+   Décor du passeport : onglets crème, l'étape regardée prend la couverture marine et or. */
+.etapes{display:grid;gap:8px;align-items:stretch}
+.et{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 4px;border:1.5px solid var(--ink-3);border-radius:10px;background:var(--card);font-family:var(--mono);font-size:15px;letter-spacing:.06em;text-transform:uppercase;line-height:1.1}
+.et.cours{font-family:var(--serif);font-weight:800;font-size:clamp(22px,6.4vw,32px);letter-spacing:.04em;padding:10px 6px;border-color:var(--cover)}
+.et.cours small{font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:.1em}
+.et.avenir{border-style:dashed;color:var(--ink-3)}
+.et.on{background:var(--cover);color:var(--gold);border:1.5px solid var(--gold);border-style:solid}
+.gros:disabled{opacity:.4;cursor:default}
 /* Le choix du haut : Notes de cours ou Exercices (le même qu'en Finances, et en haut de chaque note) */
 .vue-choix{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--cover);border-radius:12px;overflow:hidden;background:var(--card)}
 .vue-choix button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 8px;font-family:var(--serif);font-weight:800;font-size:clamp(20px,5.6vw,26px);line-height:1.1}
@@ -243,23 +252,31 @@ const store = {
 const NOW = new URLSearchParams(location.search).get("date") ? parse(new URLSearchParams(location.search).get("date")) : new Date();
 const finSemaine = x => new Date(parse(x.semaine).getTime() + 4 * DAY);
 /* =====================================================================
-   LES NOTES DE COURS : une note apparaît (lien actif) à partir de sa date « dispo ».
-   publier.js lit cet objet : il met en ligne seulement les notes dont la date est arrivée.
-   fichier : chemin relatif à cette page (dans les coulisses) ; null = pas encore écrite.
+   LES ÉTAPES (2026-11-04, sa décision) : en haut du site, « Étape 1 · Étape 2 · Étape 3 », toujours dans cet ordre,
+   comme en Finances (même lecture, décor propre au cours). L'étape en cours (la dernière dont le début est arrivé) est en gros ;
+   les autres en petit, et un clic y mène. Bascule seule à la date « debut » (pour essayer : ?date=2026-11-14).
+   debut: null = date pas encore donnée. Étapes tirées de ses examens : 1 = Introduction, 2 = Population, 3 = Richesse, Tensions.
    ===================================================================== */
+const ETAPES = [
+  { n: 1, debut: "2026-08-27", titre: "Introduction", sections: {} },
+  { n: 2, debut: "2026-11-14", titre: "Enjeu 1 · La population", sections: { "1": "L'évolution", "2": "Les caractéristiques", "3": "Les migrants", "4": "Le travail", "5": "Les villes" } },
+  { n: 3, debut: null, titre: "La richesse · Tensions et conflits", sections: {} }
+];
+/* LES NOTES DE COURS : chacune dans son étape ; lien actif à partir de sa date « dispo ».
+   publier.js lit cet objet : il met en ligne seulement les notes dont la date est arrivée.
+   fichier : chemin relatif à cette page (dans les coulisses) ; null = pas encore écrite (« À venir »). */
 const HUB = {
   notes: [
-    { id: "p13", titre: "Population S1 à S3", sujet: "Évolution · caractéristiques · migrants", fichier: "population-s1-s3.html", dispo: "2026-10-05" },
-    { id: "p45", titre: "Population S4 et S5", sujet: "Travail · villes", fichier: "population-s4-s5.html", dispo: "2026-10-30" },
-    { id: "r", titre: "La richesse", sujet: "Enjeu 2", fichier: null, dispo: "2026-11-30" },
-    { id: "c", titre: "Tensions et conflits", sujet: "Enjeu 3", fichier: null, dispo: "2027-02-22" }
+    { id: "p13", etape: 2, titre: "Population S1 à S3", sujet: "Évolution · caractéristiques · migrants", fichier: "population-s1-s3.html", dispo: "2026-10-05" },
+    { id: "p45", etape: 2, titre: "Population S4 et S5", sujet: "Travail · villes", fichier: "population-s4-s5.html", dispo: "2026-10-30" },
+    { id: "r", etape: 3, titre: "La richesse", sujet: "Enjeu 2", fichier: null, dispo: "2026-11-30" },
+    { id: "c", etape: 3, titre: "Tensions et conflits", sujet: "Enjeu 3", fichier: null, dispo: "2027-02-22" }
   ]
 };
-// Les examens de l'enjeu (pour le bouton « Seulement la matière de ton examen » ; leurs sections sont dans SECTIONS_EXAMEN).
-const EXAMENS = [
-  { id: "mi1", titre: "Examen de mi-étape 1", semaine: "2026-10-26" },
-  { id: "e1", titre: "Examen d'étape 1", semaine: "2026-11-09" }
-];
+// Les examens (bouton « Seulement la matière de ton examen » ; leurs sections sont dans SECTIONS_EXAMEN).
+// Vidé le 2026-11-04 : les deux examens inscrits ici étaient des exemples (Population est à l'étape 2).
+// Ajouter les semaines de la mi-étape et de l'examen d'étape 2 quand l'enseignant les donne, ex. : { id: "mi2", etape: 2, titre: "Examen de mi-étape", semaine: "2026-12-07" }.
+const EXAMENS = [];
 
 /* =====================================================================
    TOUR DU MONDE : l'entraînement de l'enjeu Population (bêta, 2026-10-26).
@@ -267,10 +284,11 @@ const EXAMENS = [
    une erreur donne la bonne réponse et les pages du manuel. Visuel : un passeport d'études (les rubriques sont des visas).
    Source : les notes de cours Population S1 à S5 (manuel p. 36 à 67). Jamais une question d'examen recopiée.
    ===================================================================== */
-const SECTIONS = { "1": "L'évolution", "2": "Les caractéristiques", "3": "Les migrants", "4": "Le travail", "5": "Les villes" };
+// Les sections offertes = celles de l'étape regardée (voirEtape, plus bas). Un nouvel enjeu : ses sections dans ETAPES, ses pages ici.
+let SECTIONS = {}, TOUTES = [];
 const PAGES_SEC = { "1": "36-38", "2": "39-43", "3": "45-49", "4": "52-61", "5": "64-67" };
 // Les sections de chaque examen (HUB.examens, par id)
-const SECTIONS_EXAMEN = { mi1: ["1", "2", "3"], e1: ["1", "2", "3", "4", "5"] };
+const SECTIONS_EXAMEN = {}; // ex. : { mi2: ["1", "2", "3"], e2: ["1", "2", "3", "4", "5"] }
 const SERIE = 5;
 
 // Vérification des faits : [affirmation, vraie?, explication, section]
@@ -452,7 +470,20 @@ const Q = {
 
 /* ============ Outils ============ */
 const $t = id => document.getElementById(id);
-const TOUTES = Object.keys(SECTIONS);
+// L'étape en cours et l'étape regardée (gardée jusqu'à la fermeture du navigateur ; la visite suivante revient à l'étape en cours).
+const AUJ = parse(iso(NOW));
+const commencee = e => !!e.debut && parse(e.debut) <= AUJ;
+const EN_COURS = [...ETAPES].reverse().find(commencee) || ETAPES[0];
+let VUE_ET = EN_COURS;
+function voirEtape(n) {
+  VUE_ET = ETAPES.find(e => e.n === +n) || EN_COURS;
+  SECTIONS = VUE_ET.sections; TOUTES = Object.keys(SECTIONS);
+  try { sessionStorage.setItem("monde:etape", VUE_ET.n); } catch (er) {}
+}
+const etapeDesSections = ss => ss.length ? ETAPES.find(e => ss.every(s => e.sections[s])) : null;
+// La rangée du haut : 1, 2, 3 toujours au même endroit ; l'étape en cours prend plus de place.
+const etapesHtml = () => `<nav class="etapes" aria-label="Les étapes" style="grid-template-columns:${ETAPES.map(e => e === EN_COURS ? "2fr" : "1fr").join(" ")}">${ETAPES.map(e =>
+  `<button data-et="${e.n}" class="et${e === EN_COURS ? " cours" : ""}${e === VUE_ET ? " on" : ""}${commencee(e) ? "" : " avenir"}" aria-pressed="${e === VUE_ET}">Étape ${e.n}${e === EN_COURS ? "<small>en cours</small>" : ""}</button>`).join("")}</nav>`;
 // Aucune section choisie = tout l'enjeu ; un clic ajoute ou retire une section, toujours de la même façon (2026-10-27).
 const choixSec = () => { const v = store.get("sections"); return Array.isArray(v) ? v.filter(s => SECTIONS[s]) : []; };
 const secs = () => { const v = choixSec(); return v.length ? v : TOUTES; };
@@ -605,9 +636,8 @@ let RUN = null;
 function renderTrain() {
   RUN = null;
   const ss = secs(), tout = !choixSec().length, faits = store.get("faits") || {};
-  const today = parse(iso(NOW));
-  const nx = EXAMENS.filter(x => finSemaine(x) >= today && SECTIONS_EXAMEN[x.id]).sort((a, b) => parse(a.semaine) - parse(b.semaine))[0];
-  const nxs = nx ? SECTIONS_EXAMEN[nx.id] : [];
+  const nx = EXAMENS.filter(x => x.etape === VUE_ET.n && finSemaine(x) >= AUJ && SECTIONS_EXAMEN[x.id]).sort((a, b) => parse(a.semaine) - parse(b.semaine))[0];
+  const nxs = nx ? SECTIONS_EXAMEN[nx.id].filter(s => SECTIONS[s]) : [];
   // Un visa par rubrique ; une rubrique terminée reçoit son tampon (la date où elle l'a été).
   // Chaque visa a sa couleur d'encre, comme les tampons de vrais pays.
   const ENCRES = ["#2b59c3", "#b8322a", "#2e7d4f", "#7a3fa0", "#b06a12", "#0f7c80", "#9c2f6b", "#4a5a12"];
@@ -618,16 +648,24 @@ function renderTrain() {
   const vue = store.get("vue") === "exercices" ? "exercices" : "notes";
   const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Exercices", "Me tester"]]
     .map(([v, t, s]) => `<button data-vue="${v}" class="${vue === v ? "on" : ""}" aria-pressed="${vue === v}">${t}<small>${s}</small></button>`).join("")}</nav>`;
+  const haut = etapesHtml() + choix;
   if (vue === "notes") {
-    $t("train").innerHTML = `${choix}
-      <section class="intro"><h2>Lis tes notes.</h2><p>Enjeu 1 · La population. Lis une section, puis passe aux exercices.</p></section>
+    $t("train").innerHTML = `${haut}
+      <section class="intro"><h2>Lis tes notes.</h2><p>${esc(VUE_ET.titre)}.${HUB.notes.some(n => n.etape === VUE_ET.n) ? " Lis une section, puis passe aux exercices." : ""}</p></section>
       ${notesHtml()}
       <button class="vers-ex" data-vue="exercices">Prêt? Passe aux exercices →</button>
       <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
     return;
   }
-  $t("train").innerHTML = `${choix}
-    <section class="intro"><h2>Enjeu 1 · La population</h2><p>Choisis tes destinations, puis décolle. Une erreur? La bonne réponse, et les pages du manuel à relire.</p></section>
+  if (!TOUTES.length) {
+    $t("train").innerHTML = `${haut}
+      <section class="intro"><h2>${esc(VUE_ET.titre)}</h2><p>Les exercices de cette étape arriveront avec ses notes de cours.</p></section>
+      <section class="go-g"><button class="gros go" disabled>Teste-toi<small>5 questions</small></button><button class="gros go" disabled>Teste-toi<small>10 questions</small></button></section>
+      <p class="t-note">Rien n'est envoyé : tes choix restent sur ton appareil.</p>`;
+    return;
+  }
+  $t("train").innerHTML = `${haut}
+    <section class="intro"><h2>${esc(VUE_ET.titre)}</h2><p>Choisis tes destinations, puis décolle. Une erreur? La bonne réponse, et les pages du manuel à relire.</p></section>
     <section><b class="lab">Tes destinations</b><div class="secs-g">
       <button class="sx${tout ? " on" : ""}" data-sx="tout" aria-pressed="${tout}">Tout l'enjeu</button>
       ${Object.entries(SECTIONS).map(([s, t]) => { const on = !tout && ss.includes(s);
@@ -639,12 +677,13 @@ function renderTrain() {
   // Le menu des visas reste ouvert ou fermé, comme l'élève l'a laissé.
   $t("types").addEventListener("toggle", e => store.set("types", e.target.open));
 }
-// Mes notes de cours : celles qui sont sorties s'ouvrent ; les autres montrent leur date de sortie.
+// Les notes de l'étape regardée : celles qui sont sorties s'ouvrent ; les autres montrent leur date de sortie (ou « À venir »).
 function notesHtml() {
-  const today = parse(iso(NOW));
-  return `<section><b class="lab">Mes notes de cours</b><div class="notes-l">${HUB.notes.map(n => n.fichier && parse(n.dispo) <= today
+  const ns = HUB.notes.filter(n => n.etape === VUE_ET.n);
+  if (!ns.length) return `<section class="intro"><p>Les notes de l'étape ${VUE_ET.n} ne sont pas sur le site.</p></section>`;
+  return `<section><b class="lab">Mes notes de cours</b><div class="notes-l">${ns.map(n => n.fichier && parse(n.dispo) <= AUJ
     ? `<a class="note" href="${encodeURI(n.fichier)}"><b>📘 ${esc(n.titre)}</b><small>${esc(n.sujet)}</small></a>`
-    : `<p class="note off"><b>🔒 ${esc(n.titre)}</b><small>${parse(n.dispo) > today ? "Sort le " + esc(fmt(parse(n.dispo), { day: "numeric", month: "long" })) : "Bientôt"}</small></p>`).join("")}</div></section>`;
+    : `<p class="note off"><b>🔒 ${esc(n.titre)}</b><small>${n.fichier ? "Sort le " + esc(fmt(parse(n.dispo), { day: "numeric", month: "long" })) : "À venir"}</small></p>`).join("")}</div></section>`;
 }
 function choisirSec(v) {
   let ss = choixSec();
@@ -677,25 +716,29 @@ $t("train").addEventListener("click", e => {
   const b = e.target.closest("button");
   if (!b || b.disabled) return;
   if (b.dataset.vue) { store.set("vue", b.dataset.vue); history.replaceState(null, "", "#" + b.dataset.vue); renderTrain(); scrollTo({ top: 0 }); }
+  else if (b.dataset.et) { voirEtape(b.dataset.et); renderTrain(); }
   else if (b.dataset.sx) choisirSec(b.dataset.sx);
   else if (b.dataset.act) lancer(b.dataset.act);
   else if (b.dataset.ex) lancer(b.dataset.ex);
   else if (b.hasAttribute("data-menu")) { renderTrain(); scrollTo({ top: 0 }); }
   else if (b.id === "rejouer") lancer(RUN.id);
 });
-// Lien d'une note de cours (?s=1.2, ou ?s=1,2) : ces sections-là, et la série de 5 démarre tout de suite.
-const demandees = (new URLSearchParams(location.search).get("s") || "").split(",").filter(s => SECTIONS[s]);
-if (demandees.length) store.set("sections", demandees);
+// L'étape regardée au départ : celle de cette visite, sinon l'étape en cours.
+let etDepart = null;
+try { etDepart = sessionStorage.getItem("monde:etape"); } catch (er) {}
+voirEtape(etDepart || EN_COURS.n);
+// Lien d'une note de cours (?s=1.2, ou ?s=1,2) : ces sections-là (et leur étape), et la série de 5 démarre tout de suite.
+const voirSections = ss => { const e = etapeDesSections(ss); if (!e) return false; voirEtape(e.n); store.set("sections", ss); return true; };
+const lancerTout = voirSections((new URLSearchParams(location.search).get("s") || "").split(",").filter(Boolean));
 // Le choix du haut d'une note : #notes, #exercices, ou #exercices=3 (cette section déjà choisie).
 const ancre = location.hash.match(/^#(notes|exercices)(?:=([\d.,]+))?$/);
 if (ancre) {
   store.set("vue", ancre[1]);
-  const ss = (ancre[2] || "").split(",").filter(s => SECTIONS[s]);
-  if (ss.length) store.set("sections", ss);
+  voirSections((ancre[2] || "").split(",").filter(Boolean));
 }
-if (demandees.length) store.set("vue", "exercices");
+if (lancerTout) store.set("vue", "exercices");
 renderTrain();
-if (demandees.length) lancer("examen5");
+if (lancerTout) lancer("examen5");
 
 </script>
 </body>
