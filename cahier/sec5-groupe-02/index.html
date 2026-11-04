@@ -75,6 +75,10 @@ input.case:focus-visible{outline:3px solid var(--stylo);outline-offset:2px}
 
 .cases-code{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap}
 .cases-code span{width:46px;height:56px;display:grid;place-items:center;border:1.6px solid var(--encre);background:#fff;font:600 30px/1 "IBM Plex Mono",monospace}
+/* Version vierge (à partager) : cases à remplir à l'écran ou au crayon */
+.cases-code input.car{width:46px;height:56px;border:1.6px solid var(--encre);border-radius:0;background:#fff;color:var(--encre);text-align:center;font:600 30px/1 "IBM Plex Mono",monospace;padding:0;text-transform:uppercase}
+.cases-code input.car:focus,.champ-groupe:focus{outline:3px solid var(--stylo);outline-offset:1px}
+.champ-groupe{width:3.2em;border:0;border-bottom:2px solid var(--stylo);background:transparent;color:var(--stylo);font:inherit;text-align:center;padding:0;border-radius:0}
 .copier{margin-left:8px;font:700 16px "IBM Plex Sans",sans-serif;background:var(--encre);color:#fff;border:0;padding:10px 16px;cursor:pointer}
 .copier:hover{background:var(--stylo)}
 
@@ -112,7 +116,7 @@ input.case:focus-visible{outline:3px solid var(--stylo);outline-offset:2px}
   .activites li:nth-child(3){border-left:0;padding-left:0}
   .activites li:nth-child(n+3){border-top:1px solid var(--leger)}
   .cases-code{gap:5px}
-  .cases-code span{width:40px;height:50px;font-size:26px}
+  .cases-code span,.cases-code input.car{width:40px;height:50px;font-size:26px}
 }
 @media print{
   @page{size:letter;margin:11mm 14mm}
@@ -126,7 +130,8 @@ input.case:focus-visible{outline:3px solid var(--stylo);outline-offset:2px}
   .besoins strong,.pied strong{font-size:10.5pt}
   .note{padding:4px 10px}
   .besoins span,.regles li{font-size:10.5pt}
-  .case{width:11px;height:11px}
+  .case,input.case{width:11px;height:11px}
+  input.case{transform:translateY(1px)}
   .etape{grid-template-columns:62px 1fr;padding:8px 0 7px;gap:0 14px}
   .num{font-size:44pt}
   .etape h2{font-size:14pt;margin-bottom:2px}
@@ -140,7 +145,7 @@ input.case:focus-visible{outline:3px solid var(--stylo);outline-offset:2px}
   .collant{grid-template-columns:96px 1fr;gap:12px}
   .dessin{width:96px}
   .cases-code{margin-top:5px;gap:6px}
-  .cases-code span{width:32px;height:38px;font-size:18pt}
+  .cases-code span,.cases-code input.car{width:32px;height:38px;font-size:18pt}
   .apres{margin-top:12px}
   .apres h2{font-size:14pt}
   .apres .sous{font-size:10.5pt;margin-bottom:6px}
@@ -250,6 +255,13 @@ input.case:focus-visible{outline:3px solid var(--stylo);outline-offset:2px}
     const vieux = () => { const t = document.createElement("textarea"); t.value = b.dataset.code; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); fait(); };
     if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.code).then(fait, vieux); else vieux();
   };
+
+  // Version vierge : on passe d'une case du code à la suivante en tapant
+  const cars = [...document.querySelectorAll("input.car")];
+  cars.forEach((c, i) => {
+    c.addEventListener("input", () => { if (c.value && cars[i + 1]) cars[i + 1].focus(); });
+    c.addEventListener("keydown", e => { if (e.key === "Backspace" && !c.value && cars[i - 1]) cars[i - 1].focus(); });
+  });
 
   // Le petit essai de mot de passe : tout reste dans la page
   const tests = { long: s => s.length >= 8, maj: s => /[A-ZÀ-Ý]/.test(s), min: s => /[a-zß-ÿ]/.test(s), chif: s => /\d/.test(s), sym: s => /[^A-Za-zÀ-ÿ0-9\s]/.test(s) };
