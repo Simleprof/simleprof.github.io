@@ -146,16 +146,19 @@ header b{font-family:var(--titre);font-size:20px;font-weight:800;letter-spacing:
 .dossiers{margin-top:22px;padding:14px;border-radius:24px;background:var(--surface);border:1px solid var(--line)}
 .dossiers .astuce{font-size:15px}
 .dos-g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 8px}
-.dos{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;border:2px solid color-mix(in srgb,var(--ink) 18%,transparent);background:var(--bg);text-align:left;color:var(--ink);transition:transform .15s,background .15s}
+/* Un dossier (2026-11-07) : « Dossier 1 » en petit, son titre court dessous ; plus de gros rond, boutons plus minces */
+.dos{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding:7px 12px;border-radius:14px;border:2px solid color-mix(in srgb,var(--ink) 18%,transparent);background:var(--bg);text-align:left;color:var(--ink);transition:transform .15s,background .15s}
 .dos:active{transform:scale(.97)}
-.dos .n{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:800 18px/1 var(--titre);background:var(--line);color:var(--ink-2)}
-.dos small{font-size:14px;font-weight:600;line-height:1.25;color:var(--ink-2)}
-.dos.tout{grid-column:1 / -1;justify-content:center;font-weight:800;padding:9px 12px}
+.dos .num{font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.dos b{font-size:16px;font-weight:700;line-height:1.2}
+.dos.tout{grid-column:1 / -1;align-items:center;font-weight:800;padding:8px 12px}
 /* Choisi : bordure et teinte de la couleur du cours (le noir plein faisait lourd, 2026-10-27) */
 .dos.on{background:color-mix(in srgb,var(--c) 14%,var(--bg));border-color:var(--c);color:var(--ink)}
-.dos.on small{color:var(--ink)}
-.dos.on .n{background:var(--c);color:#fff}
-@media (max-width:560px){.dos-g{grid-template-columns:1fr}.dos{padding:8px 12px}}
+.dos.on .num{color:var(--c)}
+/* Pas encore vu en classe : barré, pâle, ne se choisit pas (il reste à sa place) */
+.dos.ferme{opacity:.45;border-style:dashed;cursor:default}
+.dos.ferme b{text-decoration:line-through}
+@media (max-width:560px){.dos-g{grid-template-columns:1fr}}
 @media (min-width:900px){.dos-g{grid-template-columns:auto repeat(var(--nd,4),1fr)}.dos.tout{grid-column:auto;padding:10px 20px}}
 
 /* Feuille plein écran */
@@ -432,11 +435,19 @@ body.tbi #hero,body.tbi .par-oi,body.tbi footer,body.tbi .dossiers .astuce{displ
 body.tbi .dossiers{margin-top:6px}
 body.tbi .titre-tbi{display:block}
 .titre-tbi{display:none;font:800 32px/1.1 var(--titre);margin:4px 0 0}
-/* Les chapitres : une petite rangée au-dessus des dossiers */
-.chaps{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.chaps .eyebrow{margin-right:4px}
-.chap{width:44px;height:40px;border-radius:12px;border:2px solid color-mix(in srgb,var(--ink) 18%,transparent);font:800 18px/1 var(--titre);color:var(--ink-2);display:grid;place-items:center}
-.chap.on{background:var(--k);border-color:var(--k);color:#fff}
+/* Les chapitres (2026-11-07, comme les étapes de Sec 5) : 1 · 2 · 3 · 4 toujours au même endroit ; le chapitre choisi, plus large et en gros */
+.chaps{display:grid;gap:8px;margin-bottom:16px;align-items:stretch}
+.chap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 4px;border-radius:14px;border:2px solid color-mix(in srgb,var(--ink) 18%,transparent);color:var(--ink-2);background:var(--bg)}
+.chap span{font-size:15px;font-weight:700}
+.chap b{font:800 24px/1 var(--titre)}
+.chap.on{background:var(--k);border-color:var(--k);color:#fff;padding:10px 8px}
+.chap{text-align:center;line-height:1.15;min-width:0}
+.chap.on b{font-size:clamp(19px,5vw,30px);white-space:nowrap}
+.chap .court{display:none}
+@media (max-width:560px){.chap .long{display:none}.chap .court{display:inline}}
+.chap.on span{font-size:15px;opacity:.9}
+.chap.ferme{opacity:.4;border-style:dashed;cursor:default}
+.chap.ferme b,.chap.ferme span{text-decoration:line-through}
 /* Question ouverte (banque formative) : on pense, on retourne, on dit si on l'avait */
 .retro.rep{background:color-mix(in srgb,var(--a,var(--c)) 12%,var(--bg))}
 .choix.auto{margin-top:12px}
@@ -1006,19 +1017,30 @@ function basculerTbi(on = !tbi()) {
 }
 // Le chapitre et les dossiers choisis en haut de la page (gardés sur l'appareil) : toutes les activités y pigent leurs questions.
 // Aucun dossier choisi = tout le chapitre. Un clic ajoute ou retire un dossier, toujours de la même façon (2026-10-27).
-const chap = () => { const c = store.get("chap"), k = CHS[c] ? +c : 1; if (k !== BCH) chargerBanques(k); return k; };
-const dossiers = (c = chap()) => c === 1 ? DOSSIERS : Object.fromEntries((FORM.ch[c - 1] || []).slice(1).map((t, i) => [i + 1, t]));
-const tous = () => Object.keys(dossiers()).map(Number);
+// Ce qui est vu en classe (2026-11-07) : le reste est barré, pâle, et ne se choisit pas. Un dossier vu → l'ajouter ici ; un chapitre absent = barré.
+const OUVERTS = { 1: [1, 2, 3, 4], 2: [1] };
+const ouvert = (c, d) => (OUVERTS[c] || []).includes(+d);
+// Les titres courts des dossiers, affichés « Dossier 1 · … » (la banque formative garde les siens)
+const TITRES = {
+  1: ["Les premiers occupants", "Les rapports sociaux", "Économie, alliances et croyances", "Les contacts avec les Européens"],
+  2: ["Les débuts de la colonisation", "La Nouvelle-France (1627-1663)", "Le gouvernement royal", "Société et économie (1700-1760)", "La guerre de la Conquête"],
+  3: ["Le régime militaire", "La Proclamation royale", "L'Acte de Québec", "Les effets de la Révolution américaine", "La société coloniale (1760-1791)"],
+  4: ["Les débuts du parlementarisme", "Le Bas et le Haut-Canada", "L'économie se transforme", "Les tensions au Bas-Canada", "Les rébellions"]
+};
+const chap = () => { const c = store.get("chap"), k = CHS[c] && OUVERTS[c] ? +c : 1; if (k !== BCH) chargerBanques(k); return k; };
+const dossiers = (c = chap()) => Object.fromEntries((TITRES[c] || (FORM.ch[c - 1] || []).slice(1)).map((t, i) => [i + 1, t]));
+const tous = () => { const c = chap(); return Object.keys(dossiers(c)).map(Number).filter(d => ouvert(c, d)); };
 const cleChoix = () => "choix" + (chap() > 1 ? chap() : "");
 const selection = () => { const d = store.get(cleChoix()), t = tous(); return Array.isArray(d) ? d.filter(x => t.includes(x)) : []; };
 const choisis = () => { const d = selection(); return d.length ? d : tous(); };
 const nomChoix = (ds = choisis()) => ds.length === tous().length ? "Tout le chapitre" : (ds.length > 1 ? "Dossiers " : "Dossier ") + ds.join(", ").replace(/, (\d)$/, " et $1");
 function choisirDossier(v) {
   const ds = selection(), d = +v;
+  if (v !== "tout" && !ouvert(chap(), d)) return;
   store.set(cleChoix(), v === "tout" ? [] : ds.includes(d) ? ds.filter(x => x !== d) : [...ds, d].sort());
   render();
 }
-function choisirChap(c) { store.set("chap", +c); render(); }
+function choisirChap(c) { if (!OUVERTS[c]) return; store.set("chap", +c); render(); }
 // Le dossier d'une question. Le tri et les paires n'ont que la page du cahier : on la convertit.
 const parPage = p => { const i = PAGES_DOS.findIndex(x => p <= x); return i < 0 ? PAGES_DOS.length + 1 : i + 1; };
 const DOS = { chaine: x => x[2], tri: x => parPage(x[2]), paires: x => parPage(x[2]), ordre: x => x[3] };
@@ -1043,11 +1065,12 @@ function render() {
   const faits = store.get("faits") || {};
   const ds = selection(), tout = !ds.length, dz = dossiers();
   let h = `<p class="titre-tbi">Chapitre ${c} · ${esc(CH.titre)}</p><div class="dossiers" style="--c:${coul}">
-    <div class="chaps"><span class="eyebrow">Chapitre</span>${Object.keys(CHS).map(k => `<button class="chap${+k === c ? " on" : ""}" data-chap="${k}" style="--k:${FORM.ch[k - 1]?.[0] || "var(--c)"}" aria-pressed="${+k === c}">${k}</button>`).join("")}</div>
+    <nav class="chaps" aria-label="Les chapitres" style="grid-template-columns:${Object.keys(CHS).map(k => +k === c ? "2fr" : "1fr").join(" ")}">${Object.keys(CHS).map(k => { const on = +k === c, ferme = !OUVERTS[k];
+      return `<button class="chap${on ? " on" : ""}${ferme ? " ferme" : ""}" data-chap="${k}" style="--k:${FORM.ch[k - 1]?.[0] || "var(--c)"}" aria-pressed="${on}"${ferme ? " disabled" : ""}>${on ? `<b>Chapitre ${k}</b><span>${esc(CHS[k].per)}</span>` : `<span><span class="long">Chapitre</span><span class="court">Chap.</span></span><b>${k}</b>`}</button>`; }).join("")}</nav>
     <p class="eyebrow">Où es-tu rendu dans ton cahier?</p><div class="dos-g" style="--nd:${Object.keys(dz).length}">
     <button class="dos tout${tout ? " on" : ""}" data-dos="tout" aria-pressed="${tout}">Tout le chapitre</button>
-    ${Object.entries(dz).map(([d, t]) => { const on = ds.includes(+d);
-      return `<button class="dos${on ? " on" : ""}" data-dos="${d}" aria-pressed="${on}"><span class="n">${d}</span><small>${esc(t)}</small></button>`; }).join("")}
+    ${Object.entries(dz).map(([d, t]) => { const on = ds.includes(+d), ferme = !ouvert(c, d);
+      return `<button class="dos${on ? " on" : ""}${ferme ? " ferme" : ""}" data-dos="${d}" aria-pressed="${on}"${ferme ? " disabled" : ""}><span class="num">Dossier ${d}</span><b>${esc(t)}</b></button>`; }).join("")}
     </div><p class="astuce">Touche un ou plusieurs dossiers : tes questions viendront de là.</p></div>`, fam = "";
   // Deux boutons de même valeur, côte à côte : l'élève choisit (2026-10-27) ; les activités par OI sont repliées.
   // Un chapitre sans questions de ce format (ex. chapitres 2 à 4 au cellulaire) : « Bientôt ».
