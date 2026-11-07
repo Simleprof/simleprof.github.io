@@ -80,9 +80,9 @@ header b{font-family:var(--titre);font-size:20px;font-weight:800;letter-spacing:
 .hero{position:relative;border-radius:24px;overflow:hidden;min-height:210px;display:flex;align-items:flex-end;color:#fff;background:#3b2a1d center/cover}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,6,.1),rgba(20,12,6,.86))}
 .hero > div{position:relative;padding:18px}
-.hero .eyebrow{color:rgba(255,255,255,.85)}
+.hero .eyebrow{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75),0 0 12px rgba(0,0,0,.5)}
 .hero h1{font-size:clamp(28px,7.5vw,40px);margin:4px 0 8px}
-.hero p{font-size:15px;opacity:.92;max-width:52ch}
+.hero p{font-size:16px;opacity:.95;max-width:52ch}
 .mode{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
 .mode span{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;padding:6px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
 
@@ -478,6 +478,15 @@ body.tbi .reponse{font-size:30px}
 body.tbi .retro.rep{background:var(--surface);border:3px solid var(--c)}
 body.tbi .retro .etiq{font-size:18px}
 .lettre{font-family:var(--titre);font-weight:800;color:var(--a,var(--c));margin-right:6px}
+/* Mots expliqués d'un toucher (2026-11-07) : la bulle se ferme d'un toucher ailleurs, et ce toucher agit aussitôt */
+.glose{text-decoration:underline dotted color-mix(in srgb,currentColor 55%,transparent);text-decoration-thickness:2px;text-underline-offset:3px;cursor:help;border-radius:4px}
+.glose.ouvert{background:var(--c-soft)}
+.bulle{position:fixed;z-index:1000;max-width:min(320px,calc(100vw - 32px));background:var(--ink);color:var(--bg);padding:12px 14px;border-radius:14px;font-family:var(--texte);font-size:16px;font-weight:400;line-height:1.4;letter-spacing:0;text-transform:none;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:bulle .14s ease-out}
+.bulle b{display:block;font-family:var(--titre);font-size:17px;font-weight:800;margin-bottom:2px}
+.bulle::after{content:"";position:absolute;left:var(--x,24px);border:8px solid transparent}
+.bulle.bas::after{bottom:100%;border-bottom-color:var(--ink)}
+.bulle.haut::after{top:100%;border-top-color:var(--ink)}
+@keyframes bulle{from{opacity:0;transform:translateY(4px)}}
 @media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} }
 </style>
 
@@ -514,7 +523,7 @@ body.tbi .retro .etiq{font-size:18px}
   </main>
 
   <footer>Histoire du Québec et du Canada · 3e secondaire<br>
-    Aucun compte, aucun cookie, aucune statistique de visite. Tes crochets restent sur ton appareil.</footer>
+    Aucun compte, aucun cookie, aucune statistique de visite. Ce que tu as réussi reste sur ton appareil.</footer>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="sheet-in" id="sheetIn"></div></div>
@@ -1039,7 +1048,7 @@ function render() {
     <button class="dos tout${tout ? " on" : ""}" data-dos="tout" aria-pressed="${tout}">Tout le chapitre</button>
     ${Object.entries(dz).map(([d, t]) => { const on = ds.includes(+d);
       return `<button class="dos${on ? " on" : ""}" data-dos="${d}" aria-pressed="${on}"><span class="n">${d}</span><small>${esc(t)}</small></button>`; }).join("")}
-    </div><p class="astuce">Touche un ou plusieurs dossiers : toutes les questions suivent.</p></div>`, fam = "";
+    </div><p class="astuce">Touche un ou plusieurs dossiers : tes questions viendront de là.</p></div>`, fam = "";
   // Deux boutons de même valeur, côte à côte : l'élève choisit (2026-10-27) ; les activités par OI sont repliées.
   // Un chapitre sans questions de ce format (ex. chapitres 2 à 4 au cellulaire) : « Bientôt ».
   const dispo = miniTest(choisis(), 10, c).length;
@@ -1048,7 +1057,7 @@ function render() {
     : `<div class="go-g"><p class="bientot">🔒 Bientôt : les questions de ce chapitre s'en viennent.</p></div>`;
   // Les activités par OI n'existent que pour le chapitre 1.
   if (!BANQ[c]) { $("ois").innerHTML = h; return; }
-  h += `<details class="par-oi"${store.get("ouvert-oi") ? " open" : ""}><summary><span>Ou choisis une activité <i>par opération intellectuelle</i></span></summary>`;
+  h += `<details class="par-oi"${store.get("ouvert-oi") ? " open" : ""}><summary><span>Ou choisis <i>un type de question</i></span></summary>`;
   // Combien de questions chaque activité a dans les dossiers choisis
   const nb = id => admis(id).length;
   const carteAct = a => { const n = nb(a.id), vide = n < (MINI[a.id] || 1), q = Math.min(SERIE, n);
@@ -1269,7 +1278,14 @@ function joliReponse(t) {
   // Une longue phrase avec « : » : le début est l'essentiel, la suite l'explique.
   const deux = une.length > 90 && une.indexOf(" : ") > 0 && une.indexOf(" : ") < 60;
   const tete = deux ? une.slice(0, une.indexOf(" : ")) : une, suite = deux ? [maj(une.slice(une.indexOf(" : ") + 3)), ...reste] : reste;
-  return `<p><strong class="${tete.length < 60 ? "tete" : ""}">${par(esc(tete))}</strong></p>${suite.length ? `<p>${par(esc(suite.join(" ")))}</p>` : ""}`;
+  // Une idée par ligne (élève fantôme, 2026-11-07) : chaque phrase de l'explication sur sa ligne.
+  return `<p><strong class="${tete.length < 60 ? "tete" : ""}">${par(esc(tete))}</strong></p>${suite.map(s => `<p>${par(esc(s))}</p>`).join("")}`;
+}
+// L'explication sous une bonne ou une mauvaise réponse : une phrase par ligne, les parenthèses en plus petit.
+function joliCorr(m) {
+  if (m.corrH) return m.corrH;
+  return String(m.corr).trim().split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Ý«])/)
+    .map(s => esc(s).replace(/\(([^)]*)\)/g, '<span class="par">($1)</span>')).join("<br>");
 }
 function question() {
   if (run.k >= run.items.length) return tbi() ? finTbi() : fin(run.items.length - run.rates.length, run.items.length);
@@ -1300,8 +1316,8 @@ function repondre(btn) {
   document.querySelector(".prog").outerHTML = barreProg();
   const rep = m.rAff || m.r;
   $("retro").innerHTML = bon
-    ? `<div class="retro ok"><b>✅ ${BRAVO[Math.floor(Math.random() * BRAVO.length)]}</b>${m.rAff ? " · " + esc(m.rAff) : ""}${m.corr ? "<br>" + (m.corrH || esc(m.corr)) : ""}</div><div class="suite"><button class="btn acc" data-suite>Suivante →</button></div>`
-    : `<div class="retro ko"><b>La bonne réponse : ${esc(rep)}</b>${m.corr ? "<br>" + (m.corrH || esc(m.corr)) : ""}<br>${page(m.p, m.d)}</div><div class="suite"><button class="btn acc" data-suite>Suivante →</button></div>`;
+    ? `<div class="retro ok"><b>✅ ${BRAVO[Math.floor(Math.random() * BRAVO.length)]}</b>${m.rAff ? " · " + esc(m.rAff) : ""}${m.corr ? "<br>" + joliCorr(m) : ""}</div><div class="suite"><button class="btn acc" data-suite>Suivante →</button></div>`
+    : `<div class="retro ko"><b>La bonne réponse : ${esc(rep)}</b>${m.corr ? "<br>" + joliCorr(m) : ""}<br>${page(m.p, m.d)}</div><div class="suite"><button class="btn acc" data-suite>Suivante →</button></div>`;
   $("retro").scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
@@ -1486,6 +1502,108 @@ document.addEventListener("click", e => {
   const bac = t.closest("[data-bac]"); if (bac) return ranger(bac.dataset.bac);
   const tu = t.closest("[data-tuile]"); if (tu) return tuile(tu);
 });
+/* ============ Mots expliqués d'un toucher (sa demande du 2026-11-07, idée de l'élève fantôme) ============
+   Les mots rares des questions et des réponses sont soulignés en pointillé. Un toucher : une bulle explique
+   en une demi-phrase. Un toucher ailleurs ferme la bulle ET fait son effet du même coup (« Suivante », un choix…) :
+   jamais de double clic. Les boutons de réponse ne sont pas marqués : les toucher, c'est répondre.
+   [mot affiché dans la bulle, motif reconnu, explication] */
+const GLOSS = [
+  ["corsaire", "corsaires?", "Un marin qui attaque les navires ennemis avec la permission de son roi. Un pirate, lui, n'a la permission de personne."],
+  ["les frères Kirke", "(?:frères )?Kirke", "Des corsaires au service de l'Angleterre. Ils prennent Québec en 1629."],
+  ["concéder", "concéd(?:er|é|ée|és|ées|e|ent)|concession", "Accorder une terre ou un droit à quelqu'un."],
+  ["cens", "cens", "Une petite somme que le censitaire paie au seigneur chaque année."],
+  ["rente", "rentes?", "Un paiement annuel au seigneur, en argent ou en produits de la ferme."],
+  ["tenir feu et lieu", "tenir feu et lieu", "Habiter vraiment sa terre et la cultiver."],
+  ["tiers état", "tiers état", "En France, tous ceux qui ne sont ni nobles ni membres du clergé : paysans, artisans, marchands."],
+  ["évangéliser", "évangélis(?:er|ation|é|ée|és|ées|ent)", "Convertir des gens à la religion chrétienne."],
+  ["matrilinéaire", "matrilinéaires?", "La famille se transmet par la mère."],
+  ["accroissement naturel", "accroissement naturel", "Les naissances moins les décès."],
+  ["confluent", "confluent", "L'endroit où deux cours d'eau se rejoignent."],
+  ["monopole", "monopoles?", "Le droit d'être le seul à faire un commerce."],
+  ["mercantilisme", "mercantilisme", "La colonie fournit des ressources à la métropole et achète ses produits : la métropole s'enrichit."],
+  ["métropole", "métropoles?", "Le pays qui possède et dirige une colonie. Exemple : la France."],
+  ["censitaire", "censitaires?", "Un paysan qui reçoit une terre dans une seigneurie et doit des redevances au seigneur."],
+  ["corvée", "corvées?", "Des journées de travail gratuit dues au seigneur."],
+  ["redevance", "redevances?", "Un paiement obligatoire, en argent ou en produits."],
+  ["sédentaire", "sédentaires?", "Qui vit toujours au même endroit."],
+  ["semi-sédentaire", "semi-sédentaires?", "Qui reste au même endroit quelques années, puis déménage quand le sol s'épuise."],
+  ["nomade", "nomades?", "Qui se déplace selon les saisons pour chasser, pêcher et cueillir."],
+  ["animisme", "animisme", "La croyance que les animaux, les plantes et les éléments de la nature ont un esprit."],
+  ["chaman", "chamans?", "Une personne qui communique avec les esprits et soigne les malades."],
+  ["subsistance", "subsistance", "Ce qu'il faut pour survivre : se nourrir, se vêtir, s'abriter."],
+  ["troc", "troc", "Un échange d'objets, sans argent."],
+  ["traite des fourrures", "traite des fourrures", "Le commerce des fourrures : des peaux échangées contre des objets européens."],
+  ["portage", "portages?", "Porter son canot à pied pour passer d'un cours d'eau à un autre ou éviter des rapides."],
+  ["palissade", "palissades?", "Une clôture de pieux en bois autour d'un village."],
+  ["coureur des bois", "coureurs? des bois", "Un Français qui part faire la traite des fourrures chez les Autochtones, souvent sans permis."],
+  ["intendant", "intendants?", "Le responsable de la justice, de la police et des finances de la colonie."],
+  ["Conseil souverain", "Conseil souverain", "Le conseil qui dirige la colonie à partir de 1663. Il sert aussi de tribunal."],
+  ["clergé", "clergé", "L'ensemble des prêtres, des religieux et des religieuses."],
+  ["capitulation", "capitulations?|capitul(?:er|e|ent)", "Le fait de se rendre à l'ennemi, à des conditions écrites."],
+  ["serment du Test", "serment du Test", "Un serment qui rejette la foi catholique. Il fallait le prêter pour avoir un poste dans l'administration."],
+  ["loyaliste", "loyalistes?", "Un colon resté fidèle au roi britannique pendant la Révolution américaine, venu s'installer ici."],
+  ["responsabilité ministérielle", "responsabilité ministérielle", "Les ministres doivent avoir l'appui des députés élus ; sinon, ils doivent démissionner."],
+  ["démographie", "démographi(?:e|que|ques)", "L'étude de la population : les naissances, les décès, les migrations."],
+];
+let motifGloss = null;
+try { motifGloss = new RegExp("(^|[^\\p{L}\\-'’])(" + GLOSS.map(g => g[1]).join("|") + ")(?![\\p{L}\\-])", "giu"); } catch (e) {}
+const PAS_ICI = "button,a,input,textarea,select,svg,.glose,.bulle,.choix,.prog,.tag-oi,[data-rep],[data-tuile],[data-maillon],[data-ordre],[data-bac],[data-act],[data-dos],[data-chap]";
+function definition(mot) {
+  return GLOSS.find(g => new RegExp("^(?:" + g[1] + ")$", "iu").test(mot));
+}
+function marquerMots(racine) {
+  if (!motifGloss || !racine) return;
+  const w = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT, { acceptNode: n =>
+    n.nodeValue.trim().length > 2 && n.parentElement && !n.parentElement.closest(PAS_ICI) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT });
+  const textes = []; while (w.nextNode()) textes.push(w.currentNode);
+  textes.forEach(n => {
+    const v = n.nodeValue; motifGloss.lastIndex = 0;
+    if (!motifGloss.test(v)) return;
+    motifGloss.lastIndex = 0;
+    const f = document.createDocumentFragment(); let i = 0, m;
+    while ((m = motifGloss.exec(v))) {
+      const debut = m.index + m[1].length;
+      if (!definition(m[2])) continue;
+      f.append(v.slice(i, debut));
+      const s = document.createElement("span");
+      s.className = "glose"; s.textContent = m[2]; s.setAttribute("role", "button"); s.tabIndex = 0;
+      f.append(s); i = debut + m[2].length;
+    }
+    f.append(v.slice(i));
+    n.replaceWith(f);
+  });
+}
+let bulle = null, motOuvert = null;
+function fermerBulle() { bulle?.remove(); bulle = null; motOuvert?.classList.remove("ouvert"); motOuvert = null; }
+function ouvrirBulle(s) {
+  const g = definition(s.textContent); if (!g) return;
+  fermerBulle();
+  bulle = document.createElement("div"); bulle.className = "bulle"; bulle.setAttribute("role", "tooltip");
+  bulle.innerHTML = `<b>${esc(g[0])}</b>${esc(g[2])}`;
+  document.body.append(bulle); motOuvert = s; s.classList.add("ouvert");
+  const r = s.getBoundingClientRect(), b = bulle.getBoundingClientRect();
+  const x = Math.max(16, Math.min(innerWidth - b.width - 16, r.left + r.width / 2 - b.width / 2));
+  // Au-dessus du mot si possible : la bulle ne cache jamais les boutons de réponse, plus bas.
+  const dessous = r.top - 10 - b.height < 8;
+  bulle.classList.add(dessous ? "bas" : "haut");
+  bulle.style.left = x + "px";
+  bulle.style.top = (dessous ? r.bottom + 10 : r.top - 10 - b.height) + "px";
+  bulle.style.setProperty("--x", Math.max(10, Math.min(b.width - 26, r.left + r.width / 2 - x - 8)) + "px");
+}
+// Capture : passe avant tout le reste. Un mot ouvre (ou referme) sa bulle ; tout autre toucher la ferme et continue son chemin.
+document.addEventListener("click", e => {
+  const s = e.target.closest?.(".glose");
+  if (s) { e.preventDefault(); e.stopPropagation(); return s === motOuvert ? fermerBulle() : ouvrirBulle(s); }
+  if (bulle) fermerBulle();
+}, true);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && bulle) { fermerBulle(); e.stopImmediatePropagation(); }
+  else if ((e.key === "Enter" || e.key === " ") && e.target.classList?.contains("glose")) { e.preventDefault(); e.target.click(); }
+}, true);
+addEventListener("scroll", () => bulle && fermerBulle(), { capture: true, passive: true });
+addEventListener("resize", () => bulle && fermerBulle());
+new MutationObserver(() => marquerMots($("sheetIn"))).observe($("sheetIn"), { childList: true, subtree: true });
+
 document.addEventListener("keydown", e => { if (e.key === "Escape" && $("sheet").classList.contains("on")) fermer(); });
 addEventListener("popstate", () => { if ($("sheet").classList.contains("on")) fermer(); });
 
