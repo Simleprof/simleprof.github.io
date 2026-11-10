@@ -396,27 +396,6 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media print { .haut { display: none !important; } }
 </style>
-<style id="qr-notes-sec5">
-/* « Est-ce que j'ai compris? » en fin de section. Posé par [98] Coulisses/[05] Claude/outils/qr/qr-notes-sec5.js */
-.qr5{display:flex;align-items:center;gap:16px;max-width:760px;margin:28px auto 8px;padding:14px 18px;border:2px dashed currentColor;border-radius:14px;opacity:.95;break-inside:avoid;page-break-inside:avoid}
-.qr5 svg{display:none;width:1in;height:1in;flex:none}
-.qr5 b{display:block;font-size:1.15em;line-height:1.2}
-.qr5 span{display:block;margin-top:2px}
-.qr5 a{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:999px;border:2px solid currentColor;color:inherit;text-decoration:none;font-weight:700}
-.qr5 a i{font-style:normal}
-/* Sur papier : compact, pour ne pas tomber seul sur une page (une feuille de plus × 180 élèves) */
-@media print{.qr5{opacity:1;margin:10px 0 0;padding:6px 12px;gap:12px;font-size:.9em}.qr5 svg{display:block;width:.75in;height:.75in}.qr5 a{display:none}}
-/* Affiche de fin (notes de Finances) : couleurs fixes, pour rester noire et jaune aussi en mode sombre */
-.qr5-affiche{margin:56px 0 0;background:#15171C;color:#fff;border-radius:18px;box-shadow:0 0 0 2px var(--line,#ccc);padding:36px 20px;display:grid;gap:16px;justify-items:center;text-align:center}
-.qr5-affiche h2{margin:0;font-family:var(--display,inherit);font-weight:400;font-size:clamp(2.8rem,10vw,4rem);line-height:1;text-transform:uppercase;color:#FFDC38}
-.qr5-affiche p{margin:0;max-width:34ch;font-size:1.1rem;line-height:1.45}
-.qr5-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
-.qr5-btns a{flex:1 1 200px;max-width:290px;min-height:60px;display:grid;place-items:center;padding:10px 24px;border-radius:999px;background:#FFDC38;color:#15171C;font-family:var(--display,inherit);font-size:1.5rem;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;transition:transform .15s}
-.qr5-btns a:hover{transform:translateY(-2px)}
-.qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.qr5-qr{display:none}
-@media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
-</style>
 <style id="vue-choix">
 /* En haut : Notes de cours (ici) ou Exercices (l'app). Caché à l'impression et au TBI (ouvert du tableau de bord). */
 .vue-choix { background: var(--ink); }
@@ -555,6 +534,27 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   .haut { background: #14123A; color: #fff; }
 }
 @media print { .ccard { display: none !important; } }
+</style>
+<style id="qr-notes-sec5">
+/* « Est-ce que j'ai compris? » en fin de section. Posé par [98] Coulisses/[05] Claude/outils/qr/qr-notes-sec5.js */
+.qr5{display:flex;align-items:center;gap:16px;max-width:760px;margin:28px auto 8px;padding:14px 18px;border:2px dashed currentColor;border-radius:14px;opacity:.95;break-inside:avoid;page-break-inside:avoid}
+.qr5 svg{display:none;width:1in;height:1in;flex:none}
+.qr5 b{display:block;font-size:1.15em;line-height:1.2}
+.qr5 span{display:block;margin-top:2px}
+.qr5 a{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:999px;border:2px solid currentColor;color:inherit;text-decoration:none;font-weight:700}
+.qr5 a i{font-style:normal}
+/* Sur papier : compact, pour ne pas tomber seul sur une page (une feuille de plus × 180 élèves) */
+@media print{.qr5{opacity:1;margin:10px 0 0;padding:6px 12px;gap:12px;font-size:.9em}.qr5 svg{display:block;width:.75in;height:.75in}.qr5 a{display:none}}
+/* Affiche de fin (notes de Finances) : couleurs fixes, pour rester noire et jaune aussi en mode sombre */
+.qr5-affiche{margin:56px 0 0;background:#15171C;color:#fff;border-radius:18px;box-shadow:0 0 0 2px var(--line,#ccc);padding:36px 20px;display:grid;gap:16px;justify-items:center;text-align:center}
+.qr5-affiche h2{margin:0;font-family:var(--display,inherit);font-weight:400;font-size:clamp(2.8rem,10vw,4rem);line-height:1;text-transform:uppercase;color:#FFDC38}
+.qr5-affiche p{margin:0;max-width:34ch;font-size:1.1rem;line-height:1.45}
+.qr5-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
+.qr5-btns a{flex:1 1 200px;max-width:290px;min-height:60px;display:grid;place-items:center;padding:10px 24px;border-radius:999px;background:#FFDC38;color:#15171C;font-family:var(--display,inherit);font-size:1.5rem;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;transition:transform .15s}
+.qr5-btns a:hover{transform:translateY(-2px)}
+.qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.qr5-qr{display:none}
+@media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
@@ -709,7 +709,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="tip"><b>À retenir</b>Une dépense <strong>fixe</strong> peut être <strong>compressible</strong>&nbsp;: un abonnement s'annule, et une corde à linge fait baisser la facture d'électricité.</div>
     <div class="pause">
       <div class="quiz">
-        <details><summary><span class="q-n">Choix multiples</span>Laquelle est une dépense variable&nbsp;: le loyer, l'abonnement Internet, l'épicerie, l'assurance habitation?<span class="see">Voir la réponse →</span></summary><div class="ans">L'<strong>épicerie</strong>. Les trois autres reviennent au même montant chaque mois.</div></details>
+        <details><summary><span class="q-n">Choix multiples</span>Laquelle est une dépense variable&nbsp;: le prêt-auto, l'essence, le loyer, l'abonnement de musique en ligne?<span class="see">Voir la réponse →</span></summary><div class="ans">L'<strong>essence</strong>&nbsp;: le montant change selon les kilomètres et le prix à la pompe. Les trois autres reviennent au même montant chaque mois.</div></details>
       </div>
     </div>
   </section>

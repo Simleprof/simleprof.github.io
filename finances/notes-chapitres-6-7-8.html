@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-h4C+wm2fw5Cc5xexbcNDgB7rfDVbXlpBqzVPNflyCyI=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Notes de cours chapitres 6, 7 et 8 · Intégrer le monde du travail</title>
+<link rel="stylesheet" href="../polices/36a0d5f4b5.css">
+<style>
+/* Notes de cours, chapitres 6, 7 et 8 (étape 3, « Intégrer le monde du travail »). Sortie le 2026-11-10 (chantier, dossier 09).
+   Mise en page commune (écran et papier) ; le visuel « carte » de Finances est dans <style id="theme-carte">,
+   avec une carte d'employé au lieu de la carte de crédit. */
+:root {
+  --paper: #F3F4F8; --card: #FFFFFF; --ink: #101320; --muted: #5B6175; --line: #DADDE6;
+  --hi: #C8F25A; --hi-ink: #14123A; --tag: #D23B3B; --tag-soft: #FBE3E3; --teal: #4F46E5; --teal-soft: #E8E7FD;
+  --mint: #0E8A5F; --mint-soft: #DDF3EA; --surface-2: #ECEEF4; --cover: #14123A; --radius: 18px;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; }
+.wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+p { margin: 0; }
+strong { font-weight: 700; }
+.hl { background: linear-gradient(transparent 55%, color-mix(in srgb, var(--hi) 75%, transparent) 55%); padding: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.lbl { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+
+/* Carrefour : notes de cours ou exercices */
+.vue-choix { background: var(--cover); }
+.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
+.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 2px solid rgba(255,255,255,.25); border-radius: 14px; color: #F4F3FF; text-decoration: none; text-align: center; font-family: var(--display); font-weight: 700; font-size: clamp(1.15rem, 4.6vw, 1.5rem); line-height: 1.1; }
+.vue-choix a small { font-family: var(--mono); font-weight: 400; font-size: 15px; opacity: .85; }
+.vue-choix a.on { background: var(--hi); border-color: var(--hi); color: #14123A; }
+.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--hi); }
+body:has(#retour-tdb) .vue-choix { display: none; }
+
+/* En-tête */
+.cover .wrap { padding-block: 40px 44px; display: grid; gap: 16px; }
+.eyebrow { font-family: var(--mono); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; }
+.cover h1 { font-size: clamp(2.5rem, 8vw, 4.2rem); line-height: 1.05; }
+.cover p { max-width: 44ch; font-size: 19px; }
+
+/* Sommaire */
+.plan { background: var(--paper); border-bottom: 1px solid var(--line); }
+.plan .wrap { padding-block: 26px; display: grid; gap: 12px; }
+.plan h2 { font-size: 1.35rem; }
+.cols-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 28px; }
+.plan h3 { font-size: 1.1rem; color: var(--teal); margin-bottom: 8px; }
+.plan ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.plan ol a { display: inline-block; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 7px 15px; }
+.plan ol a:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.plan .exam { font-size: 16px; color: var(--muted); }
+
+/* Sections et thèmes */
+.section-head { padding-block: 56px 14px; display: grid; gap: 10px; justify-items: start; }
+.section-head .num { font-family: var(--mono); font-weight: 600; font-size: 15px; line-height: 1; letter-spacing: .08em; color: var(--teal); background: var(--teal-soft); border-radius: 99px; padding: 6px 12px; }
+.section-head .chap { font-family: var(--mono); font-size: 15px; color: var(--muted); letter-spacing: .04em; }
+.section-head h2 { font-size: clamp(2rem, 6vw, 2.9rem); }
+.section-head p { color: var(--muted); max-width: 60ch; }
+.block { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-top: 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+@media (max-width: 520px) { .block { padding: 18px 16px; } }
+.block > p, .block > ul { max-width: 68ch; }
+.block ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.block h3 { font-size: 1.55rem; }
+.sub-h { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+/* Définitions : cartes de glossaire */
+.defs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 0; }
+.def { margin: 0; background: var(--surface-2); border-radius: 14px; padding: 14px 16px; max-width: 68ch; }
+.def dt { font-family: var(--display); font-weight: 700; font-size: 1.15rem; }
+.def dd { margin: 2px 0 0; }
+
+/* Encadrés */
+.bon, .piege { border-radius: 14px; padding: 12px 18px; max-width: 68ch; }
+.bon { background: var(--mint-soft); }
+.piege { background: var(--tag-soft); }
+.bon > b:first-child, .piege > b:first-child { display: block; font-family: var(--mono); font-size: 15px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 2px; }
+.bon > b:first-child { color: var(--mint); }
+.piege > b:first-child { color: var(--tag); }
+.bon ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.nuance { max-width: 68ch; border-top: 1.5px dashed var(--muted); border-bottom: 1.5px dashed var(--muted); padding: 4px 0; display: grid; gap: 6px; }
+.nuance summary { cursor: pointer; list-style: none; padding: 6px 0; color: var(--muted); }
+.nuance summary::-webkit-details-marker { display: none; }
+.nuance summary::before { content: "+ "; }
+.nuance[open] summary::before { content: "− "; }
+.nuance p { font-size: 17px; padding-bottom: 4px; }
+.nuance .src { font-size: 16px; color: var(--muted); }
+.nuance a { color: inherit; }
+
+/* Listes sobres */
+.lignes { margin: 0; padding: 0; list-style: none; max-width: 68ch; display: grid; }
+.lignes > div { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.lignes > div:first-child { border-top: 1px solid var(--line); }
+.lignes dt { font-family: var(--display); font-weight: 700; font-size: 1.15rem; }
+.lignes dd { margin: 0; }
+
+/* Cartes */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.card h4 { font-size: 1.25rem; }
+.card .ex { font-size: 16px; color: var(--muted); }
+.card .etiq { justify-self: start; font-family: var(--mono); font-size: 15px; border-radius: 99px; padding: 2px 10px; background: var(--teal-soft); color: var(--teal); }
+.card ul { margin: 0; padding-left: 1.1em; display: grid; gap: 3px; }
+
+/* Les chiffres de la loi : une rangée de tuiles */
+.block .chiffres { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; list-style: none; margin: 0; padding: 0; }
+.chiffres li { background: var(--surface-2); border-radius: 14px; padding: 12px 14px; }
+.chiffres b { display: block; margin-bottom: 4px; font-family: var(--display); font-size: 1.9rem; line-height: 1; color: var(--teal); font-variant-numeric: tabular-nums; }
+
+/* Qui paie? */
+.qui { width: 100%; max-width: 680px; border-collapse: collapse; font-size: 17px; }
+.qui th, .qui td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.qui th { font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--muted); }
+.qui td:first-child { width: 58%; }
+.qui td:last-child { font-weight: 700; }
+.qui .emp { color: var(--mint); }
+.qui .sauf { font-weight: 400; color: var(--muted); font-size: 16px; white-space: normal; }
+.scroll { overflow-x: auto; min-width: 0; }
+
+/* Les heures des jeunes : une semaine en barres */
+.semaine { display: grid; gap: 6px; max-width: 640px; }
+.semaine .barre { display: grid; grid-template-columns: 10fr 7fr; min-height: 38px; border-radius: 8px; overflow: hidden; font-family: var(--mono); font-size: 15px; font-weight: 600; }
+.semaine .barre span { display: grid; place-items: center; color: #fff; padding: 4px 6px; text-align: center; line-height: 1.2; }
+.semaine .barre span:first-child { background: var(--teal); }
+.semaine .barre span:last-child { background: var(--mint); }
+.semaine .leg { font-size: 16px; color: var(--muted); }
+
+/* Motifs interdits */
+.block .motifs { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+.motifs li { background: var(--tag-soft); color: var(--ink); border-radius: 99px; padding: 4px 12px; font-size: 16px; }
+
+/* Organismes */
+.orgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.org { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.org .abbr { font-family: var(--display); font-weight: 700; font-size: 1.8rem; line-height: 1; color: var(--teal); }
+.org .name { font-weight: 700; }
+
+/* Le bulletin de paie */
+.receipt { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; font-family: var(--mono); font-size: 16px; padding: 16px 18px; max-width: 480px; font-variant-numeric: tabular-nums; }
+.receipt h4 { font-family: var(--mono); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
+.receipt .sub { text-align: center; color: var(--muted); font-size: 15px; margin-bottom: 10px; }
+.receipt .row { display: flex; justify-content: space-between; gap: 10px; }
+.receipt .row.o::before { content: "O"; }
+.receipt .row.f::before { content: "F"; }
+.receipt .row.o::before, .receipt .row.f::before { font-weight: 600; width: 1.4em; flex: none; }
+.receipt .row.o::before { color: var(--tag); }
+.receipt .row.f::before { color: var(--muted); }
+.receipt .row span:first-child { flex: 1; }
+.receipt hr { border: 0; border-top: 1px dashed var(--muted); margin: 8px 0; }
+.receipt .tot { font-weight: 600; font-size: 17px; }
+.receipt .net { color: var(--mint); }
+.receipt .leg { margin-top: 10px; font-size: 15px; color: var(--muted); }
+
+/* Calcul en chaîne */
+.chain { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 16px; }
+.chain .box { background: var(--surface-2); border-radius: 10px; padding: 7px 12px; font-weight: 700; }
+.chain .box.res { background: var(--ink); color: var(--paper); }
+.chain .op { color: var(--muted); font-weight: 700; font-family: var(--mono); }
+
+/* Le cercle du chômage */
+.block .cercle { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: c; max-width: 760px; }
+@media (max-width: 700px) { .block .cercle { grid-template-columns: 1fr 1fr; } }
+.cercle li { background: var(--paper); border: 1px solid var(--line); border-top: 6px solid var(--tag); border-radius: 14px; padding: 12px 14px; font-size: 17px; }
+.cercle li::before { counter-increment: c; content: counter(c); display: block; margin-bottom: 4px; font-family: var(--mono); font-weight: 600; font-size: 15px; color: var(--tag); }
+
+/* L'escalier de l'impôt */
+.escalier { background: var(--cover); color: #F4F3FF; border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 14px; max-width: 700px; }
+.escalier label { font-family: var(--display); font-weight: 700; font-size: 1.15rem; }
+.escalier input[type=range] { width: 100%; accent-color: var(--hi); min-height: 44px; }
+.escalier .rev { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--hi); font-variant-numeric: tabular-nums; }
+.escalier .marches { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: end; gap: 4px; height: 110px; }
+.escalier .marches div { border-radius: 6px 6px 0 0; background: rgba(255,255,255,.14); position: relative; display: grid; align-content: end; justify-items: center; padding-bottom: 4px; font-family: var(--body); font-weight: 700; font-size: 15px; letter-spacing: -.02em; white-space: nowrap; }
+.escalier .marches div.on { background: var(--hi); color: #14123A; }
+.escalier .out { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 560px) { .escalier .out { grid-template-columns: 1fr; } }
+.escalier .out div { background: rgba(255,255,255,.08); border-radius: 12px; padding: 10px 12px; }
+.escalier .out span { font-size: 16px; opacity: .9; }
+.escalier .out b { display: block; font-family: var(--display); font-size: 1.6rem; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.escalier .msg { font-size: 17px; }
+.escalier .src { font-size: 15px; opacity: .8; }
+
+/* La petite vérif */
+.pause { margin: 26px 0 6px; max-width: 68ch; }
+.quiz details { background: var(--hi); color: #14123A; border: 1px solid #14123A; border-radius: var(--radius); box-shadow: 0 14px 30px -18px rgba(20,18,58,.6); }
+.quiz summary { cursor: pointer; list-style: none; padding: 16px 20px 18px; display: grid; gap: 10px; font-size: 19px; font-weight: 700; }
+.quiz summary::-webkit-details-marker { display: none; }
+.quiz .q-n { justify-self: start; font-family: var(--mono); font-size: 15px; font-weight: 600; background: #14123A; color: var(--hi); border-radius: 99px; padding: 6px 14px; }
+.quiz .q-n::before { content: "Petite vérif · "; }
+.quiz .see { justify-self: start; font-family: var(--display); font-size: 16px; font-weight: 700; background: #14123A; color: #fff; padding: 10px 18px; border-radius: 99px; }
+.quiz details[open] .see { display: none; }
+.quiz .ans { margin: 0 16px 16px; padding: 12px 16px; background: #fff; color: #14123A; border-radius: 12px; }
+
+/* Affiche de fin « On teste? » */
+.qr5-affiche { margin: 56px 0 0; background: var(--cover); color: #F4F3FF; border-radius: 24px; padding: 40px 20px; display: grid; gap: 16px; justify-items: center; text-align: center; }
+.qr5-affiche h2 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(2.8rem, 10vw, 4rem); line-height: 1; color: var(--hi); }
+.qr5-affiche p { max-width: 34ch; font-size: 19px; }
+.qr5-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; }
+.qr5-btns a { flex: 1 1 200px; max-width: 290px; min-height: 60px; display: grid; place-items: center; padding: 10px 24px; border-radius: 99px; background: var(--hi); color: #14123A; font-family: var(--display); font-weight: 700; font-size: 1.3rem; text-decoration: none; transition: transform .15s; }
+.qr5-btns a:hover { transform: translateY(-2px); }
+.qr5-btns a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.qr5-qr { display: none; }
+
+footer { margin-top: 56px; border-top: 2px solid var(--ink); }
+footer .wrap { padding-block: 18px 80px; font-size: 16px; color: var(--muted); display: grid; gap: 6px; }
+footer a { color: inherit; }
+
+.haut { position: fixed; left: max(14px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 7999; padding: 11px 18px; border-radius: 999px; background: #14123A; color: #fff; font: 700 16px/1 system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+@supports (animation-timeline: scroll()) {
+  .haut { animation: haut-apparait linear both; animation-timeline: scroll(); animation-range: 0 500px; }
+  @keyframes haut-apparait { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* TBI : on grossit (ouverte du tableau de bord sur grand écran) */
+@media screen and (min-width: 1700px) {
+  html { font-size: 24px; } body { font-size: 24px; } .wrap { max-width: 1180px; }
+  .lbl, .eyebrow, .sub-h, .section-head .num, .section-head .chap, .bon > b:first-child, .piege > b:first-child, .nuance p, .nuance .src,
+  .card .ex, .card .etiq, .qui, .qui th, .qui .sauf, .semaine .barre, .semaine .leg, .motifs li, .receipt, .receipt h4, .receipt .sub, .receipt .tot, .receipt .leg,
+  .chain, .cercle li, .cercle li::before, .escalier .out span, .escalier .msg, .escalier .src, .escalier .marches div,
+  .quiz summary, .quiz .q-n, .quiz .see, .cover p, .vue-choix a small, .plan ol a, .plan .exam, footer .wrap, .haut, .qr5-affiche p { font-size: 24px; }
+  .receipt { max-width: 680px; } .escalier { max-width: 980px; } .escalier .marches { height: 150px; }
+  html .ccard { width: min(100%, 560px); padding: 30px 34px; }
+  html .ccard .top, html .ccard .photo span, html .ccard .bot { font-size: 24px; }
+}
+
+/* Version papier (lettre) : questions numérotées, corrigé à la fin */
+.pq, .key-src, #corrige { display: none; }
+@page { size: letter; margin: .55in .6in .6in;
+  @bottom-center { content: "Notes de cours · chapitres 6, 7 et 8 · page " counter(page) " de " counter(pages); font: 8.5pt "JetBrains Mono", Consolas, monospace; color: #5B6175; } }
+@media print {
+  :root { --paper: #fff; --card: #fff; --ink: #101320; --muted: #5B6175; --line: #C9CDD6; --surface-2: #F1F2F6; --hi: #fff; --cover: #fff;
+    --tag: #B32F2F; --tag-soft: #FBE3E3; --teal: #3E37B8; --teal-soft: #ECEBFC; --mint: #0E7A55; --mint-soft: #E3F4EC; color-scheme: light; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10.5pt; line-height: 1.45; }
+  .wrap { max-width: none; padding: 0; }
+  .vue-choix, .escalier, .haut, .qr5-btns, footer, .ccard { display: none !important; }
+  .cover { border-bottom: 3px solid var(--ink); }
+  .cover .wrap { padding: 0 0 12px; gap: 8px; }
+  .cover .eyebrow { color: var(--teal); }
+  .cover h1 { font-size: 30pt; }
+  .cover h1 em { color: var(--teal); font-style: normal; }
+  .cover p { font-size: 11pt; }
+  .plan .wrap { padding-block: 10px; }
+  .plan ol a { border: 0; padding: 0 8px 0 0; font-size: 10pt; }
+  .section-head { padding-block: 8px 2px; break-after: avoid; }
+  main > .section-head:not(:first-child) { break-before: page; }
+  .section-head h2 { font-size: 20pt; }
+  .block { display: block; border: 0; border-top: 1.5px solid var(--line); border-radius: 0; padding: 12px 0; margin: 0; }
+  .block > * + * { margin-top: 9px; }
+  .block h3, .sub-h { break-after: avoid; }
+  .block h3 { font-size: 14pt; }
+  details.nuance::details-content { content-visibility: visible; }
+  .nuance summary::before { content: none; }
+  .def, .card, .org, .lignes > *, .bon, .piege, .nuance, .receipt, .qui tr, .semaine, .chiffres li, .cercle li, .chain, .quiz details, .qr5-affiche { break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .chiffres b { font-size: 16pt; }
+  .pause { margin: 12px 0 4px; }
+  .quiz details { background: none; box-shadow: none; border: 1.5px solid #999; border-radius: 6px; color: inherit; }
+  .quiz summary { padding: 8px 12px; gap: 4px; font-size: 10.5pt; color: inherit; }
+  .quiz summary::after { content: ""; height: 3.1em; background: repeating-linear-gradient(transparent 0 1.5em, var(--line) 1.5em calc(1.5em + 1px)); }
+  .quiz .q-n { background: none; color: var(--teal); padding: 0; }
+  .quiz .q-n::before { content: none; }
+  .quiz .see, .quiz .ans { display: none !important; }
+  .pq { display: inline; color: var(--teal); font-weight: 700; }
+  .qr5-affiche { margin: 16px 0 0; padding: 12px 16px; gap: 8px; background: none; color: var(--ink); border: 2.5px solid var(--ink); }
+  .qr5-affiche h2 { font-size: 22pt; color: var(--ink); }
+  .qr5-affiche p { font-size: 10pt; }
+  .qr5-qr { display: flex; gap: 36px; justify-content: center; }
+  #corrige { display: block; break-before: page; }
+  .key { margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; font-size: 9pt; line-height: 1.35; }
+  .key h4 { font-size: 1.05rem; margin: 10px 0 4px; break-after: avoid; }
+  .key li { margin-bottom: 4px; break-inside: avoid; }
+  .key li b.n { color: var(--teal); font-family: var(--mono); margin-right: 4px; }
+  .key-src { display: block; margin-top: 24px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 8.5pt; color: var(--muted); }
+}
+</style>
+<style id="theme-carte">
+/* Visuel « carte » de Finances (2026-11-03), écran seulement. Pour « Intégrer le monde du travail », la carte devient une carte d'employé. */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0C0E15; --card: #151925; --ink: #EEF0F6; --muted: #9CA3B8; --line: #2A3042;
+    --tag: #FF6B6B; --tag-soft: #3D1A1E; --teal: #8B85FF; --teal-soft: #24224A;
+    --mint: #3CCB91; --mint-soft: #12352A; --surface-2: #1D2232; --cover: #0B0A22; color-scheme: dark;
+  }
+}
+@media screen {
+  :root[data-theme="dark"] {
+    --paper: #0C0E15; --card: #151925; --ink: #EEF0F6; --muted: #9CA3B8; --line: #2A3042;
+    --tag: #FF6B6B; --tag-soft: #3D1A1E; --teal: #8B85FF; --teal-soft: #24224A;
+    --mint: #3CCB91; --mint-soft: #12352A; --surface-2: #1D2232; --cover: #0B0A22; color-scheme: dark;
+  }
+  .cover { background: radial-gradient(120% 140% at 85% 0%, #3B2FB8 0%, #14123A 60%); color: #F4F3FF; overflow: hidden; }
+  .cover .wrap { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px 28px; align-items: center; }
+  .cover .wrap > *:not(.ccard) { grid-column: 1; }
+  .cover .ccard { grid-column: 2; grid-row: 1 / span 3; }
+  @media (max-width: 720px) {
+    .cover .wrap { grid-template-columns: 1fr; }
+    .cover .ccard { grid-column: 1; grid-row: auto; margin-top: 8px; }
+  }
+  .cover .eyebrow { justify-self: start; background: rgba(255,255,255,.12); color: #fff; border-radius: 99px; padding: 5px 12px; }
+  .cover h1 em { color: var(--hi); font-style: normal; }
+  .cover p { opacity: .9; }
+  .ccard { aspect-ratio: 1.586; width: min(100%, 340px); justify-self: center; border-radius: 20px; padding: 20px 22px; color: #fff; background: linear-gradient(135deg, #6D5DFC 0%, #2B1E9A 55%, #120E44 100%); box-shadow: 0 30px 60px -25px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.25); transform: rotate(-6deg); display: grid; grid-template-rows: auto 1fr auto; position: relative; overflow: hidden; }
+  .ccard::after { content: ""; position: absolute; width: 260px; height: 260px; right: -90px; top: -110px; border-radius: 50%; background: rgba(200,242,90,.18); }
+  .ccard .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; letter-spacing: .04em; font-size: 16px; }
+  .ccard .photo { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+  .ccard .photo i { width: 42px; height: 50px; border-radius: 8px; background: rgba(255,255,255,.18); position: relative; overflow: hidden; flex: none; }
+  .ccard .photo i::before { content: ""; position: absolute; left: 12px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,.55); }
+  .ccard .photo i::after { content: ""; position: absolute; left: 6px; top: 30px; width: 30px; height: 26px; border-radius: 50% 50% 0 0; background: rgba(255,255,255,.55); }
+  .ccard .photo span { font-family: var(--mono); font-size: 15px; line-height: 1.3; opacity: .9; }
+  .ccard .bot { display: flex; justify-content: space-between; gap: 10px; font-family: var(--mono); font-size: 15px; opacity: .95; margin-top: 8px; }
+  .ccard .bot b { display: block; font-size: 1rem; font-weight: 600; }
+  .ccard .vif { color: var(--hi); }
+}
+@media print { .ccard { display: none !important; } }
+</style>
+<link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
+</head>
+<body>
+<!-- vue-choix -->
+<nav class="vue-choix" aria-label="Notes de cours ou exercices"><div class="wrap">
+  <a target="_top" class="on" href="https://simleprof.github.io/finances/#notes" aria-current="page">Notes de cours<small>Toutes mes notes</small></a>
+  <a target="_top" href="https://simleprof.github.io/finances/#exercices=6.1,6.2,7.1,7.2,8.1,8.2">Exercices<small>Me tester · chapitres 6, 7 et 8</small></a>
+</div></nav>
+<!-- /vue-choix -->
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">Éducation financière · Étape 3 · Chapitres 6, 7 et 8</div>
+    <h1>Ton premier emploi&nbsp;: tes droits, ta paie, <em>tes impôts.</em></h1>
+    <p>Ce que la loi garantit, ce qui disparaît de ta paie et où va cet argent. Lis un thème, fais sa petite vérif, continue.</p>
+    <div class="ccard" aria-hidden="true">
+      <div class="top"><span>CARTE D'EMPLOYÉ</span><span>CH.&nbsp;6 · 7 · 8</span></div>
+      <div class="photo"><i></i><span>Nadia · 80 h à 19&nbsp;$<br>une paie de deux semaines</span></div>
+      <div class="bot"><span>BRUT<b>1&nbsp;520&nbsp;$</b></span><span>RETENUES<b>434&nbsp;$</b></span><span>NET<b class="vif">1&nbsp;086&nbsp;$</b></span></div>
+    </div>
+  </div>
+</header>
+
+<section class="plan" aria-labelledby="plan-t">
+  <div class="wrap">
+    <h2 id="plan-t">Au sommaire</h2>
+    <div class="cols-plan">
+      <div><h3>Chapitre 6 · Le travail</h3><ol>
+        <li><a href="#loi">La loi</a></li>
+        <li><a href="#heures">Les heures</a></li>
+        <li><a href="#paie-qui">Qui paie?</a></li>
+        <li><a href="#jeunes">Les jeunes</a></li>
+        <li><a href="#charte">Discrimination et équité</a></li>
+        <li><a href="#devoirs">Tes devoirs</a></li>
+        <li><a href="#cnesst">CNESST et Tribunal</a></li>
+        <li><a href="#syndicat">Le syndicat</a></li>
+      </ol></div>
+      <div><h3>Chapitre 7 · La rémunération</h3><ol>
+        <li><a href="#bulletin">Le bulletin de paie</a></li>
+        <li><a href="#retenues">Les retenues</a></li>
+        <li><a href="#avantages">Les avantages sociaux</a></li>
+        <li><a href="#chomage">Le chômage</a></li>
+        <li><a href="#ae">L'assurance-emploi</a></li>
+      </ol></div>
+      <div><h3>Chapitre 8 · L'impôt</h3><ol>
+        <li><a href="#servir">À quoi servent les impôts</a></li>
+        <li><a href="#fraude">La fraude fiscale</a></li>
+        <li><a href="#progressif">L'impôt progressif</a></li>
+      </ol></div>
+    </div>
+    <p class="exam">Mi-chapitre&nbsp;: chapitres 6 et 7. Examen final&nbsp;: les trois chapitres.</p>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ===================== 6.1 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">6.1</span>
+    <span class="chap">Chapitre 6 · Le travail</span>
+    <h2>Des normes? Quelles normes?</h2>
+    <p>Ton patron n'a pas tous les droits. La loi fixe un plancher&nbsp;; il peut faire mieux, jamais moins bien.</p>
+  </div>
+
+  <section class="block" id="loi">
+    <h3>Ce que la loi te garantit</h3>
+    <dl class="defs"><div class="def"><dt>Loi sur les normes du travail</dt><dd>Les <strong>conditions minimales</strong> de travail de la plupart des travailleurs québécois, <strong>syndiqués ou non</strong>. L'employeur peut offrir mieux.</dd></div></dl>
+    <div class="bon"><b>Qui n'est pas couvert?</b>Les <strong>travailleurs autonomes</strong>, les <strong>stagiaires</strong>, les <strong>gardiens d'enfants</strong> et les employés d'une ambassade.</div>
+    <p><strong>Le salaire minimum</strong> est la norme la plus connue. <span class="hl">Il s'applique peu importe la forme de paie</span>&nbsp;: à l'heure, à la commission, au pourboire. Un avantage, comme une voiture fournie, ne peut pas faire descendre la paie sous le minimum.</p>
+    <p>Ton employeur est une banque, une compagnie aérienne, ferroviaire ou de télécommunications? C'est plutôt le <strong>Code canadien du travail</strong> qui s'applique&nbsp;: même idée, autre loi.</p>
+    <details class="nuance">
+      <summary class="lbl">Nuance · le minimum bouge chaque 1er mai</summary>
+      <p>Dans le manuel (2024)&nbsp;: 15,75&nbsp;$, ou 12,60&nbsp;$ au pourboire. Depuis le 1<sup>er</sup> mai 2026&nbsp;: <strong>16,60&nbsp;$</strong>, ou <strong>13,30&nbsp;$</strong> au pourboire. Le chiffre change chaque 1<sup>er</sup> mai, la règle reste.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.quebec.ca/nouvelles/actualites/details/hausse-du-salaire-minimum-des-aujourdhui-le-taux-general-du-salaire-minimum-setablit-a-1660-lheure-70097" rel="noopener">Gouvernement du Québec, hausse du salaire minimum (2026)</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Vrai ou faux</span>Zack vend des forfaits de cellulaire, payé seulement à la commission. Une semaine sans ventes, son patron peut lui verser moins que le salaire minimum.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> Le salaire minimum s'applique aussi à la commission&nbsp;: pour ses heures, Zack reçoit au moins le minimum.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="heures">
+    <h3>Les heures et les congés</h3>
+    <ul class="chiffres">
+      <li><b>40 h</b>une semaine normale&nbsp;; au-delà, <strong>taux et demi</strong></li>
+      <li><b>30 min</b>pour manger après 5 h de travail (non payées)</li>
+      <li><b>32 h</b>de repos consécutives, chaque semaine</li>
+      <li><b>50 h</b>au-delà de 50 h par semaine, tu peux refuser</li>
+    </ul>
+    <ul>
+      <li><strong>Les pauses-café</strong> ne sont <strong>pas exigées</strong> par la loi. Mais si l'employeur en donne, il doit les payer.</li>
+      <li><strong>Le droit de refuser</strong>&nbsp;: plus de 50 heures dans la semaine, ou trop d'heures au-delà de ton horaire habituel. Sauf si ton refus met en danger la vie de tes collègues ou de la population.</li>
+      <li><strong>Un jour férié travaillé</strong> (la Fête nationale, Noël…)&nbsp;: l'employeur te donne un <strong>congé</strong> dans les 3 semaines avant ou après, <strong>ou</strong> une <strong>indemnité</strong> (une somme d'argent à la place). C'est vrai aussi à temps partiel.</li>
+      <li><strong>Les vacances</strong>&nbsp;: 4&nbsp;% du salaire pour moins de 3 ans de service, 6&nbsp;% ensuite. L'employeur choisit les dates et t'avise 4 semaines d'avance.</li>
+    </ul>
+    <details class="nuance">
+      <summary class="lbl">Nuance · 4 heures ou 2 heures?</summary>
+      <p>Le manuel dit qu'on peut refuser plus de 4 heures au-delà de son horaire habituel. Depuis 2018, la loi dit <strong>2 heures</strong> (ou plus de 14 heures en 24 heures). Les 50 heures par semaine, elles, n'ont pas changé.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.cnesst.gouv.qc.ca/en/working-conditions/work-schedule-and-termination-employment/work-schedule/right-refuse-work/right-refuse-work-overtime" rel="noopener">CNESST, le droit de refuser des heures supplémentaires</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Calcul</span>Inès gagne 18&nbsp;$ l'heure. Cette semaine, elle a travaillé 44 heures. Combien vaut chacune de ses 4 heures supplémentaires?<span class="see">Voir la réponse →</span></summary><div class="ans">Au-delà de 40 heures, c'est taux et demi&nbsp;: 18&nbsp;$ × 1,5 = <strong>27&nbsp;$ l'heure</strong>, donc 108&nbsp;$ pour les 4 heures.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="paie-qui">
+    <h3>Qui paie quoi?</h3>
+    <p>Quand le travail coûte quelque chose, la loi tranche souvent pour l'employé.</p>
+    <div class="scroll"><table class="qui">
+      <thead><tr><th>La situation</th><th>Qui paie?</th></tr></thead>
+      <tbody>
+        <tr><td>Un uniforme avec le <strong>nom ou le logo</strong> de l'entreprise</td><td class="emp">L'employeur, toujours</td></tr>
+        <tr><td>Un uniforme sans logo, pour un employé <strong>au salaire minimum</strong></td><td class="emp">L'employeur</td></tr>
+        <tr><td>Un uniforme sans logo, pour un employé payé <strong>plus</strong> que le minimum</td><td>L'employé peut payer<br><span class="sauf">mais sa paie doit rester au moins au minimum</span></td></tr>
+        <tr><td>Une <strong>formation exigée</strong>, même hors des heures (et ses frais)</td><td class="emp">L'employeur</td></tr>
+        <tr><td>Une <strong>période d'essai</strong>, qu'on soit engagé ou non</td><td class="emp">L'employeur</td></tr>
+        <tr><td>Une <strong>réunion</strong> convoquée par l'employeur</td><td class="emp">L'employeur</td></tr>
+        <tr><td>Une erreur de caisse, une assiette cassée, un vol à l'étalage</td><td class="emp">L'employeur<br><span class="sauf">sauf négligence ou mauvaise foi</span></td></tr>
+      </tbody>
+    </table></div>
+    <dl class="defs"><div class="def"><dt>Frais d'exploitation</dt><dd>Les pertes normales d'une entreprise qui roule (une caisse qui ne tombe pas juste, du matériel brisé). Ce n'est <strong>pas</strong> à l'employé de les rembourser.</dd></div></dl>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Application</span>Au cinéma où travaille Maxime, au salaire minimum, le gérant retient 12&nbsp;$ sur sa paie&nbsp;: il a renversé un plateau de maïs soufflé. A-t-il le droit? Pourquoi?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non.</strong> Une erreur ordinaire fait partie des <strong>frais d'exploitation</strong> de l'entreprise&nbsp;: Maxime n'a pas à la rembourser (sauf s'il avait été négligent ou de mauvaise foi).</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="jeunes">
+    <h3>Les jeunes travailleurs</h3>
+    <ul>
+      <li><strong>Avant 14 ans</strong>&nbsp;: c'est interdit, sauf quelques exceptions (garder des enfants, travailler dans un camp de vacances). À 12 ou 13 ans, on peut aussi travailler dans l'entreprise de sa famille ou dans une ferme de moins de 10 employés, avec l'accord écrit d'un parent.</li>
+      <li><strong>De 14 à 16 ans, pendant l'année scolaire</strong>, l'école passe avant&nbsp;:</li>
+    </ul>
+    <div class="semaine" role="img" aria-label="Au plus 17 heures par semaine, dont 10 heures au plus du lundi au vendredi">
+      <div class="barre"><span>Lun. au ven.&nbsp;: 10 h max</span><span>Fin de sem.&nbsp;: le reste</span></div>
+      <p class="leg"><strong>17 heures au plus par semaine</strong>, dont <strong>10 au plus</strong> du lundi au vendredi. Ces limites ne s'appliquent pas pendant l'été ni la relâche.</p>
+    </div>
+    <details class="nuance">
+      <summary class="lbl">Nuance · une règle toute récente</summary>
+      <p>Ces limites existent seulement depuis le 1<sup>er</sup> septembre 2023. Le gouvernement voulait protéger la santé et la réussite scolaire des élèves.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.quebec.ca/nouvelles/actualites/details/loi-sur-lencadrement-du-travail-des-enfants-la-cnesst-est-la-pour-informer-et-accompagner-les-milieux-de-travail-48387" rel="noopener">Gouvernement du Québec, Loi sur l'encadrement du travail des enfants</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Jugement</span>En octobre, Thomas, 15 ans, travaille 3 heures chaque soir de semaine à l'aréna, puis 4 heures le samedi. Son horaire respecte-t-il la loi?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non.</strong> Au total, 19 heures (plus que 17), dont 15 du lundi au vendredi (plus que 10).</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="charte">
+    <h3>La discrimination et l'équité salariale</h3>
+    <p>La <strong>Charte des droits et libertés de la personne</strong> du Québec interdit la discrimination fondée sur 14 motifs, à l'embauche comme au travail (salaire, promotion, formation, renvoi). Les voici&nbsp;:</p>
+    <ul class="motifs">
+      <li>l'âge</li><li>le sexe</li><li>la grossesse</li><li>l'état civil</li><li>la religion</li><li>la race</li><li>la couleur</li><li>l'origine ethnique</li><li>la langue</li><li>le handicap</li><li>l'orientation sexuelle</li><li>l'identité ou l'expression de genre</li><li>les convictions politiques</li><li>la condition sociale</li>
+    </ul>
+    <p>La <strong>période de probation</strong> (environ 3 mois) doit être la même pour tous les nouveaux employés.</p>
+    <dl class="defs"><div class="def"><dt>Équité salariale</dt><dd>Un <strong>salaire égal pour un travail différent, mais équivalent</strong>&nbsp;: deux emplois différents qui demandent autant (de formation, d'efforts, de responsabilités). La loi québécoise date de <strong>1996</strong> et vise les entreprises de <strong>10 salariés et plus</strong>.</dd></div></dl>
+    <p>Pour savoir si un emploi surtout féminin (adjointe administrative) vaut un emploi surtout masculin (machiniste), on compare <strong>quatre facteurs</strong>&nbsp;: les <strong>qualifications</strong>, les <strong>responsabilités</strong>, les <strong>efforts requis</strong> et les <strong>conditions de travail</strong>. Si l'emploi féminin est sous-payé, son salaire monte.</p>
+    <div class="bon"><b>Bon à savoir</b>La loi existe, mais l'écart n'a pas disparu&nbsp;: en 2022, une femme gagnait en moyenne <strong>0,81&nbsp;$</strong> pour chaque dollar gagné par un homme.</div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Réponse courte</span>Pour comparer deux emplois, une entreprise regarde depuis combien d'années chaque personne y travaille. Est-ce un des facteurs de l'équité salariale? Nomme-les.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non</strong>&nbsp;: on compare des <strong>emplois</strong>, pas des personnes. Les quatre facteurs&nbsp;: qualifications, responsabilités, efforts requis, conditions de travail.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="devoirs">
+    <h3>Tes devoirs envers ton employeur</h3>
+    <ul>
+      <li>Faire toi-même le travail pour lequel tu as été engagé, avec <strong>prudence et diligence</strong> (avec soin et sans traîner).</li>
+      <li>Ne pas te mettre en danger, ni mettre les autres en danger.</li>
+      <li>Suivre les consignes, sauf si elles sont dangereuses ou illégales.</li>
+    </ul>
+    <dl class="lignes">
+      <div><dt>Devoir de loyauté</dt><dd>Être honnête et faire passer les intérêts de l'entreprise avant les tiens (par exemple, l'ordinateur du travail sert au travail).</dd></div>
+      <div><dt>Devoir de discrétion</dt><dd><strong>Ne pas dévoiler les informations confidentielles</strong> de l'entreprise (ses résultats, ses clients, ses projets).</dd></div>
+      <div><dt>Secret professionnel</dt><dd>Il protège les <strong>personnes</strong>&nbsp;: un médecin ou un avocat ne révèle rien sur ses patients ou ses clients.</dd></div>
+    </dl>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Application</span>Sur ses réseaux sociaux, un caissier publie le chiffre d'affaires de son magasin, qui n'était connu que des employés. Quel devoir ne respecte-t-il pas?<span class="see">Voir la réponse →</span></summary><div class="ans">Le <strong>devoir de discrétion</strong>&nbsp;: il dévoile une information confidentielle de l'entreprise (c'est aussi un manque de loyauté).</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 6.2 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">6.2</span>
+    <span class="chap">Chapitre 6 · Le travail</span>
+    <h2>Qui veille au respect des normes?</h2>
+    <p>Une règle sans arbitre ne vaut pas grand-chose. Voici les tiens.</p>
+  </div>
+
+  <section class="block" id="cnesst">
+    <h3>La CNESST et le Tribunal administratif du travail</h3>
+    <div class="orgs">
+      <div class="org"><span class="abbr">CNESST</span><span class="name">Commission des normes, de l'équité, de la santé et de la sécurité du travail</span><span>Née en <strong>2016</strong> de la fusion de trois commissions. Trois volets&nbsp;: les <strong>normes du travail</strong>, l'<strong>équité salariale</strong>, la <strong>santé et la sécurité</strong> (elle indemnise les victimes d'accidents). C'est là qu'on porte plainte.</span></div>
+      <div class="org"><span class="abbr">TAT</span><span class="name">Tribunal administratif du travail</span><span>Créé lui aussi en <strong>2016</strong>. On peut y <strong>contester une décision de la CNESST</strong>. Il protège le droit de se regrouper en syndicat et surveille l'application des conventions collectives.</span></div>
+    </div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Réponse courte</span>Un employé non syndiqué n'a pas été payé pour ses heures supplémentaires. À qui s'adresse-t-il? Et s'il n'est pas d'accord avec la décision?<span class="see">Voir la réponse →</span></summary><div class="ans">Il porte plainte à la <strong>CNESST</strong> (volet normes du travail). S'il conteste la décision, il va au <strong>Tribunal administratif du travail</strong>.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="syndicat">
+    <h3>Le syndicat</h3>
+    <dl class="defs">
+      <div class="def"><dt>Convention collective</dt><dd>Le contrat de travail <strong>négocié par le syndicat</strong> avec l'employeur. Ses conditions sont en général <strong>meilleures</strong> que celles de la loi. Elle dure souvent plusieurs années (jusqu'à sept ans, selon le manuel), puis se renégocie.</dd></div>
+      <div class="def"><dt>Grief</dt><dd>La <strong>plainte formelle</strong> que dépose le syndicat quand l'employeur ne respecte pas la convention.</dd></div>
+    </dl>
+    <p>Un employé <strong>syndiqué</strong> passe d'abord par son <strong>syndicat</strong>. La cotisation syndicale coûte de 1&nbsp;% à 2&nbsp;% du salaire. Quatre grandes centrales regroupent plus des trois quarts des syndiqués&nbsp;: FTQ, CSN, CSQ et CSD.</p>
+    <div class="piege"><b>Piège · la formule Rand</b>Dans une entreprise syndiquée, <strong>tous</strong> les employés <strong>paient la cotisation</strong>, parce que tous profitent de la convention. Mais personne n'est obligé de <strong>devenir membre</strong> du syndicat.</div>
+    <details class="nuance">
+      <summary class="lbl">Nuance · sept ans, un maximum?</summary>
+      <p>Le manuel dit qu'une convention collective peut durer jusqu'à sept ans. Dans la loi, il n'y a plus de durée maximale depuis 1994&nbsp;: elle doit seulement durer au moins un an.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.travail.gouv.qc.ca/fileadmin/fichiers/Documents/relations_travail/duree_cc/rap_dureeCC.pdf" rel="noopener">Ministère du Travail, la durée des conventions collectives</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Vrai ou faux</span>Kevin refuse d'adhérer au syndicat de son usine. Il n'aura donc pas à payer de cotisation syndicale.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> Avec la formule Rand, il paie la cotisation même s'il n'est pas membre&nbsp;: les gains négociés profitent à tout le monde.</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 7.1 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">7.1</span>
+    <span class="chap">Chapitre 7 · La rémunération</span>
+    <h2>Comprendre le bulletin de paie</h2>
+    <p>Tu as gagné 1&nbsp;520&nbsp;$, tu reçois 1&nbsp;086&nbsp;$. Où est passé le reste?</p>
+  </div>
+
+  <section class="block" id="bulletin">
+    <h3>Brut, retenues, net</h3>
+    <dl class="defs">
+      <div class="def"><dt>Salaire brut</dt><dd>Ce que tu as gagné <strong>avant</strong> les impôts et les autres retenues.</dd></div>
+      <div class="def"><dt>Salaire net</dt><dd>Ce qui <strong>reste après</strong> les retenues&nbsp;: le montant <strong>déposé dans ton compte</strong>.</dd></div>
+    </dl>
+    <div class="chain" aria-label="Heures fois taux horaire égale salaire brut ; brut moins retenues égale net">
+      <span class="box">Heures × taux</span><span class="op">=</span><span class="box">Brut</span></div>
+    <div class="chain" aria-hidden="true"><span class="box">Brut</span><span class="op">−</span><span class="box">Retenues</span><span class="op">=</span><span class="box res">Net</span>
+    </div>
+    <div class="receipt">
+      <h4>Bulletin de paie</h4>
+      <p class="sub">Nadia · Centre sportif du coin · du 14 au 25 octobre 2024</p>
+      <div class="row"><span>80 h × 19,00&nbsp;$</span><b>1&nbsp;520,00&nbsp;$</b></div>
+      <hr>
+      <div class="row o"><span>Impôt fédéral</span><span>93,26&nbsp;$</span></div>
+      <div class="row o"><span>Impôt provincial</span><span>106,21&nbsp;$</span></div>
+      <div class="row o"><span>RRQ</span><span>88,66&nbsp;$</span></div>
+      <div class="row o"><span>RQAP</span><span>7,51&nbsp;$</span></div>
+      <div class="row o"><span>Assurance-emploi</span><span>20,06&nbsp;$</span></div>
+      <div class="row f"><span>Régime de retraite (RPA)</span><span>91,20&nbsp;$</span></div>
+      <div class="row f"><span>Cotisation syndicale</span><span>15,20&nbsp;$</span></div>
+      <div class="row f"><span>Stationnement</span><span>12,00&nbsp;$</span></div>
+      <hr>
+      <div class="row tot"><span>Total des retenues</span><span>434,10&nbsp;$</span></div>
+      <div class="row tot net"><span>Salaire net</span><span>1&nbsp;085,90&nbsp;$</span></div>
+      <p class="leg">O = obligatoire&nbsp;· F = facultative (dans une entreprise syndiquée, la cotisation syndicale est obligatoire pour tous&nbsp;: formule Rand)</p>
+    </div>
+    <p>Le bulletin est <strong>obligatoire</strong>&nbsp;: il te permet de vérifier ta paie. On doit y trouver le nom de l'employé et de l'employeur, la date, la <strong>période de travail</strong>, le <strong>nombre d'heures</strong>, le <strong>taux horaire</strong>, le brut et <strong>chaque retenue</strong>. L'heure de début et de fin de chaque journée, elle, n'est pas obligatoire.</p>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Calcul</span>Jade travaille 30 heures par semaine à 16&nbsp;$ l'heure. Sa paie couvre deux semaines, et ses retenues totalisent 140&nbsp;$. Quel est son salaire brut? Son salaire net?<span class="see">Voir la réponse →</span></summary><div class="ans">Brut&nbsp;: 30 h × 16&nbsp;$ × 2 = <strong>960&nbsp;$</strong>. Net&nbsp;: 960&nbsp;$ − 140&nbsp;$ = <strong>820&nbsp;$</strong>.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="retenues">
+    <h3>Les retenues à la source</h3>
+    <p>Il y a <strong>cinq retenues obligatoires</strong> au Québec. Toutes les autres sont facultatives (régime de retraite, syndicat, assurances, REER, stationnement).</p>
+    <dl class="lignes">
+      <div><dt>Impôt fédéral et impôt provincial</dt><dd>L'employeur les retient pour les deux gouvernements. Au printemps, la <strong>déclaration de revenus</strong> fait le compte&nbsp;: trop payé, on te rembourse&nbsp;; pas assez, tu paies la différence.</dd></div>
+      <div><dt>RRQ · Régime de rentes du Québec</dt><dd>Une assurance publique pour la <strong>retraite</strong>, le <strong>décès</strong> et l'<strong>invalidité</strong>. Toi&nbsp;: 6,4&nbsp;%. Ton employeur&nbsp;: 6,4&nbsp;%. Le <strong>travailleur autonome</strong>, sans employeur, <strong>paie les deux parts</strong>&nbsp;: 12,8&nbsp;%.</dd></div>
+      <div><dt>RQAP · Régime québécois d'assurance parentale</dt><dd>Des prestations quand on a ou adopte un enfant&nbsp;; payé par l'employé et l'employeur.</dd></div>
+      <div><dt>Assurance-emploi</dt><dd>Un revenu temporaire si tu perds ton emploi (section 7.2).</dd></div>
+    </dl>
+    <div class="bon"><b>Bon à savoir · RPA ou REER?</b>Le <strong>RPA</strong> (régime de pension agréé) est collectif, géré par l'employeur, qui peut y mettre de l'argent&nbsp;: c'est un avantage social. Le <strong>REER</strong> est individuel, et l'employeur n'y cotise pas.</div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Classement</span>Obligatoire ou facultative? a) la cotisation au RQAP b) le stationnement au travail c) l'impôt provincial d) un don à un organisme de charité.<span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Obligatoire</strong> b) <strong>Facultative</strong> c) <strong>Obligatoire</strong> d) <strong>Facultative</strong>.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="avantages">
+    <h3>Les avantages sociaux</h3>
+    <dl class="defs"><div class="def"><dt>Avantages sociaux</dt><dd>Ce que l'employeur offre <strong>en plus du salaire</strong>, sans y être obligé. Ils peuvent valoir jusqu'à 30&nbsp;% de la rémunération.</dd></div></dl>
+    <div class="cols">
+      <div class="card"><h4>Les assurances</h4><ul><li>Médicaments</li><li>Soins dentaires, soins de la vue</li><li>Assurance vie, maladie, accident</li></ul></div>
+      <div class="card"><h4>Liés au travail</h4><ul><li>Régime de retraite (RPA)</li><li>Horaire de 4 jours</li><li>Banque de congés</li><li>Primes au rendement</li></ul></div>
+      <div class="card"><h4>Hors du travail</h4><ul><li>Transport en commun remboursé</li><li>Abonnement au gym</li><li>Droits de scolarité remboursés</li><li>Escompte d'employé</li></ul></div>
+    </div>
+    <div class="piege"><b>Piège · norme ou avantage?</b>Ce que la <strong>loi oblige</strong> n'est pas un avantage social&nbsp;: l'uniforme au logo fourni, les vacances, les jours fériés, les heures supplémentaires à taux et demi. Ce sont des <strong>normes du travail</strong>.</div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Classement</span>Norme du travail ou avantage social? a) un rabais de 30&nbsp;% sur les vêtements de la boutique b) la pause de 30 minutes pour manger c) une prime quand l'équipe dépasse son objectif.<span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Avantage social</strong> (hors du travail) b) <strong>Norme du travail</strong> c) <strong>Avantage social</strong> (lié au travail).</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 7.2 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">7.2</span>
+    <span class="chap">Chapitre 7 · La rémunération</span>
+    <h2>Et si je perds mon emploi?</h2>
+    <p>Tout le monde cotise, même ceux qui n'en auront jamais besoin. C'est ça, une assurance.</p>
+  </div>
+
+  <section class="block" id="chomage">
+    <h3>Le chômage et ses quatre types</h3>
+    <dl class="defs">
+      <div class="def"><dt>Chômeur</dt><dd>Une personne <strong>apte</strong> au travail (capable de travailler), qui <strong>veut travailler</strong> et qui <strong>cherche activement</strong> un emploi.</dd></div>
+      <div class="def"><dt>Population active</dt><dd>Les 15 ans et plus qui ont un emploi <strong>ou</strong> qui en cherchent un. Taux de chômage = chômeurs ÷ population active × 100.</dd></div>
+    </dl>
+    <div class="cols">
+      <div class="card"><h4>Frictionnel</h4><p>Une courte pause entre deux emplois, souvent <strong>volontaire</strong>.</p><p class="ex">Karim quitte son emploi pour une meilleure offre.</p></div>
+      <div class="card"><h4>Conjoncturel</h4><p>L'économie <strong>ralentit</strong>&nbsp;: une récession.</p><p class="ex">Une agence de voyages réduit son personnel en pleine crise.</p></div>
+      <div class="card"><h4>Structurel</h4><p>Un <strong>changement profond</strong>&nbsp;: technologie, mondialisation, secteur qui disparaît.</p><p class="ex">Une usine se robotise.</p></div>
+      <div class="card"><h4>Saisonnier</h4><p>Le travail suit les <strong>saisons</strong>&nbsp;: tourisme, agriculture, pêche.</p><p class="ex">Le moniteur de ski au printemps.</p></div>
+    </div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Application</span>Une banque ferme trois succursales parce que ses clients font presque tout sur leur cellulaire. Six caissières perdent leur emploi. Quel type de chômage?<span class="see">Voir la réponse →</span></summary><div class="ans">Du chômage <strong>structurel</strong>&nbsp;: un changement technologique fait disparaître ces emplois.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="ae">
+    <h3>L'assurance-emploi</h3>
+    <dl class="defs"><div class="def"><dt>Assurance-emploi</dt><dd>Un <strong>revenu temporaire</strong> versé par le gouvernement fédéral à une personne qui a perdu son emploi et qui y a droit. Les employés et les employeurs paient les cotisations.</dd></div></dl>
+    <div class="cols">
+      <div class="card"><h4>Pour y avoir droit</h4><ul><li>Avoir eu un emploi assurable</li><li>L'avoir perdu <strong>sans en être responsable</strong></li><li>Être sans salaire depuis 7 jours</li><li>Avoir travaillé assez d'heures (selon la région)</li><li>Être prêt à travailler et chercher activement</li></ul></div>
+      <div class="card"><h4>Pas de prestations si…</h4><ul><li>On quitte son emploi <strong>sans raison valable</strong></li><li>On est congédié pour <strong>inconduite</strong> (une faute grave)</li><li>On participe à une <strong>grève</strong> ou on subit un lock-out (l'employeur ferme ses portes aux employés)</li></ul></div>
+    </div>
+    <p>La prestation vaut <strong>55&nbsp;%</strong> du salaire moyen, jusqu'à un maximum, pendant 14 à 45 semaines. Elle est imposable. Plus le chômage est élevé dans ta région, moins il faut d'heures pour y avoir droit.</p>
+    <p class="sub-h">Quand le chômage monte</p>
+    <ol class="cercle">
+      <li>Moins de gens travaillent, donc <strong>moins de cotisations</strong> entrent.</li>
+      <li>Plus de chômeurs, donc <strong>plus de prestations</strong> à verser.</li>
+      <li>Les chômeurs <strong>dépensent moins</strong>&nbsp;: les entreprises vendent moins.</li>
+      <li>Elles peuvent couper d'autres emplois&nbsp;: la <strong>pression</strong> monte sur le gouvernement.</li>
+    </ol>
+    <details class="nuance">
+      <summary class="lbl">Nuance · les montants de 2026</summary>
+      <p>Le manuel donne un maximum de 650&nbsp;$ par semaine (2023). En 2026, le taux est toujours de 55&nbsp;%, et le maximum est de <strong>729&nbsp;$</strong> par semaine.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.canada.ca/fr/services/prestations/ae/assurance-emploi-reguliere/montant-prestation.html" rel="noopener">Gouvernement du Canada, montant des prestations régulières</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Jugement</span>Gabriel démissionne parce qu'il trouve son emploi ennuyeux, sans en avoir trouvé un autre. Aura-t-il droit à l'assurance-emploi?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non</strong>&nbsp;: il quitte <strong>volontairement</strong>, sans raison valable. Il n'a pas perdu son emploi sans en être responsable.</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 8.1 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">8.1</span>
+    <span class="chap">Chapitre 8 · L'impôt</span>
+    <h2>À quoi servent les impôts?</h2>
+    <p>L'hôpital, l'école, la route qui mène au travail&nbsp;: quelqu'un les paie. C'est toi, et tout le monde.</p>
+  </div>
+
+  <section class="block" id="servir">
+    <h3>Les services publics et la redistribution</h3>
+    <dl class="lignes">
+      <div><dt>Financer les services publics</dt><dd>Santé, éducation, justice, transport. Au Québec, en 2023-2024, la <strong>santé</strong> prenait près de <strong>40&nbsp;%</strong> du budget, l'<strong>éducation</strong> 20,8&nbsp;%.</dd></div>
+      <div><dt>Redistribuer la richesse</dt><dd>Par les <strong>paiements de transfert</strong>&nbsp;: l'allocation canadienne pour enfants, l'assurance-emploi, le supplément de revenu garanti des aînés.</dd></div>
+    </dl>
+    <dl class="defs"><div class="def"><dt>Fiscalité</dt><dd>L'ensemble des règles, des lois et des pratiques sur la perception des impôts et des taxes.</dd></div></dl>
+    <div class="bon"><b>Bon à savoir</b>Faire fonctionner l'Assemblée nationale (les salaires des députés, par exemple) ne coûte qu'environ <strong>0,12&nbsp;%</strong> du budget du Québec.</div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Réponse courte</span>Nomme les deux grandes raisons pour lesquelles l'État prélève de l'impôt sur ton revenu.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Financer les services publics</strong> (santé, éducation…) et <strong>redistribuer la richesse</strong> (paiements de transfert).</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="fraude">
+    <h3>La fraude fiscale</h3>
+    <dl class="defs"><div class="def"><dt>Fraude fiscale</dt><dd>Toute omission ou inexactitude dans une déclaration de revenus&nbsp;: <strong>éviter illégalement</strong> de payer ses impôts ou ses taxes.</dd></div></dl>
+    <div class="cols">
+      <div class="card"><span class="etiq">Forme 1</span><h4>Le travail non déclaré</h4><p>Être payé sans le dire au fisc, le service qui perçoit les impôts («&nbsp;au noir&nbsp;»).</p></div>
+      <div class="card"><span class="etiq">Forme 2</span><h4>Le marché clandestin</h4><p>Vendre des produits illégaux, ou légaux mais très taxés (alcool, cigarettes), sans taxes.</p></div>
+      <div class="card"><span class="etiq">Forme 3</span><h4>Payer sans facture</h4><p>Payer «&nbsp;sous la table&nbsp;» (comptant, sans facture) pour éviter les taxes. Le client triche aussi, et il perd sa garantie légale.</p></div>
+    </div>
+    <dl class="lignes">
+      <div><dt>Planification fiscale · légale</dt><dd>Réduire ses impôts avec les mesures prévues par les gouvernements&nbsp;: cotiser à un REER, faire un don, réclamer ses crédits d'impôt.</dd></div>
+      <div><dt>Évasion fiscale · illégale</dt><dd>Contourner la loi exprès&nbsp;: cacher des revenus, déduire des dépenses inventées. Amendes, poursuites, voire la prison.</dd></div>
+    </dl>
+    <p class="sub-h">Pourquoi tout le monde y perd</p>
+    <ol class="cercle">
+      <li><strong>L'État perd des revenus</strong>&nbsp;: moins d'argent pour les services, plus de dette.</li>
+      <li><strong>Les honnêtes paient plus</strong> pour compenser.</li>
+      <li><strong>Concurrence déloyale</strong>&nbsp;: le tricheur vend moins cher que l'entreprise honnête.</li>
+      <li>L'État hausse les impôts, ce qui <strong>pousse à frauder</strong> encore plus.</li>
+    </ol>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Analyse</span>Un garage répare des autos «&nbsp;comptant, sans facture&nbsp;» 20&nbsp;% moins cher que son voisin honnête. Nomme deux conséquences de cette fraude.<span class="see">Voir la réponse →</span></summary><div class="ans">Deux parmi&nbsp;: <strong>concurrence déloyale</strong> (le voisin perd des clients)&nbsp;; <strong>moins de revenus pour l'État</strong>&nbsp;; les <strong>contribuables honnêtes paient plus</strong>. Et le client n'a plus de garantie.</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 8.2 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">8.2</span>
+    <span class="chap">Chapitre 8 · L'impôt</span>
+    <h2>Combien doit-on payer?</h2>
+    <p>«&nbsp;Si je gagne plus, l'impôt va tout me prendre.&nbsp;» Faux, et voici pourquoi.</p>
+  </div>
+
+  <section class="block" id="progressif">
+    <h3>L'impôt progressif</h3>
+    <dl class="defs">
+      <div class="def"><dt>Impôt progressif</dt><dd>Plus le revenu est élevé, <strong>plus le taux est élevé</strong>. En 2018, les 20&nbsp;% les plus riches avaient 50,9&nbsp;% des revenus et payaient 70,7&nbsp;% de l'impôt.</dd></div>
+      <div class="def"><dt>Taux marginal</dt><dd>Le taux de la <strong>dernière marche</strong> de l'escalier, celle où tombent tes <strong>derniers dollars gagnés</strong>. Seuls ces dollars-là sont imposés à ce taux.</dd></div>
+      <div class="def"><dt>Taux effectif</dt><dd>Ce que tu paies <strong>vraiment</strong>, en moyenne, sur tout ton revenu&nbsp;: impôt ÷ revenu.</dd></div>
+    </dl>
+    <div class="escalier" aria-live="polite">
+      <label for="rev">Glisse ton revenu imposable de l'année&nbsp;:</label>
+      <span class="rev" id="rev-v">30&nbsp;000&nbsp;$</span>
+      <input type="range" id="rev" min="0" max="260000" step="1000" value="30000">
+      <div class="marches" aria-hidden="true">
+        <div style="height:12%">0</div><div style="height:30%">15</div><div style="height:45%">20,5</div><div style="height:60%">26</div><div style="height:78%">29</div><div style="height:100%">33</div>
+      </div>
+      <p class="src">Les six marches&nbsp;: le taux fédéral de chaque palier, en %.</p>
+      <div class="out">
+        <div><span>Impôt fédéral de l'année (calcul du manuel)</span><b id="i-tot">2&nbsp;144&nbsp;$</b></div>
+        <div><span>Taux marginal</span><b id="i-marg">15&nbsp;%</b></div>
+        <div><span>Taux effectif</span><b id="i-eff">7,1&nbsp;%</b></div>
+      </div>
+      <p class="msg" id="i-calc">2&nbsp;144&nbsp;$ ÷ 30&nbsp;000&nbsp;$ = 7,1&nbsp;%&nbsp;: ton taux effectif. Ta dernière marche, elle, est à 15&nbsp;%&nbsp;: ton taux marginal.</p>
+      <p class="msg" id="i-msg">Sur 1&nbsp;000&nbsp;$ de plus, l'impôt fédéral en prend 150&nbsp;$ (l'impôt du Québec prend aussi sa part).</p>
+      <p class="src">Impôt fédéral seulement, avec les paliers de 2024 du manuel (le provincial fonctionne de la même façon).</p>
+    </div>
+    <div class="bon"><b>Bon à savoir · la déclaration de revenus</b><ul>
+      <li>On la produit <strong>au plus tard le 30 avril</strong>, pour l'année d'avant.</li>
+      <li><strong>Même un petit revenu</strong> d'élève se déclare&nbsp;: c'est elle qui donne droit aux crédits et aux prestations (le crédit pour la TPS, les prêts et bourses…).</li>
+      <li>On peut la remplir <strong>soi-même</strong>&nbsp;; un comptable n'est pas obligatoire.</li>
+    </ul></div>
+    <details class="nuance">
+      <summary class="lbl">Nuance · le premier palier a baissé</summary>
+      <p>Le manuel donne les paliers de 2024&nbsp;: 15&nbsp;% sur la première tranche. En 2026, ce taux fédéral est de <strong>14&nbsp;%</strong>, et on peut gagner 16&nbsp;452&nbsp;$ avant de payer de l'impôt fédéral. Le principe de l'escalier ne change pas.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.canada.ca/fr/ministere-finances/services/publications/rapport-incidence-reduction-taux-imposition-marginal-premiere-tranche-revenu-particuliers-credits-impot-non-remboursables.html" rel="noopener">Finances Canada, réduction du taux de la première tranche</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Analyse</span>Léon refuse une augmentation&nbsp;: «&nbsp;Je vais changer de palier, et tout mon salaire sera imposé plus fort.&nbsp;» A-t-il raison?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non.</strong> L'impôt est progressif&nbsp;: seuls les dollars <strong>au-dessus</strong> du palier sont imposés au taux plus élevé (le taux marginal). Il garde toujours la plus grande partie de son augmentation.</div></details>
+    </div></div>
+  </section>
+
+<!--qr5--><section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions par section. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=6.1" target="_blank" rel="noopener">Section 6.1 →</a><a href="https://simleprof.github.io/finances/?s=6.2" target="_blank" rel="noopener">Section 6.2 →</a><a href="https://simleprof.github.io/finances/?s=7.1" target="_blank" rel="noopener">Section 7.1 →</a><a href="https://simleprof.github.io/finances/?s=7.2" target="_blank" rel="noopener">Section 7.2 →</a><a href="https://simleprof.github.io/finances/?s=8.1" target="_blank" rel="noopener">Section 8.1 →</a><a href="https://simleprof.github.io/finances/?s=8.2" target="_blank" rel="noopener">Section 8.2 →</a></div><div class="qr5-qr" style="flex-wrap:wrap;gap:14px 26px"><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m2 0h1m2 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m4 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h5m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h4m6 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m4 0h4m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M1 11.5h2m1 0h7m1 0h7m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M2 12.5h5m1 0h1m2 0h2m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M2 13.5h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h3m1 0h1m6 0h2m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h2m3 0h1m4 0h2m1 0h2m1 0h1M1 16.5h1m3 0h2m1 0h1m1 0h4m1 0h2m5 0h1m2 0h3m1 0h3M5 17.5h3m1 0h2m1 0h5m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m1 0h1m5 0h4m4 0h4m1 0h1m1 0h3m1 0h2m1 0h1M3 19.5h3m1 0h3m6 0h2m1 0h1m1 0h2m3 0h4m1 0h2M1 20.5h3m1 0h2m3 0h4m1 0h1m1 0h1m2 0h4m2 0h1m1 0h5M4 21.5h1m2 0h2m1 0h1m2 0h1m1 0h1m3 0h1m2 0h1m1 0h1m4 0h2M1 22.5h2m5 0h3m5 0h2m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m1 0h2m2 0h3m3 0h1m1 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m2 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m2 0h2m1 0h2m1 0h1m1 0h4m2 0h3m2 0h8m2 0h1M9 26.5h1m3 0h1m3 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m6 0h1m1 0h3m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h4m1 0h3m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h4m1 0h3m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m5 0h4m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m4 0h1m1 0h1m1 0h1m6 0h1m1 0h2m3 0h1"/></svg></span>Section 6.1</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m2 0h2m1 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m6 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h6m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h4m6 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m2 0h2m1 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m4 0h4m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m1 0h1m2 0h1m4 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M2 11.5h1m1 0h2m1 0h3m1 0h8m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M1 12.5h1m1 0h2m3 0h1m2 0h2m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M1 13.5h2m1 0h1m2 0h1m7 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h1m3 0h1m4 0h1m1 0h2m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h2m3 0h1m3 0h3m1 0h2m1 0h1M1 16.5h1m3 0h2m1 0h4m1 0h1m1 0h2m5 0h1m1 0h4m1 0h3M5 17.5h6m1 0h5m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m7 0h3m5 0h4m1 0h1m1 0h3m1 0h2m1 0h1M1 19.5h1m1 0h2m1 0h4m6 0h2m1 0h1m1 0h2m3 0h4m1 0h2M1 20.5h1m1 0h1m1 0h2m5 0h2m1 0h1m1 0h1m2 0h4m2 0h1m1 0h5M4 21.5h1m2 0h2m2 0h1m2 0h1m4 0h1m2 0h1m1 0h1m4 0h2M1 22.5h2m6 0h2m4 0h3m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m1 0h1m3 0h1m4 0h1m2 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m2 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m1 0h3m1 0h1m2 0h1m2 0h3m2 0h3m2 0h8m2 0h1M9 26.5h2m2 0h2m2 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m2 0h1m4 0h4m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h1m1 0h2m1 0h3m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h2m1 0h4m1 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m6 0h3m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m6 0h1m1 0h2m3 0h1"/></svg></span>Section 6.2</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m1 0h7m2 0h2m2 0h1m4 0h7M1 2.5h1m5 0h1m1 0h2m2 0h3m3 0h3m5 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m4 0h3m4 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h2m4 0h3m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m4 0h2m2 0h5m2 0h1m1 0h1m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 8.5h1m2 0h2m1 0h2m1 0h1m4 0h1M1 9.5h1m2 0h6m1 0h3m1 0h1m1 0h2m2 0h1m2 0h3m2 0h1m1 0h3M1 10.5h1m2 0h1m3 0h4m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m4 0h3M1 11.5h4m1 0h3m1 0h1m2 0h2m1 0h2m5 0h3m1 0h1m1 0h5M1 12.5h1m1 0h1m1 0h2m1 0h1m2 0h1m2 0h1m1 0h1m2 0h1m2 0h3m1 0h3m2 0h1m1 0h1M2 13.5h2m1 0h5m2 0h1m1 0h1m3 0h1m3 0h1m2 0h3M2 14.5h2m6 0h2m1 0h1m1 0h1m3 0h3m3 0h1m2 0h1m2 0h1M1 15.5h3m1 0h1m1 0h4m5 0h1m3 0h2m1 0h1m3 0h1m2 0h1M1 16.5h1m1 0h1m2 0h1m2 0h1m2 0h1m4 0h1m3 0h1m1 0h1m1 0h2m1 0h1m1 0h2m1 0h1M3 17.5h1m1 0h1m1 0h1m2 0h1m2 0h2m1 0h1m4 0h1m1 0h8M3 18.5h4m6 0h2m1 0h6m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1M1 19.5h2m1 0h4m4 0h1m2 0h2m1 0h3m1 0h3m3 0h1m1 0h2m1 0h1M2 20.5h1m1 0h1m1 0h1m1 0h2m2 0h3m1 0h2m5 0h1m3 0h1m1 0h3m1 0h1M2 21.5h1m2 0h1m1 0h1m1 0h3m5 0h1m1 0h2m1 0h3m1 0h1m3 0h1m1 0h1M1 22.5h1m1 0h3m2 0h1m4 0h1m8 0h1m1 0h3m2 0h3M1 23.5h1m1 0h1m2 0h2m4 0h2m5 0h3m1 0h3m1 0h1m1 0h1m1 0h3M1 24.5h1m2 0h2m2 0h3m1 0h3m1 0h1m1 0h4m4 0h3m2 0h3M1 25.5h2m1 0h1m1 0h6m1 0h1m3 0h1m1 0h1m1 0h1m3 0h5m2 0h1M9 26.5h2m2 0h1m1 0h5m2 0h1m2 0h1m3 0h1m1 0h2M1 27.5h7m1 0h1m4 0h3m1 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1M1 28.5h1m5 0h1m1 0h1m2 0h1m2 0h1m1 0h4m1 0h4m3 0h3M1 29.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m2 0h2m1 0h1m1 0h8m2 0h1M1 30.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m3 0h1m1 0h2m1 0h1m1 0h2m1 0h1M1 31.5h1m1 0h3m1 0h1m3 0h1m1 0h2m1 0h1m3 0h1m3 0h1m1 0h1m1 0h2m2 0h2M1 32.5h1m5 0h1m2 0h1m1 0h1m6 0h3m5 0h3m1 0h3M1 33.5h7m1 0h1m1 0h1m4 0h3m1 0h1m2 0h1m1 0h1m1 0h3"/></svg></span>Section 7.1</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m2 0h1m2 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m3 0h1m1 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h3m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h6m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h3m1 0h1m5 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m5 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m4 0h4m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M2 11.5h1m1 0h1m1 0h4m1 0h8m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M2 12.5h5m1 0h1m1 0h1m1 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M1 13.5h1m4 0h2m1 0h2m2 0h1m1 0h1m1 0h1m2 0h6m3 0h2m1 0h2M3 14.5h1m4 0h2m3 0h2m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m1 0h1m3 0h1m1 0h3m2 0h1m1 0h2m3 0h1m3 0h3m1 0h2m1 0h1M1 16.5h1m2 0h3m2 0h3m3 0h2m5 0h1m1 0h4m1 0h3M5 17.5h6m1 0h5m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M3 18.5h1m1 0h1m4 0h4m5 0h4m1 0h1m1 0h3m1 0h2m1 0h1M3 19.5h7m1 0h1m2 0h1m1 0h2m1 0h1m1 0h2m3 0h4m1 0h2M2 20.5h2m2 0h1m4 0h3m1 0h1m1 0h1m2 0h4m2 0h1m1 0h5M7 21.5h3m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m4 0h2M1 22.5h1m7 0h3m1 0h1m2 0h2m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m2 0h1m2 0h2m3 0h1m2 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m4 0h1m1 0h2m1 0h1m1 0h2m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m2 0h2m1 0h2m1 0h1m2 0h3m2 0h3m2 0h8m2 0h1M9 26.5h2m2 0h1m3 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m2 0h2m2 0h1m1 0h3m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h1m1 0h2m3 0h1m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h2m1 0h4m1 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m4 0h5m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m6 0h4m3 0h1"/></svg></span>Section 7.2</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m5 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h3m4 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h6m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h4m6 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m3 0h1m1 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M3 10.5h1m4 0h1m4 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M2 11.5h1m1 0h2m1 0h12m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M2 12.5h3m3 0h1m3 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M1 13.5h1m5 0h1m2 0h2m3 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h2m2 0h1m1 0h2m1 0h1m1 0h2m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m2 0h1m2 0h1m2 0h2m1 0h2m1 0h2m3 0h1m4 0h2m1 0h2m1 0h1M1 16.5h1m1 0h1m1 0h2m2 0h4m2 0h2m5 0h1m2 0h3m1 0h3M5 17.5h6m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m7 0h3m5 0h4m1 0h1m1 0h3m1 0h2m1 0h1M3 19.5h2m1 0h4m4 0h4m1 0h1m1 0h2m3 0h4m1 0h2M1 20.5h1m1 0h1m8 0h2m3 0h1m2 0h4m2 0h1m1 0h5M4 21.5h5m5 0h1m4 0h1m2 0h1m1 0h1m4 0h2M1 22.5h3m4 0h3m4 0h3m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m2 0h1m2 0h2m6 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m2 0h2m1 0h1m2 0h1m2 0h3m2 0h3m2 0h8m2 0h1M9 26.5h2m2 0h2m2 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m2 0h1m5 0h3m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h1m1 0h2m3 0h1m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m5 0h4m2 0h1m2 0h1m4 0h1m1 0h1m1 0h1M1 33.5h7m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m6 0h1m2 0h1m3 0h1"/></svg></span>Section 8.1</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m3 0h1m1 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h2m5 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h5m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h4m6 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m5 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M3 10.5h1m4 0h1m1 0h1m2 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M1 11.5h2m1 0h6m2 0h7m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M1 12.5h1m1 0h4m1 0h1m3 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M6 13.5h2m1 0h1m3 0h1m1 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h1m1 0h1m1 0h1m1 0h2m3 0h2m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m2 0h1m2 0h1m2 0h2m1 0h2m1 0h2m3 0h1m3 0h3m1 0h2m1 0h1M1 16.5h1m1 0h1m1 0h2m3 0h2m3 0h2m5 0h1m1 0h4m1 0h3M5 17.5h3m1 0h2m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m1 0h1m5 0h4m4 0h4m1 0h1m1 0h3m1 0h2m1 0h1M1 19.5h1m1 0h3m1 0h3m4 0h4m1 0h1m1 0h2m3 0h4m1 0h2M1 20.5h3m6 0h4m3 0h1m2 0h4m2 0h1m1 0h5M4 21.5h5m1 0h2m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m4 0h2M1 22.5h3m5 0h2m5 0h2m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m5 0h1m1 0h1m2 0h2m1 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m1 0h3m1 0h2m1 0h1m1 0h4m2 0h3m2 0h8m2 0h1M9 26.5h1m3 0h1m3 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m6 0h5m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h4m3 0h1m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h2m1 0h4m1 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h8m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m6 0h3m2 0h1m2 0h1m4 0h1m1 0h1m1 0h1M1 33.5h7m1 0h1m4 0h1m1 0h1m1 0h1m6 0h1m2 0h1m3 0h1"/></svg></span>Section 8.2</figure></div></section><!--/qr5-->
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Synthèse des chapitres 6, 7 et 8 du cahier <em>Éducation financière</em> (p.&nbsp;146 à 211).</span>
+    <span>Nuances&nbsp;: Gouvernement du Québec, ministère du Travail, Gouvernement du Canada et Finances Canada (liens dans le texte).</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // L'escalier de l'impôt : paliers fédéraux de 2024 (manuel, p. 205). Les premiers 15 705 $ sont exemptés.
+  var P = [[15705, 0], [55867, .15], [111733, .205], [173205, .26], [246752, .29], [Infinity, .33]];
+  var f = new Intl.NumberFormat("fr-CA", { maximumFractionDigits: 0 });
+  var f1 = new Intl.NumberFormat("fr-CA", { maximumFractionDigits: 1 });
+  var r = document.getElementById("rev"), marches = document.querySelectorAll(".escalier .marches div");
+  function calc() {
+    var R = +r.value, t = 0, bas = 0, k = 0;
+    for (var i = 0; i < P.length; i++) {
+      var haut = P[i][0], part = Math.max(0, Math.min(R, haut) - bas);
+      t += part * P[i][1];
+      if (R > bas) k = i;
+      bas = haut;
+    }
+    var taux = P[k][1];
+    document.getElementById("rev-v").textContent = f.format(R) + " $";
+    document.getElementById("i-tot").textContent = f.format(Math.round(t)) + " $";
+    document.getElementById("i-marg").textContent = f1.format(taux * 100) + " %";
+    document.getElementById("i-eff").textContent = R ? f1.format(t / R * 100) + " %" : "0 %";
+    document.getElementById("i-msg").textContent = taux === 0
+      ? "Sous l'exemption de base : aucun impôt fédéral. Déclare quand même tes revenus pour avoir droit aux crédits et aux prestations."
+      : "Sur 1 000 $ de plus, l'impôt fédéral en prend " + f.format(taux * 1000) + " $ (l'impôt du Québec prend aussi sa part).";
+    document.getElementById("i-calc").textContent = R && taux
+      ? f.format(Math.round(t)) + " $ ÷ " + f.format(R) + " $ = " + f1.format(t / R * 100) + " % : ton taux effectif. Ta dernière marche, elle, est à " + f1.format(taux * 100) + " % : ton taux marginal."
+      : "Aucun impôt fédéral : taux effectif et taux marginal à 0 %.";
+    marches.forEach(function (m, i) { m.classList.toggle("on", i === k); });
+  }
+  r.addEventListener("input", calc);
+  calc();
+  // Version papier : numérote les questions (Q1, Q2…) et bâtit le corrigé, visible seulement à l'impression.
+  var key = document.createElement("section");
+  key.id = "corrige";
+  key.innerHTML = '<div class="section-head"><span class="num" aria-hidden="true">✎</span><h2>Corrigé</h2><p>Les réponses aux questions, dans l\'ordre. Essaie d\'abord, vérifie ensuite.</p></div>';
+  var list = null, group = "", n = 0;
+  document.querySelectorAll(".section-head h2, .quiz details").forEach(function (el) {
+    if (el.tagName === "H2") { list = null; group = el.textContent; return; }
+    n++;
+    var tag = el.querySelector(".q-n");
+    var pq = document.createElement("b");
+    pq.className = "pq";
+    pq.textContent = "✎ Q" + n + " · ";
+    tag.insertBefore(pq, tag.firstChild);
+    if (!list) {
+      var h = document.createElement("h4");
+      h.textContent = group;
+      list = document.createElement("ol");
+      list.className = "key";
+      key.appendChild(h);
+      key.appendChild(list);
+    }
+    var li = document.createElement("li");
+    li.innerHTML = '<b class="n">Q' + n + "</b>" + el.querySelector(".ans").innerHTML;
+    list.appendChild(li);
+  });
+  var src = document.createElement("p");
+  src.className = "key-src";
+  src.innerHTML = document.querySelector("footer .wrap").innerHTML;
+  document.querySelector("main").appendChild(src);
+  document.querySelector("main").appendChild(key);
+})();
+</script>
+<!-- retour-tdb -->
+<script>
+/* Retour au tableau de bord : seulement si la page a été ouverte depuis le tableau de bord (?tdb=…). Outil : retour-tdb.js */
+document.addEventListener("DOMContentLoaded", function () {
+  var vieux = document.getElementById("retour-tdb"); if (vieux) vieux.remove();
+  var u = new URLSearchParams(location.search).get("tdb");
+  if (!u || !/^file:/i.test(u)) return;
+  var s = document.createElement("style");
+  s.textContent = "#retour-tdb{position:fixed;top:12px;left:12px;z-index:8000;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;" +
+    "border-radius:999px;background:rgba(255,255,255,.94);color:#1D1B17;border:1px solid rgba(0,0,0,.12);box-shadow:0 4px 14px rgba(0,0,0,.14);" +
+    "font:700 16px/1 system-ui,'Segoe UI',sans-serif;text-decoration:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:padding .25s}" +
+    "#retour-tdb b{font-size:20px}#retour-tdb span{max-width:12em;overflow:hidden;white-space:nowrap;transition:max-width .3s,opacity .3s}" +
+    "#retour-tdb.court{padding:0 13px}#retour-tdb.court span{max-width:0;opacity:0}#retour-tdb.court:hover span,#retour-tdb.court:focus span{max-width:12em;opacity:1}" +
+    "#retour-tdb:hover{background:#fff}@media print{#retour-tdb{display:none}}";
+  var a = document.createElement("a");
+  a.id = "retour-tdb"; a.href = u; a.title = "Revenir au tableau de bord";
+  a.innerHTML = "<b>←</b><span>Tableau de bord</span>";
+  a.appendChild(s);
+  document.body.appendChild(a);
+  setTimeout(function () { a.classList.add("court"); }, 3000);
+});
+</script>
+<!-- /retour-tdb -->
+<a class="haut" href="#" aria-label="Retour en haut de la note">↑ Haut</a>
+<script>window.LF_COURS = "finances";
+/* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
+   Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher, lecture à voix haute
+   par le navigateur (aucune donnée ne sort de l'appareil), règle de lecture qui suit le doigt ou la souris.
+   Seuls les réglages de l'élève sont gardés, sur son appareil (localStorage). window.LF_COURS choisit le glossaire. */
+(function () {
+  "use strict";
+
+  // ---------- Les mots expliqués, par cours : [mot tel qu'affiché, motif reconnu, explication simple] ----------
+  var GLOSSAIRE = {
+    monde: [
+      ["démographie", "démographi(?:e|que|ques)", "L'étude des populations : combien de gens, les naissances, les décès, les migrations."],
+      ["natalité", "natalité", "Le nombre de naissances dans une population."],
+      ["mortalité", "mortalité", "Le nombre de décès dans une population."],
+      ["fécondité", "fécondité", "Le nombre moyen d'enfants qu'une femme a dans sa vie."],
+      ["espérance de vie", "espérance de vie", "Le nombre moyen d'années qu'une personne peut s'attendre à vivre."],
+      ["accroissement", "accroissement", "Une augmentation, une croissance."],
+      ["solde migratoire", "solde migratoire", "Les immigrants qui arrivent, moins les émigrants qui partent."],
+      ["seuil de renouvellement", "seuil de renouvellement", "2,1 enfants par femme : ce qu'il faut pour qu'une population ne diminue pas."],
+      ["densité", "densité", "Le nombre d'habitants par kilomètre carré."],
+      ["millénaire", "millénaires?", "Une période de mille ans."],
+      ["stagner", "stagn(?:e|ent|er|ation)", "Ne presque plus bouger : ni hausse, ni baisse."],
+      ["industrialisé", "industrialisé(?:e|s|es)?", "Qui a beaucoup d'usines et d'industries."],
+      ["émergent", "émergents?", "Un pays qui se développe vite, comme la Chine ou l'Inde."],
+      ["proportion", "proportion(?:s|nelle|nel)?", "La part d'un tout. Exemple : 1 personne sur 4."],
+      ["indicateur", "indicateurs?", "Un chiffre qui sert à mesurer quelque chose."],
+      ["vieillissement", "vieillissement|vieillissante", "Quand la part des personnes âgées augmente dans une population."],
+      ["nataliste", "natalistes?", "Qui encourage les gens à avoir des enfants."],
+      ["allocation", "allocations?", "Une somme d'argent versée régulièrement par le gouvernement."],
+      ["allègement fiscal", "allègements? fiscaux|allègements?", "Une baisse d'impôt."],
+      ["contraceptive", "contraceptive", "Qui empêche une grossesse."],
+      ["émancipation", "émancipation", "Le fait de devenir libre et autonome."],
+      ["immigrant", "immigrante?s?", "Une personne qui arrive dans un pays pour y vivre."],
+      ["émigrant", "émigrante?s?", "Une personne qui quitte son pays."],
+      ["diaspora", "diaspora", "Les gens d'un même pays qui vivent dispersés ailleurs dans le monde."],
+      ["perméabilité", "perméabilité", "Quand une frontière se laisse traverser facilement."],
+      ["persécution", "persécutions?|persécutée?s?", "De mauvais traitements répétés contre des gens, à cause de leur religion, de leur origine ou de leurs idées."],
+      ["réfugié", "réfugiée?s?", "Une personne qui fuit son pays parce que sa vie est en danger."],
+      ["asile", "asile", "La protection qu'un pays donne à une personne en danger."],
+      ["clandestin", "clandestine?s?", "En cachette, sans autorisation."],
+      ["mondialisation", "mondialisation", "Les liens de plus en plus forts entre les pays : commerce, voyages, communications."],
+      ["pénurie", "pénurie", "Un manque. Exemple : pas assez de travailleurs."],
+      ["main-d'œuvre", "main-d['’]œuvre", "Les travailleurs."],
+      ["souverain", "souverain", "Qui décide seul, sans recevoir d'ordres d'un autre pays."],
+      ["intégration", "intégration|intégrer", "Devenir membre de la société d'accueil : apprendre la langue, travailler, participer, tout en gardant sa culture."],
+      ["surqualifié", "surqualifiée?s?", "Qui a plus de diplômes ou de compétences que son emploi n'en demande."],
+      ["ordre professionnel", "ordres? professionnels?", "L'organisme qui décide qui peut exercer une profession, comme médecin ou ingénieur."],
+      ["réglementé", "réglementée?s?", "Encadré par des règles officielles."],
+      ["discrimination", "discrimination", "Traiter quelqu'un moins bien à cause de son origine, de son sexe ou d'un handicap."],
+      ["stigmatiser", "stigmatiser|stigmatisée?s?", "Coller une étiquette négative à quelqu'un."],
+      ["exode", "exode", "Le départ d'un grand nombre de personnes."],
+      ["urbanisation", "urbanisation|urbanisée?s?", "La croissance des villes : de plus en plus de gens vivent en ville."],
+      ["citadin", "citadins?", "Une personne qui vit en ville."],
+      ["agglomération", "agglomération", "Une ville et ses banlieues."],
+      ["mégapole", "mégapoles?", "Une très grande ville : plus de 10 millions d'habitants."],
+      ["bidonville", "bidonvilles?", "Un quartier de maisons fragiles, sans eau courante ni égouts."],
+      ["insalubre", "insalubres?", "Sale et mauvais pour la santé."],
+      ["précaire", "précaires?", "Fragile, pas solide, qui peut se perdre facilement."],
+      ["périphérie", "périphérie", "Le tour, la bordure d'une ville."],
+      ["passeur", "passeurs?", "Une personne payée pour faire traverser une frontière en cachette."],
+      ["charges sociales", "charges sociales", "Les sommes qu'un employeur verse au gouvernement pour ses employés (retraite, assurance-emploi)."],
+      ["exploiter", "exploiter", "Profiter de quelqu'un en abusant de sa situation : salaire très bas, travail forcé, menaces."],
+      ["antécédents judiciaires", "antécédents judiciaires", "Les crimes pour lesquels une personne a déjà été condamnée."],
+      ["paradoxe", "paradoxe", "Une situation qui semble se contredire."],
+      ["hostile", "hostile", "Qui n'est pas accueillant : difficile ou dangereux pour y vivre."]
+    ],
+    finances: [
+      ["nécessité", "nécessité", "Une chose dont on ne peut pas se passer."],
+      ["physiologique", "physiologiques?", "Qui concerne le corps : manger, boire, dormir, respirer."],
+      ["accomplissement", "accomplissement", "Réaliser ses rêves et devenir la personne qu'on veut être."],
+      ["coût d'opportunité", "coût d['’]opportunité", "Ce à quoi tu renonces quand tu fais un choix."],
+      ["renoncer", "renonce(?:r|s|z)?|renoncé", "Abandonner, laisser tomber."],
+      ["pouvoir d'achat", "pouvoir d['’]achat", "Ce que ton argent te permet d'acheter."],
+      ["inflation", "inflation", "La hausse générale des prix avec le temps."],
+      ["accise", "accise", "Une taxe cachée dans le prix (essence, alcool, tabac)."],
+      ["socioculturel", "socioculturels?", "Qui vient de la société et de la culture autour de toi."],
+      ["persuader", "persuader|persuasive", "Convaincre."],
+      ["sensibiliser", "sensibiliser", "Faire prendre conscience d'un problème pour changer un comportement."],
+      ["sociétal", "sociétale?s?", "Qui concerne toute la société. Une pub sociétale veut changer un comportement pour le bien de tous."],
+      ["notoriété", "notoriété", "Le fait d'être connu."],
+      ["mensonger", "mensong(?:er|ère)s?", "Qui ment, qui est faux."],
+      ["objectif", "objective", "Basée sur des faits, pas sur une opinion."],
+      ["impartial", "impartial(?:e|es|aux)?", "Qui ne favorise personne."],
+      ["fiable", "fiables?", "En qui ou en quoi on peut avoir confiance."],
+      ["démystifier", "démystifient|démystifier", "Expliquer simplement quelque chose qui semblait compliqué."],
+      ["bail", "bail", "Le contrat de location d'un logement."],
+      ["conformité", "conformité", "Être pareil à ce qui était annoncé."],
+      ["défaut caché", "défauts? cachés?|vices? cachés?", "Un problème grave qu'on ne pouvait pas voir au moment de l'achat."],
+      ["hameçonnage", "hameçonnage", "Un faux message (texto, courriel) qui essaie de voler tes informations."],
+      ["mise en demeure", "mise en demeure", "Une lettre officielle qui demande de régler un problème, sinon on ira en justice."],
+      ["médiation", "médiation|médiateur", "Une personne neutre aide les deux côtés à s'entendre. Elle ne décide pas."],
+      ["arbitrage", "arbitrage|arbitre", "Une personne neutre écoute les deux côtés et décide qui a raison."],
+      ["litige", "litiges?", "Un conflit, un désaccord."],
+      ["recours", "recours", "Un moyen de faire respecter tes droits."],
+      ["impulsif", "impulsifs?|impulsives?", "Fait sur un coup de tête, sans réfléchir."],
+      ["épargne", "épargne|épargner", "L'argent qu'on met de côté."],
+      ["endettement", "endettement", "Le fait de devoir de l'argent. Pas un problème en soi."],
+      ["surendettement", "surendettement|surendettée?s?", "Devoir plus d'argent qu'on est capable d'en rembourser."],
+      ["excédentaire", "excédentaire", "Il reste de l'argent : on gagne plus qu'on dépense."],
+      ["déficitaire", "déficitaire", "Il manque de l'argent : on dépense plus qu'on gagne."],
+      ["compressible", "compressibles?|incompressibles?", "Compressible : qu'on peut couper ou réduire vite. Incompressible : qu'on ne peut pas couper à court terme."],
+      ["différé", "différé", "Remis à plus tard."],
+      ["solvabilité", "solvabilité|solvable|insolvable", "Solvable : capable de rembourser ses dettes. Insolvable : incapable de les rembourser."],
+      ["ratio", "ratio", "Une comparaison entre deux nombres, souvent en pourcentage."],
+      ["brut", "brut", "Avant qu'on enlève les impôts et les déductions."],
+      ["actif", "actifs?", "Ce que tu possèdes et qui a de la valeur (maison, auto, épargne)."],
+      ["passif", "passifs?", "Toutes tes dettes."],
+      ["caution", "caution|endosseur|cautionnement", "La personne qui promet de payer la dette si l'emprunteur ne paie plus."],
+      ["capital", "capital", "Le montant emprunté, sans les intérêts."],
+      ["intérêt", "intérêts?", "Ce qu'on paie au prêteur pour utiliser son argent."],
+      ["échéance", "échéance|échéancier", "Échéance : la date limite pour payer. Échéancier : le calendrier des paiements."],
+      ["hypothécaire", "hypothécaire|hypothèques?", "Un prêt pour acheter une maison. La maison sert de garantie."],
+      ["à tempérament", "tempérament", "Payer petit à petit, en plusieurs versements. On devient propriétaire à la fin."],
+      ["créancier", "créanciers?", "La personne ou l'entreprise à qui on doit de l'argent."],
+      ["recouvrement", "recouvrement", "Récupérer l'argent qu'une personne doit."],
+      ["syndic", "syndic", "Un professionnel qui aide les personnes très endettées et s'occupe des faillites."],
+      ["faillite", "faillites?", "Quand on ne peut plus payer ses dettes : on remet ses biens pour s'en libérer."],
+      ["insolvabilité", "insolvabilité", "Ne plus être capable de payer ses dettes."],
+      ["consolidation", "consolidation", "Regrouper plusieurs dettes en un seul prêt."],
+      ["saisissable", "saisissables?|saisir", "Que le prêteur peut prendre pour se rembourser."],
+      ["marge de manœuvre", "marge de manœuvre", "L'argent qui te reste pour faire des choix."],
+      ["prolongée", "prolongée", "Qui dure plus longtemps."],
+      ["sans provision", "sans provision", "Un chèque sans assez d'argent dans le compte."],
+      ["émettrice", "émettrice", "Qui crée et fournit la carte."]
+    ]
+  };
+
+  var NOM = "lf-reglages", TAILLES = [1, 1.15, 1.3], VITESSES = [0.8, 1, 1.15];
+  var r = { on: false, taille: 1, vitesse: 1, regle: false };
+  try { var lu = JSON.parse(localStorage.getItem(NOM)); if (lu) for (var k in r) if (k in lu) r[k] = lu[k]; } catch (e) {}
+  function garder() { try { localStorage.setItem(NOM, JSON.stringify(r)); } catch (e) {} }
+
+  var voix = "speechSynthesis" in window ? window.speechSynthesis : null;
+
+  // ---------- Habillage ----------
+  var css = [
+    ".lf-ui{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:7999;display:flex;align-items:center;gap:6px;",
+    "font:700 16px/1.1 'Atkinson Hyperlegible',system-ui,'Segoe UI',sans-serif;color:#101820}",
+    ".lf-ui button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent}",
+    ".lf-ouvrir{display:flex;align-items:center;gap:8px;height:50px;padding:0 18px 0 14px;border-radius:999px;background:#FFF6D6;border:2px solid #101820 !important;",
+    "box-shadow:4px 4px 0 #101820;transition:transform .15s}.lf-ouvrir:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #101820}",
+    ".lf-ouvrir b{font-size:22px;letter-spacing:-.02em}.lf-ouvrir span{max-width:10em;overflow:hidden;white-space:nowrap;transition:max-width .35s,opacity .35s}",
+    ".lf-ui.court .lf-ouvrir span{max-width:0;opacity:0}.lf-ui.court .lf-ouvrir{padding:0 14px}",
+    ".lf-barre{display:none;align-items:stretch;gap:4px;padding:5px;border-radius:20px;background:#FFF6D6;border:2px solid #101820;box-shadow:4px 4px 0 #101820}",
+    ".lf-barre button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:58px;height:58px;padding:0 8px;border-radius:14px}",
+    ".lf-barre button i{font-style:normal;font-size:21px;line-height:1}.lf-barre button small{font-size:13px;font-weight:700}",
+    ".lf-barre button:hover{background:rgba(16,24,32,.08)}.lf-barre button[aria-pressed=true]{background:#101820;color:#FFF6D6}",
+    "html.lf-on .lf-ouvrir{display:none}html.lf-on .lf-barre{display:flex}",
+    "@media (max-width:420px){.lf-ui{left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));justify-content:flex-end}",
+    ".lf-barre{width:100%;justify-content:space-between}.lf-barre button{min-width:0;flex:1;padding:0 2px}}",
+    "@media print{.lf-ui,.lf-bulle,.lf-regle{display:none !important}}",
+    // Le texte : plus gros, plus aéré, plus lisible
+    "html.lf-on body>*:not(.lf-ui):not(.lf-bulle):not(.lf-regle){zoom:var(--lf-zoom,1)}",
+    // Les graphiques gardent leur taille (sinon ils débordent du cellulaire), et rien ne dépasse sur le côté
+    "html.lf-on :is(.viz,figure,svg,canvas,img,video,iframe){zoom:calc(1 / var(--lf-zoom,1))}",
+    "html.lf-on :is(.viz,figure) :is(figure,svg,canvas,img){zoom:1}",
+    "html.lf-on,html.lf-on body{overflow-x:clip}",
+    "html.lf-on body :is(p,li,dd,dt,td,th,summary,blockquote,figcaption,label,span,b,strong,em,small,div){font-family:'Atkinson Hyperlegible',system-ui,'Segoe UI',sans-serif !important}",
+    "html.lf-on body :is(p,li,dd,td,summary,blockquote,.ans){line-height:1.75 !important;letter-spacing:.02em;word-spacing:.12em;text-align:left !important}",
+    "html.lf-on body{padding-bottom:96px}",
+    // Les mots expliqués
+    // (all:unset : le mot ne prend jamais le style d'une pastille ou d'un badge de la page qui vise « span »)
+    "span.lf-mot.lf-mot{all:unset;display:inline !important;border-bottom:2.5px dotted currentColor !important;cursor:help;border-radius:2px}",
+    "span.lf-mot.lf-mot:hover,span.lf-mot.lf-mot:focus{background:rgba(255,214,0,.45) !important;outline:none}",
+    ".lf-bulle{position:fixed;z-index:8001;max-width:min(340px,calc(100vw - 24px));padding:14px 16px 12px;border-radius:16px;background:#101820;color:#FFF6D6;",
+    "font:400 18px/1.5 'Atkinson Hyperlegible',system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:lf-pop .18s ease-out}",
+    ".lf-bulle b{display:block;font-size:19px;color:#FFD84D;margin-bottom:4px}",
+    ".lf-bulle button{display:block;margin-top:10px;font-family:inherit;font-weight:700;font-size:16px;line-height:1;color:#101820;background:#FFD84D;border:0;border-radius:999px;padding:10px 14px;cursor:pointer}",
+    "@keyframes lf-pop{from{opacity:0;transform:translateY(6px) scale(.97)}}",
+    // La lecture à voix haute : le passage lu est surligné
+    ".lf-lu{background:rgba(255,214,0,.38) !important;box-shadow:0 0 0 6px rgba(255,214,0,.38);border-radius:6px;transition:background .2s}",
+    // La règle de lecture
+    ".lf-regle{position:fixed;left:0;right:0;height:3.2em;z-index:7998;pointer-events:none;display:none;",
+    "box-shadow:0 0 0 100vmax rgba(16,24,32,.28);border-top:2px solid #FFD84D;border-bottom:2px solid #FFD84D}",
+    "html.lf-regle-on .lf-regle{display:block}",
+    "@media (prefers-reduced-motion:reduce){.lf-bulle{animation:none}}"
+  ].join("");
+
+  function el(tag, attrs, html) { var e = document.createElement(tag); for (var a in attrs) e.setAttribute(a, attrs[a]); if (html != null) e.innerHTML = html; return e; }
+
+  function demarrer() {
+    var style = el("style"); style.textContent = css; document.head.appendChild(style);
+
+    var ui = el("div", { "class": "lf-ui" });
+    var ouvrir = el("button", { "class": "lf-ouvrir", type: "button", "aria-label": "Lecture facilitée : texte plus gros, mots expliqués, lecture à voix haute" }, "<b>Aa</b><span>Lecture facilitée</span>");
+    var barre = el("div", { "class": "lf-barre", role: "toolbar", "aria-label": "Lecture facilitée" });
+    bEcouter = el("button", { type: "button", "aria-pressed": "false" }, "<i>🔊</i><small>Écouter</small>");
+    var bTaille = el("button", { type: "button", "aria-label": "Taille du texte" }, "<i>A+</i><small>Taille</small>");
+    var bVitesse = el("button", { type: "button" }, "<i>🐢</i><small>Vitesse</small>");
+    var bRegle = el("button", { type: "button", "aria-pressed": "false" }, "<i>📏</i><small>Règle</small>");
+    var bFermer = el("button", { type: "button", "aria-label": "Revenir au texte normal" }, "<i>✕</i><small>Fermer</small>");
+    if (voix) { barre.appendChild(bEcouter); barre.appendChild(bVitesse); }
+    barre.appendChild(bTaille); barre.appendChild(bRegle); barre.appendChild(bFermer);
+    ui.appendChild(ouvrir); ui.appendChild(barre);
+    document.body.appendChild(ui);
+    setTimeout(function () { ui.classList.add("court"); }, 5000);
+
+    var regle = el("div", { "class": "lf-regle", "aria-hidden": "true" });
+    document.body.appendChild(regle);
+
+    function afficher() {
+      var h = document.documentElement;
+      h.classList.toggle("lf-on", r.on);
+      h.classList.toggle("lf-regle-on", r.on && r.regle);
+      h.style.setProperty("--lf-zoom", r.on ? r.taille : 1);
+      var it = TAILLES.indexOf(r.taille);
+      bTaille.querySelector("i").textContent = ["A", "A+", "A++"][it < 0 ? 0 : it];
+      bVitesse.querySelector("i").textContent = r.vitesse < 1 ? "🐢" : r.vitesse > 1 ? "🐇" : "🚶";
+      bVitesse.setAttribute("aria-label", "Vitesse de la voix : " + (r.vitesse < 1 ? "lente" : r.vitesse > 1 ? "rapide" : "normale"));
+      bRegle.setAttribute("aria-pressed", r.regle ? "true" : "false");
+      if (r.on) marquerMots();
+    }
+
+    ouvrir.addEventListener("click", function () { r.on = true; if (r.taille === 1) r.taille = TAILLES[1]; garder(); afficher(); });
+    bFermer.addEventListener("click", function () { arreter(); fermerBulle(); r.on = false; garder(); afficher(); });
+    bTaille.addEventListener("click", function () { r.taille = TAILLES[(TAILLES.indexOf(r.taille) + 1) % TAILLES.length]; garder(); afficher(); });
+    bVitesse.addEventListener("click", function () {
+      r.vitesse = VITESSES[(VITESSES.indexOf(r.vitesse) + 1) % VITESSES.length]; garder(); afficher();
+      if (enCours) lireDepuis(position);   // la nouvelle vitesse s'applique tout de suite
+    });
+    bRegle.addEventListener("click", function () { r.regle = !r.regle; garder(); afficher(); });
+    bEcouter.addEventListener("click", function () { if (enCours) arreter(); else lireDepuis(premierVisible()); });
+
+    // La règle suit la souris ou le doigt
+    function placerRegle(y) { regle.style.top = (y - regle.offsetHeight / 2) + "px"; }
+    document.addEventListener("pointermove", function (e) { if (r.regle) placerRegle(e.clientY); }, { passive: true });
+    document.addEventListener("touchmove", function (e) { if (r.regle && e.touches[0]) placerRegle(e.touches[0].clientY); }, { passive: true });
+    placerRegle(window.innerHeight * 0.4);
+
+    afficher();
+  }
+
+  // ---------- Les mots expliqués ----------
+  var motsFaits = false, bulle = null;
+  var EXCLUS = "script,style,svg,button,a,input,select,textarea,label,nav,h1,h2,h3,h4,h5,h6,dt,summary,code,.term>b,.lf-ui,.lf-bulle,[aria-hidden=true]";
+
+  function marquerMots() {
+    if (motsFaits) return; motsFaits = true;
+    var liste = GLOSSAIRE[window.LF_COURS] || [];
+    if (!liste.length) return;
+    var motif;
+    try { motif = new RegExp("(?<![\\p{L}\\-])(" + liste.map(function (m) { return m[1]; }).join("|") + ")(?![\\p{L}])", "giu"); }
+    catch (e) { return; }   // vieux navigateur : on garde le reste de la lecture facilitée
+    var dejaVu = new Map();   // zone de la page → mots déjà expliqués dans cette zone (un mot n'est souligné qu'une fois par zone)
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!n.nodeValue.trim() || !n.parentElement || n.parentElement.closest(EXCLUS)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var textes = []; while (walker.nextNode()) textes.push(walker.currentNode);
+    textes.forEach(function (n) {
+      var zone = n.parentElement.closest("section,article,details,.topic,.mod") || document.body;
+      var vus = dejaVu.get(zone); if (!vus) { vus = {}; dejaVu.set(zone, vus); }
+      var t = n.nodeValue, frag = null, dernier = 0, m;
+      motif.lastIndex = 0;
+      while ((m = motif.exec(t))) {
+        var entree = trouver(liste, m[1]);
+        if (!entree || vus[entree[0]]) continue;
+        vus[entree[0]] = true;
+        frag = frag || document.createDocumentFragment();
+        frag.appendChild(document.createTextNode(t.slice(dernier, m.index)));
+        var s = el("span", { "class": "lf-mot", tabindex: "0", role: "button", "data-mot": entree[0], "aria-label": m[1] + " : voir l'explication" });
+        s.textContent = m[1];
+        frag.appendChild(s);
+        dernier = m.index + m[1].length;
+      }
+      if (frag) { frag.appendChild(document.createTextNode(t.slice(dernier))); n.parentNode.replaceChild(frag, n); }
+    });
+  }
+  function trouver(liste, mot) {
+    for (var i = 0; i < liste.length; i++) if (new RegExp("^(?:" + liste[i][1] + ")$", "iu").test(mot)) return liste[i];
+    return null;
+  }
+
+  function ouvrirBulle(s) {
+    fermerBulle();
+    var entree = (GLOSSAIRE[window.LF_COURS] || []).filter(function (m) { return m[0] === s.getAttribute("data-mot"); })[0];
+    if (!entree) return;
+    bulle = el("div", { "class": "lf-bulle", role: "dialog", "aria-label": "Explication du mot " + entree[0] });
+    bulle.innerHTML = "<b></b><span></span>";
+    bulle.querySelector("b").textContent = entree[0];
+    bulle.querySelector("span").textContent = entree[2];
+    if (voix) {
+      var ecoute = el("button", { type: "button" }, "🔊 Écouter");
+      ecoute.addEventListener("click", function (e) { e.stopPropagation(); dire(entree[0] + ". " + entree[2]); });
+      bulle.appendChild(ecoute);
+    }
+    document.body.appendChild(bulle);
+    var b = s.getBoundingClientRect(), w = bulle.offsetWidth, hh = bulle.offsetHeight;
+    var x = Math.min(Math.max(12, b.left), window.innerWidth - w - 12);
+    var y = b.bottom + 10; if (y + hh > window.innerHeight - 90) y = Math.max(12, b.top - hh - 10);
+    bulle.style.left = x + "px"; bulle.style.top = y + "px";
+    bulleY = window.scrollY;
+  }
+  var bulleY = 0;
+  function fermerBulle() { if (bulle) { bulle.remove(); bulle = null; } }
+
+  document.addEventListener("click", function (e) {
+    var s = e.target.closest && e.target.closest(".lf-mot");
+    if (s && r.on) { e.preventDefault(); e.stopPropagation(); ouvrirBulle(s); return; }
+    if (bulle && !e.target.closest(".lf-bulle")) fermerBulle();
+    // Pendant la lecture, toucher un passage fait reprendre la lecture à cet endroit
+    if (enCours && !e.target.closest(".lf-ui,a,button,summary,input,label")) {
+      var i = unites().indexOf(uniteDe(e.target));
+      if (i >= 0) lireDepuis(i);
+    }
+  }, true);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { fermerBulle(); if (enCours) arreter(); }
+    if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("lf-mot")) { e.preventDefault(); ouvrirBulle(e.target); }
+  });
+  // La bulle se ferme quand on défile vraiment (pas au petit glissement d'un doigt qui touche le mot)
+  window.addEventListener("scroll", function () { if (bulle && Math.abs(window.scrollY - bulleY) > 60) fermerBulle(); }, { passive: true });
+
+  // ---------- La lecture à voix haute ----------
+  // Une « unité » = le bloc qui contient un bout de texte (paragraphe, puce, case, réponse révélée…), dans l'ordre de la page.
+  // Ce qui est caché (réponses pas encore révélées) n'est jamais lu.
+  var enCours = false, position = 0, cache = null, bEcouter = null;
+  var MUETS = /^(Révéler|Voir la réponse →|La réalité →|→|←|·)$/;
+
+  function blocDe(n) {
+    var e = n.nodeType === 1 ? n : n.parentElement;
+    while (e && e !== document.body) {
+      var d = getComputedStyle(e).display;
+      if (d !== "inline" && d !== "contents") return e;
+      e = e.parentElement;
+    }
+    return document.body;
+  }
+  function uniteDe(cible) {
+    var liste = unites();
+    for (var e = cible; e && e !== document.body; e = e.parentElement) if (liste.indexOf(e) >= 0) return e;
+    return null;
+  }
+  function unites() {
+    if (cache) return cache;
+    var vus = new Set(), liste = [];
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        var p = n.parentElement;
+        if (!p || !n.nodeValue.trim() || p.closest("script,style,svg,nav,.lf-ui,.lf-bulle,[aria-hidden=true],#retour-tdb")) return NodeFilter.FILTER_REJECT;
+        if (MUETS.test(n.nodeValue.trim())) return NodeFilter.FILTER_REJECT;
+        if (!p.getClientRects().length) return NodeFilter.FILTER_REJECT;   // caché
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    while (walker.nextNode()) {
+      var b = blocDe(walker.currentNode);
+      if (!vus.has(b)) { vus.add(b); liste.push(b); }
+    }
+    cache = liste;
+    return liste;
+  }
+  function texteDe(b) {
+    var morceaux = [];
+    var walker = document.createTreeWalker(b, NodeFilter.SHOW_TEXT, null);
+    while (walker.nextNode()) {
+      var n = walker.currentNode, p = n.parentElement;
+      if (MUETS.test(n.nodeValue.trim()) || !p.getClientRects().length || p.closest("svg,script,style,[aria-hidden=true]")) continue;
+      if (blocDe(n) !== b) continue;   // un bloc enfant sera lu à son tour
+      morceaux.push(n.nodeValue);
+    }
+    return prononcer(morceaux.join(""));
+  }
+  // Ce que la voix lit mal : symboles, siècles en chiffres romains, unités
+  function prononcer(t) {
+    var romains = { I: 1, V: 5, X: 10 };
+    return t.replace(/\b([IVX]{1,5})e\b/g, function (m, r) {
+      var n = 0; for (var i = 0; i < r.length; i++) { var v = romains[r[i]], s = romains[r[i + 1]] || 0; n += v < s ? -v : v; } return n + "e";
+    })
+      .replace(/\s−\s/g, " moins ").replace(/−(\d)/g, "moins $1")
+      .replace(/×/g, " fois ").replace(/÷/g, " divisé par ").replace(/≈/g, " environ ").replace(/≤/g, " moins de ou égal à ").replace(/>/g, " plus que ").replace(/</g, " moins que ")
+      .replace(/km²/g, " kilomètre carré").replace(/[→↓↑]/g, ", ").replace(/[«»"]/g, "").replace(/\s+/g, " ").trim();
+  }
+  function premierVisible() {
+    var liste = unites();
+    for (var i = 0; i < liste.length; i++) { var b = liste[i].getBoundingClientRect(); if (b.bottom > 80 && b.height > 0) return i; }
+    return 0;
+  }
+  function choisirVoix() {
+    var toutes = voix.getVoices();
+    return toutes.filter(function (v) { return /^fr[-_]CA/i.test(v.lang); })[0] || toutes.filter(function (v) { return /^fr/i.test(v.lang); })[0] || null;
+  }
+  function dire(texte, fin) {
+    voix.cancel();
+    var u = new SpeechSynthesisUtterance(texte);
+    var v = choisirVoix(); if (v) u.voice = v;
+    u.lang = v ? v.lang : "fr-CA";
+    u.rate = r.vitesse;
+    if (fin) { u.onend = fin; u.onerror = function (e) { if (e.error !== "interrupted" && e.error !== "canceled") fin(); }; }
+    setTimeout(function () { voix.speak(u); }, 60);   // Chrome ignore parfois un speak() collé sur un cancel()
+  }
+  function surligner(b) {
+    document.querySelectorAll(".lf-lu").forEach(function (x) { x.classList.remove("lf-lu"); });
+    if (!b) return;
+    b.classList.add("lf-lu");
+    var box = b.getBoundingClientRect();
+    if (box.top < 70 || box.bottom > window.innerHeight - 110) b.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+  function lireDepuis(i) {
+    cache = null;   // une réponse a peut-être été révélée depuis
+    var liste = unites();
+    if (i >= liste.length) return arreter();
+    enCours = true; position = i;
+    if (bEcouter) { bEcouter.setAttribute("aria-pressed", "true"); bEcouter.innerHTML = "<i>⏸</i><small>Arrêter</small>"; }
+    var t = texteDe(liste[i]);
+    if (!t) return lireDepuis(i + 1);
+    surligner(liste[i]);
+    dire(t, function () { if (enCours && position === i) lireDepuis(i + 1); });
+  }
+  function arreter() {
+    enCours = false;
+    if (voix) voix.cancel();
+    surligner(null);
+    if (bEcouter) { bEcouter.setAttribute("aria-pressed", "false"); bEcouter.innerHTML = "<i>🔊</i><small>Écouter</small>"; }
+  }
+  if (voix) { voix.getVoices(); if ("onvoiceschanged" in voix) voix.onvoiceschanged = function () {}; }
+  window.addEventListener("pagehide", function () { if (voix) voix.cancel(); });
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", demarrer); else demarrer();
+})();
+</script>
+</body>
+</html>

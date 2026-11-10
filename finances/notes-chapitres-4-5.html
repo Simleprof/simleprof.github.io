@@ -1,0 +1,1275 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-o5Pg5aEP52F/8idOvYo+iAu/F0+nuCTLQdZraaBU7Nk=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Notes de cours chapitres 4 et 5 · Poursuivre ses études</title>
+<link rel="stylesheet" href="../polices/36a0d5f4b5.css">
+<style>
+/* Notes de cours, chapitres 4 et 5 (étape 3, « Poursuivre ses études »). Chantier, 2026-11-06.
+   Mise en page commune (écran et papier) ; le visuel « carte » de Finances est dans <style id="theme-carte">,
+   avec une carte étudiante au lieu de la carte de crédit. */
+:root {
+  --paper: #F3F4F8; --card: #FFFFFF; --ink: #101320; --muted: #5B6175; --line: #DADDE6;
+  --hi: #C8F25A; --hi-ink: #14123A; --tag: #D23B3B; --tag-soft: #FBE3E3; --teal: #4F46E5; --teal-soft: #E8E7FD;
+  --mint: #0E8A5F; --mint-soft: #DDF3EA; --surface-2: #ECEEF4; --cover: #14123A; --radius: 18px;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; }
+.wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+p { margin: 0; }
+strong { font-weight: 700; }
+.hl { background: linear-gradient(transparent 55%, color-mix(in srgb, var(--hi) 75%, transparent) 55%); padding: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.muted { color: var(--muted); }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.lbl { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+
+/* Carrefour : notes de cours ou exercices */
+.vue-choix { background: var(--cover); }
+.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
+.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 2px solid rgba(255,255,255,.25); border-radius: 14px; color: #F4F3FF; text-decoration: none; text-align: center; font-family: var(--display); font-weight: 700; font-size: clamp(1.15rem, 4.6vw, 1.5rem); line-height: 1.1; }
+.vue-choix a small { font-family: var(--mono); font-weight: 400; font-size: 15px; opacity: .85; }
+.vue-choix a.on { background: var(--hi); border-color: var(--hi); color: #14123A; }
+.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--hi); }
+body:has(#retour-tdb) .vue-choix { display: none; }
+
+/* En-tête */
+.cover .wrap { padding-block: 40px 44px; display: grid; gap: 16px; }
+.eyebrow { font-family: var(--mono); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; }
+.cover h1 { font-size: clamp(2.5rem, 8vw, 4.2rem); line-height: 1.05; }
+.cover p { max-width: 44ch; font-size: 19px; }
+
+/* Sommaire */
+.plan { background: var(--paper); border-bottom: 1px solid var(--line); }
+.plan .wrap { padding-block: 26px; display: grid; gap: 12px; }
+.plan h2 { font-size: 1.35rem; }
+.cols-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px 28px; }
+.plan h3 { font-size: 1.1rem; color: var(--teal); margin-bottom: 8px; }
+.plan ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.plan ol a { display: inline-block; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 7px 15px; }
+.plan ol a:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* Sections et thèmes */
+.section-head { padding-block: 56px 14px; display: grid; gap: 10px; justify-items: start; }
+.section-head .num { font-family: var(--mono); font-weight: 600; font-size: 15px; line-height: 1; letter-spacing: .08em; color: var(--teal); background: var(--teal-soft); border-radius: 99px; padding: 6px 12px; }
+.section-head .chap { font-family: var(--mono); font-size: 15px; color: var(--muted); letter-spacing: .04em; }
+.section-head h2 { font-size: clamp(2rem, 6vw, 2.9rem); }
+.section-head p { color: var(--muted); max-width: 60ch; }
+.block { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-top: 14px; display: grid; gap: 16px; }
+@media (max-width: 520px) { .block { padding: 18px 16px; } }
+.block > p, .block > ul { max-width: 68ch; }
+.block ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.block h3 { font-size: 1.55rem; }
+.sub-h { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+/* Définitions : cartes de glossaire */
+.defs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 0; }
+.def { margin: 0; background: var(--surface-2); border-radius: 14px; padding: 14px 16px; max-width: 68ch; }
+.def dt { font-family: var(--display); font-weight: 700; font-size: 1.15rem; }
+.def dd { margin: 2px 0 0; }
+
+/* Encadrés */
+.bon, .piege { border-radius: 14px; padding: 12px 18px; max-width: 68ch; }
+.bon { background: var(--mint-soft); }
+.piege { background: var(--tag-soft); }
+.bon > b:first-child, .piege > b:first-child { display: block; font-family: var(--mono); font-size: 15px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 2px; }
+.bon > b:first-child { color: var(--mint); }
+.piege > b:first-child { color: var(--tag); }
+.bon ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.nuance { max-width: 68ch; border-top: 1.5px dashed var(--muted); border-bottom: 1.5px dashed var(--muted); padding: 4px 0; display: grid; gap: 6px; }
+.nuance summary { cursor: pointer; list-style: none; padding: 6px 0; color: var(--muted); }
+.nuance summary::-webkit-details-marker { display: none; }
+.nuance summary::before { content: "+ "; }
+.nuance[open] summary::before { content: "− "; }
+.nuance p { font-size: 17px; padding-bottom: 4px; }
+.nuance .src { font-size: 16px; color: var(--muted); }
+.nuance a { color: inherit; }
+
+/* Listes sobres */
+.lignes, .block ul.lignes { margin: 0; padding: 0; list-style: none; max-width: 68ch; display: grid; }
+.lignes > li, .lignes > div { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.lignes > li:first-child, .lignes > div:first-child { border-top: 1px solid var(--line); }
+.lignes dt, .lignes .t { font-family: var(--display); font-weight: 700; font-size: 1.15rem; }
+.lignes dd { margin: 0; }
+
+/* Cartes */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.card h4 { font-size: 1.25rem; }
+.card .ex { font-size: 16px; color: var(--muted); }
+.card .paie { justify-self: start; font-family: var(--mono); font-size: 15px; border-radius: 99px; padding: 2px 10px; background: var(--teal-soft); color: var(--teal); }
+
+/* Les chemins après le secondaire */
+.parcours { display: grid; gap: 0; max-width: 720px; margin: 0; }
+.parcours > div { display: grid; grid-template-columns: 9.5em 7.5em minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.parcours > div:first-child { border-top: 2px solid var(--ink); }
+.parcours dt { font-family: var(--display); font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
+.parcours dt small { display: block; font-family: var(--body); font-weight: 400; font-size: 16px; color: var(--muted); }
+.parcours .duree { font-family: var(--mono); font-size: 16px; color: var(--teal); }
+.parcours dd { margin: 0; }
+.parcours .uni { color: var(--mint); font-weight: 700; white-space: nowrap; }
+.parcours .non { color: var(--tag); font-weight: 700; }
+@media (max-width: 600px) { .parcours > div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Une vie active en barres */
+.vie { display: grid; gap: 12px; max-width: 680px; }
+.vie .r { display: grid; gap: 4px; }
+.vie .top { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.vie .top b { font-family: var(--display); font-size: 1.15rem; }
+.vie .top span { font-family: var(--mono); font-size: 16px; font-variant-numeric: tabular-nums; }
+.vie i { display: block; height: 22px; border-radius: 6px; background: var(--teal); }
+.vie .r.bac i { background: var(--mint); }
+.vie .r.sans i { background: var(--tag); }
+.vie .calc { font-size: 16px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Le simulateur de diplôme */
+.machine { background: var(--cover); color: #F4F3FF; border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 12px; max-width: 680px; }
+.machine .choix { display: flex; flex-wrap: wrap; gap: 8px; }
+.machine button { font: 700 16px/1.2 var(--display); padding: 10px 16px; border-radius: 99px; border: 1.5px solid rgba(255,255,255,.35); background: transparent; color: #F4F3FF; cursor: pointer; min-height: 44px; }
+.machine button[aria-pressed="true"] { background: var(--hi); border-color: var(--hi); color: #14123A; }
+.machine .out { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 480px) { .machine .out { grid-template-columns: 1fr; } }
+.machine .out div { background: rgba(255,255,255,.08); border-radius: 12px; padding: 10px 12px; }
+.machine .out span { font-size: 16px; opacity: .9; }
+.machine .out b { display: block; font-family: var(--display); font-size: 1.7rem; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.machine .out .plus b { color: var(--hi); }
+.machine .msg { font-size: 17px; }
+
+/* L'offre et la demande */
+.od { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.od .card .sign { font-family: var(--display); font-weight: 700; font-size: 2rem; line-height: 1; }
+.od .bas .sign { color: var(--tag); }
+.od .haut-s .sign { color: var(--mint); }
+
+/* Motifs interdits */
+.motifs { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+.motifs li { background: var(--tag-soft); color: var(--ink); border-radius: 99px; padding: 4px 12px; font-size: 16px; }
+
+/* Organismes */
+.orgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.org { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.org .abbr { font-family: var(--display); font-weight: 700; font-size: 1.8rem; line-height: 1; color: var(--teal); }
+.org .name { font-weight: 700; }
+
+/* La facture de l'université */
+.receipt { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; font-family: var(--mono); font-size: 16px; padding: 16px 18px; max-width: 460px; font-variant-numeric: tabular-nums; }
+.receipt h4 { font-family: var(--mono); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
+.receipt .sub { text-align: center; color: var(--muted); font-size: 15px; margin-bottom: 10px; }
+.receipt .row { display: flex; justify-content: space-between; gap: 10px; }
+.receipt .row.petit { font-size: 15px; color: var(--muted); padding-left: 1em; }
+.receipt .row.gros { font-weight: 600; }
+.receipt .row b { font-weight: 600; }
+.receipt hr { border: 0; border-top: 1px dashed var(--muted); margin: 8px 0; }
+.receipt .tot { font-weight: 600; font-size: 17px; }
+.receipt .ds { color: var(--teal); }
+.receipt .fa { color: var(--mint); }
+
+/* Chez ses parents ou en appartement */
+.duel { display: grid; gap: 12px; max-width: 640px; }
+.duel .r { display: grid; gap: 4px; }
+.duel .top { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.duel .top b { font-family: var(--display); font-size: 1.2rem; }
+.duel .top .tot { font-family: var(--display); font-weight: 700; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.duel i { display: block; height: 26px; border-radius: 6px; }
+.duel .mahee i { background: var(--mint); width: 35.9%; }
+.duel .seb i { background: var(--tag); width: 100%; }
+.duel .sous { font-size: 16px; color: var(--muted); }
+.scroll { overflow-x: auto; min-width: 0; }
+.mini { width: 100%; max-width: 640px; border-collapse: collapse; font-size: 16px; }
+.mini th, .mini td { padding: 7px 8px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: top; font-variant-numeric: tabular-nums; }
+.mini th { font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--muted); }
+.mini th:first-child, .mini td:first-child { text-align: left; }
+
+/* Calcul en chaîne */
+.chain { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 16px; }
+.chain .box { background: var(--surface-2); border-radius: 10px; padding: 7px 12px; font-weight: 700; }
+.chain .box.res { background: var(--ink); color: var(--paper); }
+.chain .op { color: var(--muted); font-weight: 700; font-family: var(--mono); }
+
+/* Le remboursement en trois temps */
+.temps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; counter-reset: t; }
+@media (max-width: 640px) { .temps { grid-template-columns: 1fr; } }
+.temps li { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; border-top: 6px solid var(--mint); }
+.temps li:nth-child(2) { border-top-color: var(--teal); }
+.temps li:nth-child(3) { border-top-color: var(--tag); }
+.temps .quand { font-family: var(--mono); font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.temps b { font-family: var(--display); font-size: 1.15rem; }
+
+/* Les heures de travail : une jauge */
+.jauge { max-width: 640px; display: grid; gap: 6px; }
+.jauge .barre { display: grid; grid-template-columns: 10fr 5fr 5fr 8fr; height: 30px; border-radius: 8px; overflow: hidden; }
+.jauge .barre i:nth-child(1) { background: var(--mint-soft); }
+.jauge .barre i:nth-child(2) { background: var(--mint); }
+.jauge .barre i:nth-child(3) { background: var(--hi); }
+.jauge .barre i:nth-child(4) { background: var(--tag); }
+.jauge .ech { display: grid; grid-template-columns: 10fr 5fr 5fr 8fr; font-family: var(--mono); font-size: 15px; color: var(--muted); }
+.jauge .ech span { border-left: 1px solid var(--muted); padding-left: 4px; }
+.jauge .leg { display: grid; gap: 2px; font-size: 16px; }
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.duo .card h4 { font-size: 1.15rem; }
+.duo .plus h4 { color: var(--mint); }
+.duo .moins h4 { color: var(--tag); }
+.duo ul { margin: 0; padding-left: 1.1em; display: grid; gap: 3px; }
+
+/* La petite vérif */
+.pause { margin: 26px 0 6px; max-width: 68ch; }
+.quiz details { background: var(--hi); color: #14123A; border: 1px solid #14123A; border-radius: var(--radius); box-shadow: 0 14px 30px -18px rgba(20,18,58,.6); }
+.quiz summary { cursor: pointer; list-style: none; padding: 16px 20px 18px; display: grid; gap: 10px; font-size: 19px; font-weight: 700; }
+.quiz summary::-webkit-details-marker { display: none; }
+.quiz .q-n { justify-self: start; font-family: var(--mono); font-size: 15px; font-weight: 600; background: #14123A; color: var(--hi); border-radius: 99px; padding: 6px 14px; }
+.quiz .q-n::before { content: "Petite vérif · "; }
+.quiz .see { justify-self: start; font-family: var(--display); font-size: 16px; font-weight: 700; background: #14123A; color: #fff; padding: 10px 18px; border-radius: 99px; }
+.quiz details[open] .see { display: none; }
+.quiz .ans { margin: 0 16px 16px; padding: 12px 16px; background: #fff; color: #14123A; border-radius: 12px; }
+
+/* Affiche de fin « On teste? » */
+.qr5-affiche { margin: 56px 0 0; background: var(--cover); color: #F4F3FF; border-radius: 24px; padding: 40px 20px; display: grid; gap: 16px; justify-items: center; text-align: center; }
+.qr5-affiche h2 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(2.8rem, 10vw, 4rem); line-height: 1; color: var(--hi); }
+.qr5-affiche p { max-width: 34ch; font-size: 19px; }
+.qr5-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; }
+.qr5-btns a { flex: 1 1 200px; max-width: 290px; min-height: 60px; display: grid; place-items: center; padding: 10px 24px; border-radius: 99px; background: var(--hi); color: #14123A; font-family: var(--display); font-weight: 700; font-size: 1.3rem; text-decoration: none; transition: transform .15s; }
+.qr5-btns a:hover { transform: translateY(-2px); }
+.qr5-btns a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.qr5-qr { display: none; }
+
+footer { margin-top: 56px; border-top: 2px solid var(--ink); }
+footer .wrap { padding-block: 18px 80px; font-size: 16px; color: var(--muted); display: grid; gap: 6px; }
+footer a { color: inherit; }
+
+.haut { position: fixed; left: max(14px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 7999; padding: 11px 18px; border-radius: 999px; background: #14123A; color: #fff; font: 700 16px/1 system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+@supports (animation-timeline: scroll()) {
+  .haut { animation: haut-apparait linear both; animation-timeline: scroll(); animation-range: 0 500px; }
+  @keyframes haut-apparait { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* TBI : on grossit (ouverte du tableau de bord sur grand écran) */
+@media screen and (min-width: 1700px) {
+  html { font-size: 24px; } body { font-size: 24px; } .wrap { max-width: 1180px; }
+  .lbl, .eyebrow, .sub-h, .section-head .num, .section-head .chap, .bon > b:first-child, .piege > b:first-child, .nuance p, .nuance .src,
+  .card .ex, .card .paie, .parcours dt small, .parcours .duree, .vie .top span, .vie .calc, .machine button, .machine .out span, .machine .msg,
+  .motifs li, .receipt, .receipt h4, .receipt .sub, .receipt .row.petit, .receipt .tot, .duel .sous, .mini, .mini th, .chain, .temps .quand,
+  .jauge .ech, .jauge .leg, .quiz summary, .quiz .q-n, .quiz .see, .cover p, .vue-choix a small, .plan ol a, footer .wrap, .haut, .qr5-affiche p { font-size: 24px; }
+  .receipt { max-width: 640px; }
+  html .ccard { width: min(100%, 560px); padding: 30px 34px; }
+  html .ccard .top, html .ccard .photo span, html .ccard .bot { font-size: 24px; }
+}
+
+/* Version papier (lettre) : questions numérotées, corrigé à la fin */
+.pq, .key-src, #corrige { display: none; }
+@page { size: letter; margin: .55in .6in .6in;
+  @bottom-center { content: "Notes de cours · chapitres 4 et 5 · page " counter(page) " de " counter(pages); font: 8.5pt "JetBrains Mono", Consolas, monospace; color: #5B6175; } }
+@media print {
+  :root { --paper: #fff; --card: #fff; --ink: #101320; --muted: #5B6175; --line: #C9CDD6; --surface-2: #F1F2F6; --hi: #fff; --cover: #fff;
+    --tag: #B32F2F; --tag-soft: #FBE3E3; --teal: #3E37B8; --teal-soft: #ECEBFC; --mint: #0E7A55; --mint-soft: #E3F4EC; color-scheme: light; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10.5pt; line-height: 1.45; }
+  .wrap { max-width: none; padding: 0; }
+  .vue-choix, .machine, .haut, .qr5-btns, footer, .ccard { display: none !important; }
+  .cover { border-bottom: 3px solid var(--ink); }
+  .cover .wrap { padding: 0 0 12px; gap: 8px; }
+  .cover .eyebrow { color: var(--teal); }
+  .cover h1 { font-size: 30pt; }
+  .cover h1 em { color: var(--teal); font-style: normal; }
+  .cover p { font-size: 11pt; }
+  .plan .wrap { padding-block: 10px; }
+  .plan ol a { border: 0; padding: 0 8px 0 0; font-size: 10pt; }
+  .section-head { padding-block: 8px 2px; break-after: avoid; }
+  main > .section-head:not(:first-child) { break-before: page; }
+  .section-head h2 { font-size: 20pt; }
+  .block { display: block; border: 0; border-top: 1.5px solid var(--line); border-radius: 0; padding: 12px 0; margin: 0; }
+  .block > * + * { margin-top: 9px; }
+  .block h3, .sub-h { break-after: avoid; }
+  .block h3 { font-size: 14pt; }
+  details.nuance::details-content { content-visibility: visible; }
+  .nuance summary::before { content: none; }
+  .def, .card, .org, .lignes > *, .parcours > div, .vie, .bon, .piege, .nuance, .receipt, .duel, .mini tr, .temps li, .jauge, .chain, .quiz details, .qr5-affiche { break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .vie i { height: 12px; }
+  .duel i { height: 14px; }
+  .pause { margin: 12px 0 4px; }
+  .quiz details { background: none; box-shadow: none; border: 1.5px solid #999; border-radius: 6px; color: inherit; }
+  .quiz summary { padding: 8px 12px; gap: 4px; font-size: 10.5pt; color: inherit; }
+  .quiz summary::after { content: ""; height: 3.1em; background: repeating-linear-gradient(transparent 0 1.5em, var(--line) 1.5em calc(1.5em + 1px)); }
+  .quiz .q-n { background: none; color: var(--teal); padding: 0; }
+  .quiz .q-n::before { content: none; }
+  .quiz .see, .quiz .ans { display: none !important; }
+  .pq { display: inline; color: var(--teal); font-weight: 700; }
+  .qr5-affiche { margin: 16px 0 0; padding: 12px 16px; gap: 8px; background: none; color: var(--ink); border: 2.5px solid var(--ink); }
+  .qr5-affiche h2 { font-size: 22pt; color: var(--ink); }
+  .qr5-affiche p { font-size: 10pt; }
+  .qr5-qr { display: flex; gap: 36px; justify-content: center; }
+  #corrige { display: block; break-before: page; }
+  .key { margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; font-size: 9pt; line-height: 1.35; }
+  .key h4 { font-size: 1.05rem; margin: 10px 0 4px; break-after: avoid; }
+  .key li { margin-bottom: 4px; break-inside: avoid; }
+  .key li b.n { color: var(--teal); font-family: var(--mono); margin-right: 4px; }
+  .key-src { display: block; margin-top: 24px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 8.5pt; color: var(--muted); }
+}
+</style>
+<style id="theme-carte">
+/* Visuel « carte » de Finances (2026-11-03), écran seulement. À l'étape 3, la carte de crédit devient une carte étudiante. */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0C0E15; --card: #151925; --ink: #EEF0F6; --muted: #9CA3B8; --line: #2A3042;
+    --tag: #FF6B6B; --tag-soft: #3D1A1E; --teal: #8B85FF; --teal-soft: #24224A;
+    --mint: #3CCB91; --mint-soft: #12352A; --surface-2: #1D2232; --cover: #0B0A22; color-scheme: dark;
+  }
+}
+@media screen {
+  :root[data-theme="dark"] {
+    --paper: #0C0E15; --card: #151925; --ink: #EEF0F6; --muted: #9CA3B8; --line: #2A3042;
+    --tag: #FF6B6B; --tag-soft: #3D1A1E; --teal: #8B85FF; --teal-soft: #24224A;
+    --mint: #3CCB91; --mint-soft: #12352A; --surface-2: #1D2232; --cover: #0B0A22; color-scheme: dark;
+  }
+  .cover { background: radial-gradient(120% 140% at 85% 0%, #3B2FB8 0%, #14123A 60%); color: #F4F3FF; overflow: hidden; }
+  .cover .wrap { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px 28px; align-items: center; }
+  .cover .wrap > *:not(.ccard) { grid-column: 1; }
+  .cover .ccard { grid-column: 2; grid-row: 1 / span 3; }
+  @media (max-width: 720px) {
+    .cover .wrap { grid-template-columns: 1fr; }
+    .cover .ccard { grid-column: 1; grid-row: auto; margin-top: 8px; }
+  }
+  .cover .eyebrow { justify-self: start; background: rgba(255,255,255,.12); color: #fff; border-radius: 99px; padding: 5px 12px; }
+  .cover h1 em { color: var(--hi); font-style: normal; }
+  .cover p { opacity: .9; }
+  .ccard { aspect-ratio: 1.586; width: min(100%, 340px); justify-self: center; border-radius: 20px; padding: 20px 22px; color: #fff; background: linear-gradient(135deg, #6D5DFC 0%, #2B1E9A 55%, #120E44 100%); box-shadow: 0 30px 60px -25px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.25); transform: rotate(-6deg); display: grid; grid-template-rows: auto 1fr auto; position: relative; overflow: hidden; }
+  .ccard::after { content: ""; position: absolute; width: 260px; height: 260px; right: -90px; top: -110px; border-radius: 50%; background: rgba(200,242,90,.18); }
+  .ccard .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; letter-spacing: .04em; font-size: 16px; }
+  .ccard .photo { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+  .ccard .photo i { width: 42px; height: 50px; border-radius: 8px; background: rgba(255,255,255,.18); position: relative; overflow: hidden; flex: none; }
+  .ccard .photo i::before { content: ""; position: absolute; left: 12px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,.55); }
+  .ccard .photo i::after { content: ""; position: absolute; left: 6px; top: 30px; width: 30px; height: 26px; border-radius: 50% 50% 0 0; background: rgba(255,255,255,.55); }
+  .ccard .photo span { font-family: var(--mono); font-size: 15px; line-height: 1.3; opacity: .9; }
+  .ccard .bot { display: flex; justify-content: space-between; gap: 10px; font-family: var(--mono); font-size: 15px; opacity: .95; margin-top: 8px; }
+  .ccard .bot b { display: block; font-size: 1rem; font-weight: 600; }
+  .ccard .vif { color: var(--hi); }
+}
+@media print { .ccard { display: none !important; } }
+</style>
+<link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
+</head>
+<body>
+<!-- vue-choix -->
+<nav class="vue-choix" aria-label="Notes de cours ou exercices"><div class="wrap">
+  <a target="_top" class="on" href="https://simleprof.github.io/finances/#notes" aria-current="page">Notes de cours<small>Toutes mes notes</small></a>
+  <a target="_top" href="https://simleprof.github.io/finances/#exercices=4.1,4.2,4.3,5.1,5.2">Exercices<small>Me tester · chapitres 4 et 5</small></a>
+</div></nav>
+<!-- /vue-choix -->
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">Éducation financière · Étape 3 · Chapitres 4 et 5</div>
+    <h1>Étudier&nbsp;: ce que ça coûte, <em>ce que ça rapporte.</em></h1>
+    <p>Les chemins après le secondaire, les salaires, la recherche d'emploi, puis comment payer ses études. Lis un thème, fais sa petite vérif, continue.</p>
+    <div class="ccard" aria-hidden="true">
+      <div class="top"><span>CARTE ÉTUDIANTE</span><span>CH.&nbsp;4 · 5</span></div>
+      <div class="photo"><i></i><span>Gains d'une vie active<br>de 18 à 65 ans</span></div>
+      <div class="bot"><span>SANS DES<b>1,77&nbsp;M$</b></span><span>DES<b>2,21&nbsp;M$</b></span><span>BAC<b class="vif">3,26&nbsp;M$</b></span></div>
+    </div>
+  </div>
+</header>
+
+<section class="plan" aria-labelledby="plan-t">
+  <div class="wrap">
+    <h2 id="plan-t">Au sommaire</h2>
+    <div class="cols-plan">
+      <div><h3>Chapitre 4 · Les perspectives d'emploi</h3><ol>
+        <li><a href="#chemins">Les chemins</a></li>
+        <li><a href="#opportunite">Le coût d'opportunité</a></li>
+        <li><a href="#formes">Les formes de rémunération</a></li>
+        <li><a href="#facteurs">Les facteurs du salaire</a></li>
+        <li><a href="#offre">L'offre et la demande</a></li>
+        <li><a href="#cv">CV et lettre</a></li>
+        <li><a href="#entrevue">L'entrevue et les organismes</a></li>
+        <li><a href="#conseils">Trier les conseils</a></li>
+      </ol></div>
+      <div><h3>Chapitre 5 · Le financement des études</h3><ol>
+        <li><a href="#couts">Ce que coûtent les études</a></li>
+        <li><a href="#logement">Chez ses parents ou non</a></li>
+        <li><a href="#ppb">Les prêts et bourses</a></li>
+        <li><a href="#remboursement">Le remboursement</a></li>
+        <li><a href="#sources">Le travail et les autres sources</a></li>
+      </ol></div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ===================== 4.1 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">4.1</span>
+    <span class="chap">Chapitre 4 · Les perspectives d'emploi</span>
+    <h2>Aller à l'école, ça en vaut la peine?</h2>
+    <p>Travailler tout de suite, faire un DEP, aller au cégep&nbsp;: chaque chemin ouvre ses portes, et a son prix.</p>
+  </div>
+
+  <section class="block" id="chemins">
+    <h3>Les chemins après le secondaire</h3>
+    <dl class="defs"><div class="def"><dt>Emploi précaire</dt><dd>Un emploi qui n'offre <strong>aucune garantie de durée ni de stabilité</strong>. Sans diplôme, on se retrouve souvent dans des emplois peu qualifiés, très mal payés et précaires.</dd></div></dl>
+    <p>L'école est obligatoire jusqu'à 16 ans. Ensuite, à la fin de chaque étape, on peut entrer sur le marché du travail avec un diplôme en poche.</p>
+    <dl class="parcours">
+      <div><dt>DEP<small>diplôme d'études professionnelles</small></dt><dd class="duree">6 à 18 mois</dd><dd>Un <strong>métier</strong> (machiniste, coiffeuse, soudeur). Ensuite&nbsp;: le travail ou le cégep, <span class="non">jamais directement l'université</span>.</dd></div>
+      <div><dt>ASP<small>attestation de spécialisation professionnelle</small></dt><dd class="duree">après un DEP</dd><dd>Une <strong>spécialisation</strong> dans le métier choisi.</dd></div>
+      <div><dt>DEC préuniversitaire<small>formation générale au cégep</small></dt><dd class="duree">2 ans</dd><dd>Il <strong>prépare à l'université</strong>&nbsp;: c'est son but. <span class="uni">→ université</span></dd></div>
+      <div><dt>DEC technique<small>formation technique au cégep</small></dt><dd class="duree">3 ans en général</dd><dd>Il mène à un <strong>emploi précis</strong>, mais il ouvre aussi la porte de l'université. <span class="uni">→ université</span></dd></div>
+      <div><dt>Université<small>trois cycles</small></dt><dd class="duree">3 ou 4 ans, et plus</dd><dd><strong>Bac</strong> (3 ou 4 ans), puis <strong>maîtrise</strong> (2 ans) ou <strong>DESS</strong> (1 an), puis <strong>doctorat</strong> (environ 4 ans).</dd></div>
+    </dl>
+    <div class="piege"><b>Piège</b>Le DEP ne mène <strong>pas directement</strong> à l'université. Pour y entrer, il faut un <strong>DEC</strong>, préuniversitaire <strong>ou</strong> technique.</div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Application</span>Rosalie, 17 ans, veut devenir technicienne en génie civil le plus vite possible, sans passer par l'université. Quel diplôme vise-t-elle? Combien de temps dure-t-il?<span class="see">Voir la réponse →</span></summary><div class="ans">Un <strong>DEC technique</strong>, en <strong>3 ans</strong> en général&nbsp;: il mène directement à un emploi précis.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="opportunite">
+    <h3>Le coût d'opportunité des études</h3>
+    <dl class="defs"><div class="def"><dt>Coût d'opportunité</dt><dd>La valeur de ce à quoi on <strong>renonce</strong> quand on fait un choix (chapitre 1). Étudier à temps plein, c'est <strong>renoncer à un salaire à temps plein</strong>.</dd></div></dl>
+    <p><strong>L'exemple du manuel.</strong> Un jeune de 17 ans fait un DEC technique de 3 ans. Avec son DES, il aurait gagné en moyenne 46&nbsp;000&nbsp;$ par année. Il renonce donc à <strong>3 × 46&nbsp;000&nbsp;$ = 138&nbsp;000&nbsp;$</strong>.</p>
+    <p>C'est beaucoup. Mais regarde ce que rapporte <strong>toute une vie active</strong>, de 18 à 65 ans&nbsp;:</p>
+    <div class="vie">
+      <div class="r sans"><div class="top"><b>Sans DES</b><span>1&nbsp;766&nbsp;400&nbsp;$</span></div><i style="width:54.3%" aria-hidden="true"></i><span class="calc">36&nbsp;800&nbsp;$ par année × 48 ans</span></div>
+      <div class="r"><div class="top"><b>DES</b><span>2&nbsp;208&nbsp;000&nbsp;$</span></div><i style="width:67.8%" aria-hidden="true"></i><span class="calc">46&nbsp;000&nbsp;$ par année × 48 ans</span></div>
+      <div class="r"><div class="top"><b>DEC technique</b><span>2&nbsp;367&nbsp;000&nbsp;$</span></div><i style="width:72.7%" aria-hidden="true"></i><span class="calc">52&nbsp;600&nbsp;$ par année × 45 ans (3 ans d'études)</span></div>
+      <div class="r bac"><div class="top"><b>Baccalauréat</b><span>3&nbsp;255&nbsp;100&nbsp;$</span></div><i style="width:100%" aria-hidden="true"></i><span class="calc">75&nbsp;700&nbsp;$ par année × 43 ans (5 ans d'études&nbsp;: cégep et bac)</span></div>
+    </div>
+    <p><span class="hl">Même en travaillant moins d'années, la personne qui a un bac gagne environ un million de dollars de plus que celle qui a un DES.</span></p>
+    <div class="machine" aria-live="polite">
+      <p><strong>Choisis un diplôme&nbsp;:</strong></p>
+      <div class="choix" role="group" aria-label="Choisis un diplôme">
+        <button type="button" data-d="sans" aria-pressed="false">Sans DES</button>
+        <button type="button" data-d="des" aria-pressed="false">DES</button>
+        <button type="button" data-d="dec" aria-pressed="true">DEC technique</button>
+        <button type="button" data-d="bac" aria-pressed="false">Bac</button>
+      </div>
+      <div class="out">
+        <div><span>Salaire auquel tu renonces pendant tes études</span><b id="v-ren">138&nbsp;000&nbsp;$</b></div>
+        <div class="plus"><span>Sur ta vie active, comparé au DES</span><b id="v-gap">+159&nbsp;000&nbsp;$</b></div>
+      </div>
+      <p class="msg" id="v-msg">Tu travailles 3 ans de moins, et tu gagnes quand même plus.</p>
+    </div>
+    <details class="nuance">
+      <summary class="lbl">Nuance · un diplôme ne garantit rien</summary>
+      <p>Ce sont des <strong>moyennes</strong>. Le manuel le dit lui-même&nbsp;: un diplôme universitaire ne garantit pas un bon salaire, et il y a des exceptions (p.&nbsp;107). Mais l'inverse est dur aussi&nbsp;: au salaire minimum d'aujourd'hui (16,60&nbsp;$ l'heure), 40 heures par semaine toute l'année donnent environ 34&nbsp;500&nbsp;$, moins que le salaire moyen d'une personne sans diplôme.</p>
+      <p class="src">Source&nbsp;: <a href="https://cnesst.gouv.qc.ca/fr/conditions-travail/salaire-paye/salaire" rel="noopener">CNESST, le salaire minimum</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Calcul</span>Avec son DES en poche, Sami choisit un DEC préuniversitaire plutôt qu'un emploi à temps plein. Selon le salaire moyen du manuel, à combien d'argent renonce-t-il?<span class="see">Voir la réponse →</span></summary><div class="ans">Le DEC préuniversitaire dure 2 ans&nbsp;: 2 × 46&nbsp;000&nbsp;$ = <strong>92&nbsp;000&nbsp;$</strong>. C'est son coût d'opportunité.</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 4.2 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">4.2</span>
+    <span class="chap">Chapitre 4 · Les perspectives d'emploi</span>
+    <h2>Comment les salaires sont-ils fixés?</h2>
+    <p>Un concierge, une conductrice d'équipement lourd, une architecte&nbsp;: 40 heures par semaine chacun, des salaires très différents.</p>
+  </div>
+
+  <section class="block" id="formes">
+    <h3>Les formes de rémunération</h3>
+    <dl class="defs"><div class="def"><dt>Rémunération</dt><dd>Le <strong>salaire</strong> + les <strong>avantages sociaux</strong> (assurances, régime de retraite, etc.).</dd></div></dl>
+    <div class="cols">
+      <div class="card"><h4>Salaire horaire</h4><p>Un montant fixe <strong>par heure</strong>. Les heures supplémentaires sont payées.</p><span class="paie">La paie suit les heures</span><p class="ex">Plombier, électricien</p></div>
+      <div class="card"><h4>Salaire fixe</h4><p>Un montant <strong>annuel prévu d'avance</strong> (contrat ou convention collective), versé en paies égales.</p><span class="paie">Même paie, peu importe les heures</span><p class="ex">Comptable, gérant de magasin</p></div>
+      <div class="card"><h4>Travail à forfait</h4><p>Un montant fixé au contrat <strong>pour une tâche</strong>, peu importe le temps qu'elle prend.</p><span class="paie">Un prix par tâche</span><p class="ex">Journaliste pigiste, chargé de cours</p></div>
+      <div class="card"><h4>Salaire au pourboire</h4><p>Un salaire de base + l'argent remis <strong>directement par les clients</strong>.</p><span class="paie">Base + pourboires</span><p class="ex">Serveuse, coiffeur, livreur, portier</p></div>
+      <div class="card"><h4>Salaire à la commission</h4><p>Une <strong>prime selon le rendement</strong>, presque toujours ajoutée à un salaire de base.</p><span class="paie">Base + primes sur les ventes</span><p class="ex">Vente, immobilier</p></div>
+    </div>
+    <div class="piege"><b>Piège</b>Horaire ou fixe? Avec un salaire <strong>horaire</strong>, plus d'heures donnent une plus grosse paie. Avec un salaire <strong>fixe</strong>, la paie reste la même, même si on travaille plus.</div>
+    <div class="bon"><b>Bon à savoir</b><ul>
+      <li>Le <strong>salaire minimum au pourboire</strong> est <strong>plus bas</strong> que le salaire minimum général.</li>
+      <li>Au restaurant, le plongeur, le débarrasseur et le commis d'un restaurant rapide n'y ont pas droit&nbsp;: ils sont au salaire minimum général.</li>
+      <li>La loi sur le salaire minimum s'applique aussi à la commission.</li>
+    </ul></div>
+    <details class="nuance">
+      <summary class="lbl">Nuance · ce qui a changé depuis le manuel</summary>
+      <p>Le manuel donne les taux de mai 2024&nbsp;: 15,75&nbsp;$ et 12,60&nbsp;$ l'heure. Depuis le 1<sup>er</sup> mai 2026, c'est <strong>16,60&nbsp;$</strong> (général) et <strong>13,30&nbsp;$</strong> (au pourboire).</p>
+      <p class="src">Source&nbsp;: <a href="https://cnesst.gouv.qc.ca/fr/conditions-travail/salaire-paye/salaire" rel="noopener">CNESST, le salaire minimum</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Réponse courte</span>Quelle forme de rémunération? a) Une graphiste reçoit 1&nbsp;200&nbsp;$ pour créer un logo, qu'elle y passe 5 heures ou 30. b) Un livreur garde l'argent que les clients lui remettent, en plus de son salaire de base. c) Un courtier immobilier touche un pourcentage du prix de chaque maison qu'il vend.<span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Travail à forfait</strong>. b) <strong>Salaire au pourboire</strong>. c) <strong>Salaire à la commission</strong>.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="facteurs">
+    <h3>Les facteurs qui influent sur le salaire</h3>
+    <div class="cols">
+      <div class="card"><h4>Personnels</h4><ul><li>Âge</li><li>Formation</li><li>Sexe</li></ul></div>
+      <div class="card"><h4>Liés à l'emploi</h4><ul><li>Talent, renommée</li><li>Qualifications, compétences</li><li>Fonctions, responsabilités</li><li>Ancienneté, expérience</li><li>Rendement</li></ul></div>
+      <div class="card"><h4>Liés aux conditions de travail</h4><ul><li>Risques</li><li>Éloignement géographique</li><li>Parité industrielle (les entreprises concurrentes offrent des salaires semblables)</li><li>Syndicalisation</li></ul></div>
+    </div>
+    <p>S'ajoutent le <strong>secteur d'emploi</strong> et l'<strong>offre et la demande</strong> (thème suivant). En règle générale, <span class="hl">plus la formation exigée est longue, plus le salaire est élevé</span>&nbsp;; un emploi qui s'apprend en une demi-journée paie souvent le salaire minimum.</p>
+    <dl class="defs">
+      <div class="def"><dt>Ancienneté</dt><dd>Le <strong>temps passé</strong> dans un emploi.</dd></div>
+      <div class="def"><dt>Expérience</dt><dd>Ce temps, <strong>plus</strong> les connaissances accumulées et la pratique d'une activité.</dd></div>
+    </dl>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Jugement</span>Dans le même hôpital, Noah est préposé depuis 1 an et Mireille depuis 12 ans. Qui des deux gagne probablement le plus? Quel facteur l'explique?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Mireille</strong>&nbsp;: son <strong>ancienneté</strong> (12 ans dans l'emploi) et l'<strong>expérience</strong> qu'elle a accumulée font monter son salaire.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="offre">
+    <h3>L'offre et la demande sur le marché du travail</h3>
+    <dl class="lignes">
+      <div><dt>L'offre</dt><dd>Les <strong>travailleurs</strong>, qui offrent leur travail.</dd></div>
+      <div><dt>La demande</dt><dd>Les <strong>entreprises</strong>, qui cherchent des travailleurs.</dd></div>
+      <div><dt>Le salaire</dt><dd>Il se fixe au <strong>point d'équilibre</strong> entre les deux.</dd></div>
+    </dl>
+    <div class="od">
+      <div class="card bas"><span class="sign">↓</span><h4>Beaucoup de candidats</h4><p>Beaucoup de gens peuvent faire l'emploi&nbsp;: le salaire reste <strong>bas</strong>. Exemple&nbsp;: la restauration rapide.</p></div>
+      <div class="card haut-s"><span class="sign">↑</span><h4>Peu de candidats</h4><p>Le talent est rare, ou il y a une <strong>pénurie</strong>&nbsp;: le salaire <strong>monte</strong>. Exemple&nbsp;: un joueur de hockey vedette.</p></div>
+    </div>
+    <p>Quand le <strong>chômage est bas</strong>, les entreprises se disputent les travailleurs et les salaires montent. Quand il est <strong>élevé</strong>, ils baissent.</p>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Analyse</span>Une région du Québec manque de mécaniciens de machinerie lourde. Que risque-t-il d'arriver à leur salaire? Pourquoi?<span class="see">Voir la réponse →</span></summary><div class="ans">Il risque de <strong>monter</strong>&nbsp;: les entreprises (la demande) cherchent plus de mécaniciens qu'il n'y en a (l'offre). Pour les attirer, elles paient plus.</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 4.3 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">4.3</span>
+    <span class="chap">Chapitre 4 · Les perspectives d'emploi</span>
+    <h2>Comment trouver un bon emploi?</h2>
+    <p>Se préparer, puis passer à l'action, et savoir qui peut t'aider.</p>
+  </div>
+
+  <section class="block" id="cv">
+    <h3>Le CV, la lettre et les stratégies</h3>
+    <dl class="defs">
+      <div class="def"><dt>Curriculum vitæ (CV)</dt><dd>Il <strong>résume</strong> ta formation, ton expérience de travail et tes qualifications.</dd></div>
+      <div class="def"><dt>Lettre de motivation</dt><dd>Elle montre que tu veux <strong>cet emploi-là</strong>. Son but&nbsp;: donner envie de lire ton CV, puis de te convoquer en entrevue. <strong>Une lettre par emploi.</strong></dd></div>
+    </dl>
+    <p class="sub-h">Les stratégies</p>
+    <ul class="lignes">
+      <li><span class="t">Le réseautage.</span> La plupart des emplois ne sont jamais affichés&nbsp;: ce sont les <strong>emplois cachés</strong>. Ta famille, tes amis, tes anciens patrons peuvent t'y mener.</li>
+      <li><span class="t">Un CV soigné</span> et une <strong>lettre propre à chaque emploi</strong>.</li>
+      <li><span class="t">Préparer l'entrevue.</span> S'informer sur l'entreprise, prévoir ses réponses.</li>
+      <li><span class="t">Se présenter en personne</span> et demander de l'aide à un <strong>organisme</strong> (thème suivant).</li>
+    </ul>
+    <details class="nuance">
+      <summary class="lbl">Nuance · les emplois cachés</summary>
+      <p>On lit souvent que 80&nbsp;% des emplois sont cachés. Le manuel donne ce chiffre «&nbsp;selon diverses statistiques&nbsp;», sans dire lesquelles&nbsp;: retiens surtout que <strong>la plupart</strong> des emplois ne sont pas affichés.</p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Jugement</span>Pour gagner du temps, Zoé envoie exactement la même lettre de motivation à 30 employeurs. Bonne idée? Pourquoi?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non.</strong> La lettre doit montrer qu'elle veut <strong>cet emploi précis</strong>&nbsp;: il en faut une par emploi. Sinon, l'employeur risque de ne même pas lire son CV.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="entrevue">
+    <h3>L'entrevue et les organismes</h3>
+    <p>En entrevue, la <strong>Charte des droits et libertés de la personne</strong> du Québec interdit les questions sur&nbsp;:</p>
+    <ul class="motifs">
+      <li>la race</li><li>la couleur</li><li>le sexe</li><li>la grossesse</li><li>l'orientation sexuelle</li><li>l'état civil</li><li>l'âge</li><li>la religion</li><li>les convictions politiques</li><li>la langue</li><li>l'origine ethnique ou nationale</li><li>la condition sociale</li><li>un handicap</li>
+    </ul>
+    <p class="muted">Sauf si le motif a un lien direct avec l'emploi.</p>
+    <div class="bon"><b>Bon à savoir</b>L'employeur peut te demander si tu as un <strong>casier judiciaire</strong>. Il peut refuser de t'embaucher seulement si le délit a un lien avec l'emploi.</div>
+    <p class="sub-h">Qui peut t'aider</p>
+    <div class="orgs">
+      <div class="org"><span class="abbr">Québec emploi</span><span class="name">Gouvernement du Québec</span><p>Le site des offres d'emploi du gouvernement.</p></div>
+      <div class="org"><span class="abbr">CJE</span><span class="name">Carrefours jeunesse-emploi</span><p><strong>Gratuits</strong>, pour les 16 à 35 ans.</p></div>
+      <div class="org"><span class="abbr">CLE</span><span class="name">Centres locaux d'emploi</span><p>Près de 150 au Québec&nbsp;: l'emploi, et aussi l'aide de dernier recours.</p></div>
+    </div>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Réponse courte</span>En entrevue pour un emploi d'été, on demande à Karim, 17 ans&nbsp;: «&nbsp;De quel pays viennent tes parents?&nbsp;» La question est-elle permise? Et où peut-il aller gratuitement pour se faire aider dans sa recherche d'emploi?<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non</strong>, elle touche son <strong>origine ethnique ou nationale</strong>&nbsp;: c'est interdit par la Charte. Il peut aller au <strong>carrefour jeunesse-emploi</strong> (CJE) de sa région.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="conseils">
+    <h3>Rappel du chapitre 1&nbsp;: trier les conseils</h3>
+    <p>Choisir ses études, c'est aussi recevoir des tas de conseils. Ta <strong>famille</strong>, tes <strong>amis</strong>, tes <strong>collègues de travail</strong>, les <strong>médias</strong>&nbsp;: tous influencent tes choix (p.&nbsp;11). Avant de suivre un conseil, pose-toi ces questions (p.&nbsp;18)&nbsp;:</p>
+    <dl class="lignes">
+      <div><dt>Qui parle?</dt><dd>Quelle est sa formation, sa fonction? Est-ce un spécialiste de la question?</dd></div>
+      <div><dt>Quel est son intérêt?</dt><dd>Un patron qui manque d'employés a intérêt à te garder. Cherche-t-il à t'informer, ou à défendre son point de vue?</dd></div>
+      <div><dt>Fait ou opinion?</dt><dd>Vérifie les faits dans une source fiable (les salaires selon le diplôme, p.&nbsp;103), puis <strong>compare les options</strong> avant de décider.</dd></div>
+    </dl>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Jugement</span>Dans une vidéo, un influenceur affirme&nbsp;: «&nbsp;L'université, c'est une perte d'argent. Moi, j'ai réussi sans diplôme.&nbsp;» Nomme deux questions à te poser avant de le croire.<span class="see">Voir la réponse →</span></summary><div class="ans">Au choix&nbsp;: <strong>Qui est-il</strong> (formation, spécialiste)? <strong>Quel intérêt</strong> a-t-il (des vues, un commanditaire)? Donne-t-il des <strong>sources</strong>? Est-ce un <strong>fait ou une opinion</strong>? Son cas est une exception&nbsp;: en moyenne, le bac rapporte bien plus sur une vie (p.&nbsp;103).</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 5.1 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">5.1</span>
+    <span class="chap">Chapitre 5 · Le financement des études</span>
+    <h2>Les études, combien ça coûte?</h2>
+    <p>Les cours, les frais de l'école, et surtout la vie de tous les jours.</p>
+  </div>
+
+  <section class="block" id="couts">
+    <h3>Ce que coûtent les études</h3>
+    <div class="cols">
+      <div class="card"><h4>DEP</h4><p>Certaines formations sont <strong>gratuites</strong>. Après 18 ans, la formation reste gratuite, mais on paie ses <strong>manuels</strong>. Les droits d'inscription varient.</p></div>
+      <div class="card"><h4>Cégep public</h4><p>Le DEC est <strong>gratuit à temps plein</strong>. Mais il y a des droits d'inscription et des frais afférents&nbsp;: <strong>de 150&nbsp;$ à 300&nbsp;$ par session</strong>. Le cégep privé coûte plus cher.</p></div>
+      <div class="card"><h4>Université</h4><p><strong>Pas gratuite</strong>&nbsp;: environ <strong>300&nbsp;$ par cours</strong>, ou 1&nbsp;500&nbsp;$ pour une session de 5 cours, sans les frais afférents.</p></div>
+    </div>
+    <dl class="defs">
+      <div class="def"><dt>Droits de scolarité</dt><dd>Le prix des <strong>cours</strong>, calculé selon le nombre de crédits.</dd></div>
+      <div class="def"><dt>Frais afférents</dt><dd>Les <strong>autres frais</strong> exigés par l'école, en plus des cours&nbsp;: services aux étudiants, association étudiante, sport, etc.</dd></div>
+    </dl>
+    <div class="receipt" role="table" aria-label="Exemple de frais pour une année à l'Université de Sherbrooke">
+      <h4>Une année à l'université</h4>
+      <p class="sub">Exemple du manuel&nbsp;: Université de Sherbrooke, 2023</p>
+      <div class="row" role="row"><span>Frais d'inscription</span><span>77,00</span></div>
+      <div class="row gros ds" role="row"><span>Droits de scolarité (30 crédits)</span><span>2&nbsp;880,90</span></div>
+      <hr>
+      <div class="row gros fa" role="row"><span>Frais afférents</span><span>750,90</span></div>
+      <div class="row petit" role="row"><span>Services à la vie étudiante</span><span>223,50</span></div>
+      <div class="row petit" role="row"><span>Services administratifs</span><span>117,60</span></div>
+      <div class="row petit" role="row"><span>Sport et activité physique</span><span>117,00</span></div>
+      <div class="row petit" role="row"><span>Association étudiante</span><span>100,00</span></div>
+      <div class="row petit" role="row"><span>Fonds d'appui à l'engagement étudiant</span><span>93,90</span></div>
+      <div class="row petit" role="row"><span>Transport en commun</span><span>71,60</span></div>
+      <div class="row petit" role="row"><span>Droits d'auteur</span><span>27,30</span></div>
+      <hr>
+      <div class="row tot" role="row"><span>Total, 2 sessions</span><span>3&nbsp;708,80&nbsp;$</span></div>
+    </div>
+    <div class="bon"><b>Bon à savoir</b>Certains programmes exigent du <strong>matériel particulier</strong>. En soins infirmiers, la première année peut coûter environ 1&nbsp;900&nbsp;$ (sarrau, stéthoscope, etc.).</div>
+    <p class="sub-h">Pourquoi l'État paie-t-il tes études?</p>
+    <p>L'éducation est le 2<sup>e</sup> poste du budget du Québec&nbsp;: près de 21&nbsp;% en 2023-2024 (p.&nbsp;124). Ce que l'État y gagne&nbsp;: trois raisons. Le manuel ne les dit pas en une phrase, mais ses chiffres les montrent.</p>
+    <ul class="lignes">
+      <li><span class="t">Des entreprises qui trouvent du personnel formé.</span> Le Québec a besoin de techniciennes, de soudeurs, d'infirmières.</li>
+      <li><span class="t">Des salaires plus élevés.</span> Un diplômé gagne plus (p.&nbsp;103 et 108)&nbsp;; il verse donc plus d'impôts à l'État.</li>
+      <li><span class="t">Moins de chômage.</span> Un diplômé occupe moins souvent un emploi précaire (p.&nbsp;100)&nbsp;: l'État verse moins d'aide de dernier recours (p.&nbsp;117).</li>
+    </ul>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Vrai ou faux</span>Au cégep public, un étudiant inscrit à temps plein n'a absolument rien à payer à son école.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> Les cours sont gratuits, mais il paie des droits d'inscription et des frais afférents&nbsp;: de 150&nbsp;$ à 300&nbsp;$ par session.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="logement">
+    <h3>Chez ses parents ou en appartement?</h3>
+    <p>Les frais qui font le plus mal au budget d'un étudiant, ce ne sont pas les cours&nbsp;: ce sont les <strong>frais de subsistance</strong> (pour vivre : loyer, nourriture, transport). L'exemple du manuel&nbsp;:</p>
+    <div class="duel">
+      <div class="r mahee"><div class="top"><b>Mahée, chez ses parents</b><span class="tot">565&nbsp;$ par mois</span></div><i aria-hidden="true"></i><span class="sous">4&nbsp;520&nbsp;$ par année scolaire (2 sessions de 4 mois)</span></div>
+      <div class="r seb"><div class="top"><b>Sébastien, en appartement</b><span class="tot">1&nbsp;575&nbsp;$ par mois</span></div><i aria-hidden="true"></i><span class="sous">12&nbsp;600&nbsp;$ par année scolaire</span></div>
+    </div>
+    <p>Ce qui change entre les deux, par mois&nbsp;:</p>
+    <div class="scroll"><table class="mini">
+      <thead><tr><th>Dépense</th><th>Mahée</th><th>Sébastien</th></tr></thead>
+      <tbody>
+        <tr><td>Logement, électricité, chauffage</td><td>0&nbsp;$</td><td>550&nbsp;$</td></tr>
+        <tr><td>Alimentation et hygiène</td><td>125&nbsp;$</td><td>550&nbsp;$</td></tr>
+        <tr><td>Communications</td><td>90&nbsp;$</td><td>125&nbsp;$</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted">Le reste (livres, transport, dépenses personnelles) est pareil. Près de la moitié des étudiants quittent la maison après le secondaire.</p>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Calcul</span>Pendant une année scolaire de 8 mois, combien Sébastien paie-t-il de plus que Mahée?<span class="see">Voir la réponse →</span></summary><div class="ans">1. Par mois&nbsp;: 1&nbsp;575&nbsp;$ − 565&nbsp;$ = 1&nbsp;010&nbsp;$.<br>2. Pour 8 mois&nbsp;: 1&nbsp;010&nbsp;$ × 8 = <strong>8&nbsp;080&nbsp;$</strong> de plus.<br>Vérification&nbsp;: 12&nbsp;600&nbsp;$ − 4&nbsp;520&nbsp;$ = 8&nbsp;080&nbsp;$.</div></details>
+    </div></div>
+  </section>
+
+  <!-- ===================== 5.2 ===================== -->
+  <div class="section-head">
+    <span class="num" aria-hidden="true">5.2</span>
+    <span class="chap">Chapitre 5 · Le financement des études</span>
+    <h2>Comment financer ses études?</h2>
+    <p>Les prêts et bourses du gouvernement, le travail, et quelques autres portes.</p>
+  </div>
+
+  <section class="block" id="ppb">
+    <h3>Le Programme de prêts et bourses</h3>
+    <dl class="defs"><div class="def"><dt>Programme de prêts et bourses</dt><dd>L'aide du <strong>gouvernement du Québec</strong> aux étudiants dont les <strong>ressources financières sont insuffisantes</strong>. Il vaut pour le DEP, le cégep et l'université.</dd></div></dl>
+    <dl class="defs">
+      <div class="def"><dt>Prêt</dt><dd><strong>Remboursable</strong> à la fin des études&nbsp;: le capital (la somme empruntée) et les intérêts.</dd></div>
+      <div class="def"><dt>Bourse</dt><dd><strong>Non remboursable</strong>. Elle est donnée.</dd></div>
+    </dl>
+    <p class="sub-h">Le calcul</p>
+    <div class="chain" aria-label="Dépenses admises moins contributions égale besoins ; le prêt vient d'abord, la bourse couvre le reste">
+      <span class="box">Dépenses admises</span><span class="op">−</span><span class="box">Contributions</span><span class="op">=</span><span class="box res">Besoins</span>
+    </div>
+    <ul>
+      <li><strong>Dépenses admises</strong>&nbsp;: les dépenses régulières (logement, nourriture, transport) et ponctuelles (droits de scolarité, manuels).</li>
+      <li><strong>Contributions</strong>&nbsp;: l'argent que l'étudiant doit mettre lui-même. S'il y a lieu, ses parents ou son conjoint en mettent aussi, selon leurs moyens.</li>
+      <li>Exemple&nbsp;: 8&nbsp;000&nbsp;$ de dépenses admises − 2&nbsp;500&nbsp;$ de contributions = 5&nbsp;500&nbsp;$ de besoins.</li>
+<li>Les besoins sont d'abord couverts par un <strong>prêt</strong>, jusqu'au prêt maximal&nbsp;; ce qui dépasse est versé en <strong>bourse</strong>.</li>
+    </ul>
+    <p class="sub-h">Pour y avoir droit</p>
+    <ul class="lignes">
+      <li>Ne pas avoir les <strong>ressources financières suffisantes</strong>.</li>
+      <li>Avoir la <strong>citoyenneté canadienne</strong> (ou un statut équivalent) et <strong>résider au Québec</strong>.</li>
+      <li>Être admis dans un <strong>établissement reconnu</strong> par le ministère.</li>
+      <li>Étudier <strong>à temps plein</strong>.</li>
+      <li>Ne pas dépasser la <strong>période d'admissibilité</strong>&nbsp;: un nombre maximal de mois d'études.</li>
+<li>Ne pas dépasser la <strong>limite d'endettement</strong>, un maximum de dette&nbsp;: de 16&nbsp;000&nbsp;$ (cégep, formation générale) à 55&nbsp;000&nbsp;$ (doctorat).</li>
+    </ul>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Calcul</span>Pour son année au cégep, Jade a 9&nbsp;000&nbsp;$ de dépenses admises. Les contributions attendues (elle et ses parents) sont de 3&nbsp;000&nbsp;$. Son prêt maximal est de 4&nbsp;000&nbsp;$. Combien reçoit-elle en prêt? En bourse?<span class="see">Voir la réponse →</span></summary><div class="ans">1. Besoins&nbsp;: 9&nbsp;000&nbsp;$ − 3&nbsp;000&nbsp;$ = 6&nbsp;000&nbsp;$.<br>2. Le prêt vient d'abord&nbsp;: <strong>4&nbsp;000&nbsp;$ en prêt</strong>.<br>3. Le reste&nbsp;: 6&nbsp;000&nbsp;$ − 4&nbsp;000&nbsp;$ = <strong>2&nbsp;000&nbsp;$ en bourse</strong>.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="remboursement">
+    <h3>Les intérêts et le remboursement</h3>
+    <ol class="temps">
+      <li><span class="quand">Pendant les études</span><b>L'État paie les intérêts</b><p>Sur ton prêt, tu ne paies rien.</p></li>
+      <li><span class="quand">Les 6 mois après</span><b>Exemption partielle</b><p>Tu paies <strong>seulement les intérêts</strong>, pas le capital.</p></li>
+      <li><span class="quand">Ensuite</span><b>Tu rembourses tout</b><p>Le <strong>capital et les intérêts</strong>, selon l'entente prise avec ton institution financière.</p></li>
+    </ol>
+    <div class="piege"><b>Piège</b>Le gouvernement <strong>ne rembourse pas</strong> ton prêt à ta place. Il paie les intérêts <strong>pendant tes études</strong>, et c'est tout.</div>
+    <div class="bon"><b>Bon à savoir</b><ul>
+      <li><strong>Remise de dette</strong>&nbsp;: si tu étudies à temps plein et finis dans les délais prévus, l'État peut réduire ta dette d'études de <strong>15&nbsp;%</strong> (p.&nbsp;121). C'est une réduction, pas un remboursement complet.</li>
+      <li>Le taux d'intérêt d'un prêt étudiant est plus bas que celui d'un prêt auto ou d'une carte de crédit&nbsp;: on rembourse d'abord les dettes au taux le plus élevé.</li>
+    </ul></div>
+    <details class="nuance">
+      <summary class="lbl">Nuance · la remise de dette, en vrai</summary>
+      <p>La remise vaut 15&nbsp;% du prêt reçu pour le programme terminé. Il faut la demander dans les 3 ans, et on n'y a droit qu'une fois par ordre d'enseignement (une fois pour le cégep, une fois pour le bac, etc.).</p>
+      <p class="src">Source&nbsp;: <a href="https://www.quebec.ca/education/aide-financiere-aux-etudes/remboursement/remise-dette" rel="noopener">Québec.ca, la remise de dette</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Application</span>Félix termine son DEC à la fin de mai. Il a reçu un prêt du gouvernement. Que doit-il payer en juin? Et en janvier suivant?<span class="see">Voir la réponse →</span></summary><div class="ans">En juin, il est dans les 6 mois d'<strong>exemption partielle</strong>&nbsp;: il paie <strong>seulement les intérêts</strong>. En janvier, les 6 mois sont passés&nbsp;: il rembourse le <strong>capital et les intérêts</strong>.</div></details>
+    </div></div>
+  </section>
+
+  <section class="block" id="sources">
+    <h3>Le travail et les autres sources</h3>
+    <p><strong>Travailler</strong>&nbsp;: un emploi d'été ou à temps partiel, un stage rémunéré, ou le <strong>Programme études-travail</strong> (un emploi dans son propre établissement, pour les étudiants dont la situation financière est très précaire).</p>
+    <p class="sub-h">Combien d'heures par semaine?</p>
+    <div class="jauge">
+      <div class="barre" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="ech" aria-hidden="true"><span>0 h</span><span>10 h</span><span>15 h</span><span>20 h et plus</span></div>
+      <div class="leg">
+        <span><strong>De 10 à 15 heures</strong>&nbsp;: un horaire qui convient bien.</span>
+        <span><strong>20 heures</strong>&nbsp;: le maximum pour un élève à temps plein.</span>
+        <span><strong>Plus de 20 heures</strong>&nbsp;: les études en souffrent.</span>
+      </div>
+    </div>
+    <div class="duo">
+      <div class="card plus"><h4>Les bénéfices</h4><ul><li>Sens des responsabilités et de l'organisation</li><li>Expérience du marché du travail</li><li>Autonomie financière, estime de soi</li></ul></div>
+      <div class="card moins"><h4>Les inconvénients</h4><ul><li>Moins de temps et d'énergie pour étudier</li><li>Baisse de la concentration et de la motivation</li><li>Fatigue, stress, manque de sommeil</li></ul></div>
+    </div>
+    <p class="sub-h">Les autres sources</p>
+    <ul class="lignes">
+      <li><span class="t">L'aide des parents</span> et le <strong>REEE</strong> (régime enregistré d'épargne-études)&nbsp;: les gouvernements ajoutent 20&nbsp;% (Canada) et 10&nbsp;% (Québec) aux cotisations.</li>
+      <li><span class="t">Les bourses d'études</span>&nbsp;: d'admission, d'excellence.</li>
+      <li><span class="t">Un prêt d'un membre de la famille</span>, ou le <strong>sociofinancement</strong>.</li>
+      <li><span class="t">Un prêt personnel ou une marge de crédit</span> à la banque. Attention&nbsp;: les intérêts courent <strong>dès le premier jour</strong>, pas seulement après les études.</li>
+    </ul>
+    <details class="nuance">
+      <summary class="lbl">Nuance · une erreur dans le manuel</summary>
+      <p>Le manuel écrit que l'aide du Québec au REEE est plafonnée à 3&nbsp;600&nbsp;$ «&nbsp;par année&nbsp;». En fait, c'est 250&nbsp;$ par année au maximum, et <strong>3&nbsp;600&nbsp;$ pour toute la vie</strong> du régime.</p>
+      <p class="src">Source&nbsp;: <a href="https://www.revenuquebec.ca/fr/citoyens/credits-dimpot/incitatif-quebecois-a-lepargne-etudes/determination-du-montant/" rel="noopener">Revenu Québec, l'incitatif québécois à l'épargne-études</a></p>
+    </details>
+    <div class="pause"><div class="quiz">
+      <details><summary><span class="q-n">Jugement</span>Maya est au cégep à temps plein et travaille 24 heures par semaine pour payer son auto. Ses notes baissent. Quel conseil lui donnes-tu? Nomme aussi une autre façon de financer ses études.<span class="see">Voir la réponse →</span></summary><div class="ans">Réduire ses heures&nbsp;: <strong>pas plus de 20 heures</strong>, idéalement <strong>de 10 à 15</strong>. Autres sources, au choix&nbsp;: le Programme de prêts et bourses, l'aide de ses parents, un REEE, une bourse d'études, un emploi d'été.</div></details>
+    </div></div>
+  </section>
+
+<!--qr5--><section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions par section. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=4.1" target="_blank" rel="noopener">Section 4.1 →</a><a href="https://simleprof.github.io/finances/?s=4.2" target="_blank" rel="noopener">Section 4.2 →</a><a href="https://simleprof.github.io/finances/?s=4.3" target="_blank" rel="noopener">Section 4.3 →</a><a href="https://simleprof.github.io/finances/?s=5.1" target="_blank" rel="noopener">Section 5.1 →</a><a href="https://simleprof.github.io/finances/?s=5.2" target="_blank" rel="noopener">Section 5.2 →</a></div><div class="qr5-qr"></div></section><!--/qr5-->
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Synthèse des chapitres 4 et 5 du cahier <em>Éducation financière</em> (p.&nbsp;96 à 145), avec un rappel du chapitre 1 (p.&nbsp;11 et 18).</span>
+    <span>Nuances&nbsp;: CNESST, Québec.ca et Revenu Québec (liens dans le texte).</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Le simulateur de diplôme : données du manuel (p. 103). Le DES sert de point de comparaison.
+  var D = {
+    sans: { ren: 0, gap: -441600, msg: "Pas d'études à payer, mais 441 600 $ de moins sur une vie que le DES." },
+    des: { ren: 0, gap: 0, msg: "Le point de départ : 46 000 $ par année en moyenne, pendant 48 ans." },
+    dec: { ren: 138000, gap: 159000, msg: "Tu travailles 3 ans de moins, et tu gagnes quand même plus." },
+    bac: { ren: 230000, gap: 1047100, msg: "Tu travailles 5 ans de moins, et tu gagnes quand même le plus." }
+  };
+  var f = new Intl.NumberFormat("fr-CA", { maximumFractionDigits: 0 });
+  var btns = document.querySelectorAll(".machine button");
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var d = D[b.getAttribute("data-d")];
+      btns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      document.getElementById("v-ren").textContent = f.format(d.ren) + " $";
+      document.getElementById("v-gap").textContent = (d.gap > 0 ? "+" : d.gap < 0 ? "−" : "") + f.format(Math.abs(d.gap)) + " $";
+      document.getElementById("v-msg").textContent = d.msg;
+    });
+  });
+  // Version papier : numérote les questions (Q1, Q2…) et bâtit le corrigé, visible seulement à l'impression.
+  var key = document.createElement("section");
+  key.id = "corrige";
+  key.innerHTML = '<div class="section-head"><span class="num" aria-hidden="true">✎</span><h2>Corrigé</h2><p>Les réponses aux questions, dans l\'ordre. Essaie d\'abord, vérifie ensuite.</p></div>';
+  var list = null, group = "", n = 0;
+  document.querySelectorAll(".section-head h2, .quiz details").forEach(function (el) {
+    if (el.tagName === "H2") { list = null; group = el.textContent; return; }
+    n++;
+    var tag = el.querySelector(".q-n");
+    var pq = document.createElement("b");
+    pq.className = "pq";
+    pq.textContent = "✎ Q" + n + " · ";
+    tag.insertBefore(pq, tag.firstChild);
+    if (!list) {
+      var h = document.createElement("h4");
+      h.textContent = group;
+      list = document.createElement("ol");
+      list.className = "key";
+      key.appendChild(h);
+      key.appendChild(list);
+    }
+    var li = document.createElement("li");
+    li.innerHTML = '<b class="n">Q' + n + "</b>" + el.querySelector(".ans").innerHTML;
+    list.appendChild(li);
+  });
+  var src = document.createElement("p");
+  src.className = "key-src";
+  src.innerHTML = document.querySelector("footer .wrap").innerHTML;
+  document.querySelector("main").appendChild(src);
+  document.querySelector("main").appendChild(key);
+})();
+</script>
+<!-- retour-tdb -->
+<script>
+/* Retour au tableau de bord : seulement si la page a été ouverte depuis le tableau de bord (?tdb=…). Outil : retour-tdb.js */
+document.addEventListener("DOMContentLoaded", function () {
+  var vieux = document.getElementById("retour-tdb"); if (vieux) vieux.remove();
+  var u = new URLSearchParams(location.search).get("tdb");
+  if (!u || !/^file:/i.test(u)) return;
+  var s = document.createElement("style");
+  s.textContent = "#retour-tdb{position:fixed;top:12px;left:12px;z-index:8000;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;" +
+    "border-radius:999px;background:rgba(255,255,255,.94);color:#1D1B17;border:1px solid rgba(0,0,0,.12);box-shadow:0 4px 14px rgba(0,0,0,.14);" +
+    "font:700 16px/1 system-ui,'Segoe UI',sans-serif;text-decoration:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:padding .25s}" +
+    "#retour-tdb b{font-size:20px}#retour-tdb span{max-width:12em;overflow:hidden;white-space:nowrap;transition:max-width .3s,opacity .3s}" +
+    "#retour-tdb.court{padding:0 13px}#retour-tdb.court span{max-width:0;opacity:0}#retour-tdb.court:hover span,#retour-tdb.court:focus span{max-width:12em;opacity:1}" +
+    "#retour-tdb:hover{background:#fff}@media print{#retour-tdb{display:none}}";
+  var a = document.createElement("a");
+  a.id = "retour-tdb"; a.href = u; a.title = "Revenir au tableau de bord";
+  a.innerHTML = "<b>←</b><span>Tableau de bord</span>";
+  a.appendChild(s);
+  document.body.appendChild(a);
+  setTimeout(function () { a.classList.add("court"); }, 3000);
+});
+</script>
+<!-- /retour-tdb -->
+<a class="haut" href="#" aria-label="Retour en haut de la note">↑ Haut</a>
+<script>window.LF_COURS = "finances";
+/* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
+   Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher, lecture à voix haute
+   par le navigateur (aucune donnée ne sort de l'appareil), règle de lecture qui suit le doigt ou la souris.
+   Seuls les réglages de l'élève sont gardés, sur son appareil (localStorage). window.LF_COURS choisit le glossaire. */
+(function () {
+  "use strict";
+
+  // ---------- Les mots expliqués, par cours : [mot tel qu'affiché, motif reconnu, explication simple] ----------
+  var GLOSSAIRE = {
+    monde: [
+      ["démographie", "démographi(?:e|que|ques)", "L'étude des populations : combien de gens, les naissances, les décès, les migrations."],
+      ["natalité", "natalité", "Le nombre de naissances dans une population."],
+      ["mortalité", "mortalité", "Le nombre de décès dans une population."],
+      ["fécondité", "fécondité", "Le nombre moyen d'enfants qu'une femme a dans sa vie."],
+      ["espérance de vie", "espérance de vie", "Le nombre moyen d'années qu'une personne peut s'attendre à vivre."],
+      ["accroissement", "accroissement", "Une augmentation, une croissance."],
+      ["solde migratoire", "solde migratoire", "Les immigrants qui arrivent, moins les émigrants qui partent."],
+      ["seuil de renouvellement", "seuil de renouvellement", "2,1 enfants par femme : ce qu'il faut pour qu'une population ne diminue pas."],
+      ["densité", "densité", "Le nombre d'habitants par kilomètre carré."],
+      ["millénaire", "millénaires?", "Une période de mille ans."],
+      ["stagner", "stagn(?:e|ent|er|ation)", "Ne presque plus bouger : ni hausse, ni baisse."],
+      ["industrialisé", "industrialisé(?:e|s|es)?", "Qui a beaucoup d'usines et d'industries."],
+      ["émergent", "émergents?", "Un pays qui se développe vite, comme la Chine ou l'Inde."],
+      ["proportion", "proportion(?:s|nelle|nel)?", "La part d'un tout. Exemple : 1 personne sur 4."],
+      ["indicateur", "indicateurs?", "Un chiffre qui sert à mesurer quelque chose."],
+      ["vieillissement", "vieillissement|vieillissante", "Quand la part des personnes âgées augmente dans une population."],
+      ["nataliste", "natalistes?", "Qui encourage les gens à avoir des enfants."],
+      ["allocation", "allocations?", "Une somme d'argent versée régulièrement par le gouvernement."],
+      ["allègement fiscal", "allègements? fiscaux|allègements?", "Une baisse d'impôt."],
+      ["contraceptive", "contraceptive", "Qui empêche une grossesse."],
+      ["émancipation", "émancipation", "Le fait de devenir libre et autonome."],
+      ["immigrant", "immigrante?s?", "Une personne qui arrive dans un pays pour y vivre."],
+      ["émigrant", "émigrante?s?", "Une personne qui quitte son pays."],
+      ["diaspora", "diaspora", "Les gens d'un même pays qui vivent dispersés ailleurs dans le monde."],
+      ["perméabilité", "perméabilité", "Quand une frontière se laisse traverser facilement."],
+      ["persécution", "persécutions?|persécutée?s?", "De mauvais traitements répétés contre des gens, à cause de leur religion, de leur origine ou de leurs idées."],
+      ["réfugié", "réfugiée?s?", "Une personne qui fuit son pays parce que sa vie est en danger."],
+      ["asile", "asile", "La protection qu'un pays donne à une personne en danger."],
+      ["clandestin", "clandestine?s?", "En cachette, sans autorisation."],
+      ["mondialisation", "mondialisation", "Les liens de plus en plus forts entre les pays : commerce, voyages, communications."],
+      ["pénurie", "pénurie", "Un manque. Exemple : pas assez de travailleurs."],
+      ["main-d'œuvre", "main-d['’]œuvre", "Les travailleurs."],
+      ["souverain", "souverain", "Qui décide seul, sans recevoir d'ordres d'un autre pays."],
+      ["intégration", "intégration|intégrer", "Devenir membre de la société d'accueil : apprendre la langue, travailler, participer, tout en gardant sa culture."],
+      ["surqualifié", "surqualifiée?s?", "Qui a plus de diplômes ou de compétences que son emploi n'en demande."],
+      ["ordre professionnel", "ordres? professionnels?", "L'organisme qui décide qui peut exercer une profession, comme médecin ou ingénieur."],
+      ["réglementé", "réglementée?s?", "Encadré par des règles officielles."],
+      ["discrimination", "discrimination", "Traiter quelqu'un moins bien à cause de son origine, de son sexe ou d'un handicap."],
+      ["stigmatiser", "stigmatiser|stigmatisée?s?", "Coller une étiquette négative à quelqu'un."],
+      ["exode", "exode", "Le départ d'un grand nombre de personnes."],
+      ["urbanisation", "urbanisation|urbanisée?s?", "La croissance des villes : de plus en plus de gens vivent en ville."],
+      ["citadin", "citadins?", "Une personne qui vit en ville."],
+      ["agglomération", "agglomération", "Une ville et ses banlieues."],
+      ["mégapole", "mégapoles?", "Une très grande ville : plus de 10 millions d'habitants."],
+      ["bidonville", "bidonvilles?", "Un quartier de maisons fragiles, sans eau courante ni égouts."],
+      ["insalubre", "insalubres?", "Sale et mauvais pour la santé."],
+      ["précaire", "précaires?", "Fragile, pas solide, qui peut se perdre facilement."],
+      ["périphérie", "périphérie", "Le tour, la bordure d'une ville."],
+      ["passeur", "passeurs?", "Une personne payée pour faire traverser une frontière en cachette."],
+      ["charges sociales", "charges sociales", "Les sommes qu'un employeur verse au gouvernement pour ses employés (retraite, assurance-emploi)."],
+      ["exploiter", "exploiter", "Profiter de quelqu'un en abusant de sa situation : salaire très bas, travail forcé, menaces."],
+      ["antécédents judiciaires", "antécédents judiciaires", "Les crimes pour lesquels une personne a déjà été condamnée."],
+      ["paradoxe", "paradoxe", "Une situation qui semble se contredire."],
+      ["hostile", "hostile", "Qui n'est pas accueillant : difficile ou dangereux pour y vivre."]
+    ],
+    finances: [
+      ["nécessité", "nécessité", "Une chose dont on ne peut pas se passer."],
+      ["physiologique", "physiologiques?", "Qui concerne le corps : manger, boire, dormir, respirer."],
+      ["accomplissement", "accomplissement", "Réaliser ses rêves et devenir la personne qu'on veut être."],
+      ["coût d'opportunité", "coût d['’]opportunité", "Ce à quoi tu renonces quand tu fais un choix."],
+      ["renoncer", "renonce(?:r|s|z)?|renoncé", "Abandonner, laisser tomber."],
+      ["pouvoir d'achat", "pouvoir d['’]achat", "Ce que ton argent te permet d'acheter."],
+      ["inflation", "inflation", "La hausse générale des prix avec le temps."],
+      ["accise", "accise", "Une taxe cachée dans le prix (essence, alcool, tabac)."],
+      ["socioculturel", "socioculturels?", "Qui vient de la société et de la culture autour de toi."],
+      ["persuader", "persuader|persuasive", "Convaincre."],
+      ["sensibiliser", "sensibiliser", "Faire prendre conscience d'un problème pour changer un comportement."],
+      ["sociétal", "sociétale?s?", "Qui concerne toute la société. Une pub sociétale veut changer un comportement pour le bien de tous."],
+      ["notoriété", "notoriété", "Le fait d'être connu."],
+      ["mensonger", "mensong(?:er|ère)s?", "Qui ment, qui est faux."],
+      ["objectif", "objective", "Basée sur des faits, pas sur une opinion."],
+      ["impartial", "impartial(?:e|es|aux)?", "Qui ne favorise personne."],
+      ["fiable", "fiables?", "En qui ou en quoi on peut avoir confiance."],
+      ["démystifier", "démystifient|démystifier", "Expliquer simplement quelque chose qui semblait compliqué."],
+      ["bail", "bail", "Le contrat de location d'un logement."],
+      ["conformité", "conformité", "Être pareil à ce qui était annoncé."],
+      ["défaut caché", "défauts? cachés?|vices? cachés?", "Un problème grave qu'on ne pouvait pas voir au moment de l'achat."],
+      ["hameçonnage", "hameçonnage", "Un faux message (texto, courriel) qui essaie de voler tes informations."],
+      ["mise en demeure", "mise en demeure", "Une lettre officielle qui demande de régler un problème, sinon on ira en justice."],
+      ["médiation", "médiation|médiateur", "Une personne neutre aide les deux côtés à s'entendre. Elle ne décide pas."],
+      ["arbitrage", "arbitrage|arbitre", "Une personne neutre écoute les deux côtés et décide qui a raison."],
+      ["litige", "litiges?", "Un conflit, un désaccord."],
+      ["recours", "recours", "Un moyen de faire respecter tes droits."],
+      ["impulsif", "impulsifs?|impulsives?", "Fait sur un coup de tête, sans réfléchir."],
+      ["épargne", "épargne|épargner", "L'argent qu'on met de côté."],
+      ["endettement", "endettement", "Le fait de devoir de l'argent. Pas un problème en soi."],
+      ["surendettement", "surendettement|surendettée?s?", "Devoir plus d'argent qu'on est capable d'en rembourser."],
+      ["excédentaire", "excédentaire", "Il reste de l'argent : on gagne plus qu'on dépense."],
+      ["déficitaire", "déficitaire", "Il manque de l'argent : on dépense plus qu'on gagne."],
+      ["compressible", "compressibles?|incompressibles?", "Compressible : qu'on peut couper ou réduire vite. Incompressible : qu'on ne peut pas couper à court terme."],
+      ["différé", "différé", "Remis à plus tard."],
+      ["solvabilité", "solvabilité|solvable|insolvable", "Solvable : capable de rembourser ses dettes. Insolvable : incapable de les rembourser."],
+      ["ratio", "ratio", "Une comparaison entre deux nombres, souvent en pourcentage."],
+      ["brut", "brut", "Avant qu'on enlève les impôts et les déductions."],
+      ["actif", "actifs?", "Ce que tu possèdes et qui a de la valeur (maison, auto, épargne)."],
+      ["passif", "passifs?", "Toutes tes dettes."],
+      ["caution", "caution|endosseur|cautionnement", "La personne qui promet de payer la dette si l'emprunteur ne paie plus."],
+      ["capital", "capital", "Le montant emprunté, sans les intérêts."],
+      ["intérêt", "intérêts?", "Ce qu'on paie au prêteur pour utiliser son argent."],
+      ["échéance", "échéance|échéancier", "Échéance : la date limite pour payer. Échéancier : le calendrier des paiements."],
+      ["hypothécaire", "hypothécaire|hypothèques?", "Un prêt pour acheter une maison. La maison sert de garantie."],
+      ["à tempérament", "tempérament", "Payer petit à petit, en plusieurs versements. On devient propriétaire à la fin."],
+      ["créancier", "créanciers?", "La personne ou l'entreprise à qui on doit de l'argent."],
+      ["recouvrement", "recouvrement", "Récupérer l'argent qu'une personne doit."],
+      ["syndic", "syndic", "Un professionnel qui aide les personnes très endettées et s'occupe des faillites."],
+      ["faillite", "faillites?", "Quand on ne peut plus payer ses dettes : on remet ses biens pour s'en libérer."],
+      ["insolvabilité", "insolvabilité", "Ne plus être capable de payer ses dettes."],
+      ["consolidation", "consolidation", "Regrouper plusieurs dettes en un seul prêt."],
+      ["saisissable", "saisissables?|saisir", "Que le prêteur peut prendre pour se rembourser."],
+      ["marge de manœuvre", "marge de manœuvre", "L'argent qui te reste pour faire des choix."],
+      ["prolongée", "prolongée", "Qui dure plus longtemps."],
+      ["sans provision", "sans provision", "Un chèque sans assez d'argent dans le compte."],
+      ["émettrice", "émettrice", "Qui crée et fournit la carte."]
+    ]
+  };
+
+  var NOM = "lf-reglages", TAILLES = [1, 1.15, 1.3], VITESSES = [0.8, 1, 1.15];
+  var r = { on: false, taille: 1, vitesse: 1, regle: false };
+  try { var lu = JSON.parse(localStorage.getItem(NOM)); if (lu) for (var k in r) if (k in lu) r[k] = lu[k]; } catch (e) {}
+  function garder() { try { localStorage.setItem(NOM, JSON.stringify(r)); } catch (e) {} }
+
+  var voix = "speechSynthesis" in window ? window.speechSynthesis : null;
+
+  // ---------- Habillage ----------
+  var css = [
+    ".lf-ui{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:7999;display:flex;align-items:center;gap:6px;",
+    "font:700 16px/1.1 'Atkinson Hyperlegible',system-ui,'Segoe UI',sans-serif;color:#101820}",
+    ".lf-ui button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent}",
+    ".lf-ouvrir{display:flex;align-items:center;gap:8px;height:50px;padding:0 18px 0 14px;border-radius:999px;background:#FFF6D6;border:2px solid #101820 !important;",
+    "box-shadow:4px 4px 0 #101820;transition:transform .15s}.lf-ouvrir:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #101820}",
+    ".lf-ouvrir b{font-size:22px;letter-spacing:-.02em}.lf-ouvrir span{max-width:10em;overflow:hidden;white-space:nowrap;transition:max-width .35s,opacity .35s}",
+    ".lf-ui.court .lf-ouvrir span{max-width:0;opacity:0}.lf-ui.court .lf-ouvrir{padding:0 14px}",
+    ".lf-barre{display:none;align-items:stretch;gap:4px;padding:5px;border-radius:20px;background:#FFF6D6;border:2px solid #101820;box-shadow:4px 4px 0 #101820}",
+    ".lf-barre button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:58px;height:58px;padding:0 8px;border-radius:14px}",
+    ".lf-barre button i{font-style:normal;font-size:21px;line-height:1}.lf-barre button small{font-size:13px;font-weight:700}",
+    ".lf-barre button:hover{background:rgba(16,24,32,.08)}.lf-barre button[aria-pressed=true]{background:#101820;color:#FFF6D6}",
+    "html.lf-on .lf-ouvrir{display:none}html.lf-on .lf-barre{display:flex}",
+    "@media (max-width:420px){.lf-ui{left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));justify-content:flex-end}",
+    ".lf-barre{width:100%;justify-content:space-between}.lf-barre button{min-width:0;flex:1;padding:0 2px}}",
+    "@media print{.lf-ui,.lf-bulle,.lf-regle{display:none !important}}",
+    // Le texte : plus gros, plus aéré, plus lisible
+    "html.lf-on body>*:not(.lf-ui):not(.lf-bulle):not(.lf-regle){zoom:var(--lf-zoom,1)}",
+    // Les graphiques gardent leur taille (sinon ils débordent du cellulaire), et rien ne dépasse sur le côté
+    "html.lf-on :is(.viz,figure,svg,canvas,img,video,iframe){zoom:calc(1 / var(--lf-zoom,1))}",
+    "html.lf-on :is(.viz,figure) :is(figure,svg,canvas,img){zoom:1}",
+    "html.lf-on,html.lf-on body{overflow-x:clip}",
+    "html.lf-on body :is(p,li,dd,dt,td,th,summary,blockquote,figcaption,label,span,b,strong,em,small,div){font-family:'Atkinson Hyperlegible',system-ui,'Segoe UI',sans-serif !important}",
+    "html.lf-on body :is(p,li,dd,td,summary,blockquote,.ans){line-height:1.75 !important;letter-spacing:.02em;word-spacing:.12em;text-align:left !important}",
+    "html.lf-on body{padding-bottom:96px}",
+    // Les mots expliqués
+    // (all:unset : le mot ne prend jamais le style d'une pastille ou d'un badge de la page qui vise « span »)
+    "span.lf-mot.lf-mot{all:unset;display:inline !important;border-bottom:2.5px dotted currentColor !important;cursor:help;border-radius:2px}",
+    "span.lf-mot.lf-mot:hover,span.lf-mot.lf-mot:focus{background:rgba(255,214,0,.45) !important;outline:none}",
+    ".lf-bulle{position:fixed;z-index:8001;max-width:min(340px,calc(100vw - 24px));padding:14px 16px 12px;border-radius:16px;background:#101820;color:#FFF6D6;",
+    "font:400 18px/1.5 'Atkinson Hyperlegible',system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:lf-pop .18s ease-out}",
+    ".lf-bulle b{display:block;font-size:19px;color:#FFD84D;margin-bottom:4px}",
+    ".lf-bulle button{display:block;margin-top:10px;font-family:inherit;font-weight:700;font-size:16px;line-height:1;color:#101820;background:#FFD84D;border:0;border-radius:999px;padding:10px 14px;cursor:pointer}",
+    "@keyframes lf-pop{from{opacity:0;transform:translateY(6px) scale(.97)}}",
+    // La lecture à voix haute : le passage lu est surligné
+    ".lf-lu{background:rgba(255,214,0,.38) !important;box-shadow:0 0 0 6px rgba(255,214,0,.38);border-radius:6px;transition:background .2s}",
+    // La règle de lecture
+    ".lf-regle{position:fixed;left:0;right:0;height:3.2em;z-index:7998;pointer-events:none;display:none;",
+    "box-shadow:0 0 0 100vmax rgba(16,24,32,.28);border-top:2px solid #FFD84D;border-bottom:2px solid #FFD84D}",
+    "html.lf-regle-on .lf-regle{display:block}",
+    "@media (prefers-reduced-motion:reduce){.lf-bulle{animation:none}}"
+  ].join("");
+
+  function el(tag, attrs, html) { var e = document.createElement(tag); for (var a in attrs) e.setAttribute(a, attrs[a]); if (html != null) e.innerHTML = html; return e; }
+
+  function demarrer() {
+    var style = el("style"); style.textContent = css; document.head.appendChild(style);
+
+    var ui = el("div", { "class": "lf-ui" });
+    var ouvrir = el("button", { "class": "lf-ouvrir", type: "button", "aria-label": "Lecture facilitée : texte plus gros, mots expliqués, lecture à voix haute" }, "<b>Aa</b><span>Lecture facilitée</span>");
+    var barre = el("div", { "class": "lf-barre", role: "toolbar", "aria-label": "Lecture facilitée" });
+    bEcouter = el("button", { type: "button", "aria-pressed": "false" }, "<i>🔊</i><small>Écouter</small>");
+    var bTaille = el("button", { type: "button", "aria-label": "Taille du texte" }, "<i>A+</i><small>Taille</small>");
+    var bVitesse = el("button", { type: "button" }, "<i>🐢</i><small>Vitesse</small>");
+    var bRegle = el("button", { type: "button", "aria-pressed": "false" }, "<i>📏</i><small>Règle</small>");
+    var bFermer = el("button", { type: "button", "aria-label": "Revenir au texte normal" }, "<i>✕</i><small>Fermer</small>");
+    if (voix) { barre.appendChild(bEcouter); barre.appendChild(bVitesse); }
+    barre.appendChild(bTaille); barre.appendChild(bRegle); barre.appendChild(bFermer);
+    ui.appendChild(ouvrir); ui.appendChild(barre);
+    document.body.appendChild(ui);
+    setTimeout(function () { ui.classList.add("court"); }, 5000);
+
+    var regle = el("div", { "class": "lf-regle", "aria-hidden": "true" });
+    document.body.appendChild(regle);
+
+    function afficher() {
+      var h = document.documentElement;
+      h.classList.toggle("lf-on", r.on);
+      h.classList.toggle("lf-regle-on", r.on && r.regle);
+      h.style.setProperty("--lf-zoom", r.on ? r.taille : 1);
+      var it = TAILLES.indexOf(r.taille);
+      bTaille.querySelector("i").textContent = ["A", "A+", "A++"][it < 0 ? 0 : it];
+      bVitesse.querySelector("i").textContent = r.vitesse < 1 ? "🐢" : r.vitesse > 1 ? "🐇" : "🚶";
+      bVitesse.setAttribute("aria-label", "Vitesse de la voix : " + (r.vitesse < 1 ? "lente" : r.vitesse > 1 ? "rapide" : "normale"));
+      bRegle.setAttribute("aria-pressed", r.regle ? "true" : "false");
+      if (r.on) marquerMots();
+    }
+
+    ouvrir.addEventListener("click", function () { r.on = true; if (r.taille === 1) r.taille = TAILLES[1]; garder(); afficher(); });
+    bFermer.addEventListener("click", function () { arreter(); fermerBulle(); r.on = false; garder(); afficher(); });
+    bTaille.addEventListener("click", function () { r.taille = TAILLES[(TAILLES.indexOf(r.taille) + 1) % TAILLES.length]; garder(); afficher(); });
+    bVitesse.addEventListener("click", function () {
+      r.vitesse = VITESSES[(VITESSES.indexOf(r.vitesse) + 1) % VITESSES.length]; garder(); afficher();
+      if (enCours) lireDepuis(position);   // la nouvelle vitesse s'applique tout de suite
+    });
+    bRegle.addEventListener("click", function () { r.regle = !r.regle; garder(); afficher(); });
+    bEcouter.addEventListener("click", function () { if (enCours) arreter(); else lireDepuis(premierVisible()); });
+
+    // La règle suit la souris ou le doigt
+    function placerRegle(y) { regle.style.top = (y - regle.offsetHeight / 2) + "px"; }
+    document.addEventListener("pointermove", function (e) { if (r.regle) placerRegle(e.clientY); }, { passive: true });
+    document.addEventListener("touchmove", function (e) { if (r.regle && e.touches[0]) placerRegle(e.touches[0].clientY); }, { passive: true });
+    placerRegle(window.innerHeight * 0.4);
+
+    afficher();
+  }
+
+  // ---------- Les mots expliqués ----------
+  var motsFaits = false, bulle = null;
+  var EXCLUS = "script,style,svg,button,a,input,select,textarea,label,nav,h1,h2,h3,h4,h5,h6,dt,summary,code,.term>b,.lf-ui,.lf-bulle,[aria-hidden=true]";
+
+  function marquerMots() {
+    if (motsFaits) return; motsFaits = true;
+    var liste = GLOSSAIRE[window.LF_COURS] || [];
+    if (!liste.length) return;
+    var motif;
+    try { motif = new RegExp("(?<![\\p{L}\\-])(" + liste.map(function (m) { return m[1]; }).join("|") + ")(?![\\p{L}])", "giu"); }
+    catch (e) { return; }   // vieux navigateur : on garde le reste de la lecture facilitée
+    var dejaVu = new Map();   // zone de la page → mots déjà expliqués dans cette zone (un mot n'est souligné qu'une fois par zone)
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!n.nodeValue.trim() || !n.parentElement || n.parentElement.closest(EXCLUS)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var textes = []; while (walker.nextNode()) textes.push(walker.currentNode);
+    textes.forEach(function (n) {
+      var zone = n.parentElement.closest("section,article,details,.topic,.mod") || document.body;
+      var vus = dejaVu.get(zone); if (!vus) { vus = {}; dejaVu.set(zone, vus); }
+      var t = n.nodeValue, frag = null, dernier = 0, m;
+      motif.lastIndex = 0;
+      while ((m = motif.exec(t))) {
+        var entree = trouver(liste, m[1]);
+        if (!entree || vus[entree[0]]) continue;
+        vus[entree[0]] = true;
+        frag = frag || document.createDocumentFragment();
+        frag.appendChild(document.createTextNode(t.slice(dernier, m.index)));
+        var s = el("span", { "class": "lf-mot", tabindex: "0", role: "button", "data-mot": entree[0], "aria-label": m[1] + " : voir l'explication" });
+        s.textContent = m[1];
+        frag.appendChild(s);
+        dernier = m.index + m[1].length;
+      }
+      if (frag) { frag.appendChild(document.createTextNode(t.slice(dernier))); n.parentNode.replaceChild(frag, n); }
+    });
+  }
+  function trouver(liste, mot) {
+    for (var i = 0; i < liste.length; i++) if (new RegExp("^(?:" + liste[i][1] + ")$", "iu").test(mot)) return liste[i];
+    return null;
+  }
+
+  function ouvrirBulle(s) {
+    fermerBulle();
+    var entree = (GLOSSAIRE[window.LF_COURS] || []).filter(function (m) { return m[0] === s.getAttribute("data-mot"); })[0];
+    if (!entree) return;
+    bulle = el("div", { "class": "lf-bulle", role: "dialog", "aria-label": "Explication du mot " + entree[0] });
+    bulle.innerHTML = "<b></b><span></span>";
+    bulle.querySelector("b").textContent = entree[0];
+    bulle.querySelector("span").textContent = entree[2];
+    if (voix) {
+      var ecoute = el("button", { type: "button" }, "🔊 Écouter");
+      ecoute.addEventListener("click", function (e) { e.stopPropagation(); dire(entree[0] + ". " + entree[2]); });
+      bulle.appendChild(ecoute);
+    }
+    document.body.appendChild(bulle);
+    var b = s.getBoundingClientRect(), w = bulle.offsetWidth, hh = bulle.offsetHeight;
+    var x = Math.min(Math.max(12, b.left), window.innerWidth - w - 12);
+    var y = b.bottom + 10; if (y + hh > window.innerHeight - 90) y = Math.max(12, b.top - hh - 10);
+    bulle.style.left = x + "px"; bulle.style.top = y + "px";
+    bulleY = window.scrollY;
+  }
+  var bulleY = 0;
+  function fermerBulle() { if (bulle) { bulle.remove(); bulle = null; } }
+
+  document.addEventListener("click", function (e) {
+    var s = e.target.closest && e.target.closest(".lf-mot");
+    if (s && r.on) { e.preventDefault(); e.stopPropagation(); ouvrirBulle(s); return; }
+    if (bulle && !e.target.closest(".lf-bulle")) fermerBulle();
+    // Pendant la lecture, toucher un passage fait reprendre la lecture à cet endroit
+    if (enCours && !e.target.closest(".lf-ui,a,button,summary,input,label")) {
+      var i = unites().indexOf(uniteDe(e.target));
+      if (i >= 0) lireDepuis(i);
+    }
+  }, true);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { fermerBulle(); if (enCours) arreter(); }
+    if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("lf-mot")) { e.preventDefault(); ouvrirBulle(e.target); }
+  });
+  // La bulle se ferme quand on défile vraiment (pas au petit glissement d'un doigt qui touche le mot)
+  window.addEventListener("scroll", function () { if (bulle && Math.abs(window.scrollY - bulleY) > 60) fermerBulle(); }, { passive: true });
+
+  // ---------- La lecture à voix haute ----------
+  // Une « unité » = le bloc qui contient un bout de texte (paragraphe, puce, case, réponse révélée…), dans l'ordre de la page.
+  // Ce qui est caché (réponses pas encore révélées) n'est jamais lu.
+  var enCours = false, position = 0, cache = null, bEcouter = null;
+  var MUETS = /^(Révéler|Voir la réponse →|La réalité →|→|←|·)$/;
+
+  function blocDe(n) {
+    var e = n.nodeType === 1 ? n : n.parentElement;
+    while (e && e !== document.body) {
+      var d = getComputedStyle(e).display;
+      if (d !== "inline" && d !== "contents") return e;
+      e = e.parentElement;
+    }
+    return document.body;
+  }
+  function uniteDe(cible) {
+    var liste = unites();
+    for (var e = cible; e && e !== document.body; e = e.parentElement) if (liste.indexOf(e) >= 0) return e;
+    return null;
+  }
+  function unites() {
+    if (cache) return cache;
+    var vus = new Set(), liste = [];
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        var p = n.parentElement;
+        if (!p || !n.nodeValue.trim() || p.closest("script,style,svg,nav,.lf-ui,.lf-bulle,[aria-hidden=true],#retour-tdb")) return NodeFilter.FILTER_REJECT;
+        if (MUETS.test(n.nodeValue.trim())) return NodeFilter.FILTER_REJECT;
+        if (!p.getClientRects().length) return NodeFilter.FILTER_REJECT;   // caché
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    while (walker.nextNode()) {
+      var b = blocDe(walker.currentNode);
+      if (!vus.has(b)) { vus.add(b); liste.push(b); }
+    }
+    cache = liste;
+    return liste;
+  }
+  function texteDe(b) {
+    var morceaux = [];
+    var walker = document.createTreeWalker(b, NodeFilter.SHOW_TEXT, null);
+    while (walker.nextNode()) {
+      var n = walker.currentNode, p = n.parentElement;
+      if (MUETS.test(n.nodeValue.trim()) || !p.getClientRects().length || p.closest("svg,script,style,[aria-hidden=true]")) continue;
+      if (blocDe(n) !== b) continue;   // un bloc enfant sera lu à son tour
+      morceaux.push(n.nodeValue);
+    }
+    return prononcer(morceaux.join(""));
+  }
+  // Ce que la voix lit mal : symboles, siècles en chiffres romains, unités
+  function prononcer(t) {
+    var romains = { I: 1, V: 5, X: 10 };
+    return t.replace(/\b([IVX]{1,5})e\b/g, function (m, r) {
+      var n = 0; for (var i = 0; i < r.length; i++) { var v = romains[r[i]], s = romains[r[i + 1]] || 0; n += v < s ? -v : v; } return n + "e";
+    })
+      .replace(/\s−\s/g, " moins ").replace(/−(\d)/g, "moins $1")
+      .replace(/×/g, " fois ").replace(/÷/g, " divisé par ").replace(/≈/g, " environ ").replace(/≤/g, " moins de ou égal à ").replace(/>/g, " plus que ").replace(/</g, " moins que ")
+      .replace(/km²/g, " kilomètre carré").replace(/[→↓↑]/g, ", ").replace(/[«»"]/g, "").replace(/\s+/g, " ").trim();
+  }
+  function premierVisible() {
+    var liste = unites();
+    for (var i = 0; i < liste.length; i++) { var b = liste[i].getBoundingClientRect(); if (b.bottom > 80 && b.height > 0) return i; }
+    return 0;
+  }
+  function choisirVoix() {
+    var toutes = voix.getVoices();
+    return toutes.filter(function (v) { return /^fr[-_]CA/i.test(v.lang); })[0] || toutes.filter(function (v) { return /^fr/i.test(v.lang); })[0] || null;
+  }
+  function dire(texte, fin) {
+    voix.cancel();
+    var u = new SpeechSynthesisUtterance(texte);
+    var v = choisirVoix(); if (v) u.voice = v;
+    u.lang = v ? v.lang : "fr-CA";
+    u.rate = r.vitesse;
+    if (fin) { u.onend = fin; u.onerror = function (e) { if (e.error !== "interrupted" && e.error !== "canceled") fin(); }; }
+    setTimeout(function () { voix.speak(u); }, 60);   // Chrome ignore parfois un speak() collé sur un cancel()
+  }
+  function surligner(b) {
+    document.querySelectorAll(".lf-lu").forEach(function (x) { x.classList.remove("lf-lu"); });
+    if (!b) return;
+    b.classList.add("lf-lu");
+    var box = b.getBoundingClientRect();
+    if (box.top < 70 || box.bottom > window.innerHeight - 110) b.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+  function lireDepuis(i) {
+    cache = null;   // une réponse a peut-être été révélée depuis
+    var liste = unites();
+    if (i >= liste.length) return arreter();
+    enCours = true; position = i;
+    if (bEcouter) { bEcouter.setAttribute("aria-pressed", "true"); bEcouter.innerHTML = "<i>⏸</i><small>Arrêter</small>"; }
+    var t = texteDe(liste[i]);
+    if (!t) return lireDepuis(i + 1);
+    surligner(liste[i]);
+    dire(t, function () { if (enCours && position === i) lireDepuis(i + 1); });
+  }
+  function arreter() {
+    enCours = false;
+    if (voix) voix.cancel();
+    surligner(null);
+    if (bEcouter) { bEcouter.setAttribute("aria-pressed", "false"); bEcouter.innerHTML = "<i>🔊</i><small>Écouter</small>"; }
+  }
+  if (voix) { voix.getVoices(); if ("onvoiceschanged" in voix) voix.onvoiceschanged = function () {}; }
+  window.addEventListener("pagehide", function () { if (voix) voix.cancel(); });
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", demarrer); else demarrer();
+})();
+</script>
+</body>
+</html>

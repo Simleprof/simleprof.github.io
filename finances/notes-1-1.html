@@ -371,6 +371,17 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media print { .haut { display: none !important; } }
 </style>
+<style id="vue-choix">
+/* En haut : Notes de cours (ici) ou Exercices (l'app). Caché à l'impression et au TBI (ouvert du tableau de bord). */
+.vue-choix { background: var(--ink); }
+.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
+.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 2px solid var(--muted); color: var(--paper); text-decoration: none; text-align: center; font-family: var(--display); font-size: clamp(1.25rem, 5vw, 1.6rem); text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; }
+.vue-choix a small { font-family: var(--mono); font-size: 15px; text-transform: none; letter-spacing: 0; opacity: .85; }
+.vue-choix a.on { background: var(--hi); border-color: var(--hi); color: var(--hi-ink, #15171C); }
+.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--hi); }
+body:has(#retour-tdb) .vue-choix { display: none; }
+@media print { .vue-choix { display: none !important; } }
+</style>
 <style id="qr-notes-sec5">
 /* « Est-ce que j'ai compris? » en fin de section. Posé par [98] Coulisses/[05] Claude/outils/qr/qr-notes-sec5.js */
 .qr5{display:flex;align-items:center;gap:16px;max-width:760px;margin:28px auto 8px;padding:14px 18px;border:2px dashed currentColor;border-radius:14px;opacity:.95;break-inside:avoid;page-break-inside:avoid}
@@ -391,17 +402,6 @@ html { scroll-behavior: smooth; }
 .qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
-</style>
-<style id="vue-choix">
-/* En haut : Notes de cours (ici) ou Exercices (l'app). Caché à l'impression et au TBI (ouvert du tableau de bord). */
-.vue-choix { background: var(--ink); }
-.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
-.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 2px solid var(--muted); color: var(--paper); text-decoration: none; text-align: center; font-family: var(--display); font-size: clamp(1.25rem, 5vw, 1.6rem); text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; }
-.vue-choix a small { font-family: var(--mono); font-size: 15px; text-transform: none; letter-spacing: 0; opacity: .85; }
-.vue-choix a.on { background: var(--hi); border-color: var(--hi); color: var(--hi-ink, #15171C); }
-.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--hi); }
-body:has(#retour-tdb) .vue-choix { display: none; }
-@media print { .vue-choix { display: none !important; } }
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>

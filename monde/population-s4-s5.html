@@ -140,6 +140,7 @@ strong { font-weight: 700; }
 .warn > b:first-child, .note > b:first-child { display: block; font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
 .warn > b:first-child { color: var(--accent); }
 .note > b:first-child { color: var(--sea); }
+.note .sert { display: block; font-style: italic; color: var(--muted); margin-bottom: 6px; }
 
 /* Chiffres */
 .figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; }
@@ -221,7 +222,7 @@ strong { font-weight: 700; }
 .letters > div { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 14px; display: grid; gap: 4px; align-content: start; min-width: 0; }
 .letters .L { font-family: var(--serif); font-size: 2.4rem; line-height: .9; color: var(--accent); font-weight: 600; }
 .letters b { font-size: .98rem; }
-.letters span { font-size: .84rem; color: var(--muted); font-style: italic; }
+.letters span { font-size: max(.84rem, 15px); color: var(--muted); font-style: italic; }
 
 /* Pousse / attire */
 .flow { display: grid; grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr); gap: 10px; align-items: stretch; }
@@ -269,15 +270,6 @@ strong { font-weight: 700; }
 .qz .ans { margin: 0 12px 12px; padding: 12px 14px; border-radius: 12px; background: var(--sea-soft); animation: reveal .35s cubic-bezier(.3, 1.4, .5, 1); transform-origin: top center; }
 @keyframes reveal { from { opacity: 0; transform: scale(.92) translateY(-6px); } }
 
-/* Liste « prêt » */
-.ready { display: grid; gap: 14px; }
-.meter { height: 10px; background: var(--paper-2); border-radius: 999px; overflow: hidden; max-width: 70ch; }
-.meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--sea), var(--c-amn)); transition: width .4s; }
-.check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; max-width: 70ch; }
-.check label { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; cursor: pointer; }
-.check input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--sea); flex: none; }
-.check input:checked + span { text-decoration: line-through; color: var(--muted); }
-.score { font-family: var(--mono); font-size: .85rem; color: var(--muted); }
 
 footer { margin-top: 64px; background: var(--hero); color: rgba(245, 242, 234, .7); }
 footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
@@ -291,7 +283,6 @@ footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
   /* Un thème peut se couper d'une page à l'autre (sinon Chrome laisse des pages blanches) ; ses morceaux restent entiers. */
   .viz, .model, .qz details, .mini, .side, .callout, figure { break-inside: avoid; }
   .qz .go { display: none; }
-  #pret { display: none; }
 }
 /* Ajouts : frise dans une carte, flux animés, grille urbaine, paradoxe */
 .side .frise li { grid-template-columns: 52px minmax(0, 1fr); gap: 10px; }
@@ -314,54 +305,11 @@ footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
 .para .yrs span { flex: 1; text-align: center; }
 .para h4 { font-size: 1.05rem; }
 .hero-route { width: 100%; height: auto; display: block; }
-.hero-route text { fill: rgba(245, 242, 234, .8); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; }
+.hero-route text { fill: rgba(245, 242, 234, .8); font-family: var(--mono); font-size: 17px; letter-spacing: .06em; }
 @media (prefers-reduced-motion: reduce) { .hero-route .mov { display: none; } }
 </style>
 
 
-<style id="texte-lisible">
-/* Texte lisible (2026-10-25) : étiquettes ≥ 15 px, texte courant ≥ 16 px, au cell et à l'ordi seulement (le TBI et l'impression gardent leurs tailles). */
-@media screen and (max-width: 1400px) {
-  #score,
-  button,
-  div > p.muted > strong,
-  div.bar,
-  div.cap,
-  div.exam > span,
-  div.eyebrow,
-  div.fig > span > strong,
-  div.lab,
-  div.lab > span,
-  div.note > b,
-  div.pill,
-  div.pill > b,
-  div.warn > b,
-  div.wrap > a,
-  div.wrap > em,
-  div.yrs > span,
-  figcaption.dleg > span,
-  header > span,
-  mark,
-  span > b,
-  span.blk,
-  span.ess,
-  span.go,
-  span.k,
-  span.n,
-  span.play-t,
-  span.s,
-  span.sub,
-  span.t,
-  span.v { font-size: 15px !important; }
-  div.col > p.muted,
-  div.fig > span,
-  div.urbwrap > div > p.muted,
-  footer > div.wrap,
-  small,
-  span.cap,
-  span.ex { font-size: 16px !important; }
-}
-</style>
 <style id="retour-haut">
 /* Retour en haut (2026-10-27) : un clic remonte à l'en-tête ; il apparaît en fondu quand on descend (sans script).
    En bas à gauche : le bouton « Aa » du site est en bas à droite. */
@@ -376,6 +324,63 @@ html { scroll-behavior: smooth; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media print { .haut { display: none !important; } }
+</style>
+<style id="vue-choix">
+/* En haut : Notes de cours (ici) ou Exercices (l'app), comme en Finances. Caché à l'impression et au TBI (ouvert du tableau de bord). */
+.vue-choix { background: var(--hero); }
+.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
+.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 1.5px solid color-mix(in srgb, var(--hero-ink) 40%, transparent); border-radius: 12px; color: var(--hero-ink); text-decoration: none; text-align: center; font-family: var(--serif); font-weight: 700; line-height: 1.1; }
+.vue-choix .wrap a { font-size: clamp(20px, 5.4vw, 26px) !important; }
+.vue-choix a small { font-family: var(--mono); font-size: 15px; font-weight: 400; opacity: .85; }
+.vue-choix a.on { background: var(--gold); border-color: var(--gold); color: #13202F; }
+.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--gold); }
+body:has(#retour-tdb) .vue-choix { display: none; }
+@media print { .vue-choix { display: none !important; } }
+</style>
+
+<style id="texte-lisible">
+/* Texte lisible (2026-10-25) : étiquettes ≥ 15 px, texte courant ≥ 16 px, au cell et à l'ordi seulement (le TBI et l'impression gardent leurs tailles). */
+@media screen and (max-width: 1400px) {
+  button,
+  div > p.muted > strong,
+  div.bar,
+  div.cap,
+  div.exam > span,
+  div.eyebrow,
+  div.fig > span > strong,
+  div.lab,
+  div.lab > span,
+  div.note > b,
+  div.pill,
+  div.pill > b,
+  div.warn > b,
+  div.wrap > em,
+  div.yrs > span,
+  dt > small,
+  figcaption.dleg > span,
+  h4 > small,
+  header > span,
+  mark,
+  nav.nav > div.wrap > a,
+  span > b,
+  span.blk,
+  span.ess,
+  span.go,
+  span.k,
+  span.n,
+  span.play-t,
+  span.s,
+  span.sub,
+  span.t,
+  span.v { font-size: 15px !important; }
+  div.col > p.muted,
+  div.fig > span,
+  div.toc > a > small,
+  div.urbwrap > div > p.muted,
+  footer > div.wrap,
+  span.cap,
+  span.ex { font-size: 16px !important; }
+}
 </style>
 <style id="qr-notes-sec5">
 /* « Est-ce que j'ai compris? » en fin de section. Posé par [98] Coulisses/[05] Claude/outils/qr/qr-notes-sec5.js */
@@ -398,28 +403,16 @@ html { scroll-behavior: smooth; }
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
 </style>
-<style id="vue-choix">
-/* En haut : Notes de cours (ici) ou Exercices (l'app), comme en Finances. Caché à l'impression et au TBI (ouvert du tableau de bord). */
-.vue-choix { background: var(--hero); }
-.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
-.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 1.5px solid color-mix(in srgb, var(--hero-ink) 40%, transparent); border-radius: 12px; color: var(--hero-ink); text-decoration: none; text-align: center; font-family: var(--serif); font-weight: 700; line-height: 1.1; }
-.vue-choix .wrap a { font-size: clamp(20px, 5.4vw, 26px) !important; }
-.vue-choix a small { font-family: var(--mono); font-size: 15px; font-weight: 400; opacity: .85; }
-.vue-choix a.on { background: var(--gold); border-color: var(--gold); color: #13202F; }
-.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--gold); }
-body:has(#retour-tdb) .vue-choix { display: none; }
-@media print { .vue-choix { display: none !important; } }
-</style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
 <body>
-
 <!-- vue-choix -->
 <nav class="vue-choix" aria-label="Notes de cours ou exercices"><div class="wrap">
   <a class="on" target="_top" href="https://simleprof.github.io/monde/#notes" aria-current="page">Notes de cours<small>Toutes mes notes</small></a>
   <a target="_top" href="https://simleprof.github.io/monde/#exercices=4,5">Exercices<small>Me tester · sections 4 et 5</small></a>
 </div></nav>
 <!-- /vue-choix -->
+
 <header class="hero">
   <div class="wrap">
     <div>
@@ -442,8 +435,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
           <circle r="5" style="fill:#E8A33A"><animateMotion dur="6s" repeatCount="indefinite" begin="-3s"><mpath href="#route"/></animateMotion></circle>
           <circle r="5" style="fill:#2A9D8F"><animateMotion dur="6s" repeatCount="indefinite" begin="-4.5s"><mpath href="#route"/></animateMotion></circle>
         </g>
-        <text x="8" y="160">CAMPAGNE · SUD</text>
-        <text x="262" y="92">VILLE · NORD</text>
+        <text x="8" y="199">CAMPAGNE · SUD</text>
+        <text x="356" y="96" text-anchor="end">VILLE · NORD</text>
       </svg>
       <figcaption class="dleg"><span style="--c:var(--gold)">169 M de travailleurs migrants</span><span style="--c:var(--sea)">57 % d'urbains</span></figcaption>
     </figure>
@@ -457,7 +450,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <a href="#rappels">Rappels</a>
     <a href="#dev">Développement</a>
     <a href="#quiz">Teste-toi</a>
-    <a href="#pret">Prêt?</a>
   </div>
   <div class="prog"></div>
 </nav>
@@ -467,13 +459,13 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   <section class="brief" aria-labelledby="b-t">
     <h2 id="b-t">Ce qui t'attend à l'examen</h2>
     <div class="exam">
-      <span>Vrai ou faux <b>corrige si faux</b></span><span>Choix multiples <b>plusieurs réponses</b></span><span>« Nomme-moi trois… »</span><span>Développement</span><span>Une question d'opinion</span><span>Cumulatif <b>rappels S1–S3</b></span>
+      <span>Vrai ou faux <b>corrige si faux</b></span><span>Choix multiples <b>plusieurs réponses</b></span><span>« Nomme trois… »</span><span>Développement</span><span>Une question d'opinion</span><span>Cumulatif <b>rappels S1–S3</b></span>
     </div>
     <p class="muted" style="max-width:70ch">Dans un vrai ou faux à corriger, réécris la phrase pour qu'elle devienne vraie : écrire « faux » tout seul ne donne pas tous les points. Dans un choix multiple, il peut y avoir <strong>plusieurs</strong> bonnes réponses.</p>
     <div class="toc">
       <a href="#s4"><span class="s">Section 4</span><b>Les migrations et le monde du travail</b><small>Pénurie, politiques, intégration, diplômes, exode des cerveaux, économie parallèle</small></a>
       <a href="#s5"><span class="s">Section 5</span><b>Les migrations transforment les villes</b><small>Urbanisation, exode rural, quartiers ethniques, bidonvilles</small></a>
-      <a href="#rappels"><span class="s">Rappels</span><b>Ce qui revient de la mi-étape</b><small>Accroissement, point de vue, vieillissement, Chine, femmes</small></a>
+      <a href="#rappels"><span class="s">Rappels</span><b>Ce qui revient de la mi-étape</b><small>Accroissement, point de vue, vieillissement, Chine, natalité</small></a>
     </div>
   </section>
 
@@ -509,8 +501,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     </div>
     <div class="duo">
       <div class="side" style="--c:var(--c-afrique)">
-        <h4>Emplois peu qualifiés<small>Les secteurs qui manquent de bras</small></h4>
-        <ul><li><i>·</i><span><strong>Agriculture</strong>, souvent saisonnière</span></li><li><i>·</i><span><strong>Hôtellerie</strong> et <strong>restauration</strong></span></li><li><i>·</i><span><strong>Construction</strong></span></li><li><i>·</i><span>Industrie <strong>manufacturière</strong></span></li></ul>
+        <h4>Les plus touchés par la pénurie<small>Les secteurs qui manquent de bras</small></h4>
+        <ul><li><i>·</i><span><strong>Hôtellerie</strong> et <strong>restauration</strong></span></li><li><i>·</i><span><strong>Agriculture</strong>, souvent saisonnière</span></li><li><i>·</i><span>Industrie <strong>manufacturière</strong></span></li><li><i>·</i><span>Aussi, des immigrants dans la <strong>construction</strong></span></li></ul>
       </div>
       <div class="side" style="--c:var(--sea)">
         <h4>Emplois qualifiés<small>Les secteurs qui manquent de spécialistes</small></h4>
@@ -521,14 +513,14 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
         <details><summary><span class="k">Cause</span>Pourquoi les pays développés manquent-ils de travailleurs?<span class="go">Révéler</span></summary><div class="ans">À cause du <strong>vieillissement</strong> : beaucoup de gens prennent leur retraite, et il naît moins d'enfants pour les remplacer.</div></details>
-        <details><summary><span class="k">Nomme</span>Nomme trois secteurs qui ont besoin de travailleurs peu qualifiés.<span class="go">Révéler</span></summary><div class="ans">Au choix : l'<strong>agriculture</strong>, l'<strong>hôtellerie</strong>, la <strong>restauration</strong>, la <strong>construction</strong>, l'industrie manufacturière.</div></details>
+        <details><summary><span class="k">Nomme</span>Nomme trois secteurs parmi les plus touchés par le manque de travailleurs.<span class="go">Révéler</span></summary><div class="ans">Au choix : l'<strong>hôtellerie</strong>, la <strong>restauration</strong>, l'<strong>agriculture</strong>, l'industrie <strong>manufacturière</strong>.</div></details>
       </div>
     </div>
   </section>
 
   <section class="topic" id="politiques">
     <div class="th"><h3>Les politiques d'immigration</h3><span class="ess">Essentiel</span></div>
-    <p>Chaque pays est <strong>souverain</strong> : il décide qui entre, combien de personnes par année (un plafond) et selon quels critères. Le Canada, l'Australie et les États-Unis utilisent un <strong>système de points</strong>.</p>
+    <p>Chaque pays est <strong>souverain</strong> (maître chez lui). Il décide qui entre, combien de personnes par année (un plafond, c'est-à-dire un maximum) et selon quels critères. Le Canada, l'Australie et les États-Unis utilisent un <strong>système de points</strong>.</p>
     <div class="duo">
       <div class="side" style="--c:var(--ink)">
         <h4>Les critères de sélection<small>Le système de points</small></h4>
@@ -551,8 +543,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 
   <section class="topic" id="integration">
     <div class="th"><h3>L'intégration et la paix sociale</h3><span class="ess">Essentiel</span></div>
-    <dl class="lex"><div style="--c:var(--c-amn)"><dt>Intégration</dt><dd>Le processus par lequel un immigrant <strong>devient membre</strong> de la société d'accueil : il apprend la langue, travaille et participe à la vie collective, tout en gardant sa culture.</dd></div></dl>
-    <p><strong>Pourquoi est-ce important pour la paix sociale?</strong></p>
+    <dl class="lex"><div style="--c:var(--c-amn)"><dt>Intégration</dt><dd>Le processus par lequel un immigrant <strong>devient membre</strong> de la société d'accueil : il apprend la langue, travaille et participe à la vie collective, tout en gardant sa culture.</dd></div><div style="--c:var(--c-amn)"><dt>Paix sociale</dt><dd>La situation d'une société où les groupes <strong>vivent ensemble sans conflits graves</strong> : chacun s'y sent traité avec justice et a sa place.</dd></div></dl>
+    <p><strong>Pourquoi l'intégration est-elle importante pour la paix sociale?</strong> La paix sociale, c'est la bonne entente entre les gens. Ce qui la menace : un immigrant au <strong>chômage</strong>, <strong>isolé</strong>, poussé vers le <strong>travail au noir</strong> ou <strong>exploité</strong>. L'intégration réduit chacun de ces risques.</p>
     <div class="trio">
       <div class="mini"><span class="ic" aria-hidden="true">🤝</span><h4>Moins d'exclusion</h4><p>Un immigrant qui travaille et parle la langue n'est ni isolé, ni pauvre, ni laissé en marge.</p></div>
       <div class="mini"><span class="ic" aria-hidden="true">🕊️</span><h4>Moins de tensions</h4><p>Quand les groupes se côtoient, se comprennent et partagent les mêmes règles, les préjugés et les conflits diminuent.</p></div>
@@ -577,7 +569,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
         <div class="hb"><span class="n">Nés au Québec</span><div class="t"><div class="f" style="--w:45%;--c:var(--sea)"></div></div><span class="v">45 %</span></div>
       </div>
     </div>
-    <p>Les immigrants sont plus diplômés, mais beaucoup occupent un emploi sous leurs compétences : ils sont <strong>surqualifiés</strong>. <span class="key">Leur plus grande contrainte, c'est que leurs diplômes ne sont pas reconnus</span> par les ordres professionnels. L'autre grand obstacle est la <strong>langue</strong>.</p>
+    <p>Les immigrants sont plus diplômés. Pourtant, beaucoup occupent un emploi sous leurs compétences. Ils sont <strong>surqualifiés</strong> (trop instruits pour leur poste).</p>
+    <p><span class="key">Leur plus grande contrainte, c'est que leurs diplômes ne sont pas reconnus</span> par les ordres professionnels (ce sont eux qui donnent le droit d'exercer un métier comme ingénieur ou infirmière). Les deux autres obstacles à l'emploi : ne pas maîtriser la <strong>langue</strong> de travail ; le <strong>manque d'ouverture</strong> de certains employeurs à la diversité.</p>
     <p><strong>Les trois difficultés de la reconnaissance des qualifications</strong> :</p>
     <div class="trio">
       <div class="mini"><span class="ic" aria-hidden="true">🎓</span><h4>Les équivalences</h4><p>Il est difficile de comparer un diplôme étranger à un diplôme d'ici.</p></div>
@@ -588,7 +581,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="fig" style="--c:var(--accent)"><b>20 %</b><span>des professions sont <strong>réglementées</strong> au Canada (médecin, ingénieur, plombier, enseignant) : c'est un ordre professionnel qui décide</span></div>
       <div class="fig" style="--c:var(--sea)"><b>80 %</b><span>ne le sont pas : c'est l'<strong>employeur</strong> qui juge</span></div>
     </div>
-    <p>Pour une profession réglementée, on peut exiger des <strong>examens</strong>, une preuve de <strong>maîtrise de la langue</strong>, la vérification des antécédents judiciaires ou un <strong>stage</strong> au Canada.</p>
+    <p>Pour une profession réglementée, on peut exiger des <strong>examens</strong>, une preuve de <strong>maîtrise de la langue</strong>, la vérification des antécédents judiciaires, des références ou un <strong>stage</strong> au Canada.</p>
     <div class="note"><b>Les ententes qui aident</b><strong>France–Québec (2008)</strong> : reconnaissance mutuelle des qualifications. <strong>AECG Canada–Union européenne (2017)</strong> : un médecin, un ingénieur ou un avocat européen obtient plus facilement un permis de travail. Ces ententes ne changent pas les règles d'immigration.</div>
     <div class="play">
       <span class="play-t">À toi de jouer</span>
@@ -603,6 +596,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="th"><h3>La discrimination positive</h3><span class="ess">Essentiel</span></div>
     <dl class="lex"><div style="--c:var(--accent)"><dt>Discrimination positive</dt><dd>Mesures qui <strong>favorisent</strong> à l'embauche les groupes qui ont <strong>moins accès à l'emploi</strong>, à cause de leur origine, de leur sexe ou d'un handicap. <span class="ex">Par exemple, des subventions aux entreprises qui embauchent des immigrants.</span></dd></div></dl>
     <p>Le but : <span class="key">contrer le racisme et la discrimination au moment de l'embauche.</span> C'est un sujet idéal pour une question d'opinion.</p>
+    <div class="note"><b>Nuance : au Canada, on dit « équité en matière d'emploi »</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Le Canada n'emploie pas l'expression « discrimination positive ». Il a plutôt, depuis 1995, la <strong>Loi sur l'équité en matière d'emploi</strong>. Elle vise les grands employeurs de compétence fédérale (banques, transport aérien, télécommunications). Ils doivent corriger le désavantage de quatre groupes : les femmes, les Autochtones, les personnes handicapées et les minorités visibles.</div>
     <div class="duo">
       <div class="side" style="--c:var(--c-amn)">
         <h4>Arguments pour</h4>
@@ -610,7 +604,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       </div>
       <div class="side" style="--c:var(--accent)">
         <h4>Arguments contre</h4>
-        <ul><li><i>−</i><span>Elle peut sembler <strong>injuste</strong> pour les autres candidats.</span></li><li><i>−</i><span>L'embauche ne repose plus seulement sur le <strong>mérite</strong>.</span></li><li><i>−</i><span>Elle peut <strong>stigmatiser</strong> la personne embauchée : « il a eu le poste juste parce que… ».</span></li></ul>
+        <ul><li><i>−</i><span>Elle peut sembler <strong>injuste</strong> pour les autres candidats.</span></li><li><i>−</i><span>L'embauche ne repose plus seulement sur le <strong>mérite</strong>.</span></li><li><i>−</i><span>Elle peut <strong>stigmatiser</strong> (coller une étiquette à) la personne embauchée : « il a eu le poste juste parce que… ».</span></li></ul>
       </div>
     </div>
     <div class="play">
@@ -644,6 +638,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
         </ul>
       </div>
     </div>
+    <div class="note"><b>Nuance : et au Canada?</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>En 2023, le rapporteur spécial de l'ONU sur les formes contemporaines d'esclavage, Tomoya Obokata, a visité le Canada. Selon lui, le Programme des travailleurs étrangers temporaires <strong>favorise l'esclavage moderne</strong>. La raison principale : le permis lie le travailleur à <strong>un seul employeur</strong>. S'il se plaint, il risque de perdre son emploi et son droit de rester. (ONU Info, 2023)</div>
     <dl class="lex"><div style="--c:var(--c-afrique)"><dt>Exode des cerveaux <small>(fuite des cerveaux)</small></dt><dd>Le départ <strong>permanent de travailleurs qualifiés</strong> (médecins, ingénieurs…), qui <strong>nuit au développement</strong> de leur pays d'origine. Celui-ci perd leurs compétences, les impôts qu'ils auraient payés et l'argent investi pour les former. L'Afrique dépense environ <strong>4 milliards de dollars par année</strong> pour compenser ces départs.</dd></div></dl>
     <div class="play">
       <span class="play-t">À toi de jouer</span>
@@ -781,7 +776,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="side" style="--c:var(--c-amn)"><h4>Rio de Janeiro : intégrer</h4><p>On construit des maisons solides, on installe des services publics et on accorde des titres de propriété. Le bidonville devient un quartier.</p></div>
       <div class="side" style="--c:var(--accent)"><h4>Lagos : raser</h4><p>On démolit le bidonville et on expulse les habitants pour construire de nouvelles infrastructures.</p></div>
     </div>
-    <div class="warn"><b>Piège : et dans les pays développés?</b>Le manuel dit qu'il n'y a <strong>pas de bidonvilles à proprement parler</strong>, mais des <strong>quartiers défavorisés</strong> où vit une partie des immigrants. Dans un vrai ou faux, méfie-toi des mots absolus comme <strong>jamais</strong> ou <strong>n'existent pas</strong>.</div>
+    <div class="warn"><b>Piège : et dans les pays développés?</b>Le manuel dit qu'il n'y a <strong>pas de bidonvilles dans la grande majorité des pays développés</strong>, mais des <strong>quartiers défavorisés</strong> où vit une partie des immigrants. Dans un vrai ou faux, méfie-toi des mots absolus comme <strong>jamais</strong> ou <strong>n'existent pas</strong>.</div>
+    <div class="note"><b>Nuance : la France, un pays riche avec des bidonvilles</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Le manuel parle de la « grande majorité » des pays développés, pas de tous. La France compte officiellement ses bidonvilles. En 2023, environ <strong>11 300 personnes</strong> y vivaient, sur <strong>239 sites</strong>. Près de la moitié n'avaient pas accès à l'eau. (Délégation interministérielle à l'hébergement et à l'accès au logement, 2023)</div>
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
@@ -803,9 +799,9 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="mini"><h4>Accroissement naturel</h4><p>Naissances − décès, <strong>sans</strong> les migrations. Si on ajoute l'immigration, on parle d'<strong>accroissement total</strong>.</p></div>
       <div class="mini"><h4>Immigrant ou émigrant?</h4><p>Tout dépend du <strong>point de vue</strong>. Une Canadienne qui part vivre en Italie est une <strong>émigrante</strong> pour le Canada et une immigrante pour l'Italie.</p></div>
       <div class="mini"><h4>Le vieillissement</h4><p>La part des aînés augmente parce qu'il naît <strong>moins d'enfants</strong> et qu'on <strong>vit plus longtemps</strong>. Beaucoup de naissances, c'est beaucoup de jeunes : cela rajeunit une population.</p></div>
-      <div class="mini"><h4>Les mesures natalistes</h4><p>Elles <strong>encouragent</strong> sans forcer : allocations familiales, congés parentaux, accompagnement des futures mères, garderies, allègements fiscaux.</p></div>
+      <div class="mini"><h4>Les mesures natalistes</h4><p>Elles <strong>encouragent</strong> les naissances, sans forcer : allocations familiales, congés parentaux, accompagnement des futures mères, garderies, allègements fiscaux.</p></div>
       <div class="mini"><h4>La Chine</h4><p>Au XXe siècle, elle impose la politique de l'<strong>enfant unique</strong> (1979), avec des amendes. Elle permet ensuite deux enfants (2015), puis trois (2021), par peur du vieillissement.</p></div>
-      <div class="mini"><h4>L'émancipation des femmes</h4><p>En Occident, deux moteurs : les <strong>guerres mondiales</strong> (les femmes remplacent les hommes à l'usine) et la <strong>pilule contraceptive</strong> (années 1960).</p></div>
+      <div class="mini"><h4>Pourquoi moins de naissances?</h4><p>Entre les années 1960 et 1990 : la <strong>pilule contraceptive</strong>, les <strong>femmes sur le marché du travail</strong>, l'avortement décriminalisé, le recul du mariage et la hausse des divorces. Derrière, l'émancipation des femmes, avec deux moteurs : les <strong>guerres mondiales</strong> (les femmes remplacent les hommes à l'usine) et la pilule.</p></div>
     </div>
     <div class="play">
       <span class="play-t">À toi de jouer</span>
@@ -875,34 +871,13 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <details><summary><span class="k">Plusieurs réponses</span>Lesquelles sont des mesures d'intégration : des cours de francisation, l'expulsion, l'aide à l'emploi, un plafond annuel, l'aide au logement?<span class="go">Révéler</span></summary><div class="ans">Les <strong>cours de francisation</strong>, l'<strong>aide à l'emploi</strong> et l'<strong>aide au logement</strong>.</div></details>
       <details><summary><span class="k">Plusieurs réponses</span>Lesquels sont des secteurs qualifiés qui manquent de travailleurs : la santé, la construction, les technologies de l'information, l'agriculture, les services sociaux?<span class="go">Révéler</span></summary><div class="ans">La <strong>santé</strong>, les <strong>technologies de l'information</strong> et les <strong>services sociaux</strong>. La construction et l'agriculture manquent aussi de bras, mais pour des emplois peu qualifiés.</div></details>
       <details><summary><span class="k">Réponse courte</span>Pourquoi un travailleur temporaire est-il plus facile à exploiter?<span class="go">Révéler</span></summary><div class="ans">Son permis dépend souvent de son <strong>employeur</strong> : il a moins de droits et moins de sécurité d'emploi, et il a peur de perdre son statut s'il se plaint.</div></details>
-      <details><summary><span class="k">Nomme-moi trois</span>Nomme trois exigences possibles pour exercer une profession réglementée au Canada.<span class="go">Révéler</span></summary><div class="ans">Au choix : des <strong>examens</strong>, une preuve de <strong>maîtrise de la langue</strong>, la vérification des <strong>antécédents judiciaires</strong>, un <strong>stage</strong> au Canada, la vérification des références.</div></details>
-      <details><summary><span class="k">Nomme-moi trois</span>Nomme trois effets de la mobilité de la main-d'œuvre, pour le pays d'accueil ou pour le pays de départ.<span class="go">Révéler</span></summary><div class="ans">Au choix : la <strong>contribution à l'économie</strong> du pays d'accueil ; l'<strong>exploitation</strong> des temporaires ; les <strong>transferts d'argent</strong> vers les familles ; le retour de <strong>savoirs</strong> ; l'<strong>exode des cerveaux</strong>.</div></details>
+      <details><summary><span class="k">Nomme</span>Nomme trois exigences possibles pour exercer une profession réglementée au Canada.<span class="go">Révéler</span></summary><div class="ans">Au choix : des <strong>examens</strong>, une preuve de <strong>maîtrise de la langue</strong>, la vérification des <strong>antécédents judiciaires</strong>, un <strong>stage</strong> au Canada, la vérification des références.</div></details>
+      <details><summary><span class="k">Nomme</span>Nomme trois effets de la mobilité de la main-d'œuvre, pour le pays d'accueil ou pour le pays de départ.<span class="go">Révéler</span></summary><div class="ans">Au choix : la <strong>contribution à l'économie</strong> du pays d'accueil ; l'<strong>exploitation</strong> des temporaires ; les <strong>transferts d'argent</strong> vers les familles ; le retour de <strong>savoirs</strong> ; l'<strong>exode des cerveaux</strong>.</div></details>
       <details><summary><span class="k">Réponse courte</span>Donne deux conséquences de la croissance très rapide des villes du Sud.<span class="go">Révéler</span></summary><div class="ans">Au choix : des <strong>bidonvilles</strong>, la <strong>surpopulation</strong>, le manque d'<strong>eau potable</strong> et d'égouts, le chômage, la criminalité, une planification difficile.</div></details>
       <details><summary><span class="k">Définition</span>C'est quoi, la traite des êtres humains?<span class="go">Révéler</span></summary><div class="ans">Recruter ou transporter des personnes par la <strong>force, la menace ou la tromperie</strong> pour les <strong>exploiter</strong> : travail forcé, prostitution, esclavage.</div></details>
       <details><summary><span class="k">Rappel</span>Nomme deux événements qui ont favorisé l'émancipation des femmes en Occident.<span class="go">Révéler</span></summary><div class="ans">Les <strong>guerres mondiales</strong> et la <strong>pilule contraceptive</strong>.</div></details>
       <details><summary><span class="k">Ville</span>Pourquoi les nouveaux immigrants s'installent-ils souvent dans le même quartier que leur diaspora?<span class="go">Révéler</span></summary><div class="ans">La communauté déjà établie <strong>facilite l'intégration</strong> : la langue, l'entraide, un réseau pour trouver un logement ou un emploi.</div></details>
     </div>
-  </section>
-
-  <!-- ===================== CHECKLIST ===================== -->
-  <header class="sec-head" id="pret">
-    <div class="lab">Bilan <span id="score" class="score" aria-live="polite">0 sur 10</span></div>
-    <h2>Je suis prêt <em>si je peux…</em></h2>
-  </header>
-  <section class="ready">
-    <div class="meter"><i id="meter"></i></div>
-    <ul class="check" id="checklist" data-key="monde-pop-s4s5-pret">
-      <li><label for="c1"><input type="checkbox" id="c1"><span>Expliquer pourquoi les pays développés recrutent des immigrants, et nommer les secteurs qui manquent de travailleurs.</span></label></li>
-      <li><label for="c2"><input type="checkbox" id="c2"><span>Nommer des critères de sélection (système de points) et des mesures d'intégration.</span></label></li>
-      <li><label for="c3"><input type="checkbox" id="c3"><span>Définir l'intégration et expliquer son importance pour la paix sociale.</span></label></li>
-      <li><label for="c4"><input type="checkbox" id="c4"><span>Nommer la plus grande contrainte des immigrants qualifiés et les trois difficultés de la reconnaissance des diplômes.</span></label></li>
-      <li><label for="c5"><input type="checkbox" id="c5"><span>Définir la discrimination positive et donner mon opinion avec deux raisons.</span></label></li>
-      <li><label for="c6"><input type="checkbox" id="c6"><span>Nommer trois effets de la mobilité de la main-d'œuvre et définir l'exode des cerveaux.</span></label></li>
-      <li><label for="c7"><input type="checkbox" id="c7"><span>Définir l'économie parallèle et nommer ce qui rend un immigrant vulnérable aux abus.</span></label></li>
-      <li><label for="c8"><input type="checkbox" id="c8"><span>Expliquer l'exode rural et donner deux conséquences de l'urbanisation rapide au Sud.</span></label></li>
-      <li><label for="c9"><input type="checkbox" id="c9"><span>Comparer les villes du Nord (quartiers ethniques) et celles du Sud (bidonvilles).</span></label></li>
-      <li><label for="c10"><input type="checkbox" id="c10"><span>Réussir toutes les cartes de rappel de la mi-étape (vieillissement, mesures natalistes, Chine, émancipation des femmes).</span></label></li>
-    </ul>
   </section>
 </main>
 
@@ -957,31 +932,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-
-  // Liste « Je suis prêt »
-  var list = document.getElementById("checklist");
-  if (list) {
-    var KEY = list.getAttribute("data-key");
-    var boxes = Array.prototype.slice.call(list.querySelectorAll("input"));
-    var score = document.getElementById("score");
-    var meter = document.getElementById("meter");
-    var saved = {};
-    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
-    function update() {
-      var n = boxes.filter(function (b) { return b.checked; }).length;
-      score.textContent = n + " sur " + boxes.length + (n === boxes.length ? " · Prêt pour l'examen!" : "");
-      meter.style.width = (n / boxes.length * 100) + "%";
-    }
-    boxes.forEach(function (b) {
-      if (saved[b.id]) b.checked = true;
-      b.addEventListener("change", function () {
-        saved[b.id] = b.checked;
-        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
-        update();
-      });
-    });
-    update();
-  }
 
   window.addEventListener("beforeprint", function () {
     document.querySelectorAll(".qz details").forEach(function (d) { d.open = true; });

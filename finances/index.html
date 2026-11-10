@@ -264,8 +264,8 @@ const finSemaine = x => new Date(parse(x.semaine).getTime() + 4 * DAY);
    ===================================================================== */
 const ETAPES = [
   { n: 1, debut: "2026-08-27", titre: "Chapitre 1 · La consommation", sections: { "1.1": "Consommer, c'est choisir", "1.2": "La publicité", "1.3": "Outils, droits et recours" } },
-  { n: 2, debut: "2026-11-14", titre: "Budget, crédit et épargne", sections: { "1.4": "Le budget" } },
-  { n: 3, debut: null, titre: "Études et travail", sections: {} }
+  { n: 2, debut: "2026-11-14", titre: "Budget, crédit et épargne", sections: { "1.4": "Le budget", "3.1": "Épargner : pourquoi et comment", "3.2": "Les outils d'épargne" } },
+  { n: 3, debut: null, titre: "Études et travail", sections: {"4.1":"L'école, ça vaut la peine?","4.2":"Les salaires","4.3":"Trouver un emploi","5.1":"Ce que coûtent les études","5.2":"Financer ses études","6.1":"Tes droits au travail","6.2":"Qui te protège","7.1":"Ta paie","7.2":"Le chômage","8.1":"À quoi servent les impôts","8.2":"Combien d'impôt?"} }
 ];
 /* LES NOTES DE COURS : une par section. Une note s'ouvre dès que son étape est commencée ; avant, elle dit à partir de quand.
    publier.js lit cet objet : sortie: true = publiée en clair (plus de mot de passe depuis le 2026-11-04 ; false la chiffrerait encore).
@@ -275,7 +275,10 @@ const HUB = {
     { id: "n11", etape: 1, titre: "1.1", sujet: "Consommation", fichier: "notes-1-1.html", sortie: true },
     { id: "n12", etape: 1, titre: "1.2", sujet: "Publicité", fichier: "notes-1-2.html", sortie: true },
     { id: "n13", etape: 1, titre: "1.3", sujet: "S'informer · recours", fichier: "notes-1-3.html", sortie: true },
-    { id: "n14", etape: 2, titre: "1.4 + chapitre 2", sujet: "Budget · crédit", fichier: "notes-1-4-chapitre-2.html", sortie: true }
+    { id: "n14", etape: 2, titre: "1.4 + chapitre 2", sujet: "Budget · crédit", fichier: "notes-1-4-chapitre-2.html", sortie: true },
+    { id: "n3", etape: 2, titre: "Chapitre 3", sujet: "Épargne", fichier: "notes-chapitre-3.html", sortie: true },
+    { id: "n45", etape: 3, titre: "Chapitres 4 et 5", sujet: "Poursuivre ses études", fichier: "notes-chapitres-4-5.html", sortie: true },
+    { id: "n68", etape: 3, titre: "Chapitres 6, 7 et 8", sujet: "Travail · paie · impôt", fichier: "notes-chapitres-6-7-8.html", sortie: true }
   ]
 };
 // Les examens (pour le bouton « Seulement la matière de ton examen ») : un examen se donne pendant une semaine (son lundi).
@@ -350,7 +353,130 @@ const VF = [ // 0 = faux, 1 = vrai
   ["Être payé aux 2 semaines, c'est la même chose que deux fois par mois.", 0, "Aux 2 semaines : 26 paies par année. Deux fois par mois : 24.", "1.4", 30],
   ["Un budget déficitaire, c'est une catastrophe.", 0, "Non : tu as maintenant un portrait clair pour corriger le tir.", "1.4", 32],
   ["Par prudence, on estime ses revenus au minimum et ses dépenses au maximum.", 1, "C'est la règle de prudence : moins de mauvaises surprises.", "1.4", 30],
-  ["Le logement, l'alimentation et le transport font souvent plus de 60 % des dépenses.", 1, "Ce sont les trois gros postes.", "1.4", 30]
+  ["Le logement, l'alimentation et le transport font souvent plus de 60 % des dépenses.", 1, "Ce sont les trois gros postes.", "1.4", 30],
+  ["Une dépense ponctuelle, comme une réparation imprévue, s'estime pour toute l'année.", 1, "Elle est plutôt imprévisible : on estime son total pour l'année.", "1.4", 30],
+  ["Le cadeau d'anniversaire d'une amie n'a pas sa place dans un budget.", 0, "C'est aussi une dépense à prévoir au budget.", "1.4", 30],
+  ["Un budget équilibré, c'est quand les dépenses, épargne comprise, égalent les revenus.", 1, "Il ne reste rien, mais l'épargne est déjà prévue dedans.", "1.4", 32],
+  ["Épargner, c'est mettre de côté une partie de son revenu pour la dépenser plus tard.", 1, "C'est la définition : l'épargne sert à dépenser… plus tard.", "3.1", 72],
+  ["Le fonds d'urgence sert à se payer un gros voyage.", 0, "Il sert à faire face aux imprévus : une perte d'emploi, une réparation.", "3.1", 72],
+  ["Avec des intérêts simples, chaque année rapporte le même montant.", 1, "Ils sont calculés seulement sur le capital, qui ne change pas.", "3.1", 72],
+  ["La première année, les intérêts simples et composés rapportent la même chose.", 1, "L'écart commence la 2e année : les intérêts composés produisent alors des intérêts sur les intérêts.", "3.1", 72],
+  ["Un bon objectif d'épargne dit quoi, quand et combien.", 1, "Et il reste réaliste selon ton budget.", "3.1", 74],
+  ["Épargner 10 $ par semaine, c'est trop peu pour que ça vaille la peine.", 0, "Un petit montant régulier, placé tôt, grossit beaucoup avec les intérêts composés.", "3.1", 76],
+  ["Un placement très liquide offre souvent un rendement plus élevé.", 0, "C'est l'inverse : on paie la facilité d'accès par un rendement souvent moins intéressant.", "3.1", 78],
+  ["Ton profil d'investisseur dépend seulement de ton âge.", 0, "Il dépend de ta personnalité (ta tolérance au risque) et de tes objectifs.", "3.1", 78],
+  ["Le compte chèques rapporte plus d'intérêts que le compte d'épargne.", 0, "Il rapporte encore moins, souvent aucun intérêt : il sert aux dépenses courantes.", "3.2", 80],
+  ["Un CPG non rachetable se garde jusqu'à son échéance.", 1, "En échange, il offre un taux un peu plus élevé que le CPG rachetable.", "3.2", 80],
+  ["La SADC te rembourse si tes actions perdent de la valeur.", 0, "Elle protège tes dépôts, comme un CPG, jusqu'à 100 000 $, si l'institution financière fait faillite. Les actions ne sont pas garanties.", "3.2", 80],
+  ["Acheter une obligation, c'est prêter de l'argent à une entreprise ou à un gouvernement.", 1, "En retour, tu reçois des intérêts réguliers.", "3.2", 82],
+  ["Avec une action, tu deviens propriétaire d'une petite partie de l'entreprise.", 1, "Tu peux recevoir des dividendes et faire un gain en capital.", "3.2", 82],
+  ["Le rendement d'une action est connu d'avance.", 0, "Il est seulement espéré. Il est connu d'avance pour un compte ou un CPG.", "3.2", 88],
+  ["Le CELI sert seulement à préparer sa retraite.", 0, "Il sert à tous les projets : l'argent est accessible en tout temps.", "3.2", 86],
+  ["Un dépôt dans un REER fait baisser ton impôt de l'année.", 1, "Il est déduit du revenu. Mais l'impôt se paiera au retrait, à la retraite.", "3.2", 86],
+  ["On peut verser autant qu'on veut dans un CELIAPP.", 0, "Maximum 8 000 $ par année et 40 000 $ à vie.", "3.2", 86],
+  ["Statistique Canada mesure l'inflation avec un panier d'environ 700 biens et services.", 1, "C'est l'indice des prix à la consommation (IPC).", "3.2", 90],
+  ["Depuis des décennies, l'inflation tourne autour de 10 % par année.", 0, "Autour de 2 % par année.", "3.2", 90],
+  // Étape 3 (chantier, ch. 4 et 5)
+  ["Le DEP se fait en formation professionnelle, en 6 à 18 mois.",1,"C'est la voie la plus courte vers un métier.","4.1",100],
+  ["L'ASP se fait avant le DEP.",0,"Après : l'ASP spécialise un DEP déjà obtenu.","4.1",100],
+  ["Un DEC préuniversitaire dure en général 3 ans.",0,"2 ans. C'est le DEC technique qui dure en général 3 ans.","4.1",100],
+  ["Le DEC technique prépare surtout à un emploi précis.",1,"En 3 ans en général ; il peut aussi mener à l'université.","4.1",102],
+  ["En moyenne, une personne qui a un bac gagne plus du double d'une personne sans diplôme.",1,"75 700 $ contre 36 800 $ par année, en moyenne.","4.1",102],
+  ["Étudier à temps plein ne coûte rien si le cégep est gratuit.",0,"Il y a le coût d'opportunité : le salaire auquel tu renonces pendant ce temps.","4.1",102],
+  ["Un salarié payé à l'heure est payé pour ses heures supplémentaires.",1,"Sa paie suit les heures travaillées.","4.2",104],
+  ["Un pigiste payé à forfait reçoit plus s'il met plus de temps sur la tâche.",0,"Le montant est prévu au contrat, peu importe le temps.","4.2",104],
+  ["Une coiffeuse peut être une salariée au pourboire.",1,"Pas seulement en restauration : la coiffure, la livraison, les portiers aussi.","4.2",104],
+  ["Le débarrasseur d'un restaurant est un salarié au pourboire.",0,"Le manuel le précise : ni le plongeur ni le débarrasseur.","4.2",106],
+  ["Le talent et la renommée peuvent faire monter un salaire.",1,"Ce sont des facteurs liés à l'emploi : pense aux vedettes.","4.2",106],
+  ["Travailler loin, dans le Grand Nord, n'a aucun effet sur le salaire.",0,"L'éloignement est un facteur lié aux conditions de travail : il fait souvent monter le salaire.","4.2",106],
+  ["Sur le marché du travail, ce sont les entreprises qui forment la demande.",1,"Les travailleurs forment l'offre ; le salaire se fixe au point d'équilibre.","4.2",110],
+  ["Quand le chômage est élevé, les salaires ont tendance à monter.",0,"Ils ont tendance à baisser : beaucoup de gens cherchent un emploi.","4.2",110],
+  ["La plupart des emplois ne sont jamais affichés.",1,"Ce sont les emplois cachés : le réseautage aide à les trouver.","4.3",116],
+  ["Les carrefours jeunesse-emploi sont gratuits.",1,"Pour les 16 à 35 ans.","4.3",116],
+  ["Les centres locaux d'emploi aident seulement les gens qui ont déjà un emploi.",0,"Ils aident à trouver un emploi et versent aussi l'aide de dernier recours.","4.3",116],
+  ["À l'université, un cours coûte environ 300 $.",1,"Donc environ 1 500 $ pour une session de 5 cours, sans les frais afférents.","5.1",124],
+  ["Les frais afférents paient les cours eux-mêmes.",0,"Ce sont les droits de scolarité qui paient les cours ; les frais afférents paient le reste (services aux étudiants, sport…).","5.1",124],
+  ["Les droits de scolarité dépendent du nombre de crédits suivis.",1,"À Sherbrooke : 2 880,90 $ pour 30 crédits.","5.1",126],
+  ["Dans l'exemple du manuel, vivre en appartement coûte presque trois fois plus cher que rester chez ses parents.",1,"1 575 $ par mois contre 565 $.","5.1",126],
+  ["Le prêt étudiant est versé avant la bourse.",1,"Le prêt vient d'abord ; ce qui dépasse le prêt maximal est versé en bourse.","5.2",134],
+  ["Pour calculer ton aide, le gouvernement tient compte du revenu de tes parents.",1,"Aide = dépenses admises − contributions attendues (toi, tes parents ou ton conjoint).","5.2",130],
+  ["Avec une marge de crédit, les intérêts commencent dès le premier jour.",1,"Pour le prêt du gouvernement, c'est l'État qui paie les intérêts pendant les études.","5.2",142],
+  ["La limite d'endettement est la même pour tous les programmes.",0,"Elle va de 16 000 $ (collégial général) à 55 000 $ (3e cycle).","5.2",134],
+  ["Travailler 30 heures par semaine pendant des études à temps plein, c'est raisonnable.",0,"Pas plus de 20 heures ; de 10 à 15 heures, c'est l'idéal.","5.2",138],
+  ["Le Programme études-travail offre un emploi dans ton établissement d'enseignement.",1,"Pour les étudiants dont la situation financière est la plus précaire.","5.2",140],
+  ["Finir ses études à temps plein dans les délais peut réduire sa dette d'études.",1,"C'est la remise de dette : 15 % du prêt.","5.2",120],
+  ["Le salaire minimum des salariés au pourboire est plus bas que le taux général.",1,"13,30 $ contre 16,60 $ l'heure, depuis le 1er mai 2026.","4.2",104],
+  ["L'ancienneté et l'expérience, c'est exactement la même chose.",0,"L'ancienneté, c'est le temps passé dans un emploi ; l'expérience y ajoute les connaissances et la pratique accumulées.","4.2",108],
+  ["Au cégep public, à temps plein, on paie de 150 $ à 300 $ par session.",1,"Le DEC est gratuit : ce montant couvre les droits d'inscription et les frais afférents.","5.1",124],
+  ["Après 18 ans, en formation professionnelle, on paie ses manuels.",1,"La formation reste gratuite, mais les manuels deviennent à ta charge.","5.1",124],
+  ["Dès ton diplôme en poche, tu dois rembourser le capital de ton prêt étudiant.",0,"Pendant 6 mois, l'exemption partielle : tu paies seulement les intérêts.","5.2",134],
+  // Étape 3 (chantier, ch. 6 à 8)
+  ["La Loi sur les normes du travail protège aussi les employés syndiqués.",1,"Elle couvre la plupart des travailleurs, syndiqués ou non ; la convention collective s'y ajoute.","6.1",150],
+  ["Un stagiaire est protégé par la Loi sur les normes du travail.",0,"Les stagiaires, les travailleurs autonomes et les gardiens d'enfants n'y sont pas soumis.","6.1",152],
+  ["Une voiture fournie par l'employeur peut compenser un salaire sous le minimum.",0,"Aucun avantage ne peut faire descendre la paie sous le salaire minimum.","6.1",150],
+  ["Au-delà de 40 heures par semaine, les heures sont payées à taux et demi.",1,"Une semaine normale compte 40 heures.","6.1",152],
+  ["Après 5 heures de travail, on a droit à 30 minutes payées pour manger.",0,"Les 30 minutes sont un droit, mais elles ne sont pas payées.","6.1",152],
+  ["Un employé a droit à 32 heures de repos consécutives chaque semaine.",1,"C'est une des normes sur la durée du travail.","6.1",152],
+  ["Travailler un jour férié donne droit à un congé ou à une indemnité.",1,"Le congé se prend dans les 3 semaines avant ou après.","6.1",150],
+  ["Un employeur peut faire payer à son employé un uniforme qui porte le logo de l'entreprise.",0,"Avec le nom ou le logo de l'entreprise, l'uniforme est toujours gratuit.","6.1",152],
+  ["Une formation exigée par l'employeur, le samedi, n'a pas à être payée.",0,"Une formation exigée se paie, pendant ou hors des heures de travail.","6.1",152],
+  ["Une caissière doit rembourser l'argent qui manque dans sa caisse à la fin du quart.",0,"Les erreurs ordinaires sont des frais d'exploitation de l'entreprise, sauf négligence ou mauvaise foi.","6.1",152],
+  ["Avant 14 ans, on peut garder des enfants contre de l'argent.",1,"Le gardiennage et les camps de vacances font partie des exceptions.","6.1",152],
+  ["Pendant l'été, la limite de 17 heures par semaine pour les 14 à 16 ans s'applique aussi.",0,"Elle vaut pendant l'année scolaire, pas pendant l'été ni la relâche.","6.1",152],
+  ["La langue fait partie des motifs de discrimination interdits par la Charte.",1,"Avec l'âge, le sexe, la grossesse, la religion et dix autres.","6.1",154],
+  ["L'équité salariale, c'est un salaire égal pour un travail exactement identique.",0,"C'est un salaire égal pour un travail différent, mais équivalent.","6.1",156],
+  ["La Loi sur l'équité salariale vise les entreprises de 10 salariés et plus.",1,"Elle date de 1996.","6.1",156],
+  ["Le secret professionnel protège les informations de l'entreprise.",0,"Il protège les personnes (patients, clients). C'est le devoir de discrétion qui protège l'entreprise.","6.1",160],
+  ["La CNESST a trois volets : normes du travail, équité salariale, santé et sécurité.",1,"Elle est née en 2016 de la fusion de trois commissions.","6.2",162],
+  ["On peut contester une décision de la CNESST au Tribunal administratif du travail.",1,"Créé lui aussi en 2016.","6.2",162],
+  ["Une convention collective offre en général de moins bonnes conditions que la loi.",0,"En général meilleures : la loi fixe un minimum.","6.2",162],
+  ["Avec la formule Rand, un employé qui n'est pas membre du syndicat paie quand même la cotisation.",1,"Tous profitent de la convention : tous paient.","6.2",162],
+  ["Le salaire net est toujours plus élevé que le salaire brut.",0,"C'est l'inverse : le net, c'est le brut moins les retenues.","7.1",172],
+  ["La cotisation au RQAP est une retenue obligatoire.",1,"Avec l'impôt fédéral, l'impôt provincial, le RRQ et l'assurance-emploi.","7.1",172],
+  ["Une cotisation à un REER est une retenue obligatoire.",0,"Elle est facultative : c'est le choix de l'employé.","7.1",172],
+  ["L'heure de début et de fin de chaque journée doit figurer sur le bulletin de paie.",0,"Le bulletin indique le nombre d'heures, le taux, la période, le brut et chaque retenue.","7.1",170],
+  ["Le RRQ protège en cas de retraite, de décès et d'invalidité.",1,"C'est une assurance publique, pas une taxe.","7.1",174],
+  ["Les avantages sociaux peuvent valoir jusqu'à 30 % de la rémunération.",1,"Assurances, régime de retraite, horaire de 4 jours, etc.","7.1",176],
+  ["Les vacances payées sont un avantage social.",0,"La loi les oblige : c'est une norme du travail.","7.1",178],
+  ["Un étudiant à temps plein qui ne cherche pas d'emploi fait partie de la population active.",0,"Il fait partie de la population inactive : il ne cherche pas d'emploi.","7.2",180],
+  ["Quitter son emploi pour un meilleur, c'est du chômage frictionnel.",1,"Une courte pause, souvent volontaire, entre deux emplois.","7.2",182],
+  ["Une personne en grève peut recevoir des prestations d'assurance-emploi.",0,"Participer à un conflit de travail (grève, lock-out) exclut des prestations.","7.2",184],
+  ["La prestation d'assurance-emploi vaut 55 % du salaire moyen, jusqu'à un maximum.",1,"Et elle est imposable.","7.2",184],
+  ["Les impôts servent seulement à payer le salaire des députés.",0,"L'Assemblée nationale coûte environ 0,12 % du budget ; l'essentiel va aux services publics.","8.1",196],
+  ["L'allocation canadienne pour enfants est un paiement de transfert.",1,"Comme l'assurance-emploi et le supplément de revenu garanti.","8.1",196],
+  ["Payer comptant, sans facture, pour éviter les taxes, c'est aussi tricher.",1,"Le client participe à la fraude, et il perd sa garantie légale.","8.1",200],
+  ["Cotiser à un REER pour payer moins d'impôt est illégal.",0,"C'est de la planification fiscale, une mesure prévue par les gouvernements.","8.1",200],
+  ["Dans un système progressif, changer de palier fait monter l'impôt sur tout le revenu.",0,"Seuls les dollars au-dessus du palier sont imposés au taux plus élevé.","8.2",204],
+  ["Le taux effectif est toujours plus bas que le taux marginal, ou égal.",1,"C'est une moyenne : les premiers dollars sont imposés moins, ou pas du tout.","8.2",204],
+  ["La déclaration de revenus doit être produite au plus tard le 30 avril.",1,"Pour les revenus de l'année d'avant.","8.2",202]
+];
+// Permise ou interdite? (étape 3, D45) : [question d'entrevue, 0 = interdite, 1 = permise, explication, section, page]
+const ENTREVUE = [
+  ["« As-tu déjà travaillé avec le public? »",1,"Elle porte sur ton expérience : permise.","4.3",114],
+  ["« Es-tu enceinte? »",0,"La grossesse est un motif interdit par la Charte.","4.3",114],
+  ["« Quelle est ta religion? »",0,"La religion est un motif interdit.","4.3",114],
+  ["« Es-tu marié ou en couple? »",0,"L'état civil est un motif interdit.","4.3",114],
+  ["« Pour quel parti votes-tu? »",0,"Les convictions politiques sont un motif interdit.","4.3",114],
+  ["« As-tu un casier judiciaire? »",1,"Permise. Mais on ne peut pas te refuser pour un délit sans lien avec l'emploi.","4.3",114],
+  ["« Es-tu disponible les fins de semaine? »",1,"Elle porte sur l'emploi : permise.","4.3",114],
+  ["« As-tu un chum ou une blonde? »",0,"Ta vie amoureuse touche l'état civil et l'orientation sexuelle : interdite.","4.3",114],
+  ["« Pourquoi veux-tu travailler ici? »",1,"Elle porte sur ta motivation : permise, et même classique.","4.3",114],
+  ["Pour un poste de caissier : « As-tu un handicap? »",0,"Le handicap est un motif interdit, sauf s'il a un lien direct avec l'emploi.","4.3",114],
+  ["« Tes parents ont-ils de l'argent? »",0,"La condition sociale est un motif interdit.","4.3",114]
+];
+// Norme ou avantage? (étape 3, D73) : [énoncé, 0 = norme du travail, 1 = avantage social, explication, section, page]
+const NORMAV = [
+  ["Une assurance pour les soins dentaires",1,"Une assurance offerte par l'employeur : avantage social.","7.1",176],
+  ["Les heures au-delà de 40 payées à taux et demi",0,"La loi l'oblige : norme du travail.","7.1",178],
+  ["Le remboursement de la passe d'autobus",1,"Avantage hors du travail.","7.1",176],
+  ["Un chandail au logo, fourni gratuitement",0,"La loi l'oblige : norme du travail.","7.1",178],
+  ["Une banque de congés personnels",1,"Avantage lié au travail.","7.1",176],
+  ["Un congé quand on travaille un jour férié",0,"Norme du travail : congé ou indemnité.","7.1",178],
+  ["Un horaire de 4 jours par semaine",1,"Avantage lié au travail.","7.1",176],
+  ["Les vacances payées selon les années de service",0,"Norme du travail : 4 % ou 6 % du salaire.","7.1",178],
+  ["Un escompte de 25 % au magasin de l'employeur",1,"Avantage hors du travail.","7.1",176],
+  ["La pause de 30 minutes pour manger",0,"Norme du travail sur la durée du travail.","7.1",178],
+  ["Un régime de retraite où l'employeur verse sa part",1,"Le RPA fait partie des avantages sociaux.","7.1",176]
 ];
 const FIABLE = [ // 0 = pas fiable, 1 = fiable
   ["Une blogueuse mode très populaire déballe un ordinateur et le recommande.", 0, "Elle n'est pas spécialiste et ne cite aucune source : c'est une opinion.", "1.3", 18],
@@ -365,23 +491,36 @@ const FIABLE = [ // 0 = pas fiable, 1 = fiable
   ["Un avis Google : 5 étoiles sur 5 pour un produit.", 0, "Un avis, c'est une opinion, pas une preuve.", "1.3", 18]
 ];
 // Classe la dépense : [dépense, question, bonne réponse, explication, section, page]
-const CLASSE = { fv: ["Fixe", "Variable"], ci: ["Incompressible", "Compressible"] };
+const CLASSE = { fv: ["Fixe", "Variable"], ci: ["Incompressible", "Compressible"], gr: ["Garanti", "Pas garanti"], rc: ["Connu", "Espéré"] };
 const BUDGET = [
   ["Le loyer", "fv", 0, "Même montant chaque mois.", "1.4", 30],
   ["L'épicerie", "fv", 1, "Le montant change d'une semaine à l'autre.", "1.4", 30],
   ["Le prêt-auto", "fv", 0, "Même paiement chaque mois.", "1.4", 30],
   ["L'essence", "fv", 1, "Le montant change selon tes déplacements et le prix.", "1.4", 30],
-  ["L'abonnement de streaming", "fv", 0, "Même montant chaque mois.", "1.4", 30],
+  ["L'abonnement de musique en ligne", "fv", 0, "Même montant chaque mois.", "1.4", 30],
   ["Les sorties au restaurant", "fv", 1, "Le montant et la fréquence changent.", "1.4", 30],
   ["Le forfait cellulaire", "fv", 0, "Même montant chaque mois.", "1.4", 30],
   ["Les vêtements", "fv", 1, "Le montant et la fréquence changent.", "1.4", 30],
   ["L'assurance habitation", "fv", 0, "Même montant chaque mois.", "1.4", 30],
   ["Le loyer", "ci", 0, "On ne peut ni l'éviter ni le réduire à court terme.", "1.4", 32],
   ["Le prêt-auto", "ci", 0, "On ne peut pas le couper à court terme.", "1.4", 32],
-  ["L'abonnement de streaming", "ci", 1, "Fixe, mais compressible : il s'annule.", "1.4", 32],
+  ["L'abonnement de musique en ligne", "ci", 1, "Fixe, mais compressible : il s'annule.", "1.4", 32],
   ["Les sorties au restaurant", "ci", 1, "Facile à couper ou à réduire.", "1.4", 32],
   ["Les vêtements", "ci", 1, "On peut facilement les reporter.", "1.4", 32],
   ["Un voyage", "ci", 1, "On peut le reporter ou l'annuler.", "1.4", 32]
+];
+// Classe le placement : [placement, question, bonne réponse, explication, section, page]
+const PLACEMENT = [
+  ["Un CPG", "gr", 0, "Le capital est garanti par l'institution, et par la SADC jusqu'à 100 000 $.", "3.2", 80],
+  ["Un compte d'épargne", "gr", 0, "Très sûr : ton dépôt ne baisse pas. Mais il rapporte peu.", "3.2", 80],
+  ["Une action", "gr", 1, "Sa valeur monte et baisse avec le marché.", "3.2", 82],
+  ["Un fonds commun d'actions", "gr", 1, "Il est diversifié, mais son capital n'est généralement pas garanti.", "3.2", 84],
+  ["Un duplex", "gr", 1, "Sa valeur dépend du marché immobilier au moment de vendre.", "3.2", 84],
+  ["Un CPG", "rc", 0, "Le taux est fixé d'avance.", "3.2", 88],
+  ["Un compte d'épargne", "rc", 0, "Le taux d'intérêt est connu.", "3.2", 88],
+  ["Une obligation", "rc", 1, "Le manuel parle d'un rendement espéré (« attendu ») : sa valeur peut changer sur le marché.", "3.2", 88],
+  ["Une action", "rc", 1, "Personne ne sait d'avance ce qu'elle rapportera.", "3.2", 88],
+  ["Un fonds commun de placement", "rc", 1, "Son rendement dépend des placements qu'il contient.", "3.2", 88]
 ];
 
 // Décode la pub : [marque, visuel, slogan, petite ligne, question (s = stratégie, o = objectif), réponse, explication, couleurs]
@@ -419,7 +558,18 @@ const MARCHE = [
   ["MOI$", "Ton pouvoir d'achat", "Tu as une augmentation de salaire. Les prix ne bougent pas.", "pa", true, "Revenu ▲ · Prix = → Pouvoir d'achat ▲", "1.1", 6],
   ["MOI$", "Ton pouvoir d'achat", "Ton salaire ne bouge pas, mais tout coûte plus cher qu'avant.", "pa", false, "Prix ▲ (inflation) · Revenu = → Pouvoir d'achat ▼", "1.1", 6],
   ["MOI$", "Ton pouvoir d'achat", "Une nouvelle taxe s'ajoute sur ce que tu achètes. Ton salaire reste pareil.", "pa", false, "Taxes ▲ · Revenu = → Pouvoir d'achat ▼", "1.1", 6],
-  ["MOI$", "Ton pouvoir d'achat", "Les prix de l'épicerie baissent. Ton revenu reste le même.", "pa", true, "Prix ▼ · Revenu = → Pouvoir d'achat ▲", "1.1", 6]
+  ["MOI$", "Ton pouvoir d'achat", "Les prix de l'épicerie baissent. Ton revenu reste le même.", "pa", true, "Prix ▼ · Revenu = → Pouvoir d'achat ▲", "1.1", 6],
+  ["MOI$", "Ton pouvoir d'achat", "Ton CPG rapporte 4 % par année. L'inflation est de 2 %.", "pa", true, "Rendement 4 % > inflation 2 % → Pouvoir d'achat ▲", "3.2", 90],
+  ["MOI$", "Ton pouvoir d'achat", "Ton argent dort dans ton compte chèques, sans intérêt. Les prix montent de 3 % cette année.", "pa", false, "Rendement 0 % < inflation 3 % → Pouvoir d'achat ▼", "3.2", 90],
+  ["MOI$", "Ton pouvoir d'achat", "Ton placement rapporte 2 %. Les prix montent de 6,8 %, comme en 2022.", "pa", false, "Rendement 2 % < inflation 6,8 % → Pouvoir d'achat ▼", "3.2", 90],
+  ["MOI$", "Ton pouvoir d'achat", "Ton REER rapporte 6 % par année. L'inflation est de 2 %.", "pa", true, "Rendement 6 % > inflation 2 % → Pouvoir d'achat ▲", "3.2", 90],
+  // Étape 3 (chantier, ch. 4 et 5)
+  ["SOUD","Soudeurs","Une nouvelle usine ouvre dans une petite ville et cherche 300 soudeurs.","sal",true,"Demande de travailleurs ▲ · Offre = → Salaire ▲","4.2",110],
+  ["COMM","Commis de bureau","Une grosse entreprise ferme : des centaines de commis cherchent un emploi en même temps.","sal",false,"Offre de travailleurs ▲ · Demande = → Salaire ▼","4.2",110],
+  ["ÉTÉ","Équipiers de restauration rapide","Cet été, des milliers d'étudiants cherchent le même genre d'emploi en même temps.","sal",false,"Offre de travailleurs ▲ (beaucoup de candidats) → Salaire ▼","4.2",110],
+  ["STAR","Joueur de hockey vedette","Il marque plus que tout le monde, et trois équipes le veulent.","sal",true,"Talent rare : Offre ▼ · Demande ▲ → Salaire ▲","4.2",110],
+  ["INF","Infirmières","Les hôpitaux manquent d'infirmières, et le chômage est très bas dans la région.","sal",true,"Pénurie et chômage bas → Salaire ▲","4.2",110],
+  ["CAIS","Caissiers","Le magasin installe des caisses libre-service et a besoin de moins de caissiers.","sal",false,"Demande de travailleurs ▼ · Offre = → Salaire ▼","4.2",110]
 ];
 
 // On te texte : [prénom, message, bonne réponse, autres choix, explication, section, page]
@@ -450,7 +600,55 @@ const TEXTOS = [
   ["Jayden", "j'ai reçu un texto « ton compte est bloqué, envoie ton NAS ». je fais quoi?", "Supprime-le sans répondre : c'est de l'hameçonnage", ["Envoie ton NAS, sinon ton compte reste bloqué", "Envoie plutôt ton numéro de carte, c'est moins grave"], "Protéger ses renseignements personnels, c'est une responsabilité du consommateur.", "1.3", 24],
   ["Noah", "mon reçu de caisse est rendu tout pâle, je peux le jeter?", "Non : prends-le en photo, c'est ta preuve", ["Oui : un reçu pâle ne vaut plus rien", "Oui : le magasin en garde une copie"], "Conserver ses factures, c'est une responsabilité. C'est ta preuve pour la garantie.", "1.3", 24],
   ["Maëlle", "j'ai mis tout ce que j'ai payé avec ma carte de crédit comme un poste « carte de crédit » dans mon budget. c'est correct?", "Non : c'est un mode de paiement, pas un poste", ["Oui : c'est un poste comme les autres", "Oui, mais seulement si je paie le solde"], "Ce que tu achètes avec est déjà dans tes postes. Seuls les intérêts vont au budget.", "1.4", 30],
-  ["Jayden", "je veux couper 100 $ par mois dans mon budget. j'attaque quoi en premier?", "Le restaurant et les abonnements", ["Le loyer", "Le prêt-auto"], "Ils sont compressibles : faciles à couper vite.", "1.4", 32]
+  ["Jayden", "je veux couper 100 $ par mois dans mon budget. j'attaque quoi en premier?", "Le restaurant et les abonnements", ["Le loyer", "Le prêt-auto"], "Ils sont compressibles : faciles à couper vite.", "1.4", 32],
+  ["Ethan", "mon cousin dit qu'un budget c'est juste pour le monde cassé 🙄", "Faux : il sert à tout le monde, pour planifier ses projets et éviter les dettes", ["Vrai : si t'as de l'argent, t'en as pas besoin", "Vrai : ça sert seulement à couper ses dépenses"], "Un budget donne une vue d'ensemble : d'où vient l'argent, où il va, et comment atteindre ses objectifs.", "1.4", 28],
+  ["Noah", "mon char a lâché, la réparation coûte 900 $. heureusement j'avais de l'argent de côté juste pour ça 😮‍💨 ça s'appelle comment?", "Un fonds d'urgence", ["Un REER", "Un gain en capital", "Un dividende"], "Le fonds d'urgence sert à faire face aux imprévus.", "3.1", 72],
+  ["Maëlle", "mon fonds d'urgence, je veux pouvoir le sortir n'importe quand. quel critère compte le plus?", "La liquidité", ["Le rendement", "La durée", "La diversification"], "Un imprévu n'attend pas : le placement doit se transformer vite et facilement en argent comptant.", "3.1", 78],
+  ["Sam", "j'ai 16 ans. mon oncle dit d'attendre d'avoir une vraie job pour commencer à épargner. il a raison?", "Non : plus tu commences tôt, plus les intérêts composés travaillent", ["Oui : avant 25 ans, ça ne change rien", "Oui : les intérêts composés commencent seulement après 10 ans"], "Le temps est l'allié le plus précieux de l'épargnant.", "3.1", 74],
+  ["Ethan", "comment je fais pour pas « oublier » d'épargner à chaque paie?", "Un virement automatique le jour de la paie", ["Tout garder dans mon compte chèques", "Épargner seulement s'il reste de l'argent", "Attendre la fin de l'année"], "Épargner régulièrement : un montant prévu au budget, idéalement par virement automatique.", "3.1", 76],
+  ["Léa", "ma tante accepte de voir son argent baisser une année si ça rapporte plus à long terme. c'est quel profil?", "Audacieuse", ["Prudente", "Modérée", "Liquide"], "Elle accepte le risque pour viser un rendement élevé.", "3.1", 78],
+  ["Jayden", "je veux pas choisir mes placements moi-même. un expert pourrait gérer mon argent avec celui d'autres gens?", "Un fonds commun de placement", ["Un CPG", "Une obligation", "Un compte chèques"], "L'argent de plusieurs épargnants, confié à un gestionnaire, et bien diversifié.", "3.2", 82],
+  ["Noah", "si je prête de l'argent à une grande entreprise et qu'elle me verse des intérêts chaque année, j'ai acheté quoi?", "Une obligation", ["Une action", "Un CPG", "Un REEE"], "Une obligation : un prêt à une entreprise ou à un gouvernement, avec des intérêts réguliers.", "3.2", 82],
+  ["Maëlle", "la compagnie dont j'ai des actions m'a versé une partie de ses profits 🤑 ça s'appelle comment?", "Un dividende", ["Un gain en capital", "Un intérêt", "Une cotisation"], "Le gain en capital, c'est plutôt le profit fait à la revente.", "3.2", 82],
+  ["Sam", "j'ai acheté une action à 20 $ et je l'ai revendue 32 $. les 12 $, c'est quoi?", "Un gain en capital", ["Un dividende", "Un intérêt composé", "Un rendement garanti"], "Le profit fait quand on revend plus cher qu'on a acheté.", "3.2", 80],
+  ["Léa", "dans 4 ans je veux acheter mon premier condo. quel régime est fait pour ça?", "Le CELIAPP", ["Le REEE", "Le compte chèques", "Un fonds d'urgence"], "Le compte d'épargne libre d'impôt pour l'achat d'une première propriété.", "3.2", 86],
+  ["Ethan", "ma grand-mère veut placer de l'argent pour mon cégep, pis le gouvernement en ajouterait?? 👀", "Le REEE", ["Le CELIAPP", "Le REER", "Un CPG non rachetable"], "Les gouvernements ajoutent de 30 % à 60 % des dépôts, jusqu'à 750 $ par année.", "3.2", 86],
+  ["Jayden", "je veux payer moins d'impôt cette année, et cet argent-là c'est pour ma retraite, loin loin", "Le REER", ["Le CELI", "Le REEE", "Le compte d'épargne"], "Les dépôts sont déduits du revenu. L'impôt se paiera au retrait.", "3.2", 86],
+  ["Noah", "je veux pouvoir retirer mon argent n'importe quand, sans payer d'impôt sur ce qu'il a rapporté", "Le CELI", ["Le REER", "Le REEE", "Un CPG non rachetable"], "Accessible en tout temps ; les retraits ne sont pas imposables.", "3.2", 86],
+  ["Sam", "mon père veut acheter un duplex pour placer son argent. c'est quoi le gros inconvénient?", "Du temps et de l'argent pour l'entretenir, et des mois pour le revendre", ["Il ne fait jamais de gain en capital", "Il se vend en un clic, comme une action", "Il n'y a aucun inconvénient"], "L'immobilier demande beaucoup de temps et d'argent, et sa liquidité est faible.", "3.2", 84],
+  // Étape 3 (chantier, ch. 4 et 5)
+  ["Alexis","je veux devenir électricien vite, sans passer par le cégep. je vise quel diplôme?","Un DEP",["Un DEC préuniversitaire","Un baccalauréat","Une ASP, directement"],"Le DEP, en formation professionnelle : de 6 à 18 mois. L'ASP vient seulement après un DEP.","4.1",100],
+  ["Jessie","j'ai mon DEP en coiffure. si un jour je veux aller à l'université, je fais quoi?","Je passe d'abord par le cégep (un DEC)",["Je m'inscris direct à l'université","C'est impossible : le DEP ferme la porte","J'attends 5 ans sur le marché du travail"],"Le DEP mène au travail ou au cégep ; ce sont les DEC qui ouvrent l'université.","4.1",100],
+  ["Mathéo","mon cousin dit que lâcher l'école à 16 ans pour travailler, c'est payant tout de suite. il a raison?","Tout de suite, peut-être ; sur une vie, non",["Oui, sur toute la ligne","Non, il ne gagnera rien du tout"],"Sans diplôme : 36 800 $ par année en moyenne, contre 46 000 $ avec un DES. Et souvent des emplois précaires.","4.1",102],
+  ["Lily","je touche 15 % de ce que je vends au magasin, en plus de mon salaire de base. ça s'appelle comment?","La commission",["Le pourboire","Le travail à forfait","Le salaire fixe"],"Une prime selon ton rendement, ajoutée à ton salaire de base.","4.2",104],
+  ["Ethan","le client m'a payé 400 $ pour son site web, même si j'ai mis 2 fois plus de temps que prévu 😩","Le travail à forfait",["Le salaire horaire","La commission","Le salaire fixe"],"Le montant est prévu au contrat, peu importe le temps.","4.2",104],
+  ["Clara","j'ai fait 5 h de plus cette semaine et ma paie a monté. je suis payée comment?","À l'heure",["Au salaire fixe","À forfait","À la commission"],"Au salaire horaire, la paie suit les heures travaillées.","4.2",104],
+  ["Nathan","ma job a une assurance dentaire et un régime de retraite. ça compte dans mon salaire?","Non : dans ta rémunération",["Oui, c'est du salaire","Non, ça ne compte nulle part"],"Rémunération = salaire + avantages sociaux.","4.2",104],
+  ["Victor","je pars travailler dans une mine du Grand Nord, et le salaire est vraiment plus haut qu'en ville. pourquoi?","L'éloignement et les risques",["L'ancienneté","La renommée","L'âge"],"Des facteurs liés aux conditions de travail : ils font monter le salaire.","4.2",106],
+  ["Inès","j'envoie mon CV pour une job au cinéma. faut vraiment une lettre avec?","Oui, une lettre pour cet emploi-là",["Non, le CV suffit","Oui, la même pour toutes mes demandes"],"La lettre montre que tu veux cet emploi précis et donne envie de lire ton CV.","4.3",112],
+  ["Hugo","c'est quoi déjà le site du gouvernement pour les offres d'emploi?","Québec emploi",["Le CLE","Le CJE","La CNESST"],"Québec emploi : les offres d'emploi en ligne du gouvernement du Québec.","4.3",116],
+  ["Zack","aucune offre affichée dans mon domaine 😩 je fais quoi?","J'en parle à mon réseau",["J'abandonne","J'attends qu'une offre paraisse"],"La plupart des emplois ne sont pas affichés : ton entourage peut les connaître.","4.3",116],
+  ["Léon","à l'université, je prends 5 cours par session. ça coûte combien environ?","Environ 1 500 $, sans les frais afférents",["Rien, c'est gratuit comme au cégep","Environ 300 $ en tout","Environ 15 000 $"],"Environ 300 $ par cours : 5 × 300 $ = 1 500 $.","5.1",124],
+  ["Sofia","mon aide financière : j'ai eu un prêt ET une bourse. je rembourse les deux?","Seulement le prêt",["Les deux","Seulement la bourse","Aucun des deux"],"La bourse n'est jamais remboursée ; le prêt, oui, à la fin des études.","5.2",130],
+  ["Ariane","la banque m'offre une marge de crédit pour l'université. c'est pareil comme le prêt étudiant?","Non : les intérêts courent dès le premier jour",["Oui, exactement pareil","Non : elle n'a jamais d'intérêts"],"Pour le prêt du gouvernement, l'État paie les intérêts pendant les études. Pas la banque.","5.2",142],
+  ["Olivier","je travaille 12 h par semaine pendant mon DEC. c'est trop?","Non, c'est raisonnable",["Oui, il faudrait 0 h","Oui, plus de 5 h c'est trop"],"De 10 à 15 h, ça convient bien ; pas plus de 20 h.","5.2",138],
+  ["Laurence","mes parents épargnent pour mes études depuis que je suis bébé, et le gouvernement en ajoute. c'est quoi ce compte-là?","Un REEE",["Un CELI","Un REER","Une marge de crédit"],"Le régime enregistré d'épargne-études : les gouvernements ajoutent de l'argent aux cotisations.","5.2",140],
+  // Étape 3 (chantier, ch. 6 à 8)
+  ["Maélie","mon boss dit que les pauses-café c'est obligatoire mais qu'il les paie pas. ça marche?","Non : pas obligatoires, mais payées s'il en donne",["Oui, c'est la loi","Oui, si la pause dure moins de 15 min"],"La loi n'exige pas de pauses-café ; si l'employeur en accorde, il doit les payer.","6.1",152],
+  ["Ludo","j'ai 15 ans, mon gérant veut que je fasse 12 h en semaine pendant l'école. je peux?","Non : 10 h max du lundi au vendredi",["Oui, si c'est moins de 17 h au total","Oui, avec la permission de mes parents"],"Pendant l'année scolaire : 17 h au plus par semaine, dont 10 au plus en semaine.","6.1",152],
+  ["Inaya","mon employeur me paie moins qu'à mon collègue parce que je suis enceinte. qu'est-ce qui me protège?","La Charte des droits et libertés de la personne",["Le Code canadien du travail","La formule Rand","Le RQAP"],"La grossesse est un motif de discrimination interdit.","6.1",154],
+  ["Tristan","j'ai jasé des futurs projets secrets de ma job sur discord. c'est grave?","Oui : je manque à mon devoir de discrétion",["Non, c'est ma vie privée","Non, seulement les médecins ont un secret à garder"],"Le devoir de discrétion t'oblige à garder les informations confidentielles de l'entreprise.","6.1",160],
+  ["Kim","mon patron m'a pas payé mes heures sup et j'ai pas de syndicat. je vais où?","À la CNESST",["Au syndicat de mon cousin","À la Régie du cinéma","Nulle part, c'est son choix"],"La CNESST fait appliquer la Loi sur les normes du travail ; on y porte plainte.","6.2",162],
+  ["Raffi","je suis syndiqué et mon employeur respecte pas la convention. je fais quoi?","Je vais voir mon syndicat, qui dépose un grief",["J'appelle directement la police","J'arrête de travailler sans rien dire"],"Le grief est la plainte formelle du syndicat.","6.2",162],
+  ["Océane","je comprends pas, j'ai gagné 600 $ mais j'ai reçu 470 $ 😩","Normal : 600 $, c'est le brut ; 470 $, le net",["L'employeur s'est trompé, c'est sûr","Le 130 $ va dans ton REER"],"Les retenues à la source passent entre le brut et le net.","7.1",172],
+  ["Yanis","c'est quoi les retenues obligatoires sur ma paie?","Impôts fédéral et provincial, RRQ, RQAP, assurance-emploi",["Impôts, syndicat, stationnement","RRQ, REER, assurances"],"Il y en a cinq ; les autres sont facultatives.","7.1",172],
+  ["Béa","ma job offre des assurances dentaires. ça s'appelle comment?","Un avantage social",["Une norme du travail","Une retenue obligatoire","Une prestation"],"L'employeur l'offre en plus du salaire, sans y être obligé.","7.1",176],
+  ["Léo","mon père a perdu sa job à cause d'un robot à l'usine. c'est quel chômage?","Structurel",["Frictionnel","Saisonnier","Conjoncturel"],"Un changement technologique fait disparaître l'emploi.","7.2",182],
+  ["Sacha","ma sœur a démissionné parce qu'elle s'ennuyait. elle va avoir du chômage?","Non : départ volontaire sans raison valable",["Oui, tout le monde y a droit","Oui, si elle a travaillé un an"],"Quitter sans justification exclut des prestations d'assurance-emploi.","7.2",184],
+  ["Mya","mon oncle répare des autos au noir, il dit que ça dérange personne","Faux : les honnêtes paient pour lui",["Il a raison, c'est son argent","C'est légal sous 1 000 $"],"Moins de revenus pour l'État, injustice envers les honnêtes, concurrence déloyale.","8.1",200],
+  ["Félix","c'est quoi la différence entre planification fiscale et fraude?","La planification est légale (REER, dons) ; la fraude, non",["Aucune différence","La planification est réservée aux entreprises"],"On peut réduire ses impôts avec les mesures prévues par les gouvernements.","8.1",200],
+  ["Zoé","si je passe au palier suivant, je perds de l'argent en gagnant plus?","Non : seuls les dollars au-dessus du palier sont imposés plus",["Oui, tout ton salaire est imposé plus","Oui, si tu dépasses 50 000 $"],"C'est le principe de l'impôt progressif et du taux marginal.","8.2",204],
+  ["Noah","je gagne juste 3 000 $ par année en gardiennage, je fais une déclaration?","Oui : elle donne droit à des crédits et des prestations",["Non, c'est inutile sous 10 000 $","Seulement si mes parents le veulent"],"Même un petit revenu se déclare ; date limite : le 30 avril.","8.2",202]
 ];
 const MERCI = ["merci!! 🙏", "ok ça fait du sens", "parfait, merci 👌", "t'es bon·ne en éduc fin 😎", "noté!"];
 
@@ -460,7 +658,17 @@ const ORDRES = [
   ["Les 3 étapes d'un budget", ["Les revenus et les dépenses", "La grille budgétaire", "L'analyse et le suivi"], "Lister → organiser → analyser.", "1.4", 28],
   ["Les recours, du plus simple au plus formel", ["Service à la clientèle", "Négociation", "Mise en demeure", "Médiation", "Arbitrage", "Cour des petites créances"], "On commence toujours par le plus simple.", "1.3", 26, 4],
   ["Le nombre de paies par année, du plus petit au plus grand", ["Chaque mois", "Deux fois par mois", "Aux 2 semaines", "Chaque semaine"], "12, 24, 26 et 52 paies.", "1.4", 30],
-  ["Trouver un salaire par mois, à partir d'une paie", ["Trouver le nombre de paies par année", "Multiplier la paie par ce nombre", "Diviser le total annuel par 12"], "Tout se ramène d'abord à l'année, puis on divise.", "1.4", 30]
+  ["Trouver un salaire par mois, à partir d'une paie", ["Trouver le nombre de paies par année", "Multiplier la paie par ce nombre", "Diviser le total annuel par 12"], "Tout se ramène d'abord à l'année, puis on divise.", "1.4", 30],
+  ["Du placement le plus sûr au plus risqué", ["CPG", "Obligation", "Action"], "Plus le rendement promis est élevé, plus le risque est grand.", "3.1", 78],
+  // Étape 3 (chantier, ch. 4 et 5)
+  ["Du salaire annuel moyen le plus bas au plus haut",["Sans DES","DES","DEC technique","Baccalauréat"],"36 800 $ → 46 000 $ → 52 600 $ → 75 700 $.","4.1",102],
+  ["Un parcours possible, du secondaire à l'université",["DES","DEP","DEC technique","Baccalauréat"],"Le DEP mène au cégep, pas directement à l'université.","4.1",100],
+  ["Une demande d'emploi, dans l'ordre",["Préparer son CV","Écrire une lettre pour cet emploi","Passer l'entrevue"],"La lettre donne envie de lire le CV… et de te convoquer en entrevue.","4.3",112],
+  ["Calculer l'aide du Programme de prêts et bourses",["Additionner les dépenses admises","Soustraire les contributions attendues","Verser le prêt, jusqu'au maximum","Verser le reste en bourse"],"Dépenses − contributions = aide ; le prêt d'abord, la bourse ensuite.","5.2",134],
+  ["Le prêt étudiant, de l'entrée aux études au remboursement",["Pendant les études : l'État paie les intérêts","6 mois après : les intérêts seulement","Ensuite : le capital et les intérêts"],"Les 6 mois de répit, c'est l'exemption partielle.","5.2",134],
+  // Étape 3 (chantier, ch. 6 à 8)
+  ["Du bulletin de paie au compte de banque",["Heures × taux horaire","Salaire brut","Moins les retenues à la source","Salaire net versé"],"Brut − retenues = net.","7.1",172],
+  ["Classe ces trois postes de dépenses du Québec (2023-2024), du plus gros au plus petit",["Santé et services sociaux","Éducation et enseignement supérieur","Service de la dette"],"59 G$ → 30,7 G$ → 9,5 G$.","8.1",196]
 ];
 
 /* ============ À la caisse : les calculs ============ */
@@ -493,7 +701,39 @@ const CAISSE = [
   ...[[15, 4852], [6, 6000]].map(([mois, c]) => { const reste = mois * c, dix = Math.round(reste / 10), frais = Math.min(5000, dix);
     return { tete: "ANNULATION DE CONTRAT", sous: "Forfait cellulaire", lignes: [["Mois restants", String(mois)], ["Services par mois", argent(c)]], cible: "FRAIS",
       question: "Frais d'annulation : le plus petit entre 50 $ et 10 % des services qui restent. Combien?", bonne: argent(frais), autres: [argent(Math.max(5000, dix)), argent(reste), argent(0)],
-      ex: `${mois} × ${argent(c)} = ${argent(reste)}. 10 % = ${argent(dix)}. Le plus petit entre 50,00 $ et ${argent(dix)} : ${argent(frais)}.`, court: "Annulation · " + mois + " mois", s: "1.3", p: 24 }; })
+      ex: `${mois} × ${argent(c)} = ${argent(reste)}. 10 % = ${argent(dix)}. Le plus petit entre 50,00 $ et ${argent(dix)} : ${argent(frais)}.`, court: "Annulation · " + mois + " mois", s: "1.3", p: 24 }; }),
+  { tete: "RELEVÉ DE PLACEMENT", sous: "Intérêts simples", lignes: [["Capital", argent(150000)], ["Taux", "4 % par année"], ["Durée", "3 ans"]], cible: "INTÉRÊTS",
+    question: "Combien d'intérêts au total, avec des intérêts simples?", bonne: argent(18000), autres: [argent(18730), argent(6000), argent(168000)],
+    ex: "4 % de 1 500 $ = 60 $ par année. 3 × 60 $ = 180 $.", court: "Intérêts simples · 1 500 $", s: "3.1", p: 72 },
+  { tete: "RELEVÉ DE PLACEMENT", sous: "Intérêts composés", lignes: [["Capital", argent(200000)], ["Taux", "5 % par année"], ["Durée", "2 ans"]], cible: "INTÉRÊTS",
+    question: "Combien d'intérêts au total, avec des intérêts composés?", bonne: argent(20500), autres: [argent(20000), argent(10500), argent(220500)],
+    ex: "An 1 : 5 % de 2 000 $ = 100 $. An 2 : 5 % de 2 100 $ = 105 $. Total : 205 $.", court: "Intérêts composés · 2 000 $", s: "3.1", p: 72 },
+  { tete: "RELEVÉ DU REEE", sous: "Dépôt de l'année", lignes: [["Ton dépôt", argent(100000)], ["Aide des gouvernements", "30 %"]], cible: "AIDE REÇUE",
+    question: "Combien les gouvernements ajoutent-ils?", bonne: argent(30000), autres: [argent(75000), argent(60000), argent(3000)],
+    ex: "30 % de 1 000 $ = 300 $ (sous le maximum de 750 $ par année).", court: "REEE · aide de 30 %", s: "3.2", p: 86 },
+  { tete: "AVIS DE COTISATION", sous: "Ton REER", lignes: [["Revenu de l'an dernier", argent(2000000)], ["Maximum REER", "18 %"]], cible: "MAXIMUM",
+    question: "Combien peux-tu verser au maximum dans ton REER cette année?", bonne: argent(360000), autres: [argent(700000), argent(200000), argent(180000)],
+    ex: "18 % de 20 000 $ = 3 600 $. (Les 7 000 $, c'est le plafond du CELI.)", court: "REER · 18 % du revenu", s: "3.2", p: 86 },
+  { tete: "PANIER D'ÉPICERIE", sous: "Inflation de 2 % par année", lignes: [["Prix aujourd'hui", argent(10000)], ["Dans", "2 ans"]], cible: "PRIX",
+    question: "Combien coûtera le même panier dans 2 ans?", bonne: argent(10404), autres: [argent(10400), argent(10200), argent(12000)],
+    ex: "An 1 : 100 $ + 2 % = 102 $. An 2 : 102 $ + 2 % = 104,04 $. L'inflation se compose, comme les intérêts.", court: "Inflation · panier de 100 $", s: "3.2", p: 90 },
+  // Étape 3 (chantier, ch. 4 et 5)
+  {"tete":"COÛT D'OPPORTUNITÉ","sous":"DEC préuniversitaire, puis bac de 3 ans","lignes":[["Années d'études","5"],["Salaire moyen avec un DES","46 000,00 $"]],"cible":"SALAIRE AUQUEL ON RENONCE","question":"À combien de salaire renonce-t-on?","bonne":"230 000,00 $","autres":["46 000,00 $","138 000,00 $","378 500,00 $"],"ex":"5 ans × 46 000 $ = 230 000 $. On compte le salaire qu'on aurait eu avec un DES, pas celui du bac.","court":"Coût d'opportunité · bac","s":"4.1","p":102},
+  {"tete":"VIE ACTIVE","sous":"DEC technique ou DES?","lignes":[["DEC technique","2 367 000,00 $"],["DES","2 208 000,00 $"]],"cible":"ÉCART","question":"Sur toute une vie active, combien de plus rapporte le DEC technique?","bonne":"159 000,00 $","autres":["6 600,00 $","1 047 100,00 $","138 000,00 $"],"ex":"2 367 000 $ − 2 208 000 $ = 159 000 $ de plus, même avec 3 ans de moins sur le marché du travail.","court":"Vie active · DEC technique","s":"4.1","p":102},
+  {"tete":"TALON DE PAIE","sous":"Salaire horaire","lignes":[["Paie de la semaine","648,00 $"],["Heures travaillées","36"]],"cible":"TAUX HORAIRE","question":"Quel est le taux horaire?","bonne":"18,00 $","autres":["16,60 $","20,00 $","16,20 $"],"ex":"648 $ ÷ 36 h = 18,00 $ l'heure.","court":"Taux horaire · 36 h","s":"4.2","p":104},
+  {"tete":"TALON DE PAIE","sous":"Salaire minimum (1er mai 2026)","lignes":[["Taux général","16,60 $"],["Heures","25"]],"cible":"PAIE BRUTE","question":"Combien gagne-t-on, avant les retenues?","bonne":"415,00 $","autres":["332,50 $","393,75 $","166,00 $"],"ex":"16,60 $ × 25 h = 415,00 $. Le manuel donne 15,75 $ (2024) : depuis le 1er mai 2026, c'est 16,60 $.","court":"Salaire minimum · 25 h","s":"4.2","p":104},
+  {"tete":"VENTES DU MOIS","sous":"Salaire de base + commission","lignes":[["Salaire de base","2 000,00 $"],["Ventes","20 000,00 $"],["Commission","5 %"]],"cible":"PAIE DU MOIS","question":"Combien gagne-t-il ce mois-ci?","bonne":"3 000,00 $","autres":["1 000,00 $","2 000,00 $","22 000,00 $"],"ex":"5 % de 20 000 $ = 1 000 $. 2 000 $ + 1 000 $ = 3 000 $.","court":"Commission · 5 %","s":"4.2","p":104},
+  {"tete":"FACTURE · UNIVERSITÉ","sous":"Session d'automne","lignes":[["Cours","4"],["Coût par cours","≈ 300,00 $"]],"cible":"DROITS DE SCOLARITÉ","question":"Environ combien, sans les frais afférents?","bonne":"1 200,00 $","autres":["1 500,00 $","300,00 $","0,00 $"],"ex":"4 × 300 $ = 1 200 $. Les frais afférents s'ajoutent.","court":"Université · 4 cours","s":"5.1","p":124},
+  {"tete":"BUDGET · APPARTEMENT","sous":"Année scolaire de 8 mois","lignes":[["Dépenses par mois","980,00 $"],["Mois","8"]],"cible":"TOTAL","question":"Combien pour l'année scolaire?","bonne":"7 840,00 $","autres":["11 760,00 $","980,00 $","8 820,00 $"],"ex":"980 $ × 8 mois = 7 840 $. Une année scolaire, c'est 2 sessions de 4 mois, pas 12 mois.","court":"Appartement · 8 mois","s":"5.1","p":126},
+  {"tete":"AIDE FINANCIÈRE AUX ÉTUDES","sous":"Calcul de l'aide","lignes":[["Dépenses admises","12 000,00 $"],["Contributions attendues","4 000,00 $"],["Prêt maximal","5 000,00 $"]],"cible":"BOURSE","question":"Combien reçoit-on en bourse?","bonne":"3 000,00 $","autres":["8 000,00 $","5 000,00 $","0,00 $"],"ex":"12 000 $ − 4 000 $ = 8 000 $ d'aide. Le prêt vient d'abord : 5 000 $. Le reste, 3 000 $, en bourse.","court":"Prêts et bourses","s":"5.2","p":134},
+  {"tete":"REMISE DE DETTE","sous":"Études finies à temps plein, dans les délais","lignes":[["Prêt du programme","12 000,00 $"],["Remise","15 %"]],"cible":"MONTANT EFFACÉ","question":"Combien la remise efface-t-elle?","bonne":"1 800,00 $","autres":["10 200,00 $","1 200,00 $","12 000,00 $"],"ex":"15 % de 12 000 $ = 1 800 $. Il reste 10 200 $ à rembourser.","court":"Remise de dette · 15 %","s":"5.2","p":120},
+  // Étape 3 (chantier, ch. 6 à 8)
+  {"tete":"TALON DE PAIE","sous":"Heures supplémentaires","lignes":[["Taux horaire","18,00 $"],["Heures de la semaine","44"]],"cible":"PAIE DES 4 HEURES EN PLUS","question":"Combien reçoit-on pour les 4 heures au-delà de 40?","bonne":"108,00 $","autres":["72,00 $","144,00 $","792,00 $"],"ex":"Taux et demi : 18 $ × 1,5 = 27 $ ; 4 × 27 $ = 108 $.","court":"Heures supplémentaires","s":"6.1","p":152},
+  {"tete":"TALON DE PAIE","sous":"Salaire brut","lignes":[["Heures par semaine","25"],["Taux horaire","17,00 $"],["Semaines de la paie","2"]],"cible":"SALAIRE BRUT","question":"Quel est le salaire brut de cette paie?","bonne":"850,00 $","autres":["425,00 $","680,00 $","1 700,00 $"],"ex":"25 h × 17 $ × 2 = 850 $.","court":"Brut d'une paie","s":"7.1","p":172},
+  {"tete":"TALON DE PAIE","sous":"Salaire net","lignes":[["Salaire brut","920,00 $"],["Total des retenues","184,00 $"]],"cible":"SALAIRE NET","question":"Combien sera déposé dans le compte?","bonne":"736,00 $","autres":["1 104,00 $","920,00 $","184,00 $"],"ex":"Net = brut − retenues : 920 $ − 184 $ = 736 $.","court":"Net d'une paie","s":"7.1","p":172},
+  {"tete":"ASSURANCE-EMPLOI","sous":"55 % du salaire hebdomadaire","lignes":[["Salaire moyen par semaine","600,00 $"],["Taux des prestations","55 %"]],"cible":"PRESTATION PAR SEMAINE","question":"Combien recevra-t-il par semaine (avant impôt)?","bonne":"330,00 $","autres":["270,00 $","600,00 $","450,00 $"],"ex":"600 $ × 55 % = 330 $ par semaine, sous le maximum.","court":"Prestation d'assurance-emploi","s":"7.2","p":184},
+  {"tete":"TAUX DE CHÔMAGE","sous":"Une petite ville","lignes":[["Population active","20 000"],["Chômeurs","1 200"]],"cible":"TAUX DE CHÔMAGE","question":"Quel est le taux de chômage?","bonne":"6 %","autres":["12 %","1,2 %","60 %"],"ex":"1 200 ÷ 20 000 × 100 = 6 %.","court":"Taux de chômage","s":"7.2","p":180},
+  {"tete":"IMPÔT FÉDÉRAL","sous":"Taux marginal de 15 % (paliers du manuel)","lignes":[["Prime reçue en plus","1 000,00 $"],["Taux marginal","15 %"]],"cible":"IMPÔT FÉDÉRAL SUR LA PRIME","question":"Combien d'impôt fédéral sur cette prime?","bonne":"150,00 $","autres":["1 000,00 $","15,00 $","850,00 $"],"ex":"Seuls ces 1 000 $ en plus sont imposés au taux marginal : 1 000 $ × 15 % = 150 $.","court":"Taux marginal","s":"8.2","p":204}
 ];
 
 /* ============ Les activités ============ */
@@ -507,6 +747,9 @@ const ICO = {
   trend: '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
   recu: '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
   chat: '<path d="M4 5h16v11H9l-5 4z"/>',
+  coffre: '<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3"/><path d="M8 7V4h8v3"/>',
+  mallette: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M3 13h18"/>',
+  badge: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M10 3v3h4V3"/><circle cx="12" cy="11" r="2.5"/><path d="M8 17c1-2 7-2 8 0"/>',
   list: '<path d="M10 6h10M10 12h10M10 18h10M4 6h1M4 12h1M4 18h1"/>'
 };
 const ACTS = [
@@ -518,7 +761,10 @@ const ACTS = [
   { id: "texto", nom: "On te texte", ic: "chat", oi: "Mettre en relation des faits", c1: "#0a2540", c2: "#2563eb" },
   { id: "fiable", nom: "Fiable ou pas?", ic: "shield", oi: "Établir des faits", c1: "#0b3326", c2: "#17895f" },
   { id: "vf", nom: "Vrai ou faux?", ic: "vf", oi: "Établir des faits", c1: "#0d2a3a", c2: "#1b7aa0" },
+  { id: "entrevue", nom: "Permise ou interdite?", ic: "mallette", oi: "Établir des faits", c1: "#2b1a0a", c2: "#8c5a1e" },
+  { id: "normav", nom: "Norme ou avantage?", ic: "badge", oi: "Différences et similitudes", c1: "#14123a", c2: "#4f46e5" },
   { id: "budget", nom: "Classe la dépense", ic: "pie", oi: "Différences et similitudes", c1: "#3a0d24", c2: "#b8336a" },
+  { id: "placement", nom: "Classe le placement", ic: "coffre", oi: "Différences et similitudes", c1: "#0f2a1a", c2: "#2f7d4a" },
   { id: "ordre", nom: "Dans l'ordre", ic: "list", oi: null, c1: "#3a1010", c2: "#a83226" }
 ];
 const actDe = id => ACTS.find(a => a.id === id) || { id, nom: "Teste-toi · " + (id === "examen10" ? 10 : 5) + " questions", c1: "#10140f", c2: "#3f5a12" };
@@ -529,11 +775,14 @@ const Q = {
   besoin: () => glisse(BESOIN, ["Besoin", "Désir"], "Besoin ou désir?"),
   taxe: () => glisse(TAXE, ["Pas taxé", "Taxé"], "Taxé ou pas?"),
   vf: () => glisse(VF, ["Faux", "Vrai"], "Vrai ou faux?"),
+  entrevue: () => glisse(ENTREVUE, ["Interdite", "Permise"], "Permise ou interdite?"),
+  normav: () => glisse(NORMAV, ["Norme du travail", "Avantage social"], "Norme ou avantage?"),
   fiable: () => glisse(FIABLE, ["Pas fiable", "Fiable"], "Fiable ou pas?"),
   budget: () => BUDGET.map(([t, k, ok, ex, s, p]) => ({ type: "swipe", t, cotes: CLASSE[k], titre: CLASSE[k].join(" ou ") + "?", ok, ex, s, p })),
+  placement: () => PLACEMENT.map(([t, k, ok, ex, s, p]) => ({ type: "swipe", t, cotes: CLASSE[k], titre: k === "gr" ? "Ton capital est-il garanti?" : "Rendement connu d'avance?", ok, ex, s, p })),
   pub: () => PUBS.map(([marque, vis, slogan, sous, k, rep, ex, g]) => ({ type: "pub", marque, vis, slogan, sous, obj: k === "o", bonne: rep,
     options: k === "o" ? ["Informer", "Persuader", "Sensibiliser"] : melange([rep, ...melange(STRATS.filter(x => x !== rep && !voisin(x, rep))).slice(0, 3)]), ex, g, s: "1.2", p: k === "o" ? 12 : 14 })),
-  marche: () => MARCHE.map(([sym, nom, sc, sujet, monte, fl, s, p]) => ({ type: "marche", sym, nom, sc, pa: sujet === "pa", bonne: monte ? "Monte" : "Baisse", ex: fl, s, p })),
+  marche: () => MARCHE.map(([sym, nom, sc, sujet, monte, fl, s, p]) => ({ type: "marche", sym, nom, sc, pa: sujet === "pa", sal: sujet === "sal", bonne: monte ? "Monte" : "Baisse", ex: fl, s, p })),
   caisse: () => CAISSE.map(c => ({ type: "caisse", ...c, options: melange([c.bonne, ...melange([...new Set(c.autres)].filter(x => x !== c.bonne)).slice(0, 3)]) })),
   texto: () => TEXTOS.map(([nom, msg, rep, autres, ex, s, p], i) => ({ type: "texto", nom, msg, bonne: rep, options: melange([rep, ...autres]), ex, s, p, h: (i * 47) % 360 })),
   ordre: () => ORDRES.map(([t, items, ex, s, p, n]) => { let it = items;
@@ -665,7 +914,7 @@ const VUES = {
         <path class="tail down" pathLength="1" d="M170 42 L200 52 L228 58 L256 68 L298 78"/>
         <circle cx="170" cy="42" r="4" fill="#7c8373" stroke="none"/></svg>
       <p class="tk-sc">${esc(q.sc)}</p></div>
-      <p class="q-txt">${q.pa ? "Ton pouvoir d'achat…" : "Le prix…"}</p>
+      <p class="q-txt">${q.pa ? "Ton pouvoir d'achat…" : q.sal ? "Le salaire…" : "Le prix…"}</p>
       <div class="choix deux"><button class="ch up" data-i="0">▲ Monte</button><button class="ch down" data-i="1">▼ Baisse</button></div>`;
     brancher(st, q, ["Monte", "Baisse"], () => {
       const up = q.bonne === "Monte";

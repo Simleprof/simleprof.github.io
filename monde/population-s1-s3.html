@@ -140,6 +140,7 @@ strong { font-weight: 700; }
 .warn > b:first-child, .note > b:first-child { display: block; font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
 .warn > b:first-child { color: var(--accent); }
 .note > b:first-child { color: var(--sea); }
+.note .sert { display: block; font-style: italic; color: var(--muted); margin-bottom: 6px; }
 
 /* Chiffres */
 .figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; }
@@ -159,6 +160,26 @@ strong { font-weight: 700; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend span::before { content: ""; width: 14px; height: 4px; border-radius: 2px; background: var(--c); }
 .legend span.blk::before { height: 12px; width: 12px; border-radius: 3px; }
+/* Schémas au cellulaire (2026-11-02) : le schéma rapetisse trop pour ses petites étiquettes ;
+   elles passent sous le schéma en vrai texte, et ce qui reste dans le dessin grossit (≥ 15 px rendus). */
+.viz > .viz-cell, .viz svg .num-cell { display: none !important; }
+@media screen and (max-width: 600px) {
+  .viz svg .hors-cell { display: none; }
+  .viz > .viz-cell { display: grid !important; }
+  .viz svg .num-cell { display: inline !important; font-family: var(--serif); font-weight: 600; font-size: 32px; fill: var(--accent); }
+  .viz svg .chiffre-cell { font-size: 30px !important; }
+  .viz svg .axe-cell { font-size: 26px; }
+  .viz svg .ns-cell { font-size: 32px; }
+  .viz svg .age-cell { font-size: 28px; }
+  .viz-cell { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 16px; line-height: 1.35; }
+  .viz-cell li { display: grid; grid-template-columns: 30px 1fr; gap: 8px; align-items: baseline; }
+  .viz-cell li > b:first-child { font-family: var(--serif); font-size: 20px; color: var(--accent); }
+  .viz-cell span { color: var(--muted); }
+  .viz-cell.duo { grid-template-columns: 1fr 1fr; text-align: center; }
+  .viz-cell.duo > div { display: grid; gap: 2px; align-content: start; }
+  .viz-cell.duo b { font-family: var(--serif); font-size: 17px; }
+  .viz .tbl th, .viz .tbl td { padding: 8px 5px; }
+}
 
 /* Cercles proportionnels */
 .circles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; gap: 8px; text-align: center; }
@@ -221,7 +242,7 @@ strong { font-weight: 700; }
 .letters > div { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 14px; display: grid; gap: 4px; align-content: start; min-width: 0; }
 .letters .L { font-family: var(--serif); font-size: 2.4rem; line-height: .9; color: var(--accent); font-weight: 600; }
 .letters b { font-size: .98rem; }
-.letters span { font-size: .84rem; color: var(--muted); font-style: italic; }
+.letters span { font-size: max(.84rem, 15px); color: var(--muted); font-style: italic; }
 
 /* Pousse / attire */
 .flow { display: grid; grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr); gap: 10px; align-items: stretch; }
@@ -269,15 +290,6 @@ strong { font-weight: 700; }
 .qz .ans { margin: 0 12px 12px; padding: 12px 14px; border-radius: 12px; background: var(--sea-soft); animation: reveal .35s cubic-bezier(.3, 1.4, .5, 1); transform-origin: top center; }
 @keyframes reveal { from { opacity: 0; transform: scale(.92) translateY(-6px); } }
 
-/* Liste « prêt » */
-.ready { display: grid; gap: 14px; }
-.meter { height: 10px; background: var(--paper-2); border-radius: 999px; overflow: hidden; max-width: 70ch; }
-.meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--sea), var(--c-amn)); transition: width .4s; }
-.check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; max-width: 70ch; }
-.check label { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; cursor: pointer; }
-.check input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--sea); flex: none; }
-.check input:checked + span { text-decoration: line-through; color: var(--muted); }
-.score { font-family: var(--mono); font-size: .85rem; color: var(--muted); }
 
 footer { margin-top: 64px; background: var(--hero); color: rgba(245, 242, 234, .7); }
 footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
@@ -291,7 +303,6 @@ footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
   /* Un thème peut se couper d'une page à l'autre (sinon Chrome laisse des pages blanches) ; ses morceaux restent entiers. */
   .viz, .model, .qz details, .mini, .side, .callout, figure { break-inside: avoid; }
   .qz .go { display: none; }
-  #pret { display: none; }
 }
 /* Ajouts : frise dans une carte, flux animés, grille urbaine, paradoxe */
 .side .frise li { grid-template-columns: 52px minmax(0, 1fr); gap: 10px; }
@@ -314,15 +325,42 @@ footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
 .para .yrs span { flex: 1; text-align: center; }
 .para h4 { font-size: 1.05rem; }
 .hero-route { width: 100%; height: auto; display: block; }
-.hero-route text { fill: rgba(245, 242, 234, .8); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; }
+.hero-route text { fill: rgba(245, 242, 234, .8); font-family: var(--mono); font-size: 17px; letter-spacing: .06em; }
 @media (prefers-reduced-motion: reduce) { .hero-route .mov { display: none; } }
 </style>
 
 
+<style id="retour-haut">
+/* Retour en haut (2026-10-27) : un clic remonte à l'en-tête ; il apparaît en fondu quand on descend (sans script).
+   En bas à gauche : le bouton « Aa » du site est en bas à droite. */
+html { scroll-behavior: smooth; }
+.haut { position: fixed; left: max(14px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 7999;
+  padding: 11px 18px; border-radius: 999px; background: var(--ink, #15171C); color: var(--paper, #fff);
+  font: 700 16px/1 system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+.haut:hover { transform: translateY(-2px); }
+@supports (animation-timeline: scroll()) {
+  .haut { animation: haut-apparait linear both; animation-timeline: scroll(); animation-range: 0 500px; }
+  @keyframes haut-apparait { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media print { .haut { display: none !important; } }
+</style>
+<style id="vue-choix">
+/* En haut : Notes de cours (ici) ou Exercices (l'app), comme en Finances. Caché à l'impression et au TBI (ouvert du tableau de bord). */
+.vue-choix { background: var(--hero); }
+.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
+.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 1.5px solid color-mix(in srgb, var(--hero-ink) 40%, transparent); border-radius: 12px; color: var(--hero-ink); text-decoration: none; text-align: center; font-family: var(--serif); font-weight: 700; line-height: 1.1; }
+.vue-choix .wrap a { font-size: clamp(20px, 5.4vw, 26px) !important; }
+.vue-choix a small { font-family: var(--mono); font-size: 15px; font-weight: 400; opacity: .85; }
+.vue-choix a.on { background: var(--gold); border-color: var(--gold); color: #13202F; }
+.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--gold); }
+body:has(#retour-tdb) .vue-choix { display: none; }
+@media print { .vue-choix { display: none !important; } }
+</style>
+
 <style id="texte-lisible">
 /* Texte lisible (2026-10-25) : étiquettes ≥ 15 px, texte courant ≥ 16 px, au cell et à l'ordi seulement (le TBI et l'impression gardent leurs tailles). */
 @media screen and (max-width: 1400px) {
-  #score,
   div.cap,
   div.eq > span,
   div.exam > span,
@@ -337,11 +375,13 @@ footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
   div.pill,
   div.pill > b,
   div.warn > b,
-  div.wrap > a,
   div.wrap > em,
+  dt > small,
   figcaption.dleg > span,
+  h4 > small,
   header > span,
   mark,
+  nav.nav > div.wrap > a,
   span > b,
   span.blk,
   span.cap,
@@ -361,27 +401,12 @@ footer .wrap { padding-block: 22px 40px; font-size: .85rem; }
   tbody,
   th,
   th.r { font-size: 15px !important; }
+  div.toc > a > small,
   footer > div.wrap,
   p.ex,
-  small,
   td,
   td.r { font-size: 16px !important; }
 }
-</style>
-<style id="retour-haut">
-/* Retour en haut (2026-10-27) : un clic remonte à l'en-tête ; il apparaît en fondu quand on descend (sans script).
-   En bas à gauche : le bouton « Aa » du site est en bas à droite. */
-html { scroll-behavior: smooth; }
-.haut { position: fixed; left: max(14px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 7999;
-  padding: 11px 18px; border-radius: 999px; background: var(--ink, #15171C); color: var(--paper, #fff);
-  font: 700 16px/1 system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.28); }
-.haut:hover { transform: translateY(-2px); }
-@supports (animation-timeline: scroll()) {
-  .haut { animation: haut-apparait linear both; animation-timeline: scroll(); animation-range: 0 500px; }
-  @keyframes haut-apparait { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
-}
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-@media print { .haut { display: none !important; } }
 </style>
 <style id="qr-notes-sec5">
 /* « Est-ce que j'ai compris? » en fin de section. Posé par [98] Coulisses/[05] Claude/outils/qr/qr-notes-sec5.js */
@@ -404,28 +429,16 @@ html { scroll-behavior: smooth; }
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
 </style>
-<style id="vue-choix">
-/* En haut : Notes de cours (ici) ou Exercices (l'app), comme en Finances. Caché à l'impression et au TBI (ouvert du tableau de bord). */
-.vue-choix { background: var(--hero); }
-.vue-choix .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 14px 0; }
-.vue-choix a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px; border: 1.5px solid color-mix(in srgb, var(--hero-ink) 40%, transparent); border-radius: 12px; color: var(--hero-ink); text-decoration: none; text-align: center; font-family: var(--serif); font-weight: 700; line-height: 1.1; }
-.vue-choix .wrap a { font-size: clamp(20px, 5.4vw, 26px) !important; }
-.vue-choix a small { font-family: var(--mono); font-size: 15px; font-weight: 400; opacity: .85; }
-.vue-choix a.on { background: var(--gold); border-color: var(--gold); color: #13202F; }
-.vue-choix a:not(.on):hover, .vue-choix a:not(.on):focus-visible { border-color: var(--gold); }
-body:has(#retour-tdb) .vue-choix { display: none; }
-@media print { .vue-choix { display: none !important; } }
-</style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
 <body>
-
 <!-- vue-choix -->
 <nav class="vue-choix" aria-label="Notes de cours ou exercices"><div class="wrap">
   <a class="on" target="_top" href="https://simleprof.github.io/monde/#notes" aria-current="page">Notes de cours<small>Toutes mes notes</small></a>
   <a target="_top" href="https://simleprof.github.io/monde/#exercices=1,2,3">Exercices<small>Me tester · sections 1, 2 et 3</small></a>
 </div></nav>
 <!-- /vue-choix -->
+
 <header class="hero">
   <div class="wrap">
     <div>
@@ -451,7 +464,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <a href="#s3">3 · Migrants</a>
     <a href="#dev">Développement</a>
     <a href="#quiz">Teste-toi</a>
-    <a href="#pret">Prêt?</a>
   </div>
   <div class="prog"></div>
 </nav>
@@ -533,12 +545,18 @@ body:has(#retour-tdb) .vue-choix { display: none; }
         <path class="grid" d="M175 30 V215 M290 30 V215 M405 30 V215"/>
         <path d="M60 52 L200 52 C260 52, 300 165, 360 168 L520 172" style="stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round"/>
         <path d="M60 64 L100 64 C150 64, 200 163, 270 168 L520 178" style="stroke:var(--sea);stroke-width:4;fill:none;stroke-linecap:round"/>
-        <g style="font-family:var(--serif);font-size:24px;font-weight:600"><text x="106" y="40">1</text><text x="226" y="40">2</text><text x="341" y="40">3</text><text x="456" y="40">4</text></g>
-        <text x="184" y="90" style="font-weight:700">Croissance</text><text x="184" y="106" style="font-weight:700">rapide</text>
+        <g style="font-family:var(--serif);font-size:24px;font-weight:600"><text class="chiffre-cell" x="106" y="40">1</text><text class="chiffre-cell" x="226" y="40">2</text><text class="chiffre-cell" x="341" y="40">3</text><text class="chiffre-cell" x="456" y="40">4</text></g>
+        <g class="hors-cell"><text x="184" y="90" style="font-weight:700">Croissance</text><text x="184" y="106" style="font-weight:700">rapide</text>
         <text class="sm" x="62" y="236">Tout est haut</text><text class="sm" x="182" y="236">Mortalité ↓</text><text class="sm" x="297" y="236">Natalité ↓</text><text class="sm" x="420" y="236">Tout est bas</text>
-        <text class="sm" x="62" y="252">croissance lente</text><text class="sm" x="182" y="252">médecine, hygiène</text><text class="sm" x="297" y="252">moins d'enfants</text><text class="sm" x="420" y="252">vieillissement</text>
-        <text class="sm" x="6" y="16">Taux</text>
+        <text class="sm" x="62" y="252">croissance lente</text><text class="sm" x="182" y="252">médecine, hygiène</text><text class="sm" x="297" y="252">moins d'enfants</text><text class="sm" x="420" y="252">vieillissement</text></g>
+        <text class="sm axe-cell" x="6" y="16">Taux</text>
       </svg>
+      <ol class="viz-cell">
+        <li><b>1</b><span><strong>Tout est haut</strong> : croissance lente</span></li>
+        <li><b>2</b><span><strong>Mortalité ↓</strong> : médecine, hygiène ; croissance rapide</span></li>
+        <li><b>3</b><span><strong>Natalité ↓</strong> : moins d'enfants</span></li>
+        <li><b>4</b><span><strong>Tout est bas</strong> : vieillissement</span></li>
+      </ol>
       <div class="legend"><span style="--c:var(--accent)">Natalité</span><span style="--c:var(--sea)">Mortalité</span><span class="blk" style="--c:var(--gold)">Écart : la population augmente</span></div>
     </div>
     <div class="note"><b>Repère</b>Beaucoup de <strong>pays en développement</strong> sont en phase 2 ou 3 : leur population grimpe vite. La plupart des <strong>pays développés</strong> sont en phase 4 : peu de naissances et une population qui vieillit.</div>
@@ -568,7 +586,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="warn"><b>Piège</b>L'<strong>Asie</strong> reste de loin la région la <strong>plus peuplée</strong> (4,7 milliards, près de 60 % de l'humanité). Être la plus peuplée et grandir le plus vite, ce n'est pas la même chose : lis bien la question.</div>
     <div class="th"><h3 style="font-size:1.25rem">Les grandes vagues migratoires de l'histoire</h3></div>
     <ol class="frise">
-      <li><span class="y">−30 000 ans</span><span>Des chasseurs d'Asie passent en Amérique par la <strong>Béringie</strong>.</span></li>
+      <li><span class="y">−30 000 ans</span><span>Des chasseurs d'Asie passent en Amérique par la <strong>Béringie</strong> (un pont de terre entre l'Asie et l'Alaska).</span></li>
       <li><span class="y">IXe–XIe s.</span><span>Les <strong>Vikings</strong> atteignent le Groenland et Terre-Neuve.</span></li>
       <li><span class="y">XVe–XVIIIe s.</span><span>Les Européens colonisent l'Amérique.</span></li>
       <li><span class="y">XVIe–XIXe s.</span><span>Des Africains sont déportés de force en Amérique : la <strong>traite des esclaves</strong>.</span></li>
@@ -611,7 +629,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="fig" style="--c:var(--c-afrique)"><b>83,5 %</b><span>vivent dans un pays en développement</span></div>
       <div class="fig" style="--c:var(--sea)"><b>2008</b><span>depuis, plus de la moitié de l'humanité vit en ville</span></div>
     </div>
-    <p>Les grands foyers de population : l'Asie de l'Est, du Sud et du Sud-Est, l'Europe, le nord-est des États-Unis, le golfe de Guinée et le sud-est du Brésil. Ailleurs, la densité est faible, pour <strong>trois raisons</strong> :</p>
+    <p>Les grands foyers de population : l'Asie de l'Est, du Sud et du Sud-Est, l'Europe, le nord-est des États-Unis, le golfe de Guinée et le sud-est du Brésil. Les régions les moins peuplées sont les <strong>régions polaires</strong>, les <strong>déserts</strong> et les <strong>forêts tropicales</strong>. La densité y est faible pour <strong>trois raisons</strong> :</p>
     <div class="trio">
       <div class="mini"><span class="ic" aria-hidden="true">❄️</span><h4>Un climat rigoureux</h4><p>Il fait trop froid ou trop sec pour y vivre facilement.</p><p class="ex">Les régions polaires, les déserts</p></div>
       <div class="mini"><span class="ic" aria-hidden="true">💧</span><h4>Le manque de ressources</h4><p>Il y a peu d'eau, de terres cultivables ou de nourriture.</p><p class="ex">Le Sahara</p></div>
@@ -629,6 +647,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   <section class="topic" id="indicateurs">
     <div class="th"><h3>Les indicateurs démographiques</h3><span class="ess">Essentiel</span></div>
     <dl class="lex">
+      <div><dt>Fécondité</dt><dd>La <strong>capacité</strong> d'une femme à avoir des enfants. Ce n'est pas un nombre : ne la confonds pas avec l'indice de fécondité.</dd></div>
       <div style="--c:var(--accent)"><dt>Indice de fécondité</dt><dd>Nombre <strong>moyen d'enfants par femme</strong> dans un pays. Moyenne mondiale : <strong>2,4</strong> (2020).</dd></div>
       <div style="--c:var(--accent)"><dt>Seuil de renouvellement <small>(ou taux de remplacement)</small></dt><dd><strong>2,1 enfants par femme</strong> : ce qu'il faut pour qu'une population se renouvelle. Plusieurs pays développés sont <strong>sous</strong> ce seuil.</dd></div>
       <div><dt>Migration</dt><dd>Déplacement de personnes d'un lieu à un autre, d'un pays à un autre ou d'une région à une autre.</dd></div>
@@ -639,6 +658,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="eq"><b>Accroissement total</b><span>(naissances <i>+</i> immigrants) <i>−</i> (décès <i>+</i> émigrants)</span></div>
     </div>
     <div class="warn"><b>Piège classique</b>L'<strong>accroissement naturel ne compte pas les migrations</strong>, seulement les naissances et les décès. Pour inclure l'immigration, il faut parler d'<strong>accroissement total</strong>.</div>
+    <div class="note"><b>Nuance : le Canada, loin sous le seuil</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Le manuel dit que <em>certains</em> pays développés sont sous 2,1. Le Canada en fait partie : <strong>1,26 enfant par femme en 2023</strong>. C'est le plus bas jamais enregistré. En Colombie-Britannique : 1,00. (Statistique Canada, 2024)</div>
     <div class="viz">
       <span class="cap">Accroissement naturel de 2010 à 2020</span>
       <div class="scroll">
@@ -730,8 +750,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 <rect x="118" y="46" width="10" height="18" rx="3" style="fill:var(--sea)"/>
 <rect x="132" y="46" width="10" height="18" rx="3" style="fill:var(--accent)"/>
 <text class="sm" x="130" y="59" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<text x="130" y="244" text-anchor="middle" style="font-family:var(--serif);font-weight:600;font-size:16px">Population jeune</text>
-<text class="sm" x="130" y="262" text-anchor="middle">pays en développement : beaucoup de naissances</text>
+<text class="hors-cell" x="130" y="244" text-anchor="middle" style="font-family:var(--serif);font-weight:600;font-size:16px">Population jeune</text>
+<text class="sm hors-cell" x="130" y="262" text-anchor="middle">pays en développement : beaucoup de naissances</text>
 </g><g transform="translate(320,0)">
 <rect x="72" y="200" width="56" height="18" rx="3" style="fill:var(--sea)"/>
 <rect x="132" y="200" width="56" height="18" rx="3" style="fill:var(--accent)"/>
@@ -757,31 +777,32 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 <rect x="70" y="46" width="58" height="18" rx="3" style="fill:var(--sea)"/>
 <rect x="132" y="46" width="58" height="18" rx="3" style="fill:var(--accent)"/>
 <text class="sm" x="130" y="59" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<text x="130" y="244" text-anchor="middle" style="font-family:var(--serif);font-weight:600;font-size:16px">Population vieillissante</text>
-<text class="sm" x="130" y="262" text-anchor="middle">pays développés : peu de naissances, longue vie</text>
-</g><text class="sm" x="290" y="213" text-anchor="middle">0–9</text>
-<text class="sm" x="290" y="191" text-anchor="middle">10–19</text>
-<text class="sm" x="290" y="169" text-anchor="middle">20–29</text>
-<text class="sm" x="290" y="147" text-anchor="middle">30–39</text>
-<text class="sm" x="290" y="125" text-anchor="middle">40–49</text>
-<text class="sm" x="290" y="103" text-anchor="middle">50–59</text>
-<text class="sm" x="290" y="81" text-anchor="middle">60–69</text>
-<text class="sm" x="290" y="59" text-anchor="middle">70+</text><text class="sm" x="290" y="20" text-anchor="middle">ÂGE</text></svg>
+<text class="hors-cell" x="130" y="244" text-anchor="middle" style="font-family:var(--serif);font-weight:600;font-size:16px">Population vieillissante</text>
+<text class="sm hors-cell" x="130" y="262" text-anchor="middle">pays développés : peu de naissances, longue vie</text>
+</g><text class="sm age-cell" x="290" y="213" text-anchor="middle">0–9</text>
+<text class="sm hors-cell" x="290" y="191" text-anchor="middle">10–19</text>
+<text class="sm hors-cell" x="290" y="169" text-anchor="middle">20–29</text>
+<text class="sm hors-cell" x="290" y="147" text-anchor="middle">30–39</text>
+<text class="sm hors-cell" x="290" y="125" text-anchor="middle">40–49</text>
+<text class="sm hors-cell" x="290" y="103" text-anchor="middle">50–59</text>
+<text class="sm hors-cell" x="290" y="81" text-anchor="middle">60–69</text>
+<text class="sm age-cell" x="290" y="59" text-anchor="middle">70+</text><text class="sm age-cell" x="290" y="20" text-anchor="middle">ÂGE</text></svg>
+      <div class="viz-cell duo"><div><b>Population jeune</b><span>pays en développement : beaucoup de naissances</span></div><div><b>Population vieillissante</b><span>pays développés : peu de naissances, longue vie</span></div></div>
       <div class="legend"><span class="blk" style="--c:var(--sea)">Hommes</span><span class="blk" style="--c:var(--accent)">Femmes</span></div>
     </div>
-    <dl class="lex"><div style="--c:var(--accent)"><dt>Population vieillissante</dt><dd>Population où la <strong>proportion de personnes âgées augmente</strong> d'année en année. Deux causes : il naît <strong>moins d'enfants</strong> et les gens <strong>vivent plus longtemps</strong>.</dd></div></dl>
-    <p><strong>Pourquoi on fait moins d'enfants dans les pays développés</strong> (depuis les années 1960 à 1990) :</p>
+    <dl class="lex"><div style="--c:var(--accent)"><dt>Population vieillissante</dt><dd>Population où la <strong>proportion de personnes âgées augmente</strong> d'année en année. Deux causes. Il naît <strong>moins d'enfants</strong>. Les gens <strong>vivent plus longtemps</strong>. Et ça s'entretient : moins de jeunes aujourd'hui, c'est moins de parents demain. Donc encore moins de naissances.</dd></div></dl>
+    <p><strong>Pourquoi on fait moins d'enfants dans les pays développés</strong> (entre les années 1960 et 1990) :</p>
     <ul>
       <li>la <strong>pilule contraceptive</strong> ;</li>
       <li>la présence des <strong>femmes sur le marché du travail</strong> ;</li>
-      <li>la légalisation de l'<strong>avortement</strong> dans plusieurs pays ;</li>
+      <li>la décriminalisation de l'<strong>avortement</strong> dans plusieurs pays ;</li>
       <li>le <strong>recul du mariage</strong> et la hausse des <strong>divorces</strong>.</li>
     </ul>
     <div class="note"><b>À savoir : l'émancipation des femmes en Occident</b>Elle a deux grands moteurs. Les <strong>guerres mondiales</strong> : pendant que les hommes sont au front, les femmes les remplacent dans les usines et prouvent qu'elles peuvent travailler. La <strong>pilule contraceptive</strong>, dans les années 1960 : les femmes choisissent quand avoir des enfants, et combien.</div>
     <p>Pour freiner le vieillissement, les pays développés ont deux solutions : <span class="key">encourager les naissances</span> et <span class="key">recourir à l'immigration</span>.</p>
     <div class="duo">
       <div class="side" style="--c:var(--c-amn)">
-        <h4>Les mesures natalistes<small>Elles encouragent sans forcer</small></h4>
+        <h4>Les mesures natalistes<small>Elles encouragent les naissances, sans forcer</small></h4>
         <ul>
           <li><i>+</i><span>Accompagnement des futures mères</span></li>
           <li><i>+</i><span>Aide financière à la naissance</span></li>
@@ -829,7 +850,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <dl class="lex">
       <div style="--c:var(--c-amn)"><dt>Immigrant</dt><dd>Personne qui <strong>arrive</strong> dans un pays pour s'y installer.</dd></div>
       <div style="--c:var(--accent)"><dt>Émigrant</dt><dd>Personne qui <strong>quitte</strong> son pays.</dd></div>
-      <div><dt>Migration temporaire</dt><dd>On garde sa résidence dans le pays de départ et on y <strong>revient</strong>. <span class="ex">Les études, le travail saisonnier</span></dd></div>
+      <div><dt>Migration temporaire</dt><dd>On garde sa résidence dans le pays de départ et on y <strong>revient</strong>. Ces migrations sont <strong>de plus en plus nombreuses</strong>, et certaines deviennent permanentes. <span class="ex">Les études, le travail saisonnier</span></dd></div>
       <div><dt>Migration définitive</dt><dd>Le pays d'accueil devient le lieu d'établissement <strong>permanent</strong>.</dd></div>
       <div><dt>Migrant international</dt><dd>Personne qui quitte son pays pour vivre dans un pays étranger <strong>plus d'un an</strong>.</dd></div>
       <div><dt>Résident permanent</dt><dd>Personne qui a le <strong>droit de vivre</strong> dans un pays sans en avoir la citoyenneté.</dd></div>
@@ -852,7 +873,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <svg viewBox="0 0 640 310" role="img" aria-label="Schéma des flux migratoires : du Mexique et de l'Amérique centrale vers l'Amérique du Nord, de l'Afrique vers l'Union européenne, de l'Asie du Sud vers le golfe Persique, de l'Asie du Sud-Est vers l'Australie, de l'Asie de l'Est vers l'Amérique du Nord.">
         <defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker></defs>
         <path d="M0 150 H640" class="grid"/>
-        <text class="sm" x="4" y="142">NORD ↑</text><text class="sm" x="4" y="166">SUD ↓</text>
+        <text class="sm ns-cell" x="4" y="142">NORD ↑</text><text class="sm ns-cell" x="4" y="178">SUD ↓</text>
         <g style="stroke:var(--accent);stroke-width:2.5;fill:none;stroke-dasharray:6 6" class="fl">
           <path d="M160 180 Q 190 130, 146 94" marker-end="url(#ah)"/>
           <path d="M320 215 Q 290 140, 328 84" marker-end="url(#ah)"/>
@@ -862,13 +883,21 @@ body:has(#retour-tdb) .vue-choix { display: none; }
         </g>
         <g style="fill:var(--sea)"><circle cx="140" cy="82" r="9"/><circle cx="330" cy="72" r="9"/><circle cx="420" cy="150" r="9"/><circle cx="560" cy="270" r="9"/></g>
         <g style="fill:var(--card);stroke:var(--accent);stroke-width:2.5"><circle cx="160" cy="182" r="6"/><circle cx="320" cy="217" r="6"/><circle cx="490" cy="170" r="6"/><circle cx="600" cy="205" r="6"/><circle cx="560" cy="110" r="6"/></g>
-        <g style="font-weight:700"><text x="126" y="87" text-anchor="end">Amérique du Nord</text><text x="346" y="98">Union européenne</text><text x="420" y="134" text-anchor="middle">Golfe Persique</text><text x="560" y="297" text-anchor="middle">Australie</text></g>
+        <g class="hors-cell"><g style="font-weight:700"><text x="126" y="87" text-anchor="end">Amérique du Nord</text><text x="346" y="98">Union européenne</text><text x="420" y="134" text-anchor="middle">Golfe Persique</text><text x="560" y="297" text-anchor="middle">Australie</text></g>
         <text class="sm" x="160" y="202" text-anchor="middle">Mexique, Amérique centrale</text>
         <text class="sm" x="320" y="236" text-anchor="middle">Afrique</text>
         <text class="sm" x="490" y="190" text-anchor="middle">Asie du Sud</text>
         <text class="sm" x="634" y="192" text-anchor="end">Asie du Sud-Est</text>
-        <text class="sm" x="560" y="130" text-anchor="middle">Asie de l'Est</text>
+        <text class="sm" x="560" y="130" text-anchor="middle">Asie de l'Est</text></g>
+        <g text-anchor="middle"><text class="num-cell" x="160" y="222">1</text><text class="num-cell" x="320" y="256">2</text><text class="num-cell" x="490" y="210">3</text><text class="num-cell" x="624" y="190">4</text><text class="num-cell" x="590" y="104">5</text></g>
       </svg>
+      <ol class="viz-cell">
+        <li><b>1</b><span>Mexique, Amérique centrale → <strong>Amérique du Nord</strong></span></li>
+        <li><b>2</b><span>Afrique → <strong>Union européenne</strong></span></li>
+        <li><b>3</b><span>Asie du Sud → <strong>golfe Persique</strong></span></li>
+        <li><b>4</b><span>Asie du Sud-Est → <strong>Australie</strong></span></li>
+        <li><b>5</b><span>Asie de l'Est → <strong>Amérique du Nord</strong></span></li>
+      </ol>
       <div class="legend"><span class="blk" style="--c:var(--sea)">Grande région d'accueil</span><span style="--c:var(--accent)">Flux depuis une région d'origine</span></div>
     </div>
     <p>La majorité des migrants viennent des <strong>pays en développement</strong> : ce sont les pays les plus peuplés, et leur situation économique et politique est souvent difficile.</p>
@@ -918,11 +947,12 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   <section class="topic" id="refugies">
     <div class="th"><h3>Réfugiés et clandestins</h3><span class="ess">Essentiel</span></div>
     <dl class="lex">
-      <div style="--c:var(--accent)"><dt>Réfugié</dt><dd>Personne qui <strong>fuit</strong> son pays parce que sa <strong>sécurité est menacée</strong>, et qui demande la protection d'un autre pays.</dd></div>
+      <div style="--c:var(--accent)"><dt>Réfugié</dt><dd>Personne qui <strong>fuit</strong> son pays parce que sa <strong>sécurité est menacée</strong>, et qui demande la protection d'un autre pays. Il <strong>quitte son pays</strong> : celui qui fuit sans en sortir est un <strong>déplacé interne</strong>.</dd></div>
       <div style="--c:var(--accent)"><dt>Droit d'asile</dt><dd>Droit d'une personne persécutée d'être <strong>protégée</strong> par le pays où elle en fait la demande.</dd></div>
       <div><dt>Immigrant clandestin <small>(illégal, sans-papiers)</small></dt><dd>Personne qui entre ou reste dans un pays <strong>sans autorisation</strong> : elle ne remplit pas les critères, ou son permis est expiré. Elle passe souvent par des <strong>passeurs</strong> (des réseaux criminels).</dd></div>
     </dl>
     <p><strong>Pourquoi on fuit</strong> : les persécutions (ethniques, religieuses, politiques), la <strong>guerre</strong>, une catastrophe environnementale.</p>
+    <div class="note"><b>Nuance : le « réfugié climatique » n'existe pas en droit</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Une sécheresse ou une inondation pousse bien des gens à fuir. Mais la Convention de Genève protège seulement la personne <strong>persécutée</strong> (menacée) pour sa race, sa religion, sa nationalité, son groupe social ou ses opinions politiques. Fuir une catastrophe ne suffit donc pas pour être reconnu réfugié. (Haut Commissariat des Nations unies pour les réfugiés)</div>
     <div class="trio">
       <div class="mini"><span class="ic" aria-hidden="true">📜</span><h4>Convention de Genève, 1951</h4><p>Les pays signataires doivent accorder le <strong>droit d'asile</strong>. Le réfugié a droit à la liberté d'expression, aux soins, à l'école et au travail. En retour, il doit respecter les lois du pays.</p></div>
       <div class="mini"><span class="ic" aria-hidden="true">🇸🇾</span><h4>Syrie, depuis 2011</h4><p>Guerre civile : plus de <strong>5,6 millions</strong> de Syriens ont fui leur pays, surtout vers la Türkiye.</p></div>
@@ -986,39 +1016,18 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <p class="muted">Réponds dans ta tête ou sur une feuille, puis clique sur la carte pour vérifier.</p>
     <div class="qz">
       <details><summary><span class="k">Vrai ou faux</span>Un pays où il meurt plus de gens qu'il en naît voit forcément sa population diminuer.<span class="go">Révéler</span></summary><div class="ans"><strong>Faux.</strong> L'<strong>immigration</strong> peut compenser. C'est le cas de l'Europe.</div></details>
-      <details><summary><span class="k">Vrai ou faux</span>La plupart des pays développés ont un indice de fécondité sous le seuil de renouvellement.<span class="go">Révéler</span></summary><div class="ans"><strong>Vrai.</strong> Ils sont souvent sous <strong>2,1 enfants par femme</strong>.</div></details>
+      <details><summary><span class="k">Vrai ou faux</span>Plusieurs pays développés ont un indice de fécondité sous le seuil de renouvellement.<span class="go">Révéler</span></summary><div class="ans"><strong>Vrai.</strong> Ils sont sous <strong>2,1 enfants par femme</strong>. Le Canada, par exemple, est à 1,26 (2023).</div></details>
       <details><summary><span class="k">Vrai ou faux</span>Les flux migratoires vont surtout du Nord vers le Sud.<span class="go">Révéler</span></summary><div class="ans"><strong>Faux.</strong> Ils vont surtout du <strong>Sud vers le Nord</strong>, des pays en développement vers les pays développés.</div></details>
       <details><summary><span class="k">Transition démographique</span>Pourquoi la population explose-t-elle au milieu de la transition démographique?<span class="go">Révéler</span></summary><div class="ans">La <strong>mortalité baisse avant la natalité</strong>. Pendant un moment, il naît beaucoup plus de gens qu'il en meurt.</div></details>
       <details><summary><span class="k">Choix multiples</span>Quelle région a la plus forte croissance en % depuis 1990 : l'Asie, l'Amérique du Nord, l'Afrique ou l'Europe?<span class="go">Révéler</span></summary><div class="ans">L'<strong>Afrique</strong> : sa population a plus que doublé (+113 %).</div></details>
       <details><summary><span class="k">Explique en une phrase</span>C'est quoi, l'accroissement naturel?<span class="go">Révéler</span></summary><div class="ans">La <strong>différence entre les naissances et les décès</strong> dans une population, sans tenir compte des migrations.</div></details>
       <details><summary><span class="k">Facteur d'attraction?</span>Lequel n'en est PAS un : un emploi offert, une diaspora sur place, une guerre dans son pays, une langue commune?<span class="go">Révéler</span></summary><div class="ans">La <strong>guerre dans son pays</strong>. Elle <strong>pousse</strong> à partir, mais n'attire pas vers un pays précis.</div></details>
-      <details><summary><span class="k">Réponse courte</span>Nomme deux causes de la baisse de la natalité dans les pays développés.<span class="go">Révéler</span></summary><div class="ans">Au choix : la <strong>pilule contraceptive</strong>, les <strong>femmes sur le marché du travail</strong>, l'avortement légalisé, le recul du mariage, les divorces.</div></details>
+      <details><summary><span class="k">Réponse courte</span>Nomme deux causes de la baisse de la natalité dans les pays développés.<span class="go">Révéler</span></summary><div class="ans">Au choix : la <strong>pilule contraceptive</strong>, les <strong>femmes sur le marché du travail</strong>, l'avortement décriminalisé, le recul du mariage, les divorces.</div></details>
       <details><summary><span class="k">Réponse courte</span>Nomme trois mesures qui encouragent les naissances.<span class="go">Révéler</span></summary><div class="ans">Au choix : les <strong>allocations familiales</strong>, les <strong>congés parentaux</strong>, les <strong>services de garde</strong>, l'aide financière à la naissance, les allègements fiscaux, l'accompagnement des futures mères.</div></details>
       <details><summary><span class="k">Point de vue</span>Une Française s'installe à Québec. Pour la France, est-ce une immigrante ou une émigrante?<span class="go">Révéler</span></summary><div class="ans">Une <strong>émigrante</strong> : elle quitte la France.</div></details>
       <details><summary><span class="k">Vrai ou faux</span>Un travailleur temporaire devient automatiquement résident permanent après cinq ans.<span class="go">Révéler</span></summary><div class="ans"><strong>Faux.</strong> Il doit faire une <strong>demande officielle</strong> et être accepté. S'il reste sans permis, sa situation devient illégale.</div></details>
       <details><summary><span class="k">Association</span>Associe : A. Diaspora · B. Densité · C. Droit d'asile<br>1. Habitants au km² · 2. Protection d'une personne persécutée · 3. Communauté dispersée dans le monde<span class="go">Révéler</span></summary><div class="ans"><strong>A-3, B-1, C-2.</strong></div></details>
     </div>
-  </section>
-
-  <!-- ===================== CHECKLIST ===================== -->
-  <header class="sec-head" id="pret">
-    <div class="lab">Bilan <span id="score" class="score" aria-live="polite">0 sur 10</span></div>
-    <h2>Je suis prêt <em>si je peux…</em></h2>
-  </header>
-  <section class="ready">
-    <div class="meter"><i id="meter"></i></div>
-    <ul class="check" id="checklist" data-key="monde-pop-s1s3-pret">
-      <li><label for="c1"><input type="checkbox" id="c1"><span>Définir en une phrase le taux de natalité, le taux de mortalité et l'espérance de vie.</span></label></li>
-      <li><label for="c2"><input type="checkbox" id="c2"><span>Expliquer la transition démographique : la mortalité baisse avant la natalité.</span></label></li>
-      <li><label for="c3"><input type="checkbox" id="c3"><span>Dire quelle région grandit le plus vite (l'Afrique), laquelle est la plus peuplée (l'Asie) et laquelle stagne (l'Europe).</span></label></li>
-      <li><label for="c4"><input type="checkbox" id="c4"><span>Donner trois raisons de la faible densité de certaines régions.</span></label></li>
-      <li><label for="c5"><input type="checkbox" id="c5"><span>Distinguer l'accroissement naturel, le solde migratoire et l'accroissement total. Savoir que 2,1 est le seuil de renouvellement.</span></label></li>
-      <li><label for="c6"><input type="checkbox" id="c6"><span>Comparer les pays développés et en développement (natalité, mortalité, espérance de vie, migrations).</span></label></li>
-      <li><label for="c7"><input type="checkbox" id="c7"><span>Expliquer le vieillissement et ses causes, les mesures natalistes et la politique de l'enfant unique.</span></label></li>
-      <li><label for="c8"><input type="checkbox" id="c8"><span>Distinguer immigrant et émigrant, migration temporaire et définitive, réfugié et clandestin.</span></label></li>
-      <li><label for="c9"><input type="checkbox" id="c9"><span>Faire le portrait des migrants (âge, origine, Sud → Nord) et nommer les cinq facteurs du choix du pays d'accueil.</span></label></li>
-      <li><label for="c10"><input type="checkbox" id="c10"><span>Donner mon opinion, avec deux arguments, sur l'immigration comme solution à la baisse de la natalité.</span></label></li>
-    </ul>
   </section>
 </main>
 
@@ -1073,31 +1082,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-
-  // Liste « Je suis prêt »
-  var list = document.getElementById("checklist");
-  if (list) {
-    var KEY = list.getAttribute("data-key");
-    var boxes = Array.prototype.slice.call(list.querySelectorAll("input"));
-    var score = document.getElementById("score");
-    var meter = document.getElementById("meter");
-    var saved = {};
-    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
-    function update() {
-      var n = boxes.filter(function (b) { return b.checked; }).length;
-      score.textContent = n + " sur " + boxes.length + (n === boxes.length ? " · Prêt pour l'examen!" : "");
-      meter.style.width = (n / boxes.length * 100) + "%";
-    }
-    boxes.forEach(function (b) {
-      if (saved[b.id]) b.checked = true;
-      b.addEventListener("change", function () {
-        saved[b.id] = b.checked;
-        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
-        update();
-      });
-    });
-    update();
-  }
 
   window.addEventListener("beforeprint", function () {
     document.querySelectorAll(".qz details").forEach(function (d) { d.open = true; });
