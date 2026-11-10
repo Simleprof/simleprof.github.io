@@ -247,9 +247,10 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--ligne);color:
 .une-titre{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:6px 14px;padding:14px 0 12px;border-bottom:1.5px solid var(--encre)}
 .une-titre strong{font-weight:900;font-stretch:70%;font-size:clamp(46px,14vw,78px);line-height:.88;text-transform:uppercase}
 .une-titre strong.ok{color:var(--ok)}.une-titre strong.moyen{color:var(--acc)}.une-titre strong.ko{color:var(--ko)}
-.une-score{text-align:right;font-weight:900;font-size:clamp(34px,10vw,52px);line-height:1}
+.une-score{margin-left:auto;text-align:right;font-weight:900;font-size:clamp(34px,10vw,52px);line-height:1}
 .une-score small{display:block;font-size:15px;font-weight:700;color:var(--encre-3)}
-.une-chapo{font-size:18px;font-weight:600;padding:10px 0;color:var(--encre-2)}
+.une-chapo{font-size:18px;font-weight:600;padding:10px 0 2px;color:var(--encre-2)}
+.une-secs{font-size:15px;font-weight:700;color:var(--encre-3);padding:0 0 10px}
 .une ol{list-style:none;columns:1;border-top:1px solid var(--ligne)}
 @media (min-width:640px){.une ol{columns:2;column-gap:24px}}
 .une li{break-inside:avoid;display:grid;grid-template-columns:auto 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--ligne);font-size:16px}
@@ -986,7 +987,7 @@ function fin() {
   $t("train").innerHTML = `<article class="jeu"><section class="une">
       <p class="une-m"><b>Tour du monde</b><span>${esc(fmt(new Date(), { weekday: "long", day: "numeric", month: "long" }))}</span></p>
       <div class="une-titre"><strong class="${ton}">${verdict}</strong><p class="une-score">${bons}/${n}<small>${esc(a.nom || "Série")}</small></p></div>
-      <p class="une-chapo">${chapo} ${secs().length === TOUTES.length ? "Toutes les sections." : "Sections " + secs().map(num).join(", ") + "."}</p>
+      <p class="une-chapo">${chapo}</p><p class="une-secs">${secs().length === TOUTES.length ? "Série sur toutes les sections" : "Série sur les sections " + secs().map(num).join(", ")}</p>
       <ol>${RUN.res.map((r, j) => `<li class="${r.ok ? "ok" : "ko"}"><i>${r.ok ? "✓" : "✗"}</i><span>${j + 1}. ${esc(r.court)}${!r.ok && r.bonne && !r.court.includes(r.bonne) ? ` → <b>${esc(r.bonne)}</b>` : ""}</span></li>`).join("")}</ol>
       <span class="une-r">${aRelire.length ? `📘 À relire : ${aRelire.map(s => "manuel p. " + PAGES_SEC[s] + " (section " + num(s) + ")").join(", ")}` : "Rien à relire."}</span>
     </section>
