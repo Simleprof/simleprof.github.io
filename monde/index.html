@@ -200,7 +200,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--ligne);color:
 .gr-t{display:block;font-size:21px;font-weight:800;line-height:1.2;margin:4px 0 10px}
 /* Largeur plafonnée : à l'ordi, le graphique et la question tiennent dans l'écran sans défiler. */
 /* Grand écran : le graphique à gauche, la question et ses choix à droite (rien à faire défiler). */
-@media (min-width:900px){.gr-duo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}.gr-q .q-txt{margin-top:0}}
+.gr-q{margin-top:18px}
+@media (min-width:900px){.gr-q{margin-top:0}.gr-duo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}.gr-q .q-txt{margin-top:0}}
 .gr svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto 6px;overflow:visible}
 .gr svg text{fill:var(--encre);font-family:var(--f)}
 .gr svg .b{fill:var(--acc)}.gr svg .b.n{fill:var(--ko)}
@@ -867,7 +868,8 @@ function pyramide(forme) {
   const L = forme === "jeune" ? [100, 90, 80, 70, 60, 50, 40, 30, 20, 10] : [52, 56, 60, 66, 70, 72, 68, 58, 42, 22];
   const h = 16, c = 180;
   return `<svg viewBox="0 0 360 ${L.length * h + 30}" role="img" aria-label="Pyramide des âges">${L.map((w, i) => { const y = (L.length - 1 - i) * h;
-    return `<rect class="b" x="${c - 4 - w * 1.5}" y="${y}" width="${w * 1.5}" height="${h - 3}"/><rect class="b" x="${c + 4}" y="${y}" width="${w * 1.5}" height="${h - 3}"/>`; }).join("")}
+    // ×1.15 : la barre la plus large laisse la place à l'étiquette « Jeunes ».
+    return `<rect class="b" x="${c - 4 - w * 1.15}" y="${y}" width="${w * 1.15}" height="${h - 3}"/><rect class="b" x="${c + 4}" y="${y}" width="${w * 1.15}" height="${h - 3}"/>`; }).join("")}
     <text x="${c - 12}" y="${L.length * h + 22}" text-anchor="end" font-size="15">Hommes</text><text x="${c + 12}" y="${L.length * h + 22}" font-size="15">Femmes</text>
     <text x="4" y="12" font-size="15">Aînés</text><text x="4" y="${L.length * h - 2}" font-size="15">Jeunes</text></svg>`;
 }
