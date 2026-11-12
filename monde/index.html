@@ -1011,7 +1011,8 @@ function renderTrain() {
 function notesHtml() {
   const ns = HUB.notes.filter(n => n.etape === VUE_ET.n);
   // Les notes déjà ouvertes des autres étapes : toujours à un clic (on ne cache jamais la théorie déjà sortie).
-  const ailleurs = HUB.notes.filter(n => n.etape !== VUE_ET.n && ouverte(n));
+  // Sauf à l'étape 1 (retiré à sa demande, 2026-11-11).
+  const ailleurs = VUE_ET.n === 1 ? [] : HUB.notes.filter(n => n.etape !== VUE_ET.n && ouverte(n));
   const autres = ailleurs.length ? `<section><b class="lab">Aussi en ligne</b><p class="autres">${ailleurs.map(n => `<a href="${encodeURI(n.fichier)}">${esc(n.titre)} <small>· étape ${n.etape}</small></a>`).join("")}</p></section>` : "";
   if (!ns.length) return `<section class="intro"><p>Pas de notes de cours en ligne pour l'étape ${VUE_ET.n}.</p></section>${autres}`;
   return `<section><div class="notes-l">${ns.map(n => ouverte(n)
