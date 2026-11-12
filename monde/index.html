@@ -199,6 +199,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--ligne);color:
 .gr-k{display:block;color:var(--acc);font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .gr-t{display:block;font-size:21px;font-weight:800;line-height:1.2;margin:4px 0 10px}
 /* Largeur plafonnée : à l'ordi, le graphique et la question tiennent dans l'écran sans défiler. */
+/* Grand écran : le graphique à gauche, la question et ses choix à droite (rien à faire défiler). */
+@media (min-width:900px){.gr-duo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}.gr-q .q-txt{margin-top:0}}
 .gr svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto 6px;overflow:visible}
 .gr svg text{fill:var(--encre);font-family:var(--f)}
 .gr svg .b{fill:var(--acc)}.gr svg .b.n{fill:var(--ko)}
@@ -913,8 +915,8 @@ const VUES = {
   // Le graphique du jour
   graph(q, st) {
     const dessin = q.g.pyramide ? pyramide(q.g.pyramide) : barres(q.g) + (q.g.bis ? barres(q.g.bis) : "");
-    st.innerHTML = `<figure class="gr"><strong class="gr-t">${esc(q.titre)}</strong>${dessin}<i class="gr-s mono">Source : ${esc(q.src)}</i></figure>
-      <p class="q-txt">${esc(q.q)}</p>${choixHtml(q.options)}`;
+    st.innerHTML = `<div class="gr-duo"><figure class="gr"><strong class="gr-t">${esc(q.titre)}</strong>${dessin}<i class="gr-s mono">Source : ${esc(q.src)}</i></figure>
+      <div class="gr-q"><p class="q-txt">${esc(q.q)}</p>${choixHtml(q.options)}</div></div>`;
     brancher(st, q, ".ch", parIndex(q));
   },
   // Deux colonnes : de quel côté va cet énoncé?
