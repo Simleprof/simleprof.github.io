@@ -629,7 +629,7 @@ const OIS = [
   { id: "relation", fam: "Relier", nom: "Mettre en relation des faits", desc: "Chaque élément au bon endroit", a: "#b0417a" },
   { id: "differences", fam: "Relier", nom: "Différences et similitudes", desc: "Pareil ou différent?", a: "#2e7d4f" },
   { id: "changements", fam: "Relier", nom: "Changements et continuités", desc: "Ce qui change, ce qui reste", a: "#6b4bb3" },
-  { id: "causes", fam: "Expliquer", nom: "Causes et conséquences", desc: "Avant le fait, ou après?", a: "#c0392b" },
+  { id: "causes", fam: "Expliquer", nom: "Causes et conséquences", desc: "Chaque cause à sa conséquence", a: "#c0392b" },
   { id: "causalite", fam: "Expliquer", nom: "Liens de causalité", desc: "Trois faits, deux liens, un piège", a: "#a86a12" }
 ];
 const ACTIVITES = [
@@ -644,7 +644,7 @@ const ACTIVITES = [
   { id: "qui", oi: "differences", nom: "Qui suis-je?", ic: "🏕️" },
   { id: "pareil", oi: "differences", nom: "Pareil ou pas?", ic: "🔍" },
   { id: "change", oi: "changements", nom: "Ça change?", ic: "🔄" },
-  { id: "cause", oi: "causes", nom: "Cause ou conséquence?", ic: "💥" },
+  { id: "cause", oi: "causes", nom: "Cause et conséquence", ic: "💥" },
   { id: "chaine", oi: "causalite", nom: "La chaîne", ic: "⛓️" }
 ].map(a => ({ ...a, a: OIS.find(o => o.id === a.oi).a }));
 const SERIE = 5; // questions par série : 5 étoiles à remplir
@@ -726,29 +726,29 @@ let CHANGE = [
 // La suite ne commence jamais par une voyelle (pas de « parce que ils »), pour que la grammaire ne donne pas la réponse.
 let CAUSES = [
   ["Les Algonquiens sont nomades","le sol du Bouclier canadien est trop pauvre pour cultiver",true,7,1],
-  ["Les Algonquiens ne peuvent pas cultiver","leur nourriture vient de la chasse, de la pêche et de la cueillette",false,7,1],
+  ["Les Algonquiens ne peuvent pas cultiver","les Algonquiens vivent de la chasse, de la pêche et de la cueillette",false,7,1],
   ["Les Iroquoiens cultivent le maïs, la courge et le haricot","les Basses-terres du Saint-Laurent sont fertiles",true,7,1],
-  ["Les Iroquoiens cultivent la terre","leurs villages restent au même endroit toute l'année",false,7,1],
-  ["Les premiers humains passent d'Asie en Amérique à pied","la Béringie relie alors les deux continents",true,4,1],
+  ["Les Iroquoiens cultivent la terre","les villages iroquoiens restent au même endroit toute l'année",false,7,1],
+  ["Les premiers humains passent d'Asie en Amérique à pied","la Béringie relie alors l'Asie et l'Amérique",true,4,1],
   ["Les glaciers reculent","le passage vers le sud du continent s'ouvre",false,4,1],
-  ["Les femmes iroquoiennes rapportent l'essentiel de la nourriture","ce sont elles qui gèrent la nation",false,9,2],
-  ["La nation algonquienne est gérée par les hommes","ce sont les chasseurs qui rapportent la nourriture",true,9,2],
+  ["Les femmes iroquoiennes rapportent l'essentiel de la nourriture","les femmes gèrent la nation iroquoienne",false,9,2],
+  ["La nation algonquienne est gérée par les hommes","les hommes rapportent la nourriture par la chasse",true,9,2],
   ["Les Autochtones ne connaissent pas l'écriture","les aînés transmettent les savoirs de vive voix",false,9,2],
   ["Entre alliés, on se fait des présents mutuels","les liens d'amitié se renforcent",false,10,2],
-  ["Les Algonquiens échangent leurs fourrures contre du maïs","leur sol ne leur permet pas de cultiver",true,11,3],
-  ["Une guerre éclate entre deux nations","les deux se disputent le même territoire de chasse",true,12,3],
+  ["Les Algonquiens échangent leurs fourrures contre du maïs","le sol des Algonquiens ne leur permet pas de cultiver",true,11,3],
+  ["Une guerre éclate entre deux nations","deux nations se disputent le même territoire de chasse",true,12,3],
   ["Une guerre éclate entre deux nations","des prisonniers sont adoptés ou torturés",false,12,3],
-  ["Deux nations échangent un wampum","les deux veulent sceller leur alliance",true,12,3],
-  ["Les Européens traversent l'Atlantique","les richesses de l'Asie les attirent",true,14,4],
+  ["Deux nations échangent un wampum","deux nations veulent sceller leur alliance",true,12,3],
+  ["Les Européens traversent l'Atlantique","les richesses de l'Asie attirent les Européens",true,14,4],
   ["Cartier plante une croix à Gaspé","la France veut revendiquer ce territoire",true,15,4],
   ["Le roi veut maintenant coloniser le territoire","Cartier amène 400 colons lors de son 3e voyage",false,15,4],
-  ["Le 3e voyage de Cartier est une déception","son « or » et ses « diamants » ne sont que de la pyrite et du quartz",true,15,4],
+  ["Le 3e voyage de Cartier est une déception","l'« or » et les « diamants » de Cartier ne sont que de la pyrite et du quartz",true,15,4],
   ["L'hiver amène des conflits avec les Iroquoiens de Stadaconé","Charlesbourg-Royal est abandonné",false,15,4],
   ["Les pêcheurs français font sécher la morue sur la terre","les échanges avec les Autochtones commencent",false,16,4],
-  ["Les Autochtones obtiennent des objets en métal","leur niveau de vie s'améliore",false,16,4],
-  ["Les Autochtones chassent beaucoup plus d'animaux à fourrure","les Européens veulent leurs fourrures en échange d'objets en métal",true,16,4],
+  ["Les Autochtones obtiennent des objets en métal","le niveau de vie des Autochtones s'améliore",false,16,4],
+  ["Les Autochtones chassent beaucoup plus d'animaux à fourrure","les Européens veulent les fourrures des Autochtones en échange d'objets en métal",true,16,4],
   ["Les Français concluent l'alliance de 1603","la traite des fourrures dépend des chasseurs autochtones",true,16,4],
-  ["Les Innus et les Algonquins s'allient aux Français","ces nations veulent de l'aide contre les Iroquois",true,16,4]
+  ["Les Innus et les Algonquins s'allient aux Français","les Innus et les Algonquins veulent de l'aide contre les Iroquois",true,16,4]
 ];
 
 // La chaîne : [[fait de départ, alors…, alors…], page, dossier, piège (un fait qui ne fait pas partie de la chaîne)]
@@ -985,18 +985,18 @@ const VIDE = { EVENEMENTS: [], REPERES: [], FAMILLES: [], VF: [], MOTS: [], PERS
     ["Qui contrôle la vallée du Saint-Laurent","Avant 1754","La France contrôle la vallée du Saint-Laurent.","1760","Montréal capitule : la Nouvelle-France est conquise.",true,"Il y a changement, car la colonie passe aux mains des Britanniques.",22,5,"La guerre de la Conquête"]
   ],
   CAUSES: [
-    ["La France veut une colonie","la colonie peut l'enrichir en matières premières",true,3,1],
-    ["Champlain choisit le site de Québec","le fleuve y est étroit et facile à surveiller",true,4,1],
-    ["Les missionnaires apprennent les langues autochtones","leur but est de convertir les Autochtones",true,6,1],
+    ["La France veut une colonie","une colonie peut enrichir la France en matières premières",true,3,1],
+    ["Champlain choisit le site de Québec","à Québec, le fleuve est étroit et facile à surveiller",true,4,1],
+    ["Les missionnaires apprennent les langues autochtones","les missionnaires veulent convertir les Autochtones",true,6,1],
     ["Le peuplement échoue sous les compagnies","les colons coûtent cher à recruter et à installer",true,7,2],
     ["Les frères Kirke s'emparent de Québec","la France et l'Angleterre sont en guerre",true,8,2],
     ["Le traité de Saint-Germain-en-Laye est signé en 1632","la colonie est rendue à la France",false,8,2],
     ["Laviolette fonde Trois-Rivières","la France veut surveiller le fleuve et augmenter le commerce",true,8,2],
     ["Les Iroquois détruisent la Huronie","la France perd son principal allié pour le commerce",false,11,2],
-    ["La Nouvelle-France est moins forte que les Iroquois","peu de colons français y vivent",true,11,2],
+    ["La Nouvelle-France est moins forte que les Iroquois","peu de colons français vivent en Nouvelle-France",true,11,2],
     ["On construit des forts et on fortifie Trois-Rivières","la colonie doit se défendre contre les Iroquois",true,11,2],
     ["La population autochtone chute","les maladies européennes frappent les Autochtones",true,12,2],
-    ["Les colonies anglaises grandissent plus vite","beaucoup plus d'immigrants y arrivent",true,12,2],
+    ["Les colonies anglaises grandissent plus vite","beaucoup plus d'immigrants arrivent dans les colonies anglaises",true,12,2],
     ["Le roi envoie le régiment de Carignan-Salières","la colonie obtient une paix avec les Iroquois en 1667",false,14,3],
     ["Talon fait venir les Filles du roi","les hommes sont beaucoup plus nombreux que les femmes",true,15,3],
     ["Talon encourage les mariages et les naissances","la population grandit vite",false,15,3],
@@ -1004,12 +1004,12 @@ const VIDE = { EVENEMENTS: [], REPERES: [], FAMILLES: [], VF: [], MOTS: [], PERS
     ["La France signe la Grande Paix de Montréal","les guerres iroquoises prennent fin",false,16,3],
     ["Les colons portent des mocassins et des raquettes","l'hiver est froid et enneigé",true,18,4],
     ["Les colons construisent des toits plus pentus","la neige s'accumule moins sur les maisons",false,18,4],
-    ["Les colons se disent Canadiens","beaucoup sont nés dans la colonie",true,18,4],
+    ["Les colons se disent Canadiens","beaucoup de colons sont nés dans la colonie",true,18,4],
     ["On construit le chemin du Roy","se déplacer devient plus facile, surtout l'hiver",false,19,4],
-    ["La colonie entre dans le commerce triangulaire","sa dépendance envers la France augmente",false,19,4],
-    ["Les Acadiens sont déportés","les Britanniques craignent qu'ils aident la France",true,21,5],
-    ["Les Acadiens refusent le serment sans condition","leur désir est de rester neutres",true,21,5],
-    ["Les Britanniques prennent Louisbourg","l'entrée du Saint-Laurent passe sous leur contrôle",false,21,5],
+    ["La colonie entre dans le commerce triangulaire","la dépendance de la colonie envers la France augmente",false,19,4],
+    ["Les Acadiens sont déportés","les Britanniques craignent que les Acadiens aident la France",true,21,5],
+    ["Les Acadiens refusent le serment sans condition","les Acadiens veulent rester neutres",true,21,5],
+    ["Les Britanniques prennent Louisbourg","l'entrée du Saint-Laurent passe sous contrôle britannique",false,21,5],
     ["Les Français ne peuvent pas garder Québec après Sainte-Foy","seuls des navires britanniques arrivent au printemps",true,22,5],
     ["Montréal capitule en 1760","la Nouvelle-France est conquise",false,22,5]
   ],
@@ -1243,10 +1243,25 @@ const Q = {
     ctx2: `<div class="ligne-t"><div class="lt"><span class="etiq">${esc(qAv)}</span><p class="ctx">${esc(av)}</p></div><div class="lt-ch"><small>Moment charnière</small><b>${esc(charn)}</b></div><div class="lt ap"><span class="etiq">${esc(qAp)}</span><p class="ctx">${esc(ap)}</p></div></div>` })),
   // Causes : le fait au centre ; l'élément va du côté de la cause (avant) ou de la conséquence (après).
   // La réponse relie les deux par le petit mot : « fait parce que élément » ou « fait, alors élément ».
-  cause: () => CAUSES.map(([f, e, c, p, d]) => ({ q: maj(e) + ".", axe: f, r: c ? "Cause" : "Conséquence", choix: ["Cause", "Conséquence"], p, d,
-    consigne: "Cause ou conséquence du fait?", ctx: `<span class="etiq">Cet élément</span>`,
-    corr: c ? `${f} parce que ${e}.` : `${f}, alors ${e}.`,
-    corrH: esc(c ? `${f} parce que ${e}.` : `${f}, alors ${e}.`).replace(" parce que ", ' <b class="mot">parce que</b> ').replace(", alors ", ', <b class="mot">alors</b> ') })),
+  // Causes (refait le 2026-11-11, à sa demande : « Cause ou conséquence du fait? » était trop flou pour un élève de 14 ans).
+  // Chaque élément de CAUSES devient une paire « cause → conséquence » ; on les regroupe par 3 dans un même dossier
+  // (jamais deux fois le même fait dans un groupe), et l'élève relie chaque cause à sa conséquence (format « lien »).
+  cause: () => {
+    const paires = CAUSES.map(([f, e, c, p, d]) => ({ pr: c ? [maj(e), f] : [f, maj(e)], p, d }));
+    const groupes = [];
+    for (const d of [...new Set(paires.map(x => x.d))]) {
+      let g = [];
+      for (const x of paires.filter(y => y.d === d)) {
+        if (g.some(y => y.pr[0] === x.pr[0] || y.pr[1] === x.pr[1] || y.pr[0] === x.pr[1] || y.pr[1] === x.pr[0])) { if (g.length) groupes.push(g); g = []; }
+        g.push(x); if (g.length === 3) { groupes.push(g); g = []; }
+      }
+      if (g.length === 1 && groupes.length && groupes.at(-1)[0].d === d && groupes.at(-1).length < 4) groupes.at(-1).push(...g);
+      else if (g.length) groupes.push(g);
+    }
+    return groupes.filter(g => g.length >= 2).map(g => ({ inter: "lien", q: "Relie chaque cause à sa conséquence.", consigne: "Relie chaque cause à sa conséquence.",
+      paires: g.map(x => x.pr), cartes: g.map((_, i) => i), p: g[0].p, d: g[0].d,
+      r: g.map(x => `${x.pr[0]}, alors ${x.pr[1].charAt(0).toLowerCase() + x.pr[1].slice(1)}.`).join(" ") }));
+  },
   carte: () => CARTE_Q.map(([q, cible, p, d]) => {
     const zone = !!CARTE.zones[cible], cles = melange(Object.keys(zone ? CARTE.zones : CARTE.lieux));
     const lettres = Object.fromEntries(cles.map((k, i) => [k, zone ? String(i + 1) : LETTRES[i]]));
