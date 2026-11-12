@@ -198,7 +198,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--ligne);color:
 .gr{background:var(--carte);border:1.5px solid var(--ligne);border-radius:var(--r);padding:16px}
 .gr-k{display:block;color:var(--acc);font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .gr-t{display:block;font-size:21px;font-weight:800;line-height:1.2;margin:4px 0 10px}
-.gr svg{width:100%;height:auto;display:block;margin-bottom:6px}
+/* Largeur plafonnée : à l'ordi, le graphique et la question tiennent dans l'écran sans défiler. */
+.gr svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto 6px;overflow:visible}
 .gr svg text{fill:var(--encre);font-family:var(--f)}
 .gr svg .b{fill:var(--acc)}.gr svg .b.n{fill:var(--ko)}
 .gr svg .ax{stroke:var(--encre-3)}
@@ -851,7 +852,8 @@ const parIndex = q => b => q.options[+b.dataset.i];
 
 /* ============ Les graphiques (SVG dessinés ici) ============ */
 function barres(g) {
-  const L = 116, W = 196, H = 30, max = Math.max(...g.barres.map(b => Math.abs(b[1]))), neg = g.barres.some(b => b[1] < 0);
+  // W laisse ~80 unités à droite pour le chiffre (« +216,2 M » ne doit jamais être coupé).
+  const L = 116, W = 160, H = 30, max = Math.max(...g.barres.map(b => Math.abs(b[1]))), neg = g.barres.some(b => b[1] < 0);
   const zero = L + (neg ? 14 : 0), larg = W - (neg ? 14 : 0);
   const nb = v => (g.signe && v > 0 ? "+" : "") + String(v).replace("-", "−").replace(".", ",") + g.unite;
   return `<svg viewBox="0 0 360 ${g.barres.length * H + 6}" role="img" aria-label="Graphique à barres">${g.barres.map(([l, v], i) => {
@@ -911,7 +913,7 @@ const VUES = {
   // Le graphique du jour
   graph(q, st) {
     const dessin = q.g.pyramide ? pyramide(q.g.pyramide) : barres(q.g) + (q.g.bis ? barres(q.g.bis) : "");
-    st.innerHTML = `<figure class="gr"><b class="gr-k mono">Le graphique du jour</b><strong class="gr-t">${esc(q.titre)}</strong>${dessin}<i class="gr-s mono">Source : ${esc(q.src)}</i></figure>
+    st.innerHTML = `<figure class="gr"><strong class="gr-t">${esc(q.titre)}</strong>${dessin}<i class="gr-s mono">Source : ${esc(q.src)}</i></figure>
       <p class="q-txt">${esc(q.q)}</p>${choixHtml(q.options)}`;
     brancher(st, q, ".ch", parIndex(q));
   },
