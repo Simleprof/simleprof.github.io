@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-9FvQIOQwwLetV4e5Ii8xCq4Z9tfFJyyiraxc///miLc=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-LSk+zHfVc8YxUN0tE0XQ4OcZnmtrhM+w1iIQac2Gjgs=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours 1.3 · Consommation</title>
@@ -518,7 +518,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="org"><span class="abbr">ÉDU</span><span class="name">Éducaloi</span><p>Améliore l'accès à la justice. Explique les lois, tes droits et tes obligations en langage simple.</p><span class="when">Comprendre une loi, un contrat</span></div>
       <div class="org"><span class="abbr">BCC</span><span class="name">Bureau de la concurrence Canada</span><p>Veille à un marché concurrentiel. Applique la Loi sur la concurrence et la Loi sur l'emballage et l'étiquetage.</p><span class="when">Entreprises qui s'entendent sur les prix</span></div>
     </div>
-    <div class="tip"><b>Stratégie d'étude</b>L'<strong>OPC</strong>, le <strong>TAL</strong> et l'<strong>ACEF</strong> sont les plus faciles à expliquer en une phrase. Garde-les comme trio de base.</div>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Quel organisme?</span>Ton propriétaire refuse de faire des réparations prévues au bail.<span class="see">Voir la réponse →</span></summary><div class="ans">Le <strong>Tribunal administratif du logement (TAL)</strong>.</div></details>
@@ -669,7 +668,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
   function update() {
     var n = boxes.filter(function (b) { return b.checked; }).length;
-    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? " · Prêt pour l'examen!" : "");
+    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? "" : "");
   }
   boxes.forEach(function (b) {
     if (saved[b.id]) b.checked = true;

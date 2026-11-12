@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-AOER47uEL9JJ0G2t/bHC6voWmGYnnXELpoyBdi3husY=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-/Hi3Pw7DysZ1sTwNEefcEI+DaHVfZ915UdO9txGpTe0=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours 1.2 · Publicité</title>
@@ -491,7 +491,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="strat"><b>Les promesses</b><span>Le produit va combler tes besoins ou tes désirs.</span></div>
       <div class="strat"><b>La nouveauté</b><span>Piquer ta curiosité avec du jamais vu.</span></div>
     </div>
-    <div class="tip"><b>Stratégie d'étude</b>Il y en a 11. Apprends-en <strong>au moins 5</strong>&nbsp;: si une question t'interdit ta préférée, tu en auras d'autres en réserve.</div>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Quelle stratégie?</span>Des clients ordinaires racontent devant la caméra à quel point le produit a changé leur vie.<span class="see">Voir la réponse →</span></summary><div class="ans">Le <strong>témoignage</strong>.</div></details>
@@ -544,7 +543,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
   function update() {
     var n = boxes.filter(function (b) { return b.checked; }).length;
-    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? " · Prêt pour l'examen!" : "");
+    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? "" : "");
   }
   boxes.forEach(function (b) {
     if (saved[b.id]) b.checked = true;

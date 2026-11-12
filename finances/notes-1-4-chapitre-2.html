@@ -3,10 +3,10 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-9FvQIOQwwLetV4e5Ii8xCq4Z9tfFJyyiraxc///miLc=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-LSk+zHfVc8YxUN0tE0XQ4OcZnmtrhM+w1iIQac2Gjgs=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Notes de cours 1.4 + chapitre 2 · Budget et crédit</title>
+<title>Notes de cours 1.4 · Le budget</title>
 <link rel="stylesheet" href="../polices/36a0d5f4b5.css">
 <style>
 /* Layout : une circulaire d'épicerie. Bandeau titre, étiquettes de prix pour les définitions, facture pour les cas chiffrés, colonne de lecture ~68ch. */
@@ -237,7 +237,7 @@ footer .wrap { padding-block: 18px 40px; font-size: .85rem; color: var(--muted);
 .pq, .key-src, #corrige { display: none; }
 @page {
   size: letter; margin: .55in .6in .6in;
-  @bottom-center { content: "Notes de cours 1.4 + chapitre 2 · page " counter(page) " de " counter(pages); font: 8.5pt "IBM Plex Mono", Consolas, monospace; color: #5A606E; }
+  @bottom-center { content: "Notes de cours 1.4 · page " counter(page) " de " counter(pages); font: 8.5pt "IBM Plex Mono", Consolas, monospace; color: #5A606E; }
 }
 @media print {
   :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
@@ -567,10 +567,10 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 <!-- /vue-choix -->
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Éducation financière · Étape 2 · Le budget et le crédit</div>
-    <h1>Planifier, puis <span>emprunter.</span></h1>
-    <p>La section 1.4 et le chapitre 2 en une fiche. Lis un thème, fais sa petite vérif, continue. À la fin, on teste.</p>
-    <div class="ccard" aria-hidden="true"><div class="top"><span>BUDGET</span><span>1.4 · CH.&nbsp;2</span></div><div class="puce"></div><div><div class="pan">•••• •••• •••• 2026</div><div class="bot"><span>REVENU<b>2&nbsp;000&nbsp;$</b></span><span>DÉPENSES<b>1&nbsp;850&nbsp;$</b></span><span>MARGE<b class="vif">+150&nbsp;$</b></span></div></div></div>
+    <div class="eyebrow">Éducation financière · Étape 2 · Le budget</div>
+    <h1>Planifier avant de <span>dépenser.</span></h1>
+    <p>La section 1.4 en une fiche. Lis un thème, fais sa petite vérif, continue. À la fin, on teste.</p>
+    <div class="ccard" aria-hidden="true"><div class="top"><span>BUDGET</span><span>1.4</span></div><div class="puce"></div><div><div class="pan">•••• •••• •••• 2026</div><div class="bot"><span>REVENU<b>2&nbsp;000&nbsp;$</b></span><span>DÉPENSES<b>1&nbsp;850&nbsp;$</b></span><span>MARGE<b class="vif">+150&nbsp;$</b></span></div></div></div>
   </div>
 </header>
 
@@ -650,7 +650,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="chain" aria-label="480 fois 26 égale 12 480 par année, divisé par 12 égale 1 040 par mois, divisé par 52 égale 240 par semaine">
       <span class="box">480&nbsp;$</span><span class="op">× 26 =</span><span class="box res">12&nbsp;480&nbsp;$ / an</span><span class="op">÷ 12 =</span><span class="box">1&nbsp;040&nbsp;$ / mois</span><span class="op">ou ÷ 52 =</span><span class="box">240&nbsp;$ / sem.</span>
     </div>
-    <div class="trap"><b>Piège</b><strong>Aux 2 semaines</strong> (26 paies) n'est pas <strong>deux fois par mois</strong> (24 paies). Lis bien la question.</div>
+    <div class="trap"><b>Piège</b><strong>Aux 2 semaines</strong> (26 paies) n'est pas <strong>deux fois par mois</strong> (24 paies).</div>
     <div class="tip"><b>Dépenses ponctuelles</b>Un cadeau, une réparation, l'inscription à un sport&nbsp;: estime le total pour l'année, puis divise. Pour faire ta liste vite, regarde tes relevés bancaires et de carte des 12 derniers mois.</div>
     <div class="pause">
       <div class="quiz">
@@ -760,19 +760,13 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <!-- ===================== Chapitre 2 (à venir : le contenu de « chapitre 2 (bêta) » refait selon l'option B) ===================== -->
-  <div class="section-head a-venir">
-    <span class="num" aria-hidden="true">2</span>
-    <h2>Le crédit</h2>
-    <p>Cette partie arrive bientôt.</p>
-  </div>
-  <style>@media print{.a-venir{display:none}}</style>
 
 
 <!--qr5--><section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=1.4" target="_blank" rel="noopener">Section 1.4 →</a></div><div class="qr5-qr"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m1 0h7m2 0h2m2 0h1m4 0h7M1 2.5h1m5 0h1m1 0h1m1 0h1m1 0h3m3 0h3m5 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m4 0h3m4 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m2 0h1m4 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m3 0h2m1 0h2m4 0h3m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m4 0h2m2 0h5m2 0h1m1 0h1m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 8.5h1m3 0h1m1 0h2m1 0h1m4 0h1M1 9.5h1m2 0h6m1 0h1m1 0h1m1 0h1m1 0h2m2 0h1m2 0h3m2 0h1m1 0h3M1 10.5h1m2 0h2m2 0h4m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m4 0h3M1 11.5h5m1 0h2m1 0h2m1 0h2m1 0h2m5 0h3m1 0h1m1 0h5M1 12.5h1m1 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m2 0h3m1 0h3m2 0h1m1 0h1M2 13.5h3m2 0h3m2 0h1m1 0h1m3 0h1m3 0h1m2 0h3M2 14.5h3m1 0h1m2 0h2m2 0h1m1 0h1m3 0h3m3 0h1m2 0h1m2 0h1M1 15.5h2m2 0h1m1 0h1m1 0h2m1 0h1m3 0h1m3 0h2m1 0h1m1 0h1m1 0h1m2 0h1M1 16.5h1m1 0h2m1 0h1m2 0h1m2 0h2m3 0h1m3 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h1M5 17.5h1m1 0h2m1 0h1m1 0h3m1 0h1m4 0h1m1 0h8M1 18.5h1m1 0h2m1 0h1m3 0h1m2 0h2m1 0h6m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1M4 19.5h1m2 0h1m2 0h3m3 0h1m1 0h3m1 0h3m3 0h1m1 0h2m1 0h1M2 20.5h1m1 0h3m1 0h7m1 0h2m5 0h1m3 0h1m1 0h3m1 0h1M2 21.5h1m1 0h1m2 0h1m1 0h1m3 0h3m1 0h1m1 0h2m1 0h3m1 0h1m3 0h1m1 0h1M1 22.5h5m16 0h1m1 0h3m2 0h3M1 23.5h1m1 0h1m2 0h2m4 0h1m6 0h3m1 0h3m1 0h1m1 0h1m1 0h3M1 24.5h1m3 0h1m4 0h1m2 0h2m1 0h1m1 0h4m4 0h3m2 0h3M1 25.5h2m1 0h1m1 0h6m1 0h1m3 0h1m1 0h1m1 0h1m3 0h5m2 0h1M9 26.5h2m2 0h1m1 0h5m2 0h1m2 0h1m3 0h1m1 0h2M1 27.5h7m1 0h3m2 0h3m1 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1M1 28.5h1m5 0h1m1 0h1m1 0h2m4 0h4m1 0h4m3 0h3M1 29.5h1m1 0h3m1 0h1m1 0h2m2 0h3m1 0h2m1 0h1m1 0h8m2 0h1M1 30.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m3 0h1m1 0h2m1 0h1m1 0h2m1 0h1M1 31.5h1m1 0h3m1 0h1m3 0h4m1 0h1m3 0h1m3 0h1m1 0h1m1 0h2m2 0h2M1 32.5h1m5 0h1m2 0h1m2 0h1m5 0h3m4 0h4m1 0h3M1 33.5h7m1 0h1m1 0h1m4 0h3m1 0h1m2 0h1m1 0h1m2 0h2"/></svg>Section 1.4</figure></div></section><!--/qr5-->
 </main>
 
 <footer>
-  <div class="wrap">Synthèse de la section 1.4 du cahier <em>Éducation financière</em>, chapitre 1 (p. 27 à 37), et du chapitre 2.</div>
+  <div class="wrap">Synthèse de la section 1.4 du cahier <em>Éducation financière</em>, chapitre 1 (p. 27 à 37).</div>
 </footer>
 
 <script>
@@ -784,7 +778,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
   function update() {
     var n = boxes.filter(function (b) { return b.checked; }).length;
-    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? " · Prêt pour l'examen!" : "");
+    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? "" : "");
   }
   boxes.forEach(function (b) {
     if (saved[b.id]) b.checked = true;

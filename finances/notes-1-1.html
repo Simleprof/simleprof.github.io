@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-AOER47uEL9JJ0G2t/bHC6voWmGYnnXELpoyBdi3husY=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yBpTkTMo7adylWL1uXq/q4Lpe/yXP7+7W7pqHaykgbc=' 'sha256-/Hi3Pw7DysZ1sTwNEefcEI+DaHVfZ915UdO9txGpTe0=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours 1.1 · Consommation</title>
@@ -453,7 +453,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="tag"><dt>Désir</dt><dd>Une envie&nbsp;: ce n'est pas essentiel, mais ça fait <strong>plaisir</strong>. <span class="muted">Des vacances dans le Sud.</span></dd></div>
     </dl>
     <p><span class="hl">La grosse idée&nbsp;: ça dépend de la personne et de la situation.</span> Une auto est un désir pour Émilie, qui habite à deux pas du métro, mais un besoin pour Pierre, qui vit en région éloignée.</p>
-    <div class="trap"><b>Piège</b>Dans un vrai ou faux, méfie-toi des mots <strong>toujours</strong> et <strong>jamais</strong>.</div>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Vrai ou faux</span>Un manteau d'hiver, c'est toujours un besoin.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> Si tu n'as rien de chaud, c'est un besoin. Un troisième manteau griffé quand le tien est encore bon, c'est un désir.</div></details>
@@ -540,7 +539,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
         </tbody>
       </table>
     </div>
-    <div class="tip"><b>Exemple à savoir expliquer</b>Au bal des finissants, plein d'élèves veulent louer une limousine (demande <span class="up">↑</span>), mais il n'y en a pas plus (offre =). Le prix de location <strong>monte</strong>.</div>
+    <div class="tip"><b>Exemple</b>Au bal des finissants, plein d'élèves veulent louer une limousine (demande <span class="up">↑</span>), mais il n'y en a pas plus (offre =). Le prix de location <strong>monte</strong>.</div>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Explique</span>Pourquoi les voyages dans le Sud coûtent plus cher pendant la relâche?<span class="see">Voir la réponse →</span></summary><div class="ans">Tout le monde veut partir en même temps (demande <span class="up">↑</span>), mais il n'y a pas plus de places (offre =). Le prix <strong class="up">monte</strong>.</div></details>
@@ -592,7 +591,6 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="card"><h4>Les groupes sociaux</h4><p>Famille, amis, équipe, collègues. On achète parfois pour <strong>appartenir</strong> au groupe.</p><p class="ex">Porter le chandail de son équipe.</p></div>
       <div class="card"><h4>Les facteurs individuels</h4><p>Ce qui t'est propre&nbsp;: personnalité, histoire, <strong>valeurs</strong>.</p><p class="ex">Acheter local, recycler, éviter l'inutile.</p></div>
     </div>
-    <div class="tip"><b>Prépare-toi</b>Trouve <strong>deux exemples de ta propre vie</strong> pour chacun. Un exemple personnel vaut plus qu'une définition récitée.</div>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Quel facteur?</span>Tous tes amis portent la même marque d'espadrilles, alors tu l'achètes aussi.<span class="see">Voir la réponse →</span></summary><div class="ans">Les <strong>groupes sociaux</strong>&nbsp;: tu veux appartenir au groupe.</div></details>
@@ -617,7 +615,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
   function update() {
     var n = boxes.filter(function (b) { return b.checked; }).length;
-    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? " · Prêt pour l'examen!" : "");
+    if (score) score.textContent = n + " sur " + boxes.length + (n === boxes.length ? "" : "");
   }
   boxes.forEach(function (b) {
     if (saved[b.id]) b.checked = true;
