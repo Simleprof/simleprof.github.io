@@ -402,6 +402,10 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 .qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés, énumérations en points */
+.tag dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
@@ -467,7 +471,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="bar"><span class="y">2012</span><div class="track"><div class="fill" style="width:20%"></div><span class="v" style="left:calc(20% + 8px)">20&nbsp;%</span></div></div>
       <div class="bar"><span class="y">2021</span><div class="track"><div class="fill" style="width:73%"></div><span class="v in" style="left:calc(73% - 46px)">73&nbsp;%</span></div></div>
     </div>
-    <dl class="tags"><div class="tag"><dt>Les données (le « data »)</dt><dd>Les traces que tu laisses en ligne&nbsp;: achats, recherches, clics, concours. Les entreprises les compilent pour <strong>te connaître</strong> et te montrer des pubs <strong>ciblées</strong>, faites juste pour toi.</dd></div></dl>
+    <dl class="tags"><div class="tag"><dt>Les données (le « data »)</dt><dd>Les traces que tu laisses en ligne&nbsp;:<ul class="lst"><li>tes <strong>achats</strong>&nbsp;;</li><li>tes <strong>recherches</strong>&nbsp;;</li><li>tes <strong>clics</strong>&nbsp;;</li><li>tes <strong>concours</strong>.</li></ul>Les entreprises les compilent pour <strong>te connaître</strong> et te montrer des pubs <strong>ciblées</strong>, faites juste pour toi.</dd></div></dl>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Data</span>Pourquoi tu vois des pubs de souliers juste après avoir cherché des souliers en ligne?<span class="see">Voir la réponse →</span></summary><div class="ans">Tes recherches laissent des <strong>données</strong>. Les entreprises les utilisent pour te montrer des pubs <strong>ciblées</strong>.</div></details>
@@ -476,18 +480,18 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="strategies">
-    <div class="h3row"><h3>Les stratégies publicitaires</h3></div>
+    <div class="h3row"><h3>Les stratégies publicitaires</h3><span class="star">Essentiel</span></div>
     <p>Les trucs des pubs pour te convaincre. Toutes sont <strong>permises</strong>, tant que la pub ne ment pas.</p>
     <div class="strats">
       <div class="strat"><b>Le culte de l'idéal</b><span>Des gens beaux dans un monde parfait.</span></div>
       <div class="strat"><b>Les données factuelles</b><span>Des faits&nbsp;: provenance, fabrication.</span></div>
-      <div class="strat"><b>La vérité</b><span>On peut « jouer » avec la vérité, sans mentir.</span></div>
+      <div class="strat"><b>La vérité</b><span>On peut « jouer » avec la vérité, sans mentir.</span></div>
       <div class="strat"><b>La popularité</b><span>Achète-le et tu auras plus d'amis.</span></div>
       <div class="strat"><b>La notoriété</b><span>Une vedette ou un influenceur vante le produit.</span></div>
       <div class="strat"><b>L'émotion</b><span>Te faire rire ou pleurer pour que tu t'en souviennes.</span></div>
       <div class="strat"><b>La concurrence</b><span>Se comparer à la marque rivale pour paraître meilleur.</span></div>
       <div class="strat"><b>La mémorisation et la répétition</b><span>Slogans et jingles qui restent dans la tête.</span></div>
-      <div class="strat"><b>Le témoignage</b><span>Des « vrais » clients satisfaits.</span></div>
+      <div class="strat"><b>Le témoignage</b><span>Des « vrais » clients satisfaits.</span></div>
       <div class="strat"><b>Les promesses</b><span>Le produit va combler tes besoins ou tes désirs.</span></div>
       <div class="strat"><b>La nouveauté</b><span>Piquer ta curiosité avec du jamais vu.</span></div>
     </div>
@@ -499,29 +503,30 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="lois">
-    <div class="h3row"><h3>Les lois qui encadrent la pub</h3></div>
+    <div class="h3row"><h3>Les lois qui encadrent la pub</h3><span class="star">Essentiel</span></div>
     <p>Au Québec, l'<strong>Office de la protection du consommateur (OPC)</strong> surveille les pubs et applique la loi.</p>
     <div class="law">
       <header>La Loi sur la protection du consommateur</header>
       <div class="in">
-        <p><strong>Elle interdit&nbsp;:</strong> les déclarations mensongères, les fausses promesses et le fait de cacher la vérité sur un produit.</p>
+        <p><strong>Elle interdit&nbsp;:</strong></p><ul class="lst"><li>les <strong>déclarations mensongères</strong>&nbsp;;</li><li>les <strong>fausses promesses</strong>&nbsp;;</li><li>le fait de <strong>cacher la vérité</strong> sur un produit.</li></ul>
+        <p>Par exemple&nbsp;:</p>
         <ul>
           <li>Une vidéo où quelqu'un prétend faussement être médecin.</li>
-          <li>Un vendeur qui « oublie » de dire que l'auto usagée a été accidentée.</li>
+          <li>Un vendeur qui « oublie » de dire que l'auto usagée a été accidentée.</li>
         </ul>
         <div class="kid">
           <span class="big">-13</span>
-          <p><strong>Pub destinée aux enfants&nbsp;: interdite pour les moins de 13 ans.</strong> On regarde le produit, la façon de présenter le message, et le moment et l'endroit où la pub est diffusée.</p>
+          <div><p><strong>Pub destinée aux enfants&nbsp;: interdite pour les moins de 13 ans.</strong> On regarde&nbsp;:</p><ul class="lst"><li>le <strong>produit</strong>&nbsp;;</li><li>la <strong>façon de présenter</strong> le message&nbsp;;</li><li>le <strong>moment</strong> et l'<strong>endroit</strong> où la pub est diffusée.</li></ul></div>
         </div>
-        <p><strong>Si tu as été trompé&nbsp;:</strong> porter plainte à l'OPC, faire annuler le contrat ou poursuivre le commerçant.</p>
+        <p><strong>Si tu as été trompé&nbsp;:</strong></p><ul class="lst"><li><strong>porter plainte</strong> à l'OPC&nbsp;;</li><li>faire <strong>annuler le contrat</strong>&nbsp;;</li><li><strong>poursuivre</strong> le commerçant.</li></ul>
       </div>
     </div>
-    <p class="muted">Au fédéral, la <strong>Loi sur l'emballage et l'étiquetage</strong> exige une info exacte sur l'emballage&nbsp;: nom du produit, quantité, fournisseur.</p>
+    <p class="muted">Au fédéral, la <strong>Loi sur l'emballage et l'étiquetage</strong> exige une info exacte sur l'emballage&nbsp;:</p><ul class="lst muted"><li>le <strong>nom</strong> du produit&nbsp;;</li><li>la <strong>quantité</strong>&nbsp;;</li><li>le <strong>fournisseur</strong>.</li></ul>
     <div class="trap"><b>Piège</b>Une pub qui joue sur tes émotions, c'est <strong>légal</strong>. Ce qui est illégal, c'est de <strong>mentir</strong> ou de <strong>cacher</strong> quelque chose.</div>
     <div class="tip"><b>Une revue fiable</b><strong><em>Protégez-Vous</em></strong>, une revue québécoise qui teste et compare les produits. Bon réflexe avant un gros achat.</div>
     <div class="pause">
       <div class="quiz">
-        <details><summary><span class="q-n">Vrai ou faux</span>Une pub qui te fait pleurer est illégale au Québec.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> L'émotion est une stratégie permise. Ce qui est interdit, c'est mentir, faire de fausses promesses ou cacher la vérité.</div></details>
+        <details><summary><span class="q-n">Vrai ou faux</span>Une pub qui te fait pleurer est illégale au Québec.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> L'émotion est une stratégie permise. Ce qui est interdit&nbsp;:<ul class="lst"><li><strong>mentir</strong>&nbsp;;</li><li>faire de <strong>fausses promesses</strong>&nbsp;;</li><li><strong>cacher la vérité</strong>.</li></ul></div></details>
       </div>
     </div>
   </section>

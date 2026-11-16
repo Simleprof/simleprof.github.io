@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-/Hi3Pw7DysZ1sTwNEefcEI+DaHVfZ915UdO9txGpTe0=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-/Hi3Pw7DysZ1sTwNEefcEI+DaHVfZ915UdO9txGpTe0=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs=' 'sha256-K4LdedvB7HyD3SC2ycFhvh/1xtRbRyhAsoBGfwkaTbU='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours 1.1 · Consommation</title>
@@ -402,6 +402,25 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 .qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés, énumérations en points, choix cliquables (un par ligne) */
+.tag dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
+.quiz .choix { display: grid; gap: 6px; }
+.quiz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 9px 14px; border: 1.5px solid #14123A; border-radius: 12px; background: #fff; color: #14123A; font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: transform .15s; }
+.quiz .choix > span:hover { transform: translateX(3px); }
+.quiz .choix b { font-family: var(--mono); font-weight: 700; min-width: 1ch; }
+.quiz .choix > span.bon { border: 2.5px solid #0E8A5F; background: #DDF3EA; animation: choix-pop .4s ease; }
+.quiz .choix > span.faux { border: 2.5px solid #D23B3B; background: #FBE3E3; animation: choix-non .45s ease; }
+.quiz .choix > span.attendu { border: 2.5px dashed #0E8A5F; }
+.quiz .choix > span.bon::after { content: "✓"; margin-left: auto; color: #0E8A5F; font-weight: 800; font-size: 1.2em; }
+.quiz .choix > span.faux::after { content: "✗"; margin-left: auto; color: #D23B3B; font-weight: 800; font-size: 1.2em; }
+.quiz .verdict-choix { display: block; font-family: var(--display); font-weight: 700; font-size: 1.2rem; margin-bottom: 6px; }
+.quiz .verdict-choix.oui { color: #0E8A5F; } .quiz .verdict-choix.non { color: #D23B3B; }
+@keyframes choix-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.05); } }
+@keyframes choix-non { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) { .quiz .choix > span { animation: none !important; } }
+@media print { .quiz .choix > span { padding: 3px 8px; border-width: 1px; font-size: 10pt; font-weight: 400; } }
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
@@ -447,7 +466,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </div>
 
   <section class="block" id="besoins">
-    <div class="h3row"><h3>Besoin ou désir?</h3></div>
+    <div class="h3row"><h3>Besoin ou désir?</h3><span class="star">Essentiel</span></div>
     <dl class="tags">
       <div class="tag"><dt>Besoin</dt><dd>Une nécessité, <strong>essentielle</strong> à la vie. <span class="muted">Un repas quand tu as faim.</span></dd></div>
       <div class="tag"><dt>Désir</dt><dd>Une envie&nbsp;: ce n'est pas essentiel, mais ça fait <strong>plaisir</strong>. <span class="muted">Des vacances dans le Sud.</span></dd></div>
@@ -470,17 +489,17 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="l2" role="listitem"><b>2. Sécurité</b><span>Un environnement stable, sans crise ni anxiété</span></div>
       <div class="l1" role="listitem"><b>1. Physiologiques</b><span>Manger, boire, dormir, respirer…</span></div>
     </div>
-    <p class="mnemo">De la base au sommet&nbsp;: « <b>P</b>as <b>S</b>ûr, <b>A</b>ppelle <b>E</b>ncore <b>A</b>lex »</p>
-    <div class="trap"><b>Piège</b>La pyramide nomme de <strong>grandes catégories</strong> de besoins, pas des produits ni des activités. « Besoin d'un cellulaire » ou « besoin de magasiner », ce n'est pas un étage.</div>
+    <p class="mnemo">De la base au sommet&nbsp;: « <b>P</b>as <b>S</b>ûr, <b>A</b>ppelle <b>E</b>ncore <b>A</b>lex »</p>
+    <div class="trap"><b>Piège</b>La pyramide nomme de <strong>grandes catégories</strong> de besoins, pas des produits ni des activités. « Besoin d'un cellulaire » ou « besoin de magasiner », ce n'est pas un étage.</div>
     <div class="pause">
       <div class="quiz">
-        <details><summary><span class="q-n">Choix multiples</span>Lequel a sa place dans la pyramide&nbsp;: besoin de voyager, besoin d'estime, besoin d'Internet?<span class="see">Voir la réponse →</span></summary><div class="ans">Le <strong>besoin d'estime</strong>. Les deux autres sont des produits ou des activités, pas des catégories de besoins.</div></details>
+        <details><summary><span class="q-n">Choix multiples</span>Lequel a sa place dans la pyramide?<span class="choix"><span data-ok="0"><b>A</b>le besoin de voyager</span><span data-ok="1"><b>B</b>le besoin d'estime</span><span data-ok="0"><b>C</b>le besoin d'Internet</span></span><span class="see">Voir la réponse →</span></summary><div class="ans"><strong>B.</strong> Le <strong>besoin d'estime</strong>. Les deux autres sont des produits ou des activités, pas des catégories de besoins.</div></details>
       </div>
     </div>
   </section>
 
   <section class="block" id="opportunite">
-    <div class="h3row"><h3>Ressources limitées et coût d'opportunité</h3></div>
+    <div class="h3row"><h3>Ressources limitées et coût d'opportunité</h3><span class="star">Essentiel</span></div>
     <p>Tes envies sont illimitées, mais ton <strong>temps</strong>, ton <strong>argent</strong> et ton <strong>énergie</strong> ne le sont pas. Choisir, c'est renoncer.</p>
     <dl class="tags"><div class="tag"><dt>Coût d'opportunité <span class="muted" style="font-family:var(--body);font-size:.9rem;text-transform:none">(ou coût d'option)</span></dt><dd>Ce à quoi tu <strong>renonces</strong> quand tu choisis autre chose.</dd></div></dl>
     <p>Samedi soir&nbsp;: un quart de travail payé 80&nbsp;$ ou le party chez ton ami. Tu vas au party. Coût d'opportunité&nbsp;: <span class="hl">les 80&nbsp;$</span>.</p>
@@ -548,7 +567,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="taxes">
-    <div class="h3row"><h3>Les taxes à la consommation</h3></div>
+    <div class="h3row"><h3>Les taxes à la consommation</h3><span class="star">Essentiel</span></div>
     <div class="rates">
       <div class="rate"><b>5&nbsp;%</b><span><strong>TPS</strong>, taxe fédérale sur les produits et services</span></div>
       <div class="rate"><b>9,975&nbsp;%</b><span><strong>TVQ</strong>, taxe de vente du Québec</span></div>
@@ -566,15 +585,15 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="receipt" aria-label="Exemple de facture">
         <h4>RESTO LA FONDUE</h4>
         <div class="sub">Souper pour 4 · exemple du manuel</div>
-        <div class="row"><span>Repas</span><span>150,00</span></div>
+        <div class="row"><span>Repas</span><span>150,00&nbsp;$</span></div>
         <hr>
-        <div class="row"><span>TPS 5 %</span><span>7,50</span></div>
-        <div class="row"><span>TVQ 9,975 %</span><span>14,96</span></div>
+        <div class="row"><span>TPS 5 %</span><span>7,50&nbsp;$</span></div>
+        <div class="row"><span>TVQ 9,975 %</span><span>14,96&nbsp;$</span></div>
         <hr>
-        <div class="row tot"><span>TOTAL</span><span>172,46 $</span></div>
+        <div class="row tot"><span>TOTAL</span><span>172,46 $</span></div>
       </div>
     </div>
-    <dl class="tags"><div class="tag"><dt>Taxe d'accise</dt><dd>Une taxe <strong>cachée dans le prix</strong>&nbsp;: elle n'apparaît pas sur ta facture. Elle vise surtout l'<strong>essence</strong>, l'<strong>alcool</strong>, le <strong>tabac</strong> et les véhicules énergivores.</dd></div></dl>
+    <dl class="tags"><div class="tag"><dt>Taxe d'accise</dt><dd>Une taxe <strong>cachée dans le prix</strong>&nbsp;: elle n'apparaît pas sur ta facture. Elle vise surtout&nbsp;:<ul class="lst"><li>l'<strong>essence</strong>&nbsp;;</li><li>l'<strong>alcool</strong>&nbsp;;</li><li>le <strong>tabac</strong>&nbsp;;</li><li>les <strong>véhicules énergivores</strong>.</li></ul></dd></div></dl>
     <p><strong>Pourquoi des taxes?</strong> Pour <strong>payer les services publics</strong> (école, santé, environnement) et pour <strong>influencer ce qu'on achète</strong>&nbsp;: taxer moins l'essentiel, taxer plus ce qu'on veut décourager (pollution, tabac, alcool).</p>
     <div class="pause">
       <div class="quiz">
@@ -687,6 +706,21 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <!-- /retour-tdb -->
 <a class="haut" href="#" aria-label="Retour en haut de la note">↑ Haut</a>
+<script>/* Choix de réponse interactifs (relecture du prof, 2026-11-16) */
+document.addEventListener("click", function (e) {
+  var o = e.target.closest(".choix > span[data-ok]"); if (!o) return;
+  e.preventDefault();
+  var d = o.closest("details"), bon = o.dataset.ok === "1";
+  o.classList.remove("bon", "faux"); void o.offsetWidth; o.classList.add(bon ? "bon" : "faux");
+  var reste = d.querySelectorAll('.choix > span[data-ok="1"]:not(.bon)');
+  reste.forEach(function (x) { x.classList.add("attendu"); });
+  var ans = d.querySelector(".ans"), v = ans.querySelector(".verdict-choix");
+  if (!v) { v = document.createElement("b"); ans.insertBefore(v, ans.firstChild); }
+  v.className = "verdict-choix " + (bon ? "oui" : "non");
+  v.textContent = bon ? (reste.length > 1 ? "✓ Bonne réponse! Les autres sont en vert pointillé." : reste.length ? "✓ Bonne réponse! L'autre est en vert pointillé." : "✓ Bonne réponse!") : (reste.length > 1 ? "✗ Pas cette fois. Les bonnes réponses sont en vert pointillé." : "✗ Pas cette fois. La bonne réponse est en vert pointillé.");
+  d.open = true;
+});
+</script>
 <script>window.LF_COURS = "finances";
 /* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
    Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher.

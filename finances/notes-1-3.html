@@ -427,6 +427,10 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 .qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés, énumérations en points */
+.tag dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
@@ -473,7 +477,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 
   <section class="block" id="sinformer">
     <div class="h3row"><h3>Mieux s'informer</h3></div>
-    <p>Avant un achat, on s'informe. Une bonne source donne une information <strong>objective</strong>, <strong>impartiale</strong>, basée sur des <strong>faits</strong> et des <strong>vérifications</strong>.</p>
+    <p>Avant un achat, on s'informe. Une bonne source donne une information&nbsp;:</p>
+    <ul class="lst"><li><strong>objective</strong>&nbsp;;</li><li><strong>impartiale</strong>&nbsp;;</li><li>basée sur des <strong>faits</strong> et des <strong>vérifications</strong>.</li></ul>
     <div class="cols3">
       <div class="card"><h4>Les revues spécialisées</h4><p>Elles testent et comparent les produits, puis publient des guides d'achat.</p><p class="ex"><em>Protégez-Vous</em> (Québec) · <em>Consumer Reports</em> (États-Unis, plus de 60 laboratoires)</p></div>
       <div class="card"><h4>Les sites web et forums</h4><p>Les sites des organismes de protection du consommateur sont fiables. Les forums, eux, n'ont presque aucun contrôle de qualité.</p><p class="ex">Un avis Google ou un fil Reddit, c'est une opinion, pas une preuve.</p></div>
@@ -497,7 +502,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
           <li>Dates de création et de mise à jour récentes?</li>
         </ul></div>
     </div>
-    <div class="tip"><b>À privilégier</b>Les sites <strong>gouvernementaux</strong>, d'<strong>organismes internationaux</strong>, d'<strong>institutions publiques</strong> et d'<strong>associations reconnues</strong>. Les blogues, forums, sites anonymes et pages personnelles ne sont généralement pas fiables.</div>
+    <div class="tip"><b>À privilégier</b>Les sites&nbsp;:<ul class="lst"><li><strong>gouvernementaux</strong>&nbsp;;</li><li>d'<strong>organismes internationaux</strong>&nbsp;;</li><li>d'<strong>institutions publiques</strong>&nbsp;;</li><li>d'<strong>associations reconnues</strong>.</li></ul>Les blogues, forums, sites anonymes et pages personnelles ne sont généralement pas fiables.</div>
     <div class="trap"><b>Piège</b>Un <strong>fait</strong> n'est pas une <strong>opinion</strong>. Une influenceuse qui adore son nouvel ordi peut être sincère, mais elle n'est pas spécialiste, ne donne pas de sources et peut être payée par la marque.</div>
     <div class="pause">
       <div class="quiz">
@@ -507,7 +512,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="organismes">
-    <div class="h3row"><h3>Les organismes qui nous soutiennent</h3></div>
+    <div class="h3row"><h3>Les organismes qui nous soutiennent</h3><span class="star">Essentiel</span></div>
     <p>Gouvernements et associations aident les consommateurs.</p>
     <div class="orgs">
       <div class="org first"><span class="abbr">OPC</span><span class="name">Office de la protection du consommateur</span><p>Aide à faire des choix éclairés, informe sur tes droits, obligations et recours. Applique la Loi sur la protection du consommateur.</p><span class="when">La première porte où frapper</span></div>
@@ -526,7 +531,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="prix">
-    <div class="h3row"><h3>La politique d'exactitude des prix</h3></div>
+    <div class="h3row"><h3>La politique d'exactitude des prix</h3><span class="star">Essentiel</span></div>
     <p>C'est un <strong>droit des consommateurs</strong>. Son but&nbsp;: que tu paies <strong>le prix annoncé</strong>, et que les commerçants surveillent l'exactitude de leurs prix. Si un produit porte une étiquette, le commerçant doit le vendre à ce prix. S'il affiche plutôt ses prix sur l'étalage ou dans sa circulaire, il doit suivre cette politique quand <span class="hl">le prix à la caisse est plus élevé que le prix annoncé</span>&nbsp;:</p>
     <div class="rates">
       <div class="rate"><b>≤&nbsp;10&nbsp;$</b><span>Prix annoncé de 10&nbsp;$ ou moins&nbsp;: le produit est remis <strong>gratuitement</strong>.</span></div>
@@ -545,13 +550,13 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="receipt" aria-label="Exemple de facture avec une erreur de prix">
         <h4>ÉPICERIE DU COIN</h4>
         <div class="sub">8 muffins · exemple du manuel</div>
-        <div class="row"><span>Prix annoncé</span><span>12,99</span></div>
-        <div class="row bad"><span>Prix à la caisse</span><span>15,95</span></div>
+        <div class="row"><span>Prix annoncé</span><span>12,99&nbsp;$</span></div>
+        <div class="row bad"><span>Prix à la caisse</span><span>15,95&nbsp;$</span></div>
         <hr>
-        <div class="row"><span>Annoncé &gt; 10 $</span><span></span></div>
-        <div class="row"><span>Rabais exactitude</span><span>-10,00</span></div>
+        <div class="row"><span>Annoncé &gt; 10&nbsp;$</span><span></span></div>
+        <div class="row"><span>Rabais exactitude</span><span>−10,00&nbsp;$</span></div>
         <hr>
-        <div class="row tot"><span>À PAYER</span><span>2,99 $</span></div>
+        <div class="row tot"><span>À PAYER</span><span>2,99&nbsp;$</span></div>
         <div class="stamp ok">ERREUR = RABAIS</div>
       </div>
     </div>
@@ -563,11 +568,11 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="garanties">
-    <div class="h3row"><h3>Les garanties</h3></div>
+    <div class="h3row"><h3>Les garanties</h3><span class="star">Essentiel</span></div>
     <p>Un bien qu'on achète doit fonctionner comme prévu et durer. Trois garanties peuvent te protéger&nbsp;:</p>
     <div class="cols3">
       <div class="card"><h4>Du fabricant</h4><p><strong>Incluse dans le prix.</strong> Valide dès la date d'achat, même si tu n'as pas envoyé la carte de validation.</p><p class="ex">Généralement 1 an, pièces et main-d'œuvre.</p></div>
-      <div class="card" style="border:2px solid var(--teal)"><h4>Légale</h4><p><strong>Prévue par la loi.</strong> Automatique et gratuite pour tous les biens. Aucun commerçant ne peut te la faire payer.</p><p class="ex">Pas de durée précise&nbsp;: une « durée raisonnable ».</p></div>
+      <div class="card" style="border:2px solid var(--teal)"><h4>Légale</h4><p><strong>Prévue par la loi.</strong> Automatique et gratuite pour tous les biens. Aucun commerçant ne peut te la faire payer.</p><p class="ex">Pas de durée précise&nbsp;: une « durée raisonnable ».</p></div>
       <div class="card"><h4>Prolongée</h4><p><strong>Vendue en plus.</strong> Elle prolonge la garantie du fabricant.</p><p class="ex">Coûte 10 à 30&nbsp;% du prix de l'appareil.</p></div>
     </div>
     <p class="sub-h">Les 5 protections de la garantie légale</p>
@@ -583,7 +588,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
         </tbody>
       </table>
     </div>
-    <p class="mnemo">Retiens « <b>Q</b>uand <b>Ç</b>a <b>D</b>ure, <b>C</b>'est <b>S</b>ûr »&nbsp;: Qualité, Conformité, Durabilité, défauts Cachés, Sécurité.</p>
+    <p class="mnemo">Retiens « <b>Q</b>uand <b>Ç</b>a <b>D</b>ure, <b>C</b>'est <b>S</b>ûr »&nbsp;: Qualité, Conformité, Durabilité, défauts Cachés, Sécurité.</p>
     <div class="trap"><b>Piège</b>Les garanties s'appliquent aussi aux achats en ligne, <strong>sauf</strong> sur un site d'enchères, entre particuliers (Marketplace, Kijiji…) et à l'étranger.</div>
     <div class="pause">
       <div class="quiz">
@@ -596,8 +601,8 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="h3row"><h3>Les responsabilités des consommateurs</h3></div>
     <p>Tu as des droits, mais aussi des devoirs. Trois à retenir&nbsp;:</p>
     <div class="cols3">
-      <div class="card"><h4>Conserver ses factures</h4><p>Facture, contrat, lettre, publicité, mode d'emploi&nbsp;: ce sont tes <strong>preuves</strong> pour faire respecter la garantie.</p><p class="ex">Les reçus thermiques s'effacent en quelques mois. Prends-les en photo.</p></div>
-      <div class="card"><h4>Protéger ses renseignements</h4><p>Contre le <strong>vol d'identité</strong>&nbsp;: numéro d'assurance sociale, de compte, de carte. Déchiquette les papiers avant de les jeter.</p><p class="ex">Un texto louche qui demande tes infos? C'est de l'hameçonnage.</p></div>
+      <div class="card"><h4>Conserver ses factures</h4><p>Ce sont tes <strong>preuves</strong> pour faire respecter la garantie&nbsp;:</p><ul class="lst"><li>la <strong>facture</strong>&nbsp;;</li><li>le <strong>contrat</strong>&nbsp;;</li><li>la <strong>lettre</strong>&nbsp;;</li><li>la <strong>publicité</strong>&nbsp;;</li><li>le <strong>mode d'emploi</strong>.</li></ul><p class="ex">Les reçus thermiques s'effacent en quelques mois. Prends-les en photo.</p></div>
+      <div class="card"><h4>Protéger ses renseignements</h4><p>Contre le <strong>vol d'identité</strong>, protège tes numéros&nbsp;:</p><ul class="lst"><li>d'<strong>assurance sociale</strong>&nbsp;;</li><li>de <strong>compte</strong>&nbsp;;</li><li>de <strong>carte</strong>.</li></ul><p>Déchiquette les papiers avant de les jeter.</p><p class="ex">Un texto louche qui demande tes infos? C'est de l'hameçonnage.</p></div>
       <div class="card"><h4>Respecter les contrats</h4><p>Un contrat <strong>verbal</strong> (une poignée de main) a la même valeur qu'un contrat <strong>écrit</strong>. L'écrit est juste plus facile à prouver.</p><p class="ex">La clause principale&nbsp;: payer aux moments convenus.</p></div>
     </div>
     <div class="trap"><b>Piège</b>Tu signes des contrats sans t'en rendre compte&nbsp;: un reçu de caisse ou une facture, c'est déjà un <strong>contrat de vente</strong>. Et certains contrats, comme les contrats immobiliers, doivent obligatoirement être écrits.</div>
@@ -620,7 +625,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <li style="--i:4"><span class="n">5</span><div><b>L'arbitrage</b><span>Un arbitre écoute les deux parties et <strong>tranche</strong>&nbsp;: il décide qui a droit à quoi.</span></div></li>
       <li style="--i:5" class="court"><span class="n">6</span><div><b>La Cour des petites créances</b><span>Pour les litiges de <strong>15&nbsp;000&nbsp;$ ou moins</strong>. On s'y représente soi-même, sans avocat.</span></div></li>
     </ol>
-    <dl class="tags"><div class="tag"><dt>Protecteur du citoyen</dt><dd>L'« Ombudsman du Québec ». Il protège tes droits face aux <strong>services publics québécois</strong>. Institution neutre, impartiale et indépendante du gouvernement.</dd></div></dl>
+    <dl class="tags"><div class="tag"><dt>Protecteur du citoyen</dt><dd>L'« Ombudsman du Québec ». Il protège tes droits face aux <strong>services publics québécois</strong>. Institution neutre, impartiale et indépendante du gouvernement.</dd></div></dl>
     <div class="trap"><b>Piège</b><strong>Médiation ≠ arbitrage.</strong> Le médiateur aide à s'entendre. L'arbitre, lui, décide.</div>
     <div class="tip"><b>Cas complet&nbsp;: la laveuse de Félix</b>Sa laveuse neuve brise après 3 mois. Il peut invoquer la <strong>garantie légale</strong> (qualité, durabilité) et la <strong>garantie du fabricant</strong> (moins d'un an). Recours&nbsp;: service à la clientèle, puis mise en demeure, puis Cour des petites créances. Une garantie prolongée ne l'aurait pas aidé&nbsp;: il était déjà couvert.</div>
     <div class="pause">

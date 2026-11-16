@@ -349,6 +349,12 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   .qr5-qr { display: flex; justify-content: center; }
   a { text-decoration: none; }
 }
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés (une couleur), « Essentiel », énumérations en points */
+.def > b { color: var(--c); text-decoration: underline; text-decoration-color: var(--c, var(--encre)); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.ess { display: inline-block; vertical-align: middle; margin-left: 6px; font-family: var(--f); font-size: 15px; font-weight: 600; font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: var(--encre); border: 1.5px solid var(--c, var(--encre)); border-left-width: 6px; border-radius: 3px; padding: 2px 8px; }
+.onu ul.lst { margin: 4px 0 0; padding-left: 1.1em; display: grid; gap: 2px; font-size: 16px; color: var(--gris); }
+@media print { .ess { font-size: 8pt; border-width: 1px; border-left-width: 3px; } }
 </style>
 <!-- nav-apres-sommaire -->
 <style>
@@ -440,7 +446,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   </div>
 
   <section class="theme" id="regions" style="--c:var(--geo)">
-    <h3>Les six régions sous la loupe</h3>
+    <h3>Les six régions sous la loupe <span class="ess">Essentiel</span></h3>
     <div class="regions">
       <div class="reg" style="--rc:#D63B3B"><b>Amérique du Nord</b>
         <ul>
@@ -448,14 +454,14 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
           <li>Elle produit <strong>plus du quart de la richesse mondiale</strong>.</li>
           <li>Les <strong>Grandes Plaines</strong>, au centre : des terres très fertiles, le «&nbsp;<strong>grenier</strong>&nbsp;» de l'Amérique du Nord (céréales exportées partout).</li>
           <li>Les <strong>Grands Lacs</strong> : environ 20 % de l'eau douce de surface de la planète.</li>
-          <li>La <strong>mégalopole</strong> de Boston à Washington : une ville presque continue sur 800 km.</li>
+          <li>La <strong>mégalopole</strong> de Boston à Washington : une ville presque continue sur 800 km.</li>
         </ul>
       </div>
       <div class="reg" style="--rc:#E8702A"><b>Amérique centrale et du Sud</b>
         <ul>
           <li>L'Amérique centrale : une étroite bande de terre (sept pays) et les îles des <strong>Antilles</strong>.</li>
           <li>La forêt <strong>amazonienne</strong> : la plus grande forêt tropicale humide du monde (près de 6 millions de km²).</li>
-          <li>La cordillère des <strong>Andes</strong> : la plus longue chaîne de montagnes du monde, plus de 7 000 km le long du Pacifique.</li>
+          <li>La cordillère des <strong>Andes</strong> : la plus longue chaîne de montagnes du monde, plus de 7 000 km le long du Pacifique.</li>
           <li>Le <strong>Brésil</strong> occupe plus de la moitié du territoire et de la population de l'Amérique du Sud.</li>
         </ul>
       </div>
@@ -471,7 +477,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
           <li>Le <strong>Sahara</strong> au nord ; au sud de celui-ci, le <strong>Sahel</strong>, bande de transition vers les savanes et les forêts.</li>
           <li><strong>Afrique du Nord</strong> (Maroc, Algérie, Tunisie, Libye, Égypte…) : surtout arabo-musulmane. <strong>Afrique subsaharienne</strong> : tout ce qui est au sud du Sahara.</li>
           <li>La <strong>Corne de l'Afrique</strong>, à l'est : conflits et famines depuis des décennies.</li>
-          <li>Presque entièrement colonisée à la fin du 19e siècle ; elle compte aujourd'hui plusieurs des pays les plus pauvres du monde.</li>
+          <li>Presque entièrement colonisée à la fin du 19<sup>e</sup> siècle ; elle compte aujourd'hui plusieurs des pays les plus pauvres du monde.</li>
         </ul>
       </div>
       <div class="reg" style="--rc:#0F9AA8"><b>Asie</b>
@@ -534,8 +540,8 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   </div>
 
   <section class="theme" id="echiquier" style="--c:var(--pol)">
-    <h3>L'échiquier politique</h3>
-    <div class="def"><b>État</b> : un territoire délimité par des frontières, avec une population gouvernée par un gouvernement.<br><b style="color:var(--pol)">Idéologie politique</b> : un ensemble d'idées sur la façon dont une société devrait être organisée et fonctionner.</div>
+    <h3>L'échiquier politique <span class="ess">Essentiel</span></h3>
+    <div class="def"><b>État</b> : un territoire délimité par des frontières, avec une population gouvernée par un gouvernement.<br><b>Idéologie politique</b> : un ensemble d'idées sur la façon dont une société devrait être organisée et fonctionner.</div>
     <div class="regions">
       <div class="reg" style="--rc:#D6336C"><b>La gauche</b>
         <ul>
@@ -581,7 +587,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   </section>
 
   <section class="theme" id="regimes" style="--c:var(--pol)">
-    <h3>La démocratie et les régimes politiques</h3>
+    <h3>La démocratie et les régimes politiques <span class="ess">Essentiel</span></h3>
     <div class="def"><b>Régime politique</b> : la façon dont le pouvoir est organisé et exercé dans un État.</div>
     <p>Pour classer un régime, on regarde s'il respecte les <strong>quatre principes démocratiques</strong> :</p>
     <div class="defile">
@@ -607,11 +613,11 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   <section class="theme" id="onu" style="--c:var(--pol)">
     <h3>La communauté internationale et l'ONU</h3>
     <p>Les quelque 200 États du monde forment la <strong>communauté internationale</strong>. Pour coopérer et trouver des solutions aux problèmes qui touchent toute la planète (la paix, l'économie, la santé, l'environnement), ils se joignent à des <strong>organisations internationales</strong> et à des regroupements.</p>
-    <div class="def"><b>Organisation internationale (OI)</b> : une organisation fondée par un traité ou un accord, qui réunit des représentants de plusieurs pays.<br><b style="color:var(--pol)">Ratification</b> : confirmer officiellement ce qu'on a accepté ou promis (un traité, par exemple).<br><b style="color:var(--pol)">Droit international</b> : les règles qui encadrent les relations entre les États.<br><b style="color:var(--pol)">Pouvoir d'influence</b> : convaincre ou négocier pour obtenir ce qu'on veut, sans force.</div>
+    <div class="def"><b>Organisation internationale (OI)</b> : une organisation fondée par un traité ou un accord, qui réunit des représentants de plusieurs pays.<br><b>Ratification</b> : confirmer officiellement ce qu'on a accepté ou promis (un traité, par exemple).<br><b>Droit international</b> : les règles qui encadrent les relations entre les États.<br><b>Pouvoir d'influence</b> : convaincre ou négocier pour obtenir ce qu'on veut, sans force.</div>
     <p>Le prix à payer : en entrant dans une organisation, un État accepte que ses décisions soient parfois limitées par celles du groupe, même quand elles ne font pas son affaire.</p>
     <div class="onu">
       <div><b>L'ONU, depuis 1945</b><small>Créée après la Seconde Guerre mondiale. 193 États membres, siège à New York.</small></div>
-      <div><b>Ses quatre buts</b><small>Maintenir la paix et la sécurité · faire respecter les droits humains · lutter contre la pauvreté · favoriser la coopération internationale.</small></div>
+      <div><b>Ses quatre buts</b><ul class="lst"><li>maintenir la <strong>paix</strong> et la <strong>sécurité</strong> ;</li><li>faire respecter les <strong>droits humains</strong> ;</li><li>lutter contre la <strong>pauvreté</strong> ;</li><li>favoriser la <strong>coopération internationale</strong>.</li></ul></div>
       <div><b>L'Assemblée générale</b><small>Tous les États membres, un État = une voix. Elle débat et adopte des résolutions qui sont des recommandations.</small></div>
       <div class="fort"><b>Le Conseil de sécurité</b><small>15 membres : 5 permanents (<strong>États-Unis, Russie, Chine, France, Royaume-Uni</strong>) et 10 élus pour 2 ans. Il peut imposer des sanctions ou autoriser une intervention militaire.</small></div>
       <div><b>Le Secrétariat</b><small>L'administration, dirigée par le secrétaire général, nommé pour 5 ans. António Guterres occupe le poste depuis 2017 ; son successeur entre en fonction le 1<sup>er</sup> janvier 2027.</small></div>
@@ -674,7 +680,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
 
   <section class="theme" id="fonctionnement" style="--c:var(--eco)">
     <h3>L'économie et son fonctionnement</h3>
-    <div class="def"><b>Ressources</b> : les moyens dont dispose un pays ou une collectivité pour produire (naturelles, humaines, matérielles, financières).<br><b style="color:var(--eco)">Bien</b> : un produit ou un objet qui a une valeur ou qui comble un besoin (un vélo, du pain).<br><b style="color:var(--eco)">Service</b> : un travail qui ne fabrique pas d'objet (soigner, coiffer, assurer).<br><b style="color:var(--eco)">Capitaux</b> : les biens ou les avoirs d'une personne ou d'une entreprise (de l'argent, des machines).</div>
+    <div class="def"><b>Ressources</b> : les moyens dont dispose un pays ou une collectivité pour produire (naturelles, humaines, matérielles, financières).<br><b>Bien</b> : un produit ou un objet qui a une valeur ou qui comble un besoin (un vélo, du pain).<br><b>Service</b> : un travail qui ne fabrique pas d'objet (soigner, coiffer, assurer).<br><b>Capitaux</b> : les biens ou les avoirs d'une personne ou d'une entreprise (de l'argent, des machines).</div>
     <div class="cycle" role="img" aria-label="Les individus fournissent leur force de travail aux entreprises, qui leur versent des salaires. Les individus ont des besoins, qu'ils comblent en consommant les biens et services que les entreprises produisent et distribuent.">
       <div class="bloc ind">Individus</div><div class="fl">leur travail →<br>← un salaire</div><div class="bloc ent">Entreprises</div>
       <div class="fl">ont des ↓</div><div></div><div class="fl">produisent et distribuent ↓</div>
@@ -688,7 +694,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   </section>
 
   <section class="theme" id="secteurs" style="--c:var(--eco)">
-    <h3>Les trois secteurs de l'économie</h3>
+    <h3>Les trois secteurs de l'économie <span class="ess">Essentiel</span></h3>
     <div class="secteurs">
       <div><b>Primaire</b>Extraire et exploiter les <strong>ressources naturelles</strong> : agriculture, élevage, pêche, forêts, mines.</div>
       <div><b>Secondaire</b><strong>Transformer</strong> les ressources en produits : usines, alimentation, textile, construction, avions, médicaments.</div>
@@ -712,7 +718,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   </section>
 
   <section class="theme" id="systemes" style="--c:var(--eco)">
-    <h3>Les trois systèmes économiques</h3>
+    <h3>Les trois systèmes économiques <span class="ess">Essentiel</span></h3>
     <p>Un système économique, c'est la façon dont une société organise sa production, ses échanges et ses prix.</p>
     <div class="trio">
       <div><b>Économie de marché</b>
@@ -777,7 +783,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   </div>
 
   <section class="theme" id="frise" style="--c:var(--his)">
-    <h3>Sept périodes, une frise</h3>
+    <h3>Sept périodes, une frise <span class="ess">Essentiel</span></h3>
     <div class="frise">
       <article class="per">
         <span class="dates">1880-1914</span>
@@ -857,7 +863,7 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
         <p class="cle"><strong>Ce qui en reste :</strong> c'est notre monde. Tous les enjeux de l'année partent d'ici.</p>
       </article>
     </div>
-    <div class="def"><b>Mondialisation</b> : l'intensification des échanges économiques, politiques et culturels entre les régions du monde, grâce aux transports et aux communications.<br><b style="color:var(--his)">Interdépendance</b> : un lien de dépendance dans les deux sens entre des personnes, des entreprises ou des pays.</div>
+    <div class="def"><b>Mondialisation</b> : l'intensification des échanges économiques, politiques et culturels entre les régions du monde, grâce aux transports et aux communications.<br><b>Interdépendance</b> : un lien de dépendance dans les deux sens entre des personnes, des entreprises ou des pays.</div>
     <details class="verif">
       <summary><span class="k">Vérifie</span>Pourquoi parle-t-on de guerre «&nbsp;froide&nbsp;», alors qu'il y a eu des millions de morts en Corée et au Vietnam?<span class="go">Révéler</span></summary>
       <div class="ans">Parce que les <strong>deux superpuissances ne se sont jamais battues directement</strong> : elles se sont affrontées par d'autres pays interposés (guerres par procuration), par la course aux armements, à l'espace, au prestige.</div>
@@ -934,7 +940,9 @@ footer { margin-top: 56px; padding: 24px 0 90px; border-top: 1px solid var(--lig
   <section class="theme" id="journaliste" style="--c:#B38F00">
     <h3>Le métier de journaliste <small>Une information, ou une opinion?</small></h3>
     <p>Le <strong>journalisme factuel</strong> rapporte les faits le plus fidèlement possible : qui? quoi? où? quand? pourquoi? C'est le travail du <strong>reporter</strong>, sur le terrain, et du <strong>photographe de presse</strong>.</p>
-    <p>Le <strong>journalisme d'opinion</strong> commente l'actualité : l'<strong>éditorialiste</strong> parle au nom de la direction de son média, le <strong>chroniqueur</strong> en son nom, le <strong>caricaturiste</strong> avec un dessin satirique. Il doit tout de même présenter les faits sur lesquels il fonde son opinion.</p>
+    <p>Le <strong>journalisme d'opinion</strong> commente l'actualité :</p>
+    <ul style="margin-top:6px"><li>l'<strong>éditorialiste</strong> parle au nom de la direction de son média ;</li><li>le <strong>chroniqueur</strong>, en son nom ;</li><li>le <strong>caricaturiste</strong>, avec un dessin satirique.</li></ul>
+    <p>Il doit tout de même présenter les faits sur lesquels il fonde son opinion.</p>
     <div class="defile">
       <table class="tab empile" style="--c:#15161A">
         <thead><tr><th></th><th>L'information</th><th>L'opinion</th></tr></thead>
