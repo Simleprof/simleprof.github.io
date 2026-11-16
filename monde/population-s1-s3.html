@@ -238,6 +238,8 @@ strong { font-weight: 700; }
 .trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
 .mini { background: var(--paper-2); border: 0; border-top: 3px solid var(--gold); border-radius: 6px; padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
 .mini h4 { font-size: 1.12rem; }
+.mini .ic-drapeau { background: none; box-shadow: none; border: 0; border-radius: 0; width: auto; height: 38px; justify-content: start; }
+.mini .ic-drapeau .drapeau { width: 51px; height: 34px; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.15); }  /* drapeaux dessinés : les émojis de drapeau ne s'affichent pas sous Windows */
 .mini .ex { font-size: .88rem; color: var(--muted); font-style: italic; }
 .mini .ic { width: 38px; height: 38px; border-radius: 50%; background: var(--card); display: grid; place-content: center; font-size: 1.2rem; }
 .mini ul { padding-left: 1.1em; display: grid; gap: 3px; }
@@ -992,10 +994,15 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="note"><b>Nuance : deux sens du mot « réfugié »</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Dans le langage courant, comme dans ton manuel, « réfugié » a un <strong>sens large</strong> : on parle aussi de réfugiés après une sécheresse ou une inondation. En <strong>droit international</strong>, le sens est plus <strong>étroit</strong> : la Convention de Genève protège seulement la personne <strong>persécutée</strong> pour sa race, sa religion, sa nationalité, son groupe social ou ses opinions politiques. Une personne qui fuit une catastrophe n'a donc pas droit à l'asile pour cette raison. (Haut Commissariat des Nations unies pour les réfugiés)</div>
     <div class="trio">
       <div class="mini"><span class="ic" aria-hidden="true">📜</span><h4>Convention de Genève, 1951</h4><p>Les pays signataires doivent accorder le <strong>droit d'asile</strong>. Le réfugié a droit à la liberté d'expression, aux soins, à l'école et au travail. En retour, il doit respecter les lois du pays.</p></div>
-      <div class="mini"><span class="ic" aria-hidden="true">🇸🇾</span><h4>Syrie, depuis 2011</h4><p>Guerre civile : plus de <strong>5,6 millions</strong> de Syriens ont fui leur pays, surtout vers la Türkiye.</p></div>
-      <div class="mini"><span class="ic" aria-hidden="true">🇺🇦</span><h4>Ukraine, 2022</h4><p>Invasion russe : plus de <strong>7,9 millions</strong> de réfugiés en Europe en quelques mois.</p></div>
+      <div class="mini"><span class="ic ic-drapeau" aria-hidden="true"><svg class="drapeau" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="30" height="6.67" fill="#007A3D"/><rect y="13.33" width="30" height="6.67" fill="#000"/><polygon fill="#CE1126" transform="translate(8 10) scale(1.9)" points="0,-1 0.235,-0.324 0.951,-0.309 0.38,0.124 0.588,0.809 0,0.4 -0.588,0.809 -0.38,0.124 -0.951,-0.309 -0.235,-0.324"/><polygon fill="#CE1126" transform="translate(15 10) scale(1.9)" points="0,-1 0.235,-0.324 0.951,-0.309 0.38,0.124 0.588,0.809 0,0.4 -0.588,0.809 -0.38,0.124 -0.951,-0.309 -0.235,-0.324"/><polygon fill="#CE1126" transform="translate(22 10) scale(1.9)" points="0,-1 0.235,-0.324 0.951,-0.309 0.38,0.124 0.588,0.809 0,0.4 -0.588,0.809 -0.38,0.124 -0.951,-0.309 -0.235,-0.324"/></svg></span><h4>Syrie, depuis 2011</h4><p>Guerre civile : plus de <strong>5,6 millions</strong> de Syriens ont fui leur pays, surtout vers la Türkiye.</p></div>
+      <div class="mini"><span class="ic ic-drapeau" aria-hidden="true"><svg class="drapeau" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#0057B7"/><rect y="10" width="30" height="10" fill="#FFD700"/></svg></span><h4>Ukraine, 2022</h4><p>Invasion russe : plus de <strong>7,9 millions</strong> de réfugiés en Europe en quelques mois.</p></div>
     </div>
-    <p><strong>Contrôler ou ouvrir les frontières?</strong> Les États-Unis renforcent la surveillance à la frontière mexicaine (poste de San Ysidro). L'<strong>espace Schengen</strong>, créé en 1995, supprime les contrôles aux frontières entre ses pays membres : 26 dans le manuel, 29 depuis 2025. Les clandestins représentent de 1 % à 3 % de la population de plusieurs pays développés.</p>
+    <p><strong>Contrôler ou ouvrir les frontières?</strong></p>
+    <ul>
+      <li><strong>Contrôler</strong> : les États-Unis renforcent la surveillance à la frontière avec le Mexique (poste de San Ysidro).</li>
+      <li><strong>Ouvrir</strong> : en Europe, l'<strong>espace Schengen</strong> (1995) permet de passer d'un pays à l'autre <strong>sans contrôle</strong>. Il regroupe la plupart des pays de l'<strong>Union européenne</strong>, plus quelques voisins comme la Suisse et la Norvège. 29 pays depuis 2025 (26 dans ton manuel).</li>
+      <li><strong>Les clandestins</strong> : de 1 % à 3 % de la population de plusieurs pays développés.</li>
+    </ul>
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
