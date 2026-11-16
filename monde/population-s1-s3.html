@@ -219,6 +219,7 @@ strong { font-weight: 700; }
 .tbl th, .tbl td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: left; }
 .tbl th { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
 .tbl .r { text-align: right; }
+.tbl .u { display: block; font-size: 15px; font-weight: 400; color: var(--muted); line-height: 1.1; }  /* unité sous chaque nombre (sa demande, 2026-11-16) */
 .tbl tr.hot td { color: var(--accent); font-weight: 700; }
 
 /* Comparaison */
@@ -675,17 +676,17 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="eq"><b>Accroissement total</b><span>(naissances <i>+</i> immigrants) <i>−</i> (décès <i>+</i> émigrants)</span></div>
     </div>
     <div class="warn"><b>Piège classique</b>L'<strong>accroissement naturel ne compte pas les migrations</strong>, seulement les naissances et les décès. Pour inclure l'immigration, il faut parler d'<strong>accroissement total</strong>.</div>
-    <div class="note"><b>Nuance : le Canada, loin sous le seuil</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Le manuel dit que <em>certains</em> pays développés sont sous 2,1. Le Canada en fait partie : <strong>1,26 enfant par femme en 2023</strong>. C'est le plus bas jamais enregistré. <strong>Au Québec : 1,38</strong>, un peu plus que la moyenne du pays, mais à peine au-dessus de son creux historique (1,36 en 1987). En Colombie-Britannique : 1,00. (Statistique Canada, 2024 ; Institut de la statistique du Québec, 2024)</div>
+    <div class="note"><b>Nuance : le Canada, loin sous le seuil</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Le manuel dit que <em>certains</em> pays développés sont sous 2,1. Le Canada en fait partie : <strong>1,26 enfant par femme en 2023</strong>. C'est le plus bas jamais enregistré. <strong>Au Québec : 1,38</strong>, un peu plus que la moyenne du pays, mais à peine au-dessus de son creux historique (1,36 en 1987). En Colombie-Britannique : 1,00. (Statistique Canada et Institut de la statistique du Québec, 2024)</div>
     <div class="viz">
-      <span class="cap">Accroissement naturel de 2010 à 2020</span>
+      <span class="cap">Accroissement naturel de 2010 à 2020, en millions de personnes</span>
       <div class="scroll">
         <table class="tbl">
-          <thead><tr><th>Région <small>(en millions)</small></th><th class="r">Naissances</th><th class="r">Décès</th><th class="r">Accr. naturel</th></tr></thead>
+          <thead><tr><th>Région</th><th class="r">Naissances</th><th class="r">Décès</th><th class="r">Accr. naturel</th></tr></thead>
           <tbody>
-            <tr><td>Asie</td><td class="r">372,7</td><td class="r">156,5</td><td class="r">+216,2</td></tr>
-            <tr><td>Afrique</td><td class="r">212,1</td><td class="r">51,6</td><td class="r">+160,5</td></tr>
-            <tr><td>Amérique du Nord</td><td class="r">21,4</td><td class="r">15,6</td><td class="r">+5,9</td></tr>
-            <tr class="hot"><td>Europe</td><td class="r">38,8</td><td class="r">41,1</td><td class="r">−2,2</td></tr>
+            <tr><td>Asie</td><td class="r">372,7<small class="u">millions</small></td><td class="r">156,5<small class="u">millions</small></td><td class="r">+216,2<small class="u">millions</small></td></tr>
+            <tr><td>Afrique</td><td class="r">212,1<small class="u">millions</small></td><td class="r">51,6<small class="u">millions</small></td><td class="r">+160,5<small class="u">millions</small></td></tr>
+            <tr><td>Amérique du Nord</td><td class="r">21,4<small class="u">millions</small></td><td class="r">15,6<small class="u">millions</small></td><td class="r">+5,9<small class="u">millions</small></td></tr>
+            <tr class="hot"><td>Europe</td><td class="r">38,8<small class="u">millions</small></td><td class="r">41,1<small class="u">millions</small></td><td class="r">−2,2<small class="u">millions</small></td></tr>
           </tbody>
         </table>
       </div>
