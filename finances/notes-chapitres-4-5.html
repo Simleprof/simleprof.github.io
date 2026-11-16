@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-o5Pg5aEP52F/8idOvYo+iAu/F0+nuCTLQdZraaBU7Nk=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-o5Pg5aEP52F/8idOvYo+iAu/F0+nuCTLQdZraaBU7Nk=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs=' 'sha256-HzaDQr6stMwX9YuoD/xPKxShy89f086i/KGYH1T5Okk='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours chapitres 4 et 5 · Poursuivre ses études</title>
@@ -314,6 +314,34 @@ footer a { color: inherit; }
   .key li b.n { color: var(--teal); font-family: var(--mono); margin-right: 4px; }
   .key-src { display: block; margin-top: 24px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 8.5pt; color: var(--muted); }
 }
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés, « Essentiel », énumérations en points, choix cliquables (un par ligne) */
+.def dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.ess { display: inline-block; vertical-align: middle; margin-left: 8px; font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tag); border: 1.5px solid var(--tag); border-radius: 99px; padding: 2px 10px; }
+.ess::before { content: "★ "; }
+.piege ul, .def dd ul, .lignes dd ul { margin: 4px 0 0; padding-left: 1.2em; display: grid; gap: 3px; }
+.quiz .choix { display: grid; gap: 6px; font-weight: 600; }
+.quiz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 9px 14px; border: 1.5px solid #14123A; border-radius: 12px; background: #fff; color: #14123A; }
+.quiz .choix b { font-family: var(--mono); font-weight: 700; min-width: 1ch; margin-right: 10px; }
+.quiz .choix > span.rang { flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 10px 8px 14px; }
+.quiz .rang .it { flex: 1 1 12em; }
+.quiz .rang [data-ok] { padding: 5px 12px; border: 1.5px solid #14123A; border-radius: 99px; font-size: 16px; }
+.quiz .choix [data-ok] { cursor: pointer; transition: transform .15s; }
+.quiz .choix > span[data-ok]:hover { transform: translateX(3px); }
+.quiz .choix [data-ok].bon { border: 2.5px solid #0E8A5F; background: #DDF3EA; animation: choix-pop .4s ease; }
+.quiz .choix [data-ok].faux { border: 2.5px solid #D23B3B; background: #FBE3E3; animation: choix-non .45s ease; }
+.quiz .choix [data-ok].attendu { border: 2.5px dashed #0E8A5F; }
+.quiz .choix > span[data-ok].bon::after { content: "✓"; margin-left: auto; color: #0E8A5F; font-weight: 800; font-size: 1.2em; }
+.quiz .choix > span[data-ok].faux::after { content: "✗"; margin-left: auto; color: #D23B3B; font-weight: 800; font-size: 1.2em; }
+.quiz .verdict-choix { display: block; font-family: var(--display); font-weight: 700; font-size: 1.2rem; margin-bottom: 6px; }
+.quiz .verdict-choix.oui { color: #0E8A5F; } .quiz .verdict-choix.non { color: #D23B3B; }
+@keyframes choix-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.05); } }
+@keyframes choix-non { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) { .quiz .choix [data-ok] { animation: none !important; } }
+@media print { .quiz .choix { font-weight: 400; gap: 3px; } .quiz .choix > span { padding: 3px 8px; border-width: 1px; font-size: 10pt; } .quiz .rang [data-ok] { padding: 1px 8px; border-width: 1px; font-size: 9pt; } .ess { border-width: 1px; font-size: 9pt; } }
+.quiz .lst { display: grid; gap: 6px; font-weight: 400; }
+.quiz .lst > span { display: block; padding-left: 1.8em; text-indent: -1.8em; }
+.quiz .lst b { display: inline-block; width: 1.8em; text-indent: 0; font-family: var(--mono); }
 </style>
 <style id="theme-carte">
 /* Visuel « carte » de Finances (2026-11-03), écran seulement. À l'étape 3, la carte de crédit devient une carte étudiante. */
@@ -414,7 +442,7 @@ footer a { color: inherit; }
   </div>
 
   <section class="block" id="chemins">
-    <h3>Les chemins après le secondaire</h3>
+    <h3>Les chemins après le secondaire <span class="ess">Essentiel</span></h3>
     <dl class="defs"><div class="def"><dt>Emploi précaire</dt><dd>Un emploi qui n'offre <strong>aucune garantie de durée ni de stabilité</strong>. Sans diplôme, on se retrouve souvent dans des emplois peu qualifiés, très mal payés et précaires.</dd></div></dl>
     <p>L'école est obligatoire jusqu'à 16 ans. Ensuite, à la fin de chaque étape, on peut entrer sur le marché du travail avec un diplôme en poche.</p>
     <dl class="parcours">
@@ -475,7 +503,7 @@ footer a { color: inherit; }
   </div>
 
   <section class="block" id="formes">
-    <h3>Les formes de rémunération</h3>
+    <h3>Les formes de rémunération <span class="ess">Essentiel</span></h3>
     <dl class="defs"><div class="def"><dt>Rémunération</dt><dd>Le <strong>salaire</strong> + les <strong>avantages sociaux</strong> (assurances, régime de retraite, etc.).</dd></div></dl>
     <div class="cols">
       <div class="card"><h4>Salaire horaire</h4><p>Un montant fixe <strong>par heure</strong>. Les heures supplémentaires sont payées.</p><span class="paie">La paie suit les heures</span><p class="ex">Plombier, électricien</p></div>
@@ -496,12 +524,12 @@ footer a { color: inherit; }
       <p class="src">Source&nbsp;: <a href="https://cnesst.gouv.qc.ca/fr/conditions-travail/salaire-paye/salaire" rel="noopener">CNESST, le salaire minimum</a></p>
     </details>
     <div class="pause"><div class="quiz">
-      <details><summary><span class="q-n">Réponse courte</span>Quelle forme de rémunération? a) Une graphiste reçoit 1&nbsp;200&nbsp;$ pour créer un logo, qu'elle y passe 5 heures ou 30. b) Un livreur garde l'argent que les clients lui remettent, en plus de son salaire de base. c) Un courtier immobilier touche un pourcentage du prix de chaque maison qu'il vend.<span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Travail à forfait</strong>. b) <strong>Salaire au pourboire</strong>. c) <strong>Salaire à la commission</strong>.</div></details>
+      <details><summary><span class="q-n">Réponse courte</span>Quelle forme de rémunération?<span class="lst"><span><b>a)</b> Une graphiste reçoit 1&nbsp;200&nbsp;$ pour créer un logo, qu'elle y passe 5 heures ou 30.</span><span><b>b)</b> Un livreur garde l'argent que les clients lui remettent, en plus de son salaire de base.</span><span><b>c)</b> Un courtier immobilier touche un pourcentage du prix de chaque maison qu'il vend.</span></span><span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Travail à forfait</strong>. b) <strong>Salaire au pourboire</strong>. c) <strong>Salaire à la commission</strong>.</div></details>
     </div></div>
   </section>
 
   <section class="block" id="facteurs">
-    <h3>Les facteurs qui influent sur le salaire</h3>
+    <h3>Les facteurs qui influent sur le salaire <span class="ess">Essentiel</span></h3>
     <div class="cols">
       <div class="card"><h4>Personnels</h4><ul><li>Âge</li><li>Formation</li><li>Sexe</li></ul></div>
       <div class="card"><h4>Liés à l'emploi</h4><ul><li>Talent, renommée</li><li>Qualifications, compétences</li><li>Fonctions, responsabilités</li><li>Ancienneté, expérience</li><li>Rendement</li></ul></div>
@@ -543,7 +571,7 @@ footer a { color: inherit; }
   </div>
 
   <section class="block" id="cv">
-    <h3>Le CV, la lettre et les stratégies</h3>
+    <h3>Le CV, la lettre et les stratégies <span class="ess">Essentiel</span></h3>
     <dl class="defs">
       <div class="def"><dt>Curriculum vitæ (CV)</dt><dd>Il <strong>résume</strong> ta formation, ton expérience de travail et tes qualifications.</dd></div>
       <div class="def"><dt>Lettre de motivation</dt><dd>Elle montre que tu veux <strong>cet emploi-là</strong>. Son but&nbsp;: donner envie de lire ton CV, puis de te convoquer en entrevue. <strong>Une lettre par emploi.</strong></dd></div>
@@ -565,7 +593,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="entrevue">
-    <h3>L'entrevue et les organismes</h3>
+    <h3>L'entrevue et les organismes <span class="ess">Essentiel</span></h3>
     <p>En entrevue, la <strong>Charte des droits et libertés de la personne</strong> du Québec interdit les questions sur&nbsp;:</p>
     <ul class="motifs">
       <li>la race</li><li>la couleur</li><li>le sexe</li><li>la grossesse</li><li>l'orientation sexuelle</li><li>l'état civil</li><li>l'âge</li><li>la religion</li><li>les convictions politiques</li><li>la langue</li><li>l'origine ethnique ou nationale</li><li>la condition sociale</li><li>un handicap</li>
@@ -585,7 +613,9 @@ footer a { color: inherit; }
 
   <section class="block" id="conseils">
     <h3>Rappel du chapitre 1&nbsp;: trier les conseils</h3>
-    <p>Choisir ses études, c'est aussi recevoir des tas de conseils. Ta <strong>famille</strong>, tes <strong>amis</strong>, tes <strong>collègues de travail</strong>, les <strong>médias</strong>&nbsp;: tous influencent tes choix (p.&nbsp;11). Avant de suivre un conseil, pose-toi ces questions (p.&nbsp;18)&nbsp;:</p>
+    <p>Choisir ses études, c'est aussi recevoir des tas de conseils. Ils viennent de partout, et tous influencent tes choix (p.&nbsp;11)&nbsp;:</p>
+    <ul><li>ta <strong>famille</strong>&nbsp;;</li><li>tes <strong>amis</strong>&nbsp;;</li><li>tes <strong>collègues de travail</strong>&nbsp;;</li><li>les <strong>médias</strong>.</li></ul>
+    <p>Avant de suivre un conseil, pose-toi ces questions (p.&nbsp;18)&nbsp;:</p>
     <dl class="lignes">
       <div><dt>Qui parle?</dt><dd>Quelle est sa formation, sa fonction? Est-ce un spécialiste de la question?</dd></div>
       <div><dt>Quel est son intérêt?</dt><dd>Un patron qui manque d'employés a intérêt à te garder. Cherche-t-il à t'informer, ou à défendre son point de vue?</dd></div>
@@ -618,17 +648,17 @@ footer a { color: inherit; }
     <div class="receipt" role="table" aria-label="Exemple de frais pour une année à l'Université de Sherbrooke">
       <h4>Une année à l'université</h4>
       <p class="sub">Exemple du manuel&nbsp;: Université de Sherbrooke, 2023</p>
-      <div class="row" role="row"><span>Frais d'inscription</span><span>77,00</span></div>
-      <div class="row gros ds" role="row"><span>Droits de scolarité (30 crédits)</span><span>2&nbsp;880,90</span></div>
+      <div class="row" role="row"><span>Frais d'inscription</span><span>77,00&nbsp;$</span></div>
+      <div class="row gros ds" role="row"><span>Droits de scolarité (30 crédits)</span><span>2&nbsp;880,90&nbsp;$</span></div>
       <hr>
-      <div class="row gros fa" role="row"><span>Frais afférents</span><span>750,90</span></div>
-      <div class="row petit" role="row"><span>Services à la vie étudiante</span><span>223,50</span></div>
-      <div class="row petit" role="row"><span>Services administratifs</span><span>117,60</span></div>
-      <div class="row petit" role="row"><span>Sport et activité physique</span><span>117,00</span></div>
-      <div class="row petit" role="row"><span>Association étudiante</span><span>100,00</span></div>
-      <div class="row petit" role="row"><span>Fonds d'appui à l'engagement étudiant</span><span>93,90</span></div>
-      <div class="row petit" role="row"><span>Transport en commun</span><span>71,60</span></div>
-      <div class="row petit" role="row"><span>Droits d'auteur</span><span>27,30</span></div>
+      <div class="row gros fa" role="row"><span>Frais afférents</span><span>750,90&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Services à la vie étudiante</span><span>223,50&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Services administratifs</span><span>117,60&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Sport et activité physique</span><span>117,00&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Association étudiante</span><span>100,00&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Fonds d'appui à l'engagement étudiant</span><span>93,90&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Transport en commun</span><span>71,60&nbsp;$</span></div>
+      <div class="row petit" role="row"><span>Droits d'auteur</span><span>27,30&nbsp;$</span></div>
       <hr>
       <div class="row tot" role="row"><span>Total, 2 sessions</span><span>3&nbsp;708,80&nbsp;$</span></div>
     </div>
@@ -646,8 +676,8 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="logement">
-    <h3>Chez ses parents ou en appartement?</h3>
-    <p>Les frais qui font le plus mal au budget d'un étudiant, ce ne sont pas les cours&nbsp;: ce sont les <strong>frais de subsistance</strong> (pour vivre : loyer, nourriture, transport). L'exemple du manuel&nbsp;:</p>
+    <h3>Chez ses parents ou en appartement? <span class="ess">Essentiel</span></h3>
+    <p>Les frais qui font le plus mal au budget d'un étudiant, ce ne sont pas les cours&nbsp;: ce sont les <strong>frais de subsistance</strong> (pour vivre : loyer, nourriture, transport). L'exemple du manuel&nbsp;:</p>
     <div class="duel">
       <div class="r mahee"><div class="top"><b>Mahée, chez ses parents</b><span class="tot">565&nbsp;$ par mois</span></div><i aria-hidden="true"></i><span class="sous">4&nbsp;520&nbsp;$ par année scolaire (2 sessions de 4 mois)</span></div>
       <div class="r seb"><div class="top"><b>Sébastien, en appartement</b><span class="tot">1&nbsp;575&nbsp;$ par mois</span></div><i aria-hidden="true"></i><span class="sous">12&nbsp;600&nbsp;$ par année scolaire</span></div>
@@ -676,7 +706,7 @@ footer a { color: inherit; }
   </div>
 
   <section class="block" id="ppb">
-    <h3>Le Programme de prêts et bourses</h3>
+    <h3>Le Programme de prêts et bourses <span class="ess">Essentiel</span></h3>
     <dl class="defs"><div class="def"><dt>Programme de prêts et bourses</dt><dd>L'aide du <strong>gouvernement du Québec</strong> aux étudiants dont les <strong>ressources financières sont insuffisantes</strong>. Il vaut pour le DEP, le cégep et l'université.</dd></div></dl>
     <dl class="defs">
       <div class="def"><dt>Prêt</dt><dd><strong>Remboursable</strong> à la fin des études&nbsp;: le capital (la somme empruntée) et les intérêts.</dd></div>
@@ -707,7 +737,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="remboursement">
-    <h3>Les intérêts et le remboursement</h3>
+    <h3>Les intérêts et le remboursement <span class="ess">Essentiel</span></h3>
     <ol class="temps">
       <li><span class="quand">Pendant les études</span><b>L'État paie les intérêts</b><p>Sur ton prêt, tu ne paies rien.</p></li>
       <li><span class="quand">Les 6 mois après</span><b>Exemption partielle</b><p>Tu paies <strong>seulement les intérêts</strong>, pas le capital.</p></li>
@@ -730,7 +760,8 @@ footer a { color: inherit; }
 
   <section class="block" id="sources">
     <h3>Le travail et les autres sources</h3>
-    <p><strong>Travailler</strong>&nbsp;: un emploi d'été ou à temps partiel, un stage rémunéré, ou le <strong>Programme études-travail</strong> (un emploi dans son propre établissement, pour les étudiants dont la situation financière est très précaire).</p>
+    <p><strong>Travailler</strong>&nbsp;:</p>
+    <ul><li>un <strong>emploi d'été</strong> ou à temps partiel&nbsp;;</li><li>un <strong>stage rémunéré</strong>&nbsp;;</li><li>le <strong>Programme études-travail</strong> (un emploi dans son propre établissement, pour les étudiants dont la situation financière est très précaire).</li></ul>
     <p class="sub-h">Combien d'heures par semaine?</p>
     <div class="jauge">
       <div class="barre" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -848,6 +879,31 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <!-- /retour-tdb -->
 <a class="haut" href="#" aria-label="Retour en haut de la note">↑ Haut</a>
+<script>/* Choix de réponse interactifs (relecture du prof, 2026-11-16). Une rangée .rang = un classement : un bouton par catégorie. */
+document.addEventListener("click", function (e) {
+  var o = e.target.closest(".choix [data-ok]"); if (!o) return;
+  e.preventDefault();
+  var d = o.closest("details"), r = o.closest(".rang"), bon = o.dataset.ok === "1";
+  if (r && r.querySelector(".bon, .faux")) return;
+  o.classList.remove("bon", "faux"); void o.offsetWidth; o.classList.add(bon ? "bon" : "faux");
+  var ans = d.querySelector(".ans"), v = ans.querySelector(".verdict-choix"), texte;
+  if (r) {
+    if (!bon) r.querySelector('[data-ok="1"]').classList.add("attendu");
+    var rangs = d.querySelectorAll(".rang"), faits = d.querySelectorAll(".rang .bon, .rang .faux").length;
+    if (faits < rangs.length) { d.open = false; return; }
+    var ok = d.querySelectorAll(".rang .bon").length;
+    bon = ok === rangs.length;
+    texte = bon ? "✓ Tout est bien classé!" : ok + " sur " + rangs.length + (rangs.length - ok > 1 ? ". Les bonnes réponses sont en vert pointillé." : ". La bonne réponse est en vert pointillé.");
+  } else {
+    var reste = d.querySelectorAll('.choix > span[data-ok="1"]:not(.bon)');
+    reste.forEach(function (x) { x.classList.add("attendu"); });
+    texte = bon ? (reste.length > 1 ? "✓ Bonne réponse! Les autres sont en vert pointillé." : reste.length ? "✓ Bonne réponse! L'autre est en vert pointillé." : "✓ Bonne réponse!") : (reste.length > 1 ? "✗ Pas cette fois. Les bonnes réponses sont en vert pointillé." : "✗ Pas cette fois. La bonne réponse est en vert pointillé.");
+  }
+  if (!v) { v = document.createElement("b"); ans.insertBefore(v, ans.firstChild); }
+  v.className = "verdict-choix " + (bon ? "oui" : "non"); v.textContent = texte;
+  d.open = true;
+});
+</script>
 <script>window.LF_COURS = "finances";
 /* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
    Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher.

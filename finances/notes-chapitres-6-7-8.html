@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-h4C+wm2fw5Cc5xexbcNDgB7rfDVbXlpBqzVPNflyCyI=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-h4C+wm2fw5Cc5xexbcNDgB7rfDVbXlpBqzVPNflyCyI=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs=' 'sha256-HzaDQr6stMwX9YuoD/xPKxShy89f086i/KGYH1T5Okk='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours chapitres 6, 7 et 8 · Intégrer le monde du travail</title>
@@ -279,6 +279,31 @@ footer a { color: inherit; }
   .key li b.n { color: var(--teal); font-family: var(--mono); margin-right: 4px; }
   .key-src { display: block; margin-top: 24px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 8.5pt; color: var(--muted); }
 }
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés, « Essentiel », énumérations en points, choix cliquables (un par ligne) */
+.def dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.ess { display: inline-block; vertical-align: middle; margin-left: 8px; font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tag); border: 1.5px solid var(--tag); border-radius: 99px; padding: 2px 10px; }
+.ess::before { content: "★ "; }
+.piege ul, .def dd ul, .lignes dd ul { margin: 4px 0 0; padding-left: 1.2em; display: grid; gap: 3px; }
+.quiz .choix { display: grid; gap: 6px; font-weight: 600; }
+.quiz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 9px 14px; border: 1.5px solid #14123A; border-radius: 12px; background: #fff; color: #14123A; }
+.quiz .choix b { font-family: var(--mono); font-weight: 700; min-width: 1ch; margin-right: 10px; }
+.quiz .choix > span.rang { flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 10px 8px 14px; }
+.quiz .rang .it { flex: 1 1 12em; }
+.quiz .rang [data-ok] { padding: 5px 12px; border: 1.5px solid #14123A; border-radius: 99px; font-size: 16px; }
+.quiz .choix [data-ok] { cursor: pointer; transition: transform .15s; }
+.quiz .choix > span[data-ok]:hover { transform: translateX(3px); }
+.quiz .choix [data-ok].bon { border: 2.5px solid #0E8A5F; background: #DDF3EA; animation: choix-pop .4s ease; }
+.quiz .choix [data-ok].faux { border: 2.5px solid #D23B3B; background: #FBE3E3; animation: choix-non .45s ease; }
+.quiz .choix [data-ok].attendu { border: 2.5px dashed #0E8A5F; }
+.quiz .choix > span[data-ok].bon::after { content: "✓"; margin-left: auto; color: #0E8A5F; font-weight: 800; font-size: 1.2em; }
+.quiz .choix > span[data-ok].faux::after { content: "✗"; margin-left: auto; color: #D23B3B; font-weight: 800; font-size: 1.2em; }
+.quiz .verdict-choix { display: block; font-family: var(--display); font-weight: 700; font-size: 1.2rem; margin-bottom: 6px; }
+.quiz .verdict-choix.oui { color: #0E8A5F; } .quiz .verdict-choix.non { color: #D23B3B; }
+@keyframes choix-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.05); } }
+@keyframes choix-non { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) { .quiz .choix [data-ok] { animation: none !important; } }
+@media print { .quiz .choix { font-weight: 400; gap: 3px; } .quiz .choix > span { padding: 3px 8px; border-width: 1px; font-size: 10pt; } .quiz .rang [data-ok] { padding: 1px 8px; border-width: 1px; font-size: 9pt; } .ess { border-width: 1px; font-size: 9pt; } }
 </style>
 <style id="theme-carte">
 /* Visuel « carte » de Finances (2026-11-03), écran seulement. Pour « Intégrer le monde du travail », la carte devient une carte d'employé. */
@@ -387,8 +412,10 @@ footer a { color: inherit; }
   <section class="block" id="loi">
     <h3>Ce que la loi te garantit</h3>
     <dl class="defs"><div class="def"><dt>Loi sur les normes du travail</dt><dd>Les <strong>conditions minimales</strong> de travail de la plupart des travailleurs québécois, <strong>syndiqués ou non</strong>. L'employeur peut offrir mieux.</dd></div></dl>
-    <div class="bon"><b>Qui n'est pas couvert?</b>Les <strong>travailleurs autonomes</strong>, les <strong>stagiaires</strong>, les <strong>gardiens d'enfants</strong> et les employés d'une ambassade.</div>
-    <p><strong>Le salaire minimum</strong> est la norme la plus connue. <span class="hl">Il s'applique peu importe la forme de paie</span>&nbsp;: à l'heure, à la commission, au pourboire. Un avantage, comme une voiture fournie, ne peut pas faire descendre la paie sous le minimum.</p>
+    <div class="bon"><b>Qui n'est pas couvert?</b><ul><li>les <strong>travailleurs autonomes</strong>&nbsp;;</li><li>les <strong>stagiaires</strong>&nbsp;;</li><li>les <strong>gardiens d'enfants</strong>&nbsp;;</li><li>les <strong>employés d'une ambassade</strong>.</li></ul></div>
+    <p><strong>Le salaire minimum</strong> est la norme la plus connue. <span class="hl">Il s'applique peu importe la forme de paie</span>&nbsp;:</p>
+    <ul><li><strong>à l'heure</strong>&nbsp;;</li><li><strong>à la commission</strong>&nbsp;;</li><li><strong>au pourboire</strong>.</li></ul>
+    <p>Un avantage, comme une voiture fournie, ne peut pas faire descendre la paie sous le minimum.</p>
     <p>Ton employeur est une banque, une compagnie aérienne, ferroviaire ou de télécommunications? C'est plutôt le <strong>Code canadien du travail</strong> qui s'applique&nbsp;: même idée, autre loi.</p>
     <details class="nuance">
       <summary class="lbl">Nuance · le minimum bouge chaque 1er mai</summary>
@@ -401,7 +428,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="heures">
-    <h3>Les heures et les congés</h3>
+    <h3>Les heures et les congés <span class="ess">Essentiel</span></h3>
     <ul class="chiffres">
       <li><b>40 h</b>une semaine normale&nbsp;; au-delà, <strong>taux et demi</strong></li>
       <li><b>30 min</b>pour manger après 5 h de travail (non payées)</li>
@@ -425,7 +452,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="paie-qui">
-    <h3>Qui paie quoi?</h3>
+    <h3>Qui paie quoi? <span class="ess">Essentiel</span></h3>
     <p>Quand le travail coûte quelque chose, la loi tranche souvent pour l'employé.</p>
     <div class="scroll"><table class="qui">
       <thead><tr><th>La situation</th><th>Qui paie?</th></tr></thead>
@@ -446,7 +473,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="jeunes">
-    <h3>Les jeunes travailleurs</h3>
+    <h3>Les jeunes travailleurs <span class="ess">Essentiel</span></h3>
     <ul>
       <li><strong>Avant 14 ans</strong>&nbsp;: c'est interdit, sauf quelques exceptions (garder des enfants, travailler dans un camp de vacances). À 12 ou 13 ans, on peut aussi travailler dans l'entreprise de sa famille ou dans une ferme de moins de 10 employés, avec l'accord écrit d'un parent.</li>
       <li><strong>De 14 à 16 ans, pendant l'année scolaire</strong>, l'école passe avant&nbsp;:</li>
@@ -473,7 +500,9 @@ footer a { color: inherit; }
     </ul>
     <p>La <strong>période de probation</strong> (environ 3 mois) doit être la même pour tous les nouveaux employés.</p>
     <dl class="defs"><div class="def"><dt>Équité salariale</dt><dd>Un <strong>salaire égal pour un travail différent, mais équivalent</strong>&nbsp;: deux emplois différents qui demandent autant (de formation, d'efforts, de responsabilités). La loi québécoise date de <strong>1996</strong> et vise les entreprises de <strong>10 salariés et plus</strong>.</dd></div></dl>
-    <p>Pour savoir si un emploi surtout féminin (adjointe administrative) vaut un emploi surtout masculin (machiniste), on compare <strong>quatre facteurs</strong>&nbsp;: les <strong>qualifications</strong>, les <strong>responsabilités</strong>, les <strong>efforts requis</strong> et les <strong>conditions de travail</strong>. Si l'emploi féminin est sous-payé, son salaire monte.</p>
+    <p>Pour savoir si un emploi surtout féminin (adjointe administrative) vaut un emploi surtout masculin (machiniste), on compare <strong>quatre facteurs</strong>&nbsp;:</p>
+    <ul><li>les <strong>qualifications</strong>&nbsp;;</li><li>les <strong>responsabilités</strong>&nbsp;;</li><li>les <strong>efforts requis</strong>&nbsp;;</li><li>les <strong>conditions de travail</strong>.</li></ul>
+    <p>Si l'emploi féminin est sous-payé, son salaire monte.</p>
     <div class="bon"><b>Bon à savoir</b>La loi existe, mais l'écart n'a pas disparu&nbsp;: en 2022, une femme gagnait en moyenne <strong>0,81&nbsp;$</strong> pour chaque dollar gagné par un homme.</div>
     <div class="pause"><div class="quiz">
       <details><summary><span class="q-n">Réponse courte</span>Pour comparer deux emplois, une entreprise regarde depuis combien d'années chaque personne y travaille. Est-ce un des facteurs de l'équité salariale? Nomme-les.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Non</strong>&nbsp;: on compare des <strong>emplois</strong>, pas des personnes. Les quatre facteurs&nbsp;: qualifications, responsabilités, efforts requis, conditions de travail.</div></details>
@@ -517,7 +546,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="syndicat">
-    <h3>Le syndicat</h3>
+    <h3>Le syndicat <span class="ess">Essentiel</span></h3>
     <dl class="defs">
       <div class="def"><dt>Convention collective</dt><dd>Le contrat de travail <strong>négocié par le syndicat</strong> avec l'employeur. Ses conditions sont en général <strong>meilleures</strong> que celles de la loi. Elle dure souvent plusieurs années (jusqu'à sept ans, selon le manuel), puis se renégocie.</dd></div>
       <div class="def"><dt>Grief</dt><dd>La <strong>plainte formelle</strong> que dépose le syndicat quand l'employeur ne respecte pas la convention.</dd></div>
@@ -543,7 +572,7 @@ footer a { color: inherit; }
   </div>
 
   <section class="block" id="bulletin">
-    <h3>Brut, retenues, net</h3>
+    <h3>Brut, retenues, net <span class="ess">Essentiel</span></h3>
     <dl class="defs">
       <div class="def"><dt>Salaire brut</dt><dd>Ce que tu as gagné <strong>avant</strong> les impôts et les autres retenues.</dd></div>
       <div class="def"><dt>Salaire net</dt><dd>Ce qui <strong>reste après</strong> les retenues&nbsp;: le montant <strong>déposé dans ton compte</strong>.</dd></div>
@@ -570,7 +599,9 @@ footer a { color: inherit; }
       <div class="row tot net"><span>Salaire net</span><span>1&nbsp;085,90&nbsp;$</span></div>
       <p class="leg">O = obligatoire&nbsp;· F = facultative (dans une entreprise syndiquée, la cotisation syndicale est obligatoire pour tous&nbsp;: formule Rand)</p>
     </div>
-    <p>Le bulletin est <strong>obligatoire</strong>&nbsp;: il te permet de vérifier ta paie. On doit y trouver le nom de l'employé et de l'employeur, la date, la <strong>période de travail</strong>, le <strong>nombre d'heures</strong>, le <strong>taux horaire</strong>, le brut et <strong>chaque retenue</strong>. L'heure de début et de fin de chaque journée, elle, n'est pas obligatoire.</p>
+    <p>Le bulletin est <strong>obligatoire</strong>&nbsp;: il te permet de vérifier ta paie. On doit y trouver&nbsp;:</p>
+    <ul><li>le <strong>nom</strong> de l'employé et de l'employeur&nbsp;;</li><li>la <strong>date</strong>&nbsp;;</li><li>la <strong>période de travail</strong>&nbsp;;</li><li>le <strong>nombre d'heures</strong>&nbsp;;</li><li>le <strong>taux horaire</strong>&nbsp;;</li><li>le <strong>brut</strong>&nbsp;;</li><li><strong>chaque retenue</strong>.</li></ul>
+    <p>L'heure de début et de fin de chaque journée, elle, n'est pas obligatoire.</p>
     <div class="pause"><div class="quiz">
       <details><summary><span class="q-n">Calcul</span>Jade travaille 30 heures par semaine à 16&nbsp;$ l'heure. Sa paie couvre deux semaines, et ses retenues totalisent 140&nbsp;$. Quel est son salaire brut? Son salaire net?<span class="see">Voir la réponse →</span></summary><div class="ans">Brut&nbsp;: 30 h × 16&nbsp;$ × 2 = <strong>960&nbsp;$</strong>. Net&nbsp;: 960&nbsp;$ − 140&nbsp;$ = <strong>820&nbsp;$</strong>.</div></details>
     </div></div>
@@ -587,21 +618,21 @@ footer a { color: inherit; }
     </dl>
     <div class="bon"><b>Bon à savoir · RPA ou REER?</b>Le <strong>RPA</strong> (régime de pension agréé) est collectif, géré par l'employeur, qui peut y mettre de l'argent&nbsp;: c'est un avantage social. Le <strong>REER</strong> est individuel, et l'employeur n'y cotise pas.</div>
     <div class="pause"><div class="quiz">
-      <details><summary><span class="q-n">Classement</span>Obligatoire ou facultative? a) la cotisation au RQAP b) le stationnement au travail c) l'impôt provincial d) un don à un organisme de charité.<span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Obligatoire</strong> b) <strong>Facultative</strong> c) <strong>Obligatoire</strong> d) <strong>Facultative</strong>.</div></details>
+      <details><summary><span class="q-n">Classement</span>Obligatoire ou facultative? Classe chaque retenue.<span class="choix"><span class="rang"><span class="it"><b>a</b>la cotisation au RQAP</span><span data-ok="1">Obligatoire</span><span data-ok="0">Facultative</span></span><span class="rang"><span class="it"><b>b</b>le stationnement au travail</span><span data-ok="0">Obligatoire</span><span data-ok="1">Facultative</span></span><span class="rang"><span class="it"><b>c</b>l'impôt provincial</span><span data-ok="1">Obligatoire</span><span data-ok="0">Facultative</span></span><span class="rang"><span class="it"><b>d</b>un don à un organisme de charité</span><span data-ok="0">Obligatoire</span><span data-ok="1">Facultative</span></span></span><span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Obligatoire</strong> b) <strong>Facultative</strong> c) <strong>Obligatoire</strong> d) <strong>Facultative</strong>.</div></details>
     </div></div>
   </section>
 
   <section class="block" id="avantages">
-    <h3>Les avantages sociaux</h3>
+    <h3>Les avantages sociaux <span class="ess">Essentiel</span></h3>
     <dl class="defs"><div class="def"><dt>Avantages sociaux</dt><dd>Ce que l'employeur offre <strong>en plus du salaire</strong>, sans y être obligé. Ils peuvent valoir jusqu'à 30&nbsp;% de la rémunération.</dd></div></dl>
     <div class="cols">
       <div class="card"><h4>Les assurances</h4><ul><li>Médicaments</li><li>Soins dentaires, soins de la vue</li><li>Assurance vie, maladie, accident</li></ul></div>
       <div class="card"><h4>Liés au travail</h4><ul><li>Régime de retraite (RPA)</li><li>Horaire de 4 jours</li><li>Banque de congés</li><li>Primes au rendement</li></ul></div>
       <div class="card"><h4>Hors du travail</h4><ul><li>Transport en commun remboursé</li><li>Abonnement au gym</li><li>Droits de scolarité remboursés</li><li>Escompte d'employé</li></ul></div>
     </div>
-    <div class="piege"><b>Piège · norme ou avantage?</b>Ce que la <strong>loi oblige</strong> n'est pas un avantage social&nbsp;: l'uniforme au logo fourni, les vacances, les jours fériés, les heures supplémentaires à taux et demi. Ce sont des <strong>normes du travail</strong>.</div>
+    <div class="piege"><b>Piège · norme ou avantage?</b>Ce que la <strong>loi oblige</strong> n'est pas un avantage social. Ce sont des <strong>normes du travail</strong>&nbsp;:<ul><li>l'<strong>uniforme au logo</strong> fourni&nbsp;;</li><li>les <strong>vacances</strong>&nbsp;;</li><li>les <strong>jours fériés</strong>&nbsp;;</li><li>les <strong>heures supplémentaires</strong> à taux et demi.</li></ul></div>
     <div class="pause"><div class="quiz">
-      <details><summary><span class="q-n">Classement</span>Norme du travail ou avantage social? a) un rabais de 30&nbsp;% sur les vêtements de la boutique b) la pause de 30 minutes pour manger c) une prime quand l'équipe dépasse son objectif.<span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Avantage social</strong> (hors du travail) b) <strong>Norme du travail</strong> c) <strong>Avantage social</strong> (lié au travail).</div></details>
+      <details><summary><span class="q-n">Classement</span>Norme du travail ou avantage social? Classe chaque élément.<span class="choix"><span class="rang"><span class="it"><b>a</b>un rabais de 30&nbsp;% sur les vêtements de la boutique</span><span data-ok="0">Norme</span><span data-ok="1">Avantage</span></span><span class="rang"><span class="it"><b>b</b>la pause de 30 minutes pour manger</span><span data-ok="1">Norme</span><span data-ok="0">Avantage</span></span><span class="rang"><span class="it"><b>c</b>une prime quand l'équipe dépasse son objectif</span><span data-ok="0">Norme</span><span data-ok="1">Avantage</span></span></span><span class="see">Voir la réponse →</span></summary><div class="ans">a) <strong>Avantage social</strong> (hors du travail) b) <strong>Norme du travail</strong> c) <strong>Avantage social</strong> (lié au travail).</div></details>
     </div></div>
   </section>
 
@@ -631,7 +662,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="ae">
-    <h3>L'assurance-emploi</h3>
+    <h3>L'assurance-emploi <span class="ess">Essentiel</span></h3>
     <dl class="defs"><div class="def"><dt>Assurance-emploi</dt><dd>Un <strong>revenu temporaire</strong> versé par le gouvernement fédéral à une personne qui a perdu son emploi et qui y a droit. Les employés et les employeurs paient les cotisations.</dd></div></dl>
     <div class="cols">
       <div class="card"><h4>Pour y avoir droit</h4><ul><li>Avoir eu un emploi assurable</li><li>L'avoir perdu <strong>sans en être responsable</strong></li><li>Être sans salaire depuis 7 jours</li><li>Avoir travaillé assez d'heures (selon la région)</li><li>Être prêt à travailler et chercher activement</li></ul></div>
@@ -667,7 +698,7 @@ footer a { color: inherit; }
     <h3>Les services publics et la redistribution</h3>
     <dl class="lignes">
       <div><dt>Financer les services publics</dt><dd>Santé, éducation, justice, transport. Au Québec, en 2023-2024, la <strong>santé</strong> prenait près de <strong>40&nbsp;%</strong> du budget, l'<strong>éducation</strong> 20,8&nbsp;%.</dd></div>
-      <div><dt>Redistribuer la richesse</dt><dd>Par les <strong>paiements de transfert</strong>&nbsp;: l'allocation canadienne pour enfants, l'assurance-emploi, le supplément de revenu garanti des aînés.</dd></div>
+      <div><dt>Redistribuer la richesse</dt><dd>Par les <strong>paiements de transfert</strong>&nbsp;:<ul><li>l'<strong>allocation canadienne pour enfants</strong>&nbsp;;</li><li>l'<strong>assurance-emploi</strong>&nbsp;;</li><li>le <strong>supplément de revenu garanti</strong> des aînés.</li></ul></dd></div>
     </dl>
     <dl class="defs"><div class="def"><dt>Fiscalité</dt><dd>L'ensemble des règles, des lois et des pratiques sur la perception des impôts et des taxes.</dd></div></dl>
     <div class="bon"><b>Bon à savoir</b>Faire fonctionner l'Assemblée nationale (les salaires des députés, par exemple) ne coûte qu'environ <strong>0,12&nbsp;%</strong> du budget du Québec.</div>
@@ -677,7 +708,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="fraude">
-    <h3>La fraude fiscale</h3>
+    <h3>La fraude fiscale <span class="ess">Essentiel</span></h3>
     <dl class="defs"><div class="def"><dt>Fraude fiscale</dt><dd>Toute omission ou inexactitude dans une déclaration de revenus&nbsp;: <strong>éviter illégalement</strong> de payer ses impôts ou ses taxes.</dd></div></dl>
     <div class="cols">
       <div class="card"><span class="etiq">Forme 1</span><h4>Le travail non déclaré</h4><p>Être payé sans le dire au fisc, le service qui perçoit les impôts («&nbsp;au noir&nbsp;»).</p></div>
@@ -685,7 +716,7 @@ footer a { color: inherit; }
       <div class="card"><span class="etiq">Forme 3</span><h4>Payer sans facture</h4><p>Payer «&nbsp;sous la table&nbsp;» (comptant, sans facture) pour éviter les taxes. Le client triche aussi, et il perd sa garantie légale.</p></div>
     </div>
     <dl class="lignes">
-      <div><dt>Planification fiscale · légale</dt><dd>Réduire ses impôts avec les mesures prévues par les gouvernements&nbsp;: cotiser à un REER, faire un don, réclamer ses crédits d'impôt.</dd></div>
+      <div><dt>Planification fiscale · légale</dt><dd>Réduire ses impôts avec les mesures prévues par les gouvernements&nbsp;:<ul><li><strong>cotiser à un REER</strong>&nbsp;;</li><li><strong>faire un don</strong>&nbsp;;</li><li><strong>réclamer ses crédits d'impôt</strong>.</li></ul></dd></div>
       <div><dt>Évasion fiscale · illégale</dt><dd>Contourner la loi exprès&nbsp;: cacher des revenus, déduire des dépenses inventées. Amendes, poursuites, voire la prison.</dd></div>
     </dl>
     <p class="sub-h">Pourquoi tout le monde y perd</p>
@@ -722,7 +753,7 @@ footer a { color: inherit; }
       <div class="marches" aria-hidden="true">
         <div style="height:12%">0</div><div style="height:30%">15</div><div style="height:45%">20,5</div><div style="height:60%">26</div><div style="height:78%">29</div><div style="height:100%">33</div>
       </div>
-      <p class="src">Les six marches&nbsp;: le taux fédéral de chaque palier, en %.</p>
+      <p class="src">Les six marches&nbsp;: le taux fédéral de chaque palier, en %.</p>
       <div class="out">
         <div><span>Impôt fédéral de l'année (calcul du manuel)</span><b id="i-tot">2&nbsp;144&nbsp;$</b></div>
         <div><span>Taux marginal</span><b id="i-marg">15&nbsp;%</b></div>
@@ -843,6 +874,31 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <!-- /retour-tdb -->
 <a class="haut" href="#" aria-label="Retour en haut de la note">↑ Haut</a>
+<script>/* Choix de réponse interactifs (relecture du prof, 2026-11-16). Une rangée .rang = un classement : un bouton par catégorie. */
+document.addEventListener("click", function (e) {
+  var o = e.target.closest(".choix [data-ok]"); if (!o) return;
+  e.preventDefault();
+  var d = o.closest("details"), r = o.closest(".rang"), bon = o.dataset.ok === "1";
+  if (r && r.querySelector(".bon, .faux")) return;
+  o.classList.remove("bon", "faux"); void o.offsetWidth; o.classList.add(bon ? "bon" : "faux");
+  var ans = d.querySelector(".ans"), v = ans.querySelector(".verdict-choix"), texte;
+  if (r) {
+    if (!bon) r.querySelector('[data-ok="1"]').classList.add("attendu");
+    var rangs = d.querySelectorAll(".rang"), faits = d.querySelectorAll(".rang .bon, .rang .faux").length;
+    if (faits < rangs.length) { d.open = false; return; }
+    var ok = d.querySelectorAll(".rang .bon").length;
+    bon = ok === rangs.length;
+    texte = bon ? "✓ Tout est bien classé!" : ok + " sur " + rangs.length + (rangs.length - ok > 1 ? ". Les bonnes réponses sont en vert pointillé." : ". La bonne réponse est en vert pointillé.");
+  } else {
+    var reste = d.querySelectorAll('.choix > span[data-ok="1"]:not(.bon)');
+    reste.forEach(function (x) { x.classList.add("attendu"); });
+    texte = bon ? (reste.length > 1 ? "✓ Bonne réponse! Les autres sont en vert pointillé." : reste.length ? "✓ Bonne réponse! L'autre est en vert pointillé." : "✓ Bonne réponse!") : (reste.length > 1 ? "✗ Pas cette fois. Les bonnes réponses sont en vert pointillé." : "✗ Pas cette fois. La bonne réponse est en vert pointillé.");
+  }
+  if (!v) { v = document.createElement("b"); ans.insertBefore(v, ans.firstChild); }
+  v.className = "verdict-choix " + (bon ? "oui" : "non"); v.textContent = texte;
+  d.open = true;
+});
+</script>
 <script>window.LF_COURS = "finances";
 /* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
    Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher.
