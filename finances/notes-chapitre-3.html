@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-wZhW2jUFIm1zo/x4UbhogUZTBQKSNjcMyDvWf5Mj+CA=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-wZhW2jUFIm1zo/x4UbhogUZTBQKSNjcMyDvWf5Mj+CA=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs=' 'sha256-HzaDQr6stMwX9YuoD/xPKxShy89f086i/KGYH1T5Okk='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours chapitre 3 · L'épargne</title>
@@ -316,6 +316,32 @@ footer a { color: inherit; }
   .key li b.n { color: var(--mint); font-family: var(--mono); margin-right: 4px; }
   .key-src { display: block; margin-top: 24px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 8.5pt; color: var(--muted); }
 }
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés, « Essentiel », énumérations en points, choix cliquables (un par ligne) */
+.def dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.ess { display: inline-block; vertical-align: middle; margin-left: 8px; font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tag); border: 1.5px solid var(--tag); border-radius: 99px; padding: 2px 10px; }
+.ess::before { content: "★ "; }
+.piege ul, .def dd ul, .lignes dd ul { margin: 4px 0 0; padding-left: 1.2em; display: grid; gap: 3px; }
+.quiz .choix { display: grid; gap: 6px; font-weight: 600; }
+.quiz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 9px 14px; border: 1.5px solid #14123A; border-radius: 12px; background: #fff; color: #14123A; }
+.quiz .choix b { font-family: var(--mono); font-weight: 700; min-width: 1ch; margin-right: 10px; }
+.quiz .choix > span.rang { flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 10px 8px 14px; }
+.quiz .rang .it { flex: 1 1 12em; }
+.quiz .rang [data-ok] { padding: 5px 12px; border: 1.5px solid #14123A; border-radius: 99px; font-size: 16px; }
+.quiz .choix [data-ok] { cursor: pointer; transition: transform .15s; }
+.quiz .choix > span[data-ok]:hover { transform: translateX(3px); }
+.quiz .choix [data-ok].bon { border: 2.5px solid #0E8A5F; background: #DDF3EA; animation: choix-pop .4s ease; }
+.quiz .choix [data-ok].faux { border: 2.5px solid #D23B3B; background: #FBE3E3; animation: choix-non .45s ease; }
+.quiz .choix [data-ok].attendu { border: 2.5px dashed #0E8A5F; }
+.quiz .choix > span[data-ok].bon::after { content: "✓"; margin-left: auto; color: #0E8A5F; font-weight: 800; font-size: 1.2em; }
+.quiz .choix > span[data-ok].faux::after { content: "✗"; margin-left: auto; color: #D23B3B; font-weight: 800; font-size: 1.2em; }
+.quiz .verdict-choix { display: block; font-family: var(--display); font-weight: 700; font-size: 1.2rem; margin-bottom: 6px; }
+.quiz .verdict-choix.oui { color: #0E8A5F; } .quiz .verdict-choix.non { color: #D23B3B; }
+@keyframes choix-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.05); } }
+@keyframes choix-non { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) { .quiz .choix [data-ok] { animation: none !important; } }
+@media print { .quiz .choix { font-weight: 400; gap: 3px; } .quiz .choix > span { padding: 3px 8px; border-width: 1px; font-size: 10pt; } .quiz .rang [data-ok] { padding: 1px 8px; border-width: 1px; font-size: 9pt; } .ess { border-width: 1px; font-size: 9pt; } }
+.quiz .ans ul { margin: 4px 0 0; padding-left: 1.2em; display: grid; gap: 3px; }
 </style>
 <style id="theme-carte">
 /* Visuel « carte de crédit » de l'étape 2 (2026-11-03) : le même que l'ancienne note bêta du chapitre 2
@@ -463,10 +489,10 @@ footer a { color: inherit; }
       <p>Pourquoi mettre de l'argent de côté, comment le faire grossir, et où le placer. Lis un thème, teste-toi, continue.</p>
       <div class="ledger-mini" aria-label="Exemple : 1 000 dollars placés à 6 % d'intérêts composés">
         <div><span>Livret</span><span>Intérêts</span><span>Solde</span></div>
-        <div><span>Dépôt</span><span>—</span><span>1&nbsp;000,00</span></div>
-        <div><span>An 1</span><span>60,00</span><span>1&nbsp;060,00</span></div>
-        <div><span>An 2</span><span>63,60</span><span>1&nbsp;123,60</span></div>
-        <div><span>An 10</span><span>101,37</span><span>1&nbsp;790,85</span></div>
+        <div><span>Dépôt</span><span>—</span><span>1&nbsp;000,00&nbsp;$</span></div>
+        <div><span>An 1</span><span>60,00&nbsp;$</span><span>1&nbsp;060,00&nbsp;$</span></div>
+        <div><span>An 2</span><span>63,60&nbsp;$</span><span>1&nbsp;123,60&nbsp;$</span></div>
+        <div><span>An 10</span><span>101,37&nbsp;$</span><span>1&nbsp;790,85&nbsp;$</span></div>
       </div>
       <div class="ccard" aria-hidden="true"><div class="top"><span>ÉPARGNE</span><span>3.1 · 3.2</span></div><div class="puce"></div><div><div class="pan">•••• •••• •••• 2026</div><div class="bot"><span>CAPITAL<b>1&nbsp;000&nbsp;$</b></span><span>TAUX<b>6&nbsp;%</b></span><span>EN 10 ANS<b class="vif">1&nbsp;790&nbsp;$</b></span></div></div></div>
     </div>
@@ -512,12 +538,12 @@ footer a { color: inherit; }
       <li><span class="t">Faire face aux imprévus.</span> Une perte d'emploi, une réparation&nbsp;: c'est le rôle du <strong>fonds d'urgence</strong>.</li>
     </ul>
     <div class="pause"><div class="quiz">
-      <details><summary><span class="q-n">Réponse courte</span>Ton ami dit&nbsp;: «&nbsp;Épargner, ça sert juste pour la retraite.&nbsp;» Donne-lui deux autres raisons d'épargner.<span class="see">Voir la réponse →</span></summary><div class="ans">Au choix&nbsp;: <strong>réaliser des projets</strong>, <strong>accroître ses choix de consommation</strong>, <strong>faire face aux imprévus</strong> (le fonds d'urgence).</div></details>
+      <details><summary><span class="q-n">Réponse courte</span>Ton ami dit&nbsp;: «&nbsp;Épargner, ça sert juste pour la retraite.&nbsp;» Donne-lui deux autres raisons d'épargner.<span class="see">Voir la réponse →</span></summary><div class="ans">Au choix&nbsp;:<ul><li><strong>réaliser des projets</strong>&nbsp;;</li><li><strong>accroître ses choix de consommation</strong>&nbsp;;</li><li><strong>faire face aux imprévus</strong> (le fonds d'urgence).</li></ul></div></details>
     </div></div>
   </section>
 
   <section class="block" id="interets">
-    <div class="th"><h3>Intérêts simples et composés</h3></div>
+    <div class="th"><h3>Intérêts simples et composés <span class="ess">Essentiel</span></h3></div>
     <dl class="defs">
       <div class="def"><dt>Intérêts simples</dt><dd>Calculés <strong>seulement sur le capital</strong>, la somme de départ. Chaque année rapporte le même montant.</dd></div>
       <div class="def"><dt>Intérêts composés</dt><dd>Calculés sur le capital <strong>et sur les intérêts déjà accumulés</strong>. <span class="hl">Les intérêts produisent des intérêts.</span></dd></div>
@@ -525,16 +551,16 @@ footer a { color: inherit; }
     <p><strong>1&nbsp;000&nbsp;$ placés à 6&nbsp;% pendant 10 ans</strong> (exemple du manuel)&nbsp;:</p>
     <div class="ledger" role="table" aria-label="Solde année par année, intérêts simples contre intérêts composés">
       <div class="row head" role="row"><span>An</span><span></span><span>Simples</span><span>Composés</span></div>
-      <div class="row" role="row"><span>1</span><span class="bars"><i class="s" style="width:59.2%"></i><i class="c" style="width:59.2%"></i></span><span>1&nbsp;060</span><span>1&nbsp;060,00</span></div>
-      <div class="row" role="row"><span>2</span><span class="bars"><i class="s" style="width:62.5%"></i><i class="c" style="width:62.7%"></i></span><span>1&nbsp;120</span><span>1&nbsp;123,60</span></div>
-      <div class="row" role="row"><span>3</span><span class="bars"><i class="s" style="width:65.9%"></i><i class="c" style="width:66.5%"></i></span><span>1&nbsp;180</span><span>1&nbsp;191,02</span></div>
-      <div class="row" role="row"><span>4</span><span class="bars"><i class="s" style="width:69.2%"></i><i class="c" style="width:70.5%"></i></span><span>1&nbsp;240</span><span>1&nbsp;262,48</span></div>
-      <div class="row" role="row"><span>5</span><span class="bars"><i class="s" style="width:72.6%"></i><i class="c" style="width:74.7%"></i></span><span>1&nbsp;300</span><span>1&nbsp;338,23</span></div>
-      <div class="row" role="row"><span>6</span><span class="bars"><i class="s" style="width:75.9%"></i><i class="c" style="width:79.2%"></i></span><span>1&nbsp;360</span><span>1&nbsp;418,52</span></div>
-      <div class="row" role="row"><span>7</span><span class="bars"><i class="s" style="width:79.3%"></i><i class="c" style="width:84.0%"></i></span><span>1&nbsp;420</span><span>1&nbsp;503,63</span></div>
-      <div class="row" role="row"><span>8</span><span class="bars"><i class="s" style="width:82.6%"></i><i class="c" style="width:89.0%"></i></span><span>1&nbsp;480</span><span>1&nbsp;593,85</span></div>
-      <div class="row" role="row"><span>9</span><span class="bars"><i class="s" style="width:86.0%"></i><i class="c" style="width:94.3%"></i></span><span>1&nbsp;540</span><span>1&nbsp;689,48</span></div>
-      <div class="row last" role="row"><span>10</span><span class="bars"><i class="s" style="width:89.3%"></i><i class="c" style="width:100%"></i></span><span>1&nbsp;600</span><span>1&nbsp;790,85</span></div>
+      <div class="row" role="row"><span>1</span><span class="bars"><i class="s" style="width:59.2%"></i><i class="c" style="width:59.2%"></i></span><span>1&nbsp;060&nbsp;$</span><span>1&nbsp;060,00&nbsp;$</span></div>
+      <div class="row" role="row"><span>2</span><span class="bars"><i class="s" style="width:62.5%"></i><i class="c" style="width:62.7%"></i></span><span>1&nbsp;120&nbsp;$</span><span>1&nbsp;123,60&nbsp;$</span></div>
+      <div class="row" role="row"><span>3</span><span class="bars"><i class="s" style="width:65.9%"></i><i class="c" style="width:66.5%"></i></span><span>1&nbsp;180&nbsp;$</span><span>1&nbsp;191,02&nbsp;$</span></div>
+      <div class="row" role="row"><span>4</span><span class="bars"><i class="s" style="width:69.2%"></i><i class="c" style="width:70.5%"></i></span><span>1&nbsp;240&nbsp;$</span><span>1&nbsp;262,48&nbsp;$</span></div>
+      <div class="row" role="row"><span>5</span><span class="bars"><i class="s" style="width:72.6%"></i><i class="c" style="width:74.7%"></i></span><span>1&nbsp;300&nbsp;$</span><span>1&nbsp;338,23&nbsp;$</span></div>
+      <div class="row" role="row"><span>6</span><span class="bars"><i class="s" style="width:75.9%"></i><i class="c" style="width:79.2%"></i></span><span>1&nbsp;360&nbsp;$</span><span>1&nbsp;418,52&nbsp;$</span></div>
+      <div class="row" role="row"><span>7</span><span class="bars"><i class="s" style="width:79.3%"></i><i class="c" style="width:84.0%"></i></span><span>1&nbsp;420&nbsp;$</span><span>1&nbsp;503,63&nbsp;$</span></div>
+      <div class="row" role="row"><span>8</span><span class="bars"><i class="s" style="width:82.6%"></i><i class="c" style="width:89.0%"></i></span><span>1&nbsp;480&nbsp;$</span><span>1&nbsp;593,85&nbsp;$</span></div>
+      <div class="row" role="row"><span>9</span><span class="bars"><i class="s" style="width:86.0%"></i><i class="c" style="width:94.3%"></i></span><span>1&nbsp;540&nbsp;$</span><span>1&nbsp;689,48&nbsp;$</span></div>
+      <div class="row last" role="row"><span>10</span><span class="bars"><i class="s" style="width:89.3%"></i><i class="c" style="width:100%"></i></span><span>1&nbsp;600&nbsp;$</span><span>1&nbsp;790,85&nbsp;$</span></div>
     </div>
     <div class="legend"><span><i style="background:var(--muted);opacity:.55"></i>Simples&nbsp;: 600&nbsp;$ d'intérêts</span><span><i style="background:var(--gold)"></i>Composés&nbsp;: 790,85&nbsp;$ d'intérêts</span></div>
     <p>Au début, l'écart est minuscule. Plus le temps passe, plus il devient <strong>spectaculaire</strong>. Fais avancer le temps&nbsp;:</p>
@@ -557,7 +583,7 @@ footer a { color: inherit; }
     <div class="th"><h3>Trois stratégies pour épargner</h3></div>
     <div class="cols">
       <div class="card"><span class="big">1</span><h4>Commencer tôt</h4><p>Le <strong>temps</strong> est l'allié le plus précieux&nbsp;: plus les intérêts composés ont d'années, plus ils travaillent.</p></div>
-      <div class="card"><span class="big">2</span><h4>Se fixer des objectifs</h4><p><strong>Quoi</strong>, <strong>quand</strong>, <strong>combien</strong>&nbsp;? Un objectif <strong>réaliste</strong>, qui respecte ton budget.</p></div>
+      <div class="card"><span class="big">2</span><h4>Se fixer des objectifs</h4><p><strong>Quoi</strong>, <strong>quand</strong>, <strong>combien</strong>? Un objectif <strong>réaliste</strong>, qui respecte ton budget.</p></div>
       <div class="card"><span class="big">3</span><h4>Épargner régulièrement</h4><p>Un montant prévu au budget, idéalement par <strong>virement automatique</strong> le jour de la paie.</p></div>
     </div>
     <p class="sub-h">Commencer tôt&nbsp;: Zoé contre Max</p>
@@ -583,7 +609,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="criteres">
-    <div class="th"><h3>Rendement, sécurité, liquidité</h3></div>
+    <div class="th"><h3>Rendement, sécurité, liquidité <span class="ess">Essentiel</span></h3></div>
     <p>Avant de choisir un placement, on le juge selon <strong>trois critères</strong>&nbsp;:</p>
     <dl class="defs">
       <div class="def"><dt>Rendement</dt><dd>Le revenu que ton argent placé peut produire. De 1&nbsp;% ou 2&nbsp;% pour certains placements, jusqu'à 8&nbsp;% ou 15&nbsp;% pour d'autres.</dd></div>
@@ -597,7 +623,7 @@ footer a { color: inherit; }
       <div><dt>Entre les deux</dt><dd>Obligations</dd></div>
       <div><dt>Plus risqué<span class="q">rendement élevé</span></dt><dd>Actions</dd></div>
     </dl>
-    <p class="muted">D'après le tableau du manuel (p. 85). Un fonds commun dépend de ce qu'il contient&nbsp;; l'immobilier, du marché.</p>
+    <p class="muted">D'après le tableau du manuel (p.&nbsp;85). Un fonds commun dépend de ce qu'il contient&nbsp;; l'immobilier, du marché.</p>
     <div class="bon"><b>Bon à savoir</b><ul>
       <li><strong>La durée compte.</strong> Un placement risqué se garde à <strong>long terme</strong>&nbsp;: avec les années, les bons rendements compensent les mauvais. Pour un projet à <strong>court terme</strong>, on choisit un placement sûr.</li>
       <li><strong>La facilité se paie.</strong> Les placements très <strong>liquides</strong> ont souvent un rendement moins intéressant.</li>
@@ -628,7 +654,7 @@ footer a { color: inherit; }
   </div>
 
   <section class="block" id="familles">
-    <div class="th"><h3>Les trois familles de placements</h3></div>
+    <div class="th"><h3>Les trois familles de placements <span class="ess">Essentiel</span></h3></div>
     <div class="fams">
       <div class="fam">
         <h4>Comptes bancaires et placements garantis</h4>
@@ -667,15 +693,15 @@ footer a { color: inherit; }
     </ul></div>
     <details class="nuance">
       <summary class="lbl">Nuance · pour lire le manuel avec un œil critique</summary>
-      <p>Pour l'immobilier, le manuel dit «&nbsp;élevé&nbsp;» (p. 84), puis «&nbsp;moyen&nbsp;» dans son tableau (p. 85)&nbsp;: retiens que ça dépend du marché.</p>
+      <p>Pour l'immobilier, le manuel dit «&nbsp;élevé&nbsp;» (p.&nbsp;84), puis «&nbsp;moyen&nbsp;» dans son tableau (p.&nbsp;85)&nbsp;: retiens que ça dépend du marché.</p>
     </details>
     <div class="pause"><div class="quiz">
-      <details><summary><span class="q-n">Classement</span>Dans quelle famille va chacun&nbsp;: une obligation du gouvernement du Québec, un duplex, un CPG, une action d'une entreprise?<span class="see">Voir la réponse →</span></summary><div class="ans">Valeurs mobilières&nbsp;: l'<strong>obligation</strong> et l'<strong>action</strong>. Valeurs immobilières&nbsp;: le <strong>duplex</strong>. Comptes bancaires et placements garantis&nbsp;: le <strong>CPG</strong>.</div></details>
+      <details><summary><span class="q-n">Classement</span>Dans quelle famille va chacun? Classe chaque placement.<span class="choix"><span class="rang"><span class="it"><b>a</b>une obligation du gouvernement du Québec</span><span data-ok="0">Compte ou garanti</span><span data-ok="1">Valeur mobilière</span><span data-ok="0">Valeur immobilière</span></span><span class="rang"><span class="it"><b>b</b>un duplex</span><span data-ok="0">Compte ou garanti</span><span data-ok="0">Valeur mobilière</span><span data-ok="1">Valeur immobilière</span></span><span class="rang"><span class="it"><b>c</b>un CPG</span><span data-ok="1">Compte ou garanti</span><span data-ok="0">Valeur mobilière</span><span data-ok="0">Valeur immobilière</span></span><span class="rang"><span class="it"><b>d</b>une action d'une entreprise</span><span data-ok="0">Compte ou garanti</span><span data-ok="1">Valeur mobilière</span><span data-ok="0">Valeur immobilière</span></span></span><span class="see">Voir la réponse →</span></summary><div class="ans">Valeurs mobilières&nbsp;: l'<strong>obligation</strong> et l'<strong>action</strong>. Valeurs immobilières&nbsp;: le <strong>duplex</strong>. Comptes bancaires et placements garantis&nbsp;: le <strong>CPG</strong>.</div></details>
     </div></div>
   </section>
 
   <section class="block" id="regimes">
-    <div class="th"><h3>Les régimes enregistrés</h3></div>
+    <div class="th"><h3>Les régimes enregistrés <span class="ess">Essentiel</span></h3></div>
     <p class="sub-h">Quatre boîtes, quatre buts</p>
     <p>Un régime enregistré n'est <strong>pas un nouveau placement</strong>. C'est une <strong>boîte</strong> (une enveloppe), enregistrée auprès du gouvernement fédéral, où tu mets tes CPG, tes actions, tes obligations ou tes fonds. L'avantage&nbsp;: l'impôt.</p>
     <div class="regimes">
@@ -699,7 +725,7 @@ footer a { color: inherit; }
         <dt>Le bonus</dt><dd>Les gouvernements ajoutent de 30&nbsp;% à 60&nbsp;% des dépôts, selon le revenu des parents, jusqu'à 750&nbsp;$ par année (manuel, p.&nbsp;87)</dd></dl></div>
     </div>
     <div class="piege"><b>Piège</b><strong>CELI</strong>&nbsp;: aucun impôt <strong>à la sortie</strong>. <strong>REER</strong>&nbsp;: moins d'impôt <strong>à l'entrée</strong>, impôt à la sortie.</div>
-    <p><strong>Pourquoi ça vaut la peine?</strong> 1&nbsp;000&nbsp;$ par année à 8&nbsp;% pendant 35 ans donnent <strong>186&nbsp;102&nbsp;$</strong> dans un REER, contre <strong>108&nbsp;116&nbsp;$</strong> hors d'un régime, parce que les revenus n'y sont pas imposés pendant qu'ils grossissent (exemple du manuel, p. 88).</p>
+    <p><strong>Pourquoi ça vaut la peine?</strong> 1&nbsp;000&nbsp;$ par année à 8&nbsp;% pendant 35 ans donnent <strong>186&nbsp;102&nbsp;$</strong> dans un REER, contre <strong>108&nbsp;116&nbsp;$</strong> hors d'un régime, parce que les revenus n'y sont pas imposés pendant qu'ils grossissent (exemple du manuel, p.&nbsp;88).</p>
     <details class="nuance">
       <summary class="lbl">Nuance · ce qui a changé depuis le manuel</summary>
       <p>Le manuel donne le plafond du CELI pour 2024&nbsp;; il est resté à 7&nbsp;000&nbsp;$ en 2025 et en 2026.</p>
@@ -711,7 +737,7 @@ footer a { color: inherit; }
   </section>
 
   <section class="block" id="inflation">
-    <div class="th"><h3>L'inflation et le pouvoir d'achat</h3></div>
+    <div class="th"><h3>L'inflation et le pouvoir d'achat <span class="ess">Essentiel</span></h3></div>
     <dl class="defs">
       <div class="def"><dt>Inflation</dt><dd>L'<strong>augmentation des prix</strong> des biens et des services. Statistique Canada la mesure avec l'<strong>indice des prix à la consommation</strong> (IPC), un panier d'environ 700 biens et services.</dd></div>
       <div class="def"><dt>Pouvoir d'achat</dt><dd>Ce que ton argent permet réellement d'<strong>acheter</strong>. Quand les prix montent plus vite que ton argent, il baisse.</dd></div>
@@ -814,6 +840,31 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <!-- /retour-tdb -->
 <a class="haut" href="#" aria-label="Retour en haut de la note">↑ Haut</a>
+<script>/* Choix de réponse interactifs (relecture du prof, 2026-11-16). Une rangée .rang = un classement : un bouton par catégorie. */
+document.addEventListener("click", function (e) {
+  var o = e.target.closest(".choix [data-ok]"); if (!o) return;
+  e.preventDefault();
+  var d = o.closest("details"), r = o.closest(".rang"), bon = o.dataset.ok === "1";
+  if (r && r.querySelector(".bon, .faux")) return;
+  o.classList.remove("bon", "faux"); void o.offsetWidth; o.classList.add(bon ? "bon" : "faux");
+  var ans = d.querySelector(".ans"), v = ans.querySelector(".verdict-choix"), texte;
+  if (r) {
+    if (!bon) r.querySelector('[data-ok="1"]').classList.add("attendu");
+    var rangs = d.querySelectorAll(".rang"), faits = d.querySelectorAll(".rang .bon, .rang .faux").length;
+    if (faits < rangs.length) { d.open = false; return; }
+    var ok = d.querySelectorAll(".rang .bon").length;
+    bon = ok === rangs.length;
+    texte = bon ? "✓ Tout est bien classé!" : ok + " sur " + rangs.length + (rangs.length - ok > 1 ? ". Les bonnes réponses sont en vert pointillé." : ". La bonne réponse est en vert pointillé.");
+  } else {
+    var reste = d.querySelectorAll('.choix > span[data-ok="1"]:not(.bon)');
+    reste.forEach(function (x) { x.classList.add("attendu"); });
+    texte = bon ? (reste.length > 1 ? "✓ Bonne réponse! Les autres sont en vert pointillé." : reste.length ? "✓ Bonne réponse! L'autre est en vert pointillé." : "✓ Bonne réponse!") : (reste.length > 1 ? "✗ Pas cette fois. Les bonnes réponses sont en vert pointillé." : "✗ Pas cette fois. La bonne réponse est en vert pointillé.");
+  }
+  if (!v) { v = document.createElement("b"); ans.insertBefore(v, ans.firstChild); }
+  v.className = "verdict-choix " + (bon ? "oui" : "non"); v.textContent = texte;
+  d.open = true;
+});
+</script>
 <script>window.LF_COURS = "finances";
 /* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
    Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher.
