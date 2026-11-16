@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-JO5lm+rq/KzE8CFfWGklerfznJml/JvtChb1cQoz7Gw=' 'sha256-o5Pg5aEP52F/8idOvYo+iAu/F0+nuCTLQdZraaBU7Nk=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-o5Pg5aEP52F/8idOvYo+iAu/F0+nuCTLQdZraaBU7Nk=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours chapitres 4 et 5 · Poursuivre ses études</title>
@@ -762,7 +762,7 @@ footer a { color: inherit; }
     </div></div>
   </section>
 
-<!--qr5--><section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions par section. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=4.1" target="_blank" rel="noopener">Section 4.1 →</a><a href="https://simleprof.github.io/finances/?s=4.2" target="_blank" rel="noopener">Section 4.2 →</a><a href="https://simleprof.github.io/finances/?s=4.3" target="_blank" rel="noopener">Section 4.3 →</a><a href="https://simleprof.github.io/finances/?s=5.1" target="_blank" rel="noopener">Section 5.1 →</a><a href="https://simleprof.github.io/finances/?s=5.2" target="_blank" rel="noopener">Section 5.2 →</a></div><div class="qr5-qr"></div></section><!--/qr5-->
+<!--qr5--><section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions par section. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=4.1" id="apres-4.1">Section 4.1 →</a><a href="https://simleprof.github.io/finances/?s=4.2" id="apres-4.2">Section 4.2 →</a><a href="https://simleprof.github.io/finances/?s=4.3" id="apres-4.3">Section 4.3 →</a><a href="https://simleprof.github.io/finances/?s=5.1" id="apres-5.1">Section 5.1 →</a><a href="https://simleprof.github.io/finances/?s=5.2" id="apres-5.2">Section 5.2 →</a></div><div class="qr5-qr"></div></section><!--/qr5-->
 </main>
 
 <footer>
@@ -1115,23 +1115,37 @@ document.addEventListener("DOMContentLoaded", function () {
     bulle.style.left = x + "px"; bulle.style.top = y + "px";
     bulleY = window.scrollY;
   }
-  var bulleY = 0;
-  function fermerBulle() { if (bulle) { bulle.remove(); bulle = null; } }
+  var bulleY = 0, motOuvert = null;
+  function fermerBulle() { if (bulle) { bulle.remove(); bulle = null; } motOuvert = null; }
+  // Recliquer sur le même mot (ou sur la bulle) la referme : le réflexe de l'élève (sa demande, 2026-11-16).
+  function basculer(s) { if (bulle && motOuvert === s) { fermerBulle(); return; } ouvrirBulle(s); motOuvert = s; }
 
   document.addEventListener("click", function (e) {
     var s = e.target.closest && e.target.closest(".lf-mot");
-    if (s && r.on) { e.preventDefault(); e.stopPropagation(); ouvrirBulle(s); return; }
-    if (bulle && !e.target.closest(".lf-bulle")) fermerBulle();
+    if (s && r.on) { e.preventDefault(); e.stopPropagation(); basculer(s); return; }
+    if (bulle) fermerBulle();
   }, true);
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") fermerBulle();
-    if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("lf-mot")) { e.preventDefault(); ouvrirBulle(e.target); }
+    if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("lf-mot")) { e.preventDefault(); basculer(e.target); }
   });
   // La bulle se ferme quand on défile vraiment (pas au petit glissement d'un doigt qui touche le mot)
   window.addEventListener("scroll", function () { if (bulle && Math.abs(window.scrollY - bulleY) > 60) fermerBulle(); }, { passive: true });
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", demarrer); else demarrer();
 })();
-</script>
+
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href*="?s="]'); if (!a) return;
+  var u = new URL(a.href, location.href); if (u.origin !== location.origin && u.hostname !== "simleprof.github.io") return;
+  var nom = location.pathname.split("/").pop(); if (!/^[\w.-]+\.html$/.test(nom)) return;
+  u.searchParams.set("retour", nom); a.href = u.toString();
+}, true);
+// De retour du test (#apres-…) : on revient à l'endroit, une fois la page dessinée (les graphiques poussent le texte).
+window.addEventListener("load", function () {
+  if (location.hash.indexOf("#apres-") !== 0) return;
+  var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (el) setTimeout(function () { el.scrollIntoView({ block: "start", behavior: "instant" }); }, 60);
+});</script>
 </body>
 </html>
