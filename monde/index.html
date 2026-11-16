@@ -353,9 +353,11 @@ const ETAPES = [
 const HUB = {
   notes: [
     { id: "intro", etape: 1, titre: "Introduction", sujet: "Les régions du monde, les gouvernements, l'économie, l'histoire et les médias", fichier: "introduction.html", dispo: "2026-11-11" },
-    { id: "p13", etape: 2, titre: "Population · sections 1 à 3", sujet: "Pourquoi nous sommes 8 milliards, et qui part vivre ailleurs", fichier: "population-s1-s3.html", dispo: "2026-10-05" },
-    { id: "p45", etape: 2, titre: "Population · sections 4 et 5", sujet: "Les immigrants au travail et la vie en ville", fichier: "population-s4-s5.html", dispo: "2026-10-30" },
-    { id: "r", etape: 3, titre: "La richesse", sujet: "Pourquoi certains pays sont riches et d'autres, pauvres", fichier: null, dispo: "2026-11-30" },
+    // examen : l'évaluation que la note prépare, affichée sur la carte au lieu de « Étape N » (déjà en haut ; sa demande, 2026-11-16).
+    // L'examen d'étape de Population est récapitulatif : S4-S5 + un retour sur la S2 (registre du chantier).
+    { id: "p13", etape: 2, examen: "Examen de mi-étape", titre: "Population · sections 1 à 3", sujet: "Pourquoi nous sommes 8 milliards, et qui part vivre ailleurs", fichier: "population-s1-s3.html", dispo: "2026-10-05" },
+    { id: "p45", etape: 2, examen: "Examen d'étape · + la section 2", titre: "Population · sections 4 et 5", sujet: "Les immigrants au travail et la vie en ville", fichier: "population-s4-s5.html", dispo: "2026-10-30" },
+    { id: "r", etape: 3, examen: "Mi-chapitre (S1-S2) et chapitre", titre: "La richesse", sujet: "Pourquoi certains pays sont riches et d'autres, pauvres", fichier: null, dispo: "2026-11-30" },
     { id: "c", etape: 3, titre: "Tensions et conflits", sujet: "Pourquoi les guerres éclatent, et comment on fait la paix", fichier: null, dispo: "2027-02-22" }
   ]
 };
@@ -1165,7 +1167,7 @@ function notesHtml() {
   const autres = ailleurs.length ? `<section><b class="lab">Aussi en ligne</b><p class="autres">${ailleurs.map(n => `<a href="${encodeURI(n.fichier)}">${esc(n.titre)} <small>· étape ${n.etape}</small></a>`).join("")}</p></section>` : "";
   if (!ns.length) return `<section class="intro"><p>Pas de notes de cours en ligne pour l'étape ${VUE_ET.n}.</p></section>${autres}`;
   return `<section><div class="notes-l">${ns.map(n => ouverte(n)
-    ? `<a class="note" href="${encodeURI(n.fichier)}"><span class="k">Étape ${n.etape}</span><b>${esc(n.titre)}</b><small>${esc(n.sujet)}</small><span class="lire">Lire →</span></a>`
+    ? `<a class="note" href="${encodeURI(n.fichier)}"><span class="k">${esc(n.examen || "Étape " + n.etape)}</span><b>${esc(n.titre)}</b><small>${esc(n.sujet)}</small><span class="lire">Lire →</span></a>`
     : `<p class="note off"><span class="k">🔒 ${n.fichier ? "Sort le " + esc(fmt(parse(n.dispo), { day: "numeric", month: "long" })) : "À venir"}</span><b>${esc(n.titre)}</b><small>${esc(n.sujet)}</small></p>`).join("")}</div></section>${autres}`;
 }
 function choisirSec(v) {
