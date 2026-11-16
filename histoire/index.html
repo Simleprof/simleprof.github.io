@@ -1277,7 +1277,7 @@ const Q = {
   form: () => FORMQ ||= FORM.q.map(([ch, d, t, oi, q, r, choix, long]) => {
     if (t === "ordre" && Array.isArray(choix)) return { ch, d, q, oi, r, t, inter: "ordre", cartes: choix, consigne: "Remets en ordre, du plus ancien au plus récent." };
     if (t === "coche") return { ch, d, q, oi, r, t, inter: "coche", bons: choix.bons, cartes: [...choix.bons, ...choix.faux], consigne: `Coche les ${choix.bons.length} bonnes réponses.` };
-    if (t === "tri") return { ch, d, q, oi, r, t, inter: "tri", cols: choix.cols, cartes: choix.items, consigne: "Place chaque carte dans la bonne colonne." };
+    if (t === "tri") return { ch, d, q, oi, r, t, inter: "tri", cols: choix.cols, cartes: choix.items, consigne: "Pour chaque énoncé, choisis la bonne réponse." };
     if (t === "lien") return { ch, d, q, oi, r, t, inter: "lien", paires: choix, cartes: choix.map((_, i) => i), consigne: "Relie chaque cause à sa conséquence." };
     if (t === "vf") { const v = /^Vrai/.test(r), corr = r.replace(/^(Vrai|Faux)\.?\s*/, ""); return { ch, d, q, oi, r: v ? "Vrai" : "Faux", choix: ["Vrai", "Faux"], corr: corr || undefined, consigne: "Vrai ou faux?" }; }
     if (t === "cm") { const bon = choix["abcde".indexOf(r[0])], plein = r.replace(/^[a-e]\)\s*/, "");

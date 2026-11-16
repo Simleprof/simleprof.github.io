@@ -1077,7 +1077,7 @@ const VUES = {
   // Trier : chaque carte dans une des deux colonnes.
   tri(q, st) {
     const ordre = melange(q.items.map((_, i) => i)), choix = {};
-    st.innerHTML = `<p class="q-txt">${esc(q.t)}</p><p class="dx-cons">Place chaque carte dans la bonne colonne.</p>
+    st.innerHTML = `<p class="q-txt">${esc(q.t)}</p><p class="dx-cons">Pour chaque énoncé, choisis la bonne réponse.</p>
       <div class="tri-l">${ordre.map(i => `<div class="tri-c" data-i="${i}"><p>${esc(q.items[i][0])}</p><div class="tri-b">${q.cols.map((c, j) => `<button class="tb" data-i="${i}" data-j="${j}" aria-pressed="false">${esc(c)}</button>`).join("")}</div></div>`).join("")}</div>
       <button class="gros" id="valider" disabled>Valider</button>`;
     st.querySelectorAll(".tb").forEach(b => b.onclick = () => {
