@@ -948,7 +948,7 @@ function barres(g) {
   const L = 116, W = 160, H = 30, max = Math.max(...g.barres.map(b => Math.abs(b[1]))), neg = g.barres.some(b => b[1] < 0);
   const zero = L + (neg ? 14 : 0), larg = W - (neg ? 14 : 0);
   const nb = v => (g.signe && v > 0 ? "+" : "") + String(v).replace("-", "−").replace(".", ",") + g.unite;
-  return `<svg viewBox="0 0 360 ${g.barres.length * H + 6}" role="img" aria-label="Graphique à barres">${g.barres.map(([l, v], i) => {
+  return `<svg viewBox="0 0 360 ${g.barres.length * H + 6}" role="img" aria-label="Graphique à barres">${g.barres.map(([l, v], i) => {
     const w = Math.max(2, Math.abs(v) / max * larg), y = i * H + 4, x = v < 0 ? zero - w : zero;
     return `<text x="${L - 8}" y="${y + 17}" text-anchor="end" font-size="15">${esc(l)}</text><rect class="b${v < 0 ? " n" : ""}" x="${x}" y="${y + 3}" width="${w}" height="20"/><text class="v" x="${(v < 0 ? zero : x + w) + 6}" y="${y + 18}" font-size="15">${nb(v)}</text>`; }).join("")}
     <line class="ax" x1="${zero}" x2="${zero}" y1="0" y2="${g.barres.length * H + 6}"/></svg>`;
@@ -956,7 +956,7 @@ function barres(g) {
 function pyramide(forme) {
   const L = forme === "jeune" ? [100, 90, 80, 70, 60, 50, 40, 30, 20, 10] : [52, 56, 60, 66, 70, 72, 68, 58, 42, 22];
   const h = 16, c = 180;
-  return `<svg viewBox="0 0 360 ${L.length * h + 30}" role="img" aria-label="Pyramide des âges">${L.map((w, i) => { const y = (L.length - 1 - i) * h;
+  return `<svg viewBox="0 0 360 ${L.length * h + 30}" role="img" aria-label="Pyramide des âges">${L.map((w, i) => { const y = (L.length - 1 - i) * h;
     // ×1.15 : la barre la plus large laisse la place à l'étiquette « Jeunes ».
     return `<rect class="b" x="${c - 4 - w * 1.15}" y="${y}" width="${w * 1.15}" height="${h - 3}"/><rect class="b" x="${c + 4}" y="${y}" width="${w * 1.15}" height="${h - 3}"/>`; }).join("")}
     <text x="${c - 12}" y="${L.length * h + 22}" text-anchor="end" font-size="15">Hommes</text><text x="${c + 12}" y="${L.length * h + 22}" font-size="15">Femmes</text>

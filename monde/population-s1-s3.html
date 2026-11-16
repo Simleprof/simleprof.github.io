@@ -125,9 +125,11 @@ strong { font-weight: 700; }
 .lex { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 28px; margin: 0; }
 .lex > div { border-top: 1px solid var(--line); padding: 12px 0 12px 18px; position: relative; }
 .lex > div::before { content: ""; position: absolute; left: 0; top: 20px; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--sea)); }
-.lex dt { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; }
+.lex dt { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; text-decoration: underline; text-decoration-color: var(--c, var(--sea)); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.lex dt::after { content: "\00a0:"; color: var(--ink); display: inline-block; }
+.lex dt small { display: inline-block; }  /* deux-points après le mot défini (sa demande, 2026-11-16) */
 .lex dt small { font-family: var(--sans); font-weight: 400; font-size: .82rem; color: var(--muted); }
-.lex dd { margin: 2px 0 0; }
+.lex dd { margin: 6px 0 0; }
 .lex .ex { color: var(--muted); font-size: .9rem; font-style: italic; }
 
 /* Encadrés */
@@ -232,10 +234,10 @@ strong { font-weight: 700; }
 
 /* Cartes simples */
 .trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
-.mini { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.mini { background: var(--paper-2); border: 0; border-top: 3px solid var(--gold); border-radius: 6px; padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
 .mini h4 { font-size: 1.12rem; }
 .mini .ex { font-size: .88rem; color: var(--muted); font-style: italic; }
-.mini .ic { width: 38px; height: 38px; border-radius: 12px; background: var(--paper-2); display: grid; place-content: center; font-size: 1.2rem; }
+.mini .ic { width: 38px; height: 38px; border-radius: 50%; background: var(--card); display: grid; place-content: center; font-size: 1.2rem; }
 .mini ul { padding-left: 1.1em; display: grid; gap: 3px; }
 
 /* Lettres mnémo */
@@ -549,15 +551,15 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="viz">
       <span class="cap">Le modèle en 4 phases (et une phase 5 en pointillé)</span>
       <!-- Natalité en bleu, mortalité en rouge (sa demande, 2026-11-16). Phase 5 : les courbes se croisent, hors du manuel. -->
-      <svg viewBox="0 0 640 265" role="img" aria-label="Transition démographique en 4 phases. La mortalité chute en phase 2, la natalité chute en phase 3. L'écart entre les deux courbes représente une croissance rapide. En pointillé, une phase 5 : la natalité passe sous la mortalité et la population baisse.">
-        <path d="M60 52 L200 52 C260 52, 300 165, 360 168 L520 172 L520 178 L270 168 C200 163, 150 64, 100 64 L60 64 Z" style="fill:var(--gold-soft)"/>
-        <path d="M537 175 L615 194 L615 166 Z" style="fill:var(--accent-soft)"/>
+      <svg viewBox="0 0 640 265" role="img" aria-label="Transition démographique en 4 phases. La mortalité chute en phase 2, la natalité chute en phase 3. L'écart entre les deux courbes représente une croissance rapide. En pointillé, une phase 5 : la natalité passe sous la mortalité et la population baisse.">
+        <path d="M60 52 L200 52 C260 52, 300 165, 360 168 L520 172 L520 178 L270 168 C200 163, 150 64, 100 64 L60 64 Z" style="fill:var(--gold-soft)"/>
+        <path d="M537 175 L615 194 L615 166 Z" style="fill:var(--accent-soft)"/>
         <path class="axis" d="M50 20 V215 H625"/>
         <path class="grid" d="M175 30 V215 M290 30 V215 M405 30 V215 M520 30 V215"/>
-        <path d="M60 52 L200 52 C260 52, 300 165, 360 168 L520 172" style="stroke:var(--sea);stroke-width:4;fill:none;stroke-linecap:round"/>
-        <path d="M60 64 L100 64 C150 64, 200 163, 270 168 L520 178" style="stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round"/>
-        <path d="M520 172 L615 194" style="stroke:var(--sea);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:2 8"/>
-        <path d="M520 178 L615 166" style="stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:2 8"/>
+        <path d="M60 52 L200 52 C260 52, 300 165, 360 168 L520 172" style="stroke:var(--sea);stroke-width:4;fill:none;stroke-linecap:round"/>
+        <path d="M60 64 L100 64 C150 64, 200 163, 270 168 L520 178" style="stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round"/>
+        <path d="M520 172 L615 194" style="stroke:var(--sea);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:2 8"/>
+        <path d="M520 178 L615 166" style="stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:2 8"/>
         <g style="font-family:var(--serif);font-size:24px;font-weight:600"><text class="chiffre-cell" x="106" y="40">1</text><text class="chiffre-cell" x="226" y="40">2</text><text class="chiffre-cell" x="341" y="40">3</text><text class="chiffre-cell" x="456" y="40">4</text><text class="chiffre-cell" x="562" y="40" style="font-style:italic;fill:var(--muted)">5</text></g>
         <g class="hors-cell"><text x="184" y="90" style="font-weight:700">Croissance</text><text x="184" y="106" style="font-weight:700">rapide</text>
         <text class="sm" x="62" y="236">Tout est haut</text><text class="sm" x="182" y="236">Mortalité ↓</text><text class="sm" x="297" y="236">Natalité ↓</text><text class="sm" x="412" y="236">Tout est bas</text><text class="sm" x="527" y="236">Décès &gt; naiss.</text>
@@ -642,7 +644,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div class="fig" style="--c:var(--ink)"><b>8 <small>milliards</small></b><span>humains en 2023</span></div>
       <div class="fig" style="--c:var(--c-asie)"><b>59 %</b><span>vivent en Asie</span></div>
       <div class="fig" style="--c:var(--c-afrique)"><b>83,5 %</b><span>vivent dans un pays en développement</span></div>
-      <div class="fig" style="--c:var(--sea)"><b>2008</b><span>depuis, plus de la moitié de l'humanité vit en ville</span></div>
+      <div class="fig" style="--c:var(--sea)"><b>2008</b><span>depuis 2008, plus de la moitié de l'humanité vit en ville</span></div>
     </div>
     <p>Les grands foyers de population : l'Asie de l'Est, du Sud et du Sud-Est, l'Europe, le nord-est des États-Unis, le golfe de Guinée et le sud-est du Brésil. Les régions les moins peuplées sont les <strong>régions polaires</strong>, les <strong>déserts</strong> et les <strong>forêts tropicales</strong>. La densité y est faible pour <strong>trois raisons</strong> :</p>
     <div class="trio">
@@ -740,7 +742,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="th"><h3>Natalité, vieillissement et mesures</h3><span class="ess">Essentiel</span></div>
     <div class="viz">
       <span class="cap">Deux formes de pyramide des âges (silhouettes typiques)</span>
-      <svg viewBox="0 0 580 270" role="img" aria-label="Deux pyramides des âges. À gauche, population jeune : très large à la base, pointue au sommet. À droite, population vieillissante : étroite à la base, large au milieu et en haut."><g transform="translate(0,0)">
+      <svg viewBox="0 0 580 270" role="img" aria-label="Deux pyramides des âges. À gauche, population jeune : très large à la base, pointue au sommet. À droite, population vieillissante : étroite à la base, large au milieu et en haut."><g transform="translate(0,0)">
 <rect x="10" y="200" width="118" height="18" rx="3" style="fill:var(--sea)"/>
 <rect x="132" y="200" width="118" height="18" rx="3" style="fill:var(--accent)"/>
 <text class="sm" x="130" y="213" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
@@ -885,16 +887,16 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     </div>
     <div class="viz">
       <span class="cap">Les grands flux contemporains, schéma · Sud → Nord</span>
-      <svg viewBox="0 0 640 310" role="img" aria-label="Schéma des flux migratoires : du Mexique et de l'Amérique centrale vers l'Amérique du Nord, de l'Afrique vers l'Union européenne, de l'Asie du Sud vers le golfe Persique, de l'Asie du Sud-Est vers l'Australie, de l'Asie de l'Est vers l'Amérique du Nord.">
+      <svg viewBox="0 0 640 310" role="img" aria-label="Schéma des flux migratoires : du Mexique et de l'Amérique centrale vers l'Amérique du Nord, de l'Afrique vers l'Union européenne, de l'Asie du Sud vers le golfe Persique, de l'Asie du Sud-Est vers l'Australie, de l'Asie de l'Est vers l'Amérique du Nord.">
         <defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker></defs>
-        <path d="M0 150 H640" class="grid"/>
+        <path d="M0 150 H640" class="grid"/>
         <text class="sm ns-cell" x="4" y="142">NORD ↑</text><text class="sm ns-cell" x="4" y="178">SUD ↓</text>
         <g style="stroke:var(--accent);stroke-width:2.5;fill:none;stroke-dasharray:6 6" class="fl">
-          <path d="M160 180 Q 190 130, 146 94" marker-end="url(#ah)"/>
-          <path d="M320 215 Q 290 140, 328 84" marker-end="url(#ah)"/>
-          <path d="M490 170 Q 455 190, 432 156" marker-end="url(#ah)"/>
-          <path d="M600 205 Q 610 245, 572 262" marker-end="url(#ah)"/>
-          <path d="M560 110 Q 340 0, 154 76" marker-end="url(#ah)"/>
+          <path d="M160 180 Q 190 130, 146 94" marker-end="url(#ah)"/>
+          <path d="M320 215 Q 290 140, 328 84" marker-end="url(#ah)"/>
+          <path d="M490 170 Q 455 190, 432 156" marker-end="url(#ah)"/>
+          <path d="M600 205 Q 610 245, 572 262" marker-end="url(#ah)"/>
+          <path d="M560 110 Q 340 0, 154 76" marker-end="url(#ah)"/>
         </g>
         <g style="fill:var(--sea)"><circle cx="140" cy="82" r="9"/><circle cx="330" cy="72" r="9"/><circle cx="420" cy="150" r="9"/><circle cx="560" cy="270" r="9"/></g>
         <g style="fill:var(--card);stroke:var(--accent);stroke-width:2.5"><circle cx="160" cy="182" r="6"/><circle cx="320" cy="217" r="6"/><circle cx="490" cy="170" r="6"/><circle cx="600" cy="205" r="6"/><circle cx="560" cy="110" r="6"/></g>
