@@ -265,6 +265,9 @@ strong { font-weight: 700; }
 .qz details { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 1px 0 var(--line), 0 10px 24px -18px rgba(19, 32, 47, .45); transition: border-color .2s, transform .2s; }
 .qz details:hover { transform: translateY(-2px); }
 .qz details[open] { border-color: var(--sea); }
+.qz .choix { display: grid; gap: 6px; margin-top: 2px; }
+.qz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.qz .choix b { font-family: var(--mono); font-weight: 700; color: var(--sea); min-width: 1ch; }  /* choix de réponse un par ligne (sa demande, 2026-11-16) */
 .qz summary { cursor: pointer; list-style: none; padding: 16px 18px; display: grid; gap: 8px; }
 .qz summary::-webkit-details-marker { display: none; }
 .qz .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -736,7 +739,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
-        <details><summary><span class="k">Choix multiples</span>Quel phénomène fait grossir les villes du Sud : le tourisme, l'exode rural, la baisse de la natalité ou le télétravail?<span class="go">Révéler</span></summary><div class="ans">L'<strong>exode rural</strong> : les gens quittent la campagne pour la ville.</div></details>
+        <details><summary><span class="k">Choix de réponse</span>Quel phénomène fait grossir les villes du Sud?<span class="choix"><span><b>A</b>le tourisme</span><span><b>B</b>l'exode rural</span><span><b>C</b>la baisse de la natalité</span><span><b>D</b>le télétravail</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>B. L'exode rural</strong> : les gens quittent la campagne pour la ville.</div></details>
         <details><summary><span class="k">Nomme</span>Nomme deux raisons qui attirent les migrants en ville plutôt qu'à la campagne.<span class="go">Révéler</span></summary><div class="ans">Au choix : les <strong>emplois</strong>, l'accès à l'<strong>éducation</strong> et à la <strong>santé</strong>, les activités culturelles, la <strong>diaspora</strong>.</div></details>
       </div>
     </div>

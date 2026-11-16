@@ -288,6 +288,9 @@ strong { font-weight: 700; }
 .qz details { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 1px 0 var(--line), 0 10px 24px -18px rgba(19, 32, 47, .45); transition: border-color .2s, transform .2s; }
 .qz details:hover { transform: translateY(-2px); }
 .qz details[open] { border-color: var(--sea); }
+.qz .choix { display: grid; gap: 6px; margin-top: 2px; }
+.qz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.qz .choix b { font-family: var(--mono); font-weight: 700; color: var(--sea); min-width: 1ch; }  /* choix de réponse un par ligne (sa demande, 2026-11-16) */
 .qz summary { cursor: pointer; list-style: none; padding: 16px 18px; display: grid; gap: 8px; }
 .qz summary::-webkit-details-marker { display: none; }
 .qz .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -615,7 +618,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
-        <details><summary><span class="k">Choix multiples</span>Quelle région a la population la plus stable depuis 1990 : l'Afrique, l'Asie, l'Europe ou l'Océanie?<span class="go">Révéler</span></summary><div class="ans">L'<strong>Europe</strong> : à peine +3 % en 30 ans.</div></details>
+        <details><summary><span class="k">Choix de réponse</span>Quelle région a la population la plus stable depuis 1990?<span class="choix"><span><b>A</b>l'Afrique</span><span><b>B</b>l'Asie</span><span><b>C</b>l'Europe</span><span><b>D</b>l'Océanie</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>C. L'Europe</strong> : à peine +3 % en 30 ans.</div></details>
         <details><summary><span class="k">Données</span>Environ combien de personnes la population mondiale gagne-t-elle chaque année?<span class="go">Révéler</span></summary><div class="ans">Environ <strong>80 millions</strong> (ONU, 2022).</div></details>
       </div>
     </div>
@@ -838,7 +841,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
-        <details><summary><span class="k">Lesquelles?</span>Lesquelles de ces mesures encouragent les naissances : des services de garde, une amende au 2e enfant, un crédit d'impôt pour enfant, des frontières fermées?<span class="go">Révéler</span></summary><div class="ans">Les <strong>services de garde</strong> et le <strong>crédit d'impôt</strong>. L'amende fait l'inverse, et les frontières n'ont rien à voir avec la natalité.</div></details>
+        <details><summary><span class="k">Choix de réponse</span>Lesquelles de ces mesures encouragent les naissances? Il y a deux bonnes réponses.<span class="choix"><span><b>A</b>des services de garde</span><span><b>B</b>une amende au 2e enfant</span><span><b>C</b>un crédit d'impôt pour enfant</span><span><b>D</b>des frontières fermées</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>A et C</strong> : les <strong>services de garde</strong> et le <strong>crédit d'impôt</strong>. L'amende fait l'inverse, et les frontières n'ont rien à voir avec la natalité.</div></details>
         <details><summary><span class="k">Pyramide</span>Une pyramide des âges très large à la base et pointue au sommet : population jeune ou vieillissante?<span class="go">Révéler</span></summary><div class="ans">Une population <strong>jeune</strong> : beaucoup de naissances, peu d'aînés. C'est typique d'un pays en développement.</div></details>
       </div>
     </div>
@@ -976,7 +979,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
-        <details><summary><span class="k">Choix multiples</span>Qui est un réfugié? a) une étudiante en échange, b) un travailleur saisonnier, c) une journaliste menacée de prison à cause de ses articles.<span class="go">Révéler</span></summary><div class="ans"><strong>c)</strong> Elle fuit une <strong>menace grave</strong> : une persécution politique.</div></details>
+        <details><summary><span class="k">Choix de réponse</span>Qui est un réfugié?<span class="choix"><span><b>A</b>une étudiante en échange</span><span><b>B</b>un travailleur saisonnier</span><span><b>C</b>une journaliste menacée de prison à cause de ses articles</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>C.</strong> Elle fuit une <strong>menace grave</strong> : une persécution politique.</div></details>
         <details><summary><span class="k">Nomme</span>Quel accord de 1951 oblige les pays signataires à accorder l'asile?<span class="go">Révéler</span></summary><div class="ans">La <strong>Convention de Genève</strong> relative au statut des réfugiés.</div></details>
       </div>
     </div>
@@ -995,14 +998,14 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <details><summary><span class="k">Vrai ou faux</span>Plusieurs pays développés ont un indice de fécondité sous le seuil de renouvellement.<span class="go">Révéler</span></summary><div class="ans"><strong>Vrai.</strong> Ils sont sous <strong>2,1 enfants par femme</strong>. Le Canada, par exemple, est à 1,26 (2023).</div></details>
       <details><summary><span class="k">Vrai ou faux</span>Les flux migratoires vont surtout du Nord vers le Sud.<span class="go">Révéler</span></summary><div class="ans"><strong>Faux.</strong> Ils vont surtout du <strong>Sud vers le Nord</strong>, des pays en développement vers les pays développés.</div></details>
       <details><summary><span class="k">Transition démographique</span>Pourquoi la population explose-t-elle au milieu de la transition démographique?<span class="go">Révéler</span></summary><div class="ans">La <strong>mortalité baisse avant la natalité</strong>. Pendant un moment, il naît beaucoup plus de gens qu'il en meurt.</div></details>
-      <details><summary><span class="k">Choix multiples</span>Quelle région a la plus forte croissance en % depuis 1990 : l'Asie, l'Amérique du Nord, l'Afrique ou l'Europe?<span class="go">Révéler</span></summary><div class="ans">L'<strong>Afrique</strong> : sa population a plus que doublé (+113 %).</div></details>
+      <details><summary><span class="k">Choix de réponse</span>Quelle région a la plus forte croissance en % depuis 1990?<span class="choix"><span><b>A</b>l'Asie</span><span><b>B</b>l'Amérique du Nord</span><span><b>C</b>l'Afrique</span><span><b>D</b>l'Europe</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>C. L'Afrique</strong> : sa population a plus que doublé (+113 %).</div></details>
       <details><summary><span class="k">Explique en une phrase</span>C'est quoi, l'accroissement naturel?<span class="go">Révéler</span></summary><div class="ans">La <strong>différence entre les naissances et les décès</strong> dans une population, sans tenir compte des migrations.</div></details>
       <details><summary><span class="k">Facteur d'attraction?</span>Lequel n'en est PAS un : un emploi offert, une diaspora sur place, une guerre dans son pays, une langue commune?<span class="go">Révéler</span></summary><div class="ans">La <strong>guerre dans son pays</strong>. Elle <strong>pousse</strong> à partir, mais n'attire pas vers un pays précis.</div></details>
       <details><summary><span class="k">Réponse courte</span>Nomme deux causes de la baisse de la natalité dans les pays développés.<span class="go">Révéler</span></summary><div class="ans">Au choix : la <strong>pilule contraceptive</strong>, les <strong>femmes sur le marché du travail</strong>, l'avortement décriminalisé, le recul du mariage, les divorces.</div></details>
       <details><summary><span class="k">Réponse courte</span>Nomme trois mesures qui encouragent les naissances.<span class="go">Révéler</span></summary><div class="ans">Au choix : les <strong>allocations familiales</strong>, les <strong>congés parentaux</strong>, les <strong>services de garde</strong>, l'aide financière à la naissance, les allègements fiscaux, l'accompagnement des futures mères.</div></details>
       <details><summary><span class="k">Point de vue</span>Une Française s'installe à Québec. Pour la France, est-ce une immigrante ou une émigrante?<span class="go">Révéler</span></summary><div class="ans">Une <strong>émigrante</strong> : elle quitte la France.</div></details>
       <details><summary><span class="k">Vrai ou faux</span>Un travailleur temporaire devient automatiquement résident permanent après cinq ans.<span class="go">Révéler</span></summary><div class="ans"><strong>Faux.</strong> Il doit faire une <strong>demande officielle</strong> et être accepté. S'il reste sans permis, sa situation devient illégale.</div></details>
-      <details><summary><span class="k">Association</span>Associe : A. Diaspora · B. Densité · C. Droit d'asile<br>1. Habitants au km² · 2. Protection d'une personne persécutée · 3. Communauté dispersée dans le monde<span class="go">Révéler</span></summary><div class="ans"><strong>A-3, B-1, C-2.</strong></div></details>
+      <details><summary><span class="k">Association</span>Associe chaque mot à sa définition.<span class="choix"><span><b>A</b>Diaspora</span><span><b>B</b>Densité</span><span><b>C</b>Droit d'asile</span></span><span class="choix"><span><b>1</b>Habitants au km²</span><span><b>2</b>Protection d'une personne persécutée</span><span><b>3</b>Communauté dispersée dans le monde</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>A-3, B-1, C-2.</strong></div></details>
     </div>
   </section>
 </main>
