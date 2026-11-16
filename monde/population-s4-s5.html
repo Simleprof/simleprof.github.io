@@ -268,6 +268,21 @@ strong { font-weight: 700; }
 .qz .choix { display: grid; gap: 6px; margin-top: 2px; }
 .qz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
 .qz .choix b { font-family: var(--mono); font-weight: 700; color: var(--sea); min-width: 1ch; }  /* choix de réponse un par ligne (sa demande, 2026-11-16) */
+/* Choix de réponse interactifs (2026-11-16) : le clic colore, ça « pop », la bonne réponse s'allume */
+.qz .choix > span[data-ok], .qz .choix > span[data-a] { cursor: pointer; transition: border-color .15s, background .15s; }
+.qz .choix > span[data-ok]:hover, .qz .choix > span[data-a]:hover { border-color: var(--sea); }
+.qz .choix > span.bon { border: 2px solid #1E8E4E; background: rgba(30,142,78,.12); animation: choix-pop .4s ease; }
+.qz .choix > span.faux { border: 2px solid var(--accent); background: rgba(220,80,50,.08); animation: choix-non .45s ease; }
+.qz .choix > span.attendu { border: 2px dashed #1E8E4E; }
+.qz .choix > span.pris { border: 2px solid var(--sea); background: rgba(31,94,140,.10); }
+.qz .choix > span.bon::after { content: "✓"; margin-left: auto; color: #1E8E4E; font-weight: 800; font-size: 1.2em; }
+.qz .choix > span.faux::after { content: "✗"; margin-left: auto; color: var(--accent); font-weight: 800; font-size: 1.2em; }
+.qz .choix > span.bon[data-lien]::after { content: "✓ " attr(data-lien); }
+.qz .verdict { display: block; font-family: var(--serif); font-weight: 700; font-size: 1.25rem; margin-bottom: 6px; animation: choix-pop .4s ease; }
+.qz .verdict.oui { color: #1E8E4E; } .qz .verdict.non { color: var(--accent); }
+@keyframes choix-pop { 0% { transform: scale(1); } 45% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes choix-non { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
+@media (prefers-reduced-motion: reduce) { .qz .choix > span, .qz .verdict { animation: none !important; } }
 .qz summary { cursor: pointer; list-style: none; padding: 16px 18px; display: grid; gap: 8px; }
 .qz summary::-webkit-details-marker { display: none; }
 .qz .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -739,7 +754,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
-        <details><summary><span class="k">Choix de réponse</span>Quel phénomène fait grossir les villes du Sud?<span class="choix"><span><b>A</b>le tourisme</span><span><b>B</b>l'exode rural</span><span><b>C</b>la baisse de la natalité</span><span><b>D</b>le télétravail</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>B. L'exode rural</strong> : les gens quittent la campagne pour la ville.</div></details>
+        <details><summary><span class="k">Choix de réponse</span>Quel phénomène fait grossir les villes du Sud?<span class="choix"><span data-ok="0"><b>A</b>le tourisme</span><span data-ok="1"><b>B</b>l'exode rural</span><span data-ok="0"><b>C</b>la baisse de la natalité</span><span data-ok="0"><b>D</b>le télétravail</span></span><span class="go">Révéler</span></summary><div class="ans"><strong>B. L'exode rural</strong> : les gens quittent la campagne pour la ville.</div></details>
         <details><summary><span class="k">Nomme</span>Nomme deux raisons qui attirent les migrants en ville plutôt qu'à la campagne.<span class="go">Révéler</span></summary><div class="ans">Au choix : les <strong>emplois</strong>, l'accès à l'<strong>éducation</strong> et à la <strong>santé</strong>, les activités culturelles, la <strong>diaspora</strong>.</div></details>
       </div>
     </div>
@@ -942,6 +957,48 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 <!-- /nav-apres-sommaire-js -->
+<script>/* Choix de réponse interactifs (2026-11-16) */
+(() => {
+  const verdict = (d, oui, texte) => {
+    const ans = d.querySelector(".ans"); if (!ans) return;
+    let v = ans.querySelector(".verdict");
+    if (!v) { v = document.createElement("b"); ans.prepend(v); }
+    v.className = "verdict " + (oui ? "oui" : "non"); v.textContent = texte;
+    v.style.animation = "none"; void v.offsetWidth; v.style.animation = "";
+    d.open = true;
+  };
+  document.addEventListener("click", e => {
+    // Choix de réponse
+    const o = e.target.closest(".choix > span[data-ok]");
+    if (o) {
+      e.preventDefault();
+      const d = o.closest("details"), bon = o.dataset.ok === "1";
+      o.classList.remove("bon", "faux"); void o.offsetWidth;
+      o.classList.add(bon ? "bon" : "faux");
+      const reste = [...d.querySelectorAll('.choix > span[data-ok="1"]:not(.bon)')];
+      reste.forEach(x => x.classList.add("attendu"));
+      verdict(d, bon, bon ? (reste.length ? "✓ Bonne réponse! L'autre est en vert pointillé." : "✓ Bonne réponse!") : "✗ Pas cette fois. La bonne réponse est en vert.");
+      return;
+    }
+    // Association : un mot, puis sa définition
+    const a = e.target.closest(".choix > span[data-a]");
+    if (a) {
+      e.preventDefault();
+      const d = a.closest("details");
+      if (a.classList.contains("bon")) return;
+      if (a.dataset.a.match(/[A-Z]/)) { d.querySelectorAll(".choix > span.pris").forEach(x => x.classList.remove("pris")); a.classList.add("pris"); return; }
+      const mot = d.querySelector(".choix > span.pris"); if (!mot) return;
+      const ok = (d.dataset.paires || "").split(" ").includes(mot.dataset.a + a.dataset.a);
+      mot.classList.remove("pris");
+      [mot, a].forEach(x => { x.classList.remove("faux"); void x.offsetWidth; x.classList.add(ok ? "bon" : "faux"); });
+      if (ok) { a.dataset.lien = mot.dataset.a; mot.dataset.lien = a.dataset.a; }
+      else setTimeout(() => [mot, a].forEach(x => x.classList.remove("faux")), 700);
+      const fini = d.querySelectorAll(".choix > span[data-a].bon").length === d.querySelectorAll(".choix > span[data-a]").length;
+      if (fini) verdict(d, true, "✓ Tout est associé!");
+    }
+  });
+})();
+</script>
 <script>window.LF_COURS = "monde";
 /* Lecture facilitée : un bouton « Aa » sur chaque note publiée (publier.js l'ajoute ; source : lecture-facilitee.js dans les coulisses du site).
    Une fois activée : texte plus gros et aéré, police très lisible, mots difficiles expliqués d'un toucher.
