@@ -130,6 +130,7 @@ strong { font-weight: 700; }
 .lex dt small { display: inline-block; }  /* deux-points après le mot défini (sa demande, 2026-11-16) */
 .lex dt small { font-family: var(--sans); font-weight: 400; font-size: .82rem; color: var(--muted); }
 .lex dd { margin: 6px 0 0; }
+.lex .sous { margin: 6px 0 0; padding-left: 1.1em; display: grid; gap: 4px; }
 .lex .ex { color: var(--muted); font-size: .9rem; font-style: italic; }
 
 /* Encadrés */
@@ -487,7 +488,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 
   <section class="brief" aria-labelledby="b-t">
     <h2 id="b-t">Au sommaire</h2>
-    <p class="muted" style="max-width:70ch">Chaque thème finit par « À toi de jouer » : clique sur une carte pour voir la réponse.</p>
+    <p class="muted" style="max-width:70ch">Chaque thème finit par « À toi de jouer » : clique sur une carte pour voir la réponse.</p>
     <div class="toc">
       <a href="#s1"><span class="s">Section 1</span><b>Comment la population a-t-elle évolué?</b><small>La grande courbe, la transition démographique, qui grandit le plus vite</small></a>
       <a href="#s2"><span class="s">Section 2</span><b>Les caractéristiques de la population</b><small>Répartition, indicateurs, Nord et Sud, vieillissement</small></a>
@@ -517,7 +518,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div><dt>Espérance de vie</dt><dd>Nombre <strong>moyen d'années</strong> que vivra une personne.</dd></div>
       <div><dt>Flux migratoire</dt><dd>Mouvement de population de <strong>grande ampleur</strong>.</dd></div>
     </dl>
-    <div class="warn"><b>Piège</b>Un taux se calcule <strong>par 1 000 habitants</strong>, ce n'est pas un nombre total. « 15 naissances pour 1 000 habitants en un an » est un taux. « 384 000 naissances par jour » est un nombre.</div>
+    <div class="warn"><b>Piège</b>Un taux se calcule <strong>par 1 000 habitants</strong>, ce n'est pas un nombre total. « 15 naissances pour 1 000 habitants en un an » est un taux. « 384 000 naissances par jour » est un nombre.</div>
   </section>
 
   <section class="topic" id="courbe">
@@ -696,7 +697,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
         <details><summary><span class="k">Calcul</span>Un pays compte 50 000 naissances, 60 000 décès et 30 000 immigrants, sans émigrants. Quel est son accroissement naturel? Et son accroissement total?<span class="go">Révéler</span></summary><div class="ans">Naturel : 50 000 − 60 000 = <strong>−10 000</strong>. Total : (50 000 + 30 000) − 60 000 = <strong>+20 000</strong>. L'immigration compense.</div></details>
-        <details><summary><span class="k">Association</span>« Nombre moyen d'enfants qu'une femme met au monde. » De quel terme s'agit-il?<span class="go">Révéler</span></summary><div class="ans">De l'<strong>indice de fécondité</strong>.</div></details>
+        <details><summary><span class="k">Association</span>« Nombre moyen d'enfants qu'une femme met au monde. » De quel terme s'agit-il?<span class="go">Révéler</span></summary><div class="ans">De l'<strong>indice de fécondité</strong>.</div></details>
       </div>
     </div>
   </section>
@@ -705,19 +706,9 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="th"><h3>Pays développés et pays en développement</h3><span class="ess">Essentiel</span></div>
     <dl class="lex">
       <div style="--c:var(--sea)"><dt>Pays développés</dt><dd>Surtout au <strong>Nord</strong>. Industrialisés et riches, avec un <strong>niveau de vie élevé</strong>. <span class="ex">Le Canada, la France, le Japon</span></dd></div>
-      <div style="--c:var(--c-afrique)"><dt>Pays en développement</dt><dd>Surtout au <strong>Sud</strong>. Peu industrialisés, avec un <strong>niveau de vie plus bas</strong>. Ce groupe comprend les <strong>pays émergents</strong>, qui progressent vite (la Chine, l'Inde, le Brésil), et les <strong>pays les moins avancés</strong>.</dd></div>
+      <div style="--c:var(--c-afrique)"><dt>Pays en développement</dt><dd>Surtout au <strong>Sud</strong>. Peu industrialisés, avec un <strong>niveau de vie plus bas</strong>. On y trouve deux groupes :<ul class="sous"><li>les <strong>pays émergents</strong> : ils progressent vite (la Chine, l'Inde, le Brésil);</li><li>les <strong>pays les moins avancés</strong> : les plus pauvres, surtout en Afrique.</li></ul></dd></div>
     </dl>
     <div class="duo">
-      <div class="side" style="--c:var(--c-afrique)">
-        <h4>En développement<small>83,5 % de l'humanité</small></h4>
-        <ul>
-          <li><i>↓</i><span>Mortalité <strong>en baisse</strong></span></li>
-          <li><i>↓</i><span>Fécondité <strong>en baisse</strong>, mais encore plus de naissances que de décès</span></li>
-          <li><i>↑</i><span>Population qui <strong>continue de croître</strong></span></li>
-          <li><i>↑</i><span>Espérance de vie <strong>en hausse</strong> (vaccins, eau potable, soins)</span></li>
-          <li><i>↑</i><span>Émigration <strong>en hausse</strong></span></li>
-        </ul>
-      </div>
       <div class="side" style="--c:var(--sea)">
         <h4>Développés<small>16,5 % de l'humanité</small></h4>
         <ul>
@@ -728,8 +719,18 @@ body:has(#retour-tdb) .vue-choix { display: none; }
           <li><i>+</i><span>Des politiques pour <strong>encourager les naissances</strong></span></li>
         </ul>
       </div>
+      <div class="side" style="--c:var(--c-afrique)">
+        <h4>En développement<small>83,5 % de l'humanité</small></h4>
+        <ul>
+          <li><i>↓</i><span>Mortalité <strong>en baisse</strong></span></li>
+          <li><i>↓</i><span>Fécondité <strong>en baisse</strong>, mais encore plus de naissances que de décès</span></li>
+          <li><i>↑</i><span>Population qui <strong>continue de croître</strong></span></li>
+          <li><i>↑</i><span>Espérance de vie <strong>en hausse</strong> (vaccins, eau potable, soins)</span></li>
+          <li><i>↑</i><span>Émigration <strong>en hausse</strong></span></li>
+        </ul>
+      </div>
     </div>
-    <div class="warn"><b>Piège</b>« Nord » et « Sud » ne correspondent pas exactement aux hémisphères. L'Australie est au sud, mais c'est un pays développé. On parle de <strong>niveau de développement</strong>, pas de latitude.</div>
+    <div class="warn"><b>Piège</b>« Nord » et « Sud » ne correspondent pas exactement aux hémisphères. L'Australie est au sud, mais c'est un pays développé. On parle de <strong>niveau de développement</strong>, pas de latitude.</div>
     <div class="play">
       <span class="play-t">À toi de jouer</span>
       <div class="qz">
@@ -743,7 +744,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="th"><h3>Natalité, vieillissement et mesures</h3><span class="ess">Essentiel</span></div>
     <div class="viz">
       <span class="cap">Deux formes de pyramide des âges (silhouettes typiques)</span>
-      <svg viewBox="0 0 580 270" role="img" aria-label="Deux pyramides des âges. À gauche, population jeune : très large à la base, pointue au sommet. À droite, population vieillissante : étroite à la base, large au milieu et en haut."><g transform="translate(0,0)">
+      <svg viewBox="0 0 580 270" role="img" aria-label="Deux pyramides des âges. À gauche, population jeune : très large à la base, pointue au sommet. À droite, population vieillissante : étroite à la base, renflée vers 50 à 69 ans et large au sommet, où les femmes sont plus nombreuses."><g transform="translate(0,0)">
 <rect x="10" y="200" width="118" height="18" rx="3" style="fill:var(--sea)"/>
 <rect x="132" y="200" width="118" height="18" rx="3" style="fill:var(--accent)"/>
 <text class="sm" x="130" y="213" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
@@ -771,30 +772,22 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 <text class="hors-cell" x="130" y="244" text-anchor="middle" style="font-family:var(--serif);font-weight:600;font-size:16px">Population jeune</text>
 <text class="sm hors-cell" x="130" y="262" text-anchor="middle">pays en développement : beaucoup de naissances</text>
 </g><g transform="translate(320,0)">
-<rect x="72" y="200" width="56" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="200" width="56" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="213" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<rect x="68" y="178" width="60" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="178" width="60" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="191" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<rect x="62" y="156" width="66" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="156" width="66" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="169" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<rect x="54" y="134" width="74" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="134" width="74" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="147" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<rect x="50" y="112" width="78" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="112" width="78" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="125" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<rect x="52" y="90" width="76" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="90" width="76" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="103" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
-<rect x="60" y="68" width="68" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="68" width="68" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="81" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
+<rect x="90" y="200" width="38" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="200" width="36" height="18" rx="3" style="fill:var(--accent)"/>
+<rect x="84" y="178" width="44" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="178" width="42" height="18" rx="3" style="fill:var(--accent)"/>
+<rect x="76" y="156" width="52" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="156" width="50" height="18" rx="3" style="fill:var(--accent)"/>
+<rect x="68" y="134" width="60" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="134" width="59" height="18" rx="3" style="fill:var(--accent)"/>
+<rect x="58" y="112" width="70" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="112" width="70" height="18" rx="3" style="fill:var(--accent)"/>
+<rect x="48" y="90" width="80" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="90" width="82" height="18" rx="3" style="fill:var(--accent)"/>
+<rect x="52" y="68" width="76" height="18" rx="3" style="fill:var(--sea)"/>
+<rect x="132" y="68" width="82" height="18" rx="3" style="fill:var(--accent)"/>
 <rect x="70" y="46" width="58" height="18" rx="3" style="fill:var(--sea)"/>
-<rect x="132" y="46" width="58" height="18" rx="3" style="fill:var(--accent)"/>
-<text class="sm" x="130" y="59" text-anchor="middle" style="font-size:9.5px;fill:var(--paper)"></text>
+<rect x="132" y="46" width="78" height="18" rx="3" style="fill:var(--accent)"/>
 <text class="hors-cell" x="130" y="244" text-anchor="middle" style="font-family:var(--serif);font-weight:600;font-size:16px">Population vieillissante</text>
 <text class="sm hors-cell" x="130" y="262" text-anchor="middle">pays développés : peu de naissances, longue vie</text>
 </g><text class="sm age-cell" x="290" y="213" text-anchor="middle">0–9</text>
@@ -970,7 +963,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div><dt>Immigrant clandestin <small>(illégal, sans-papiers)</small></dt><dd>Personne qui entre ou reste dans un pays <strong>sans autorisation</strong> : elle ne remplit pas les critères, ou son permis est expiré. Elle passe souvent par des <strong>passeurs</strong> (des réseaux criminels).</dd></div>
     </dl>
     <p><strong>Pourquoi on fuit</strong> : les persécutions (ethniques, religieuses, politiques), la <strong>guerre</strong>, une catastrophe environnementale.</p>
-    <div class="note"><b>Nuance : le « réfugié climatique » n'existe pas en droit</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Une sécheresse ou une inondation pousse bien des gens à fuir. Mais la Convention de Genève protège seulement la personne <strong>persécutée</strong> (menacée) pour sa race, sa religion, sa nationalité, son groupe social ou ses opinions politiques. Fuir une catastrophe ne suffit donc pas pour être reconnu réfugié. (Haut Commissariat des Nations unies pour les réfugiés)</div>
+    <div class="note"><b>Nuance : le « réfugié climatique » n'existe pas en droit</b><span class="sert">Plus loin que le manuel : pour comprendre, pas pour apprendre par cœur.</span>Une sécheresse ou une inondation pousse bien des gens à fuir. Mais la Convention de Genève protège seulement la personne <strong>persécutée</strong> (menacée) pour sa race, sa religion, sa nationalité, son groupe social ou ses opinions politiques. Fuir une catastrophe ne suffit donc pas pour être reconnu réfugié. (Haut Commissariat des Nations unies pour les réfugiés)</div>
     <div class="trio">
       <div class="mini"><span class="ic" aria-hidden="true">📜</span><h4>Convention de Genève, 1951</h4><p>Les pays signataires doivent accorder le <strong>droit d'asile</strong>. Le réfugié a droit à la liberté d'expression, aux soins, à l'école et au travail. En retour, il doit respecter les lois du pays.</p></div>
       <div class="mini"><span class="ic" aria-hidden="true">🇸🇾</span><h4>Syrie, depuis 2011</h4><p>Guerre civile : plus de <strong>5,6 millions</strong> de Syriens ont fui leur pays, surtout vers la Türkiye.</p></div>
@@ -1012,7 +1005,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 </main>
 
 <footer>
-  <div class="wrap">Synthèse des sections 1 à 3 du chapitre 1, « La population », du manuel <em>Aborder le monde contemporain</em> (p. 34 à 49). Données : ONU, Banque mondiale. Points du bandeau : population de 2022, arrondie.</div>
+  <div class="wrap">Synthèse des sections 1 à 3 du chapitre 1, « La population », du manuel <em>Aborder le monde contemporain</em> (p. 34 à 49). Données : ONU, Banque mondiale. Points du bandeau : population de 2022, arrondie.</div>
 </footer>
 <script>
 (function () {
