@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-LSk+zHfVc8YxUN0tE0XQ4OcZnmtrhM+w1iIQac2Gjgs=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-k0ffxaGQR3NLj3c16hpEnbTqPFwXCMxntsX9ikoaKvA=' 'sha256-LSk+zHfVc8YxUN0tE0XQ4OcZnmtrhM+w1iIQac2Gjgs=' 'sha256-K4LdedvB7HyD3SC2ycFhvh/1xtRbRyhAsoBGfwkaTbU=' 'sha256-quBjGPBlIhdLtYE3G4QLnR+0voYK8evfFYnDXu+4JVs='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours 1.4 · Le budget</title>
@@ -555,6 +555,26 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 .qr5-btns a:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .qr5-qr{display:none}
 @media print{.qr5-affiche{margin:16px 0 0;padding:12px 16px;gap:8px;background:none;color:#15171C;border:2.5px solid #15171C;box-shadow:none;break-inside:avoid;page-break-inside:avoid}.qr5-affiche h2{font-size:22pt;color:#15171C}.qr5-affiche p{font-size:10pt}.qr5-btns{display:none}.qr5-qr{display:flex;gap:36px;justify-content:center}.qr5-qr figure{margin:0;font:700 10pt/1.2 var(--body,inherit)}.qr5-qr svg{display:block;width:1in;height:1in;margin:0 auto 4px}}
+
+/* Relecture du prof (2026-11-16) : mots définis soulignés ; choix de réponse un par ligne, cliquables ; énumérations en points */
+.tag dt, .def dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+
+.taxes ul { display: grid; gap: 3px; margin: 0; padding-left: 1.2em; }
+.quiz .choix { display: grid; gap: 6px; }
+.quiz .choix > span { display: flex; gap: 12px; align-items: baseline; padding: 9px 14px; border: 1.5px solid #14123A; border-radius: 12px; background: #fff; color: #14123A; font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: transform .15s; }
+.quiz .choix > span:hover { transform: translateX(3px); }
+.quiz .choix b { font-family: var(--mono); font-weight: 700; min-width: 1ch; }
+.quiz .choix > span.bon { border: 2.5px solid #0E8A5F; background: #DDF3EA; animation: choix-pop .4s ease; }
+.quiz .choix > span.faux { border: 2.5px solid #D23B3B; background: #FBE3E3; animation: choix-non .45s ease; }
+.quiz .choix > span.attendu { border: 2.5px dashed #0E8A5F; }
+.quiz .choix > span.bon::after { content: "✓"; margin-left: auto; color: #0E8A5F; font-weight: 800; font-size: 1.2em; }
+.quiz .choix > span.faux::after { content: "✗"; margin-left: auto; color: #D23B3B; font-weight: 800; font-size: 1.2em; }
+.quiz .verdict-choix { display: block; font-family: var(--display); font-weight: 700; font-size: 1.2rem; margin-bottom: 6px; }
+.quiz .verdict-choix.oui { color: #0E8A5F; } .quiz .verdict-choix.non { color: #D23B3B; }
+@keyframes choix-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.05); } }
+@keyframes choix-non { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@media (prefers-reduced-motion: reduce) { .quiz .choix > span { animation: none !important; } }
+@media print { .quiz .choix > span { padding: 3px 8px; border-width: 1px; font-size: 10pt; font-weight: 400; } }
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
@@ -599,7 +619,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </div>
 
   <section class="block" id="pourquoi">
-    <div class="h3row"><h3>Un budget, pourquoi?</h3></div>
+    <div class="h3row"><h3>Un budget, pourquoi?</h3><span class="star">Essentiel</span></div>
     <dl class="tags"><div class="tag"><dt>Budget</dt><dd>Un <strong>outil de contrôle et de prise de décision</strong>. Il donne une vue d'ensemble de tes <strong>revenus</strong> (d'où vient l'argent) et de tes <strong>dépenses</strong> (où il va).</dd></div></dl>
     <p>Un budget sert à&nbsp;:</p>
     <ul>
@@ -632,7 +652,14 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 
   <section class="block" id="revenus">
     <div class="h3row"><h3>Les revenus et les conversions</h3></div>
-    <p>Sources de revenus d'un élève&nbsp;: <strong>salaire</strong>, <strong>prêt du gouvernement</strong>, <strong>argent des parents</strong>, <strong>bourse d'études</strong>, <strong>cadeaux en argent</strong>.</p>
+    <p>Sources de revenus d'un élève&nbsp;:</p>
+    <ul>
+      <li><strong>salaire</strong>&nbsp;;</li>
+      <li><strong>prêt du gouvernement</strong>&nbsp;;</li>
+      <li><strong>argent des parents</strong>&nbsp;;</li>
+      <li><strong>bourse d'études</strong>&nbsp;;</li>
+      <li><strong>cadeaux en argent</strong>.</li>
+    </ul>
     <dl class="tags"><div class="tag"><dt>La règle de prudence</dt><dd>Estime tes <strong>revenus à leur valeur minimale</strong> et tes <strong>dépenses à leur valeur maximale</strong>. Moins de mauvaises surprises.</dd></div></dl>
     <p>Tout se ramène d'abord à l'<strong>année</strong>, puis on divise par 12 (mois) ou par 52 (semaines).</p>
     <div class="scroll">
@@ -686,7 +713,7 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   <section class="block" id="categories">
-    <div class="h3row"><h3>Fixes, variables, compressibles</h3></div>
+    <div class="h3row"><h3>Fixes, variables, compressibles</h3><span class="star">Essentiel</span></div>
     <p>Chaque dépense répond à <strong>deux questions</strong>&nbsp;: le montant change-t-il? Et peut-on la couper rapidement?</p>
     <dl class="tags">
       <div class="tag"><dt>Fixe</dt><dd>Montant stable, régulier comme un métronome. <span class="muted">Loyer, téléphone, prêt-auto.</span></dd></div>
@@ -709,13 +736,13 @@ body:has(#retour-tdb) .vue-choix { display: none; }
     <div class="tip"><b>À retenir</b>Une dépense <strong>fixe</strong> peut être <strong>compressible</strong>&nbsp;: un abonnement s'annule, et une corde à linge fait baisser la facture d'électricité.</div>
     <div class="pause">
       <div class="quiz">
-        <details><summary><span class="q-n">Choix multiples</span>Laquelle est une dépense variable&nbsp;: le prêt-auto, l'essence, le loyer, l'abonnement de musique en ligne?<span class="see">Voir la réponse →</span></summary><div class="ans">L'<strong>essence</strong>&nbsp;: le montant change selon les kilomètres et le prix à la pompe. Les trois autres reviennent au même montant chaque mois.</div></details>
+        <details><summary><span class="q-n">Choix multiples</span>Laquelle est une dépense variable?<span class="choix"><span data-ok="0"><b>A</b>le prêt-auto</span><span data-ok="1"><b>B</b>l'essence</span><span data-ok="0"><b>C</b>le loyer</span><span data-ok="0"><b>D</b>l'abonnement de musique en ligne</span></span><span class="see">Voir la réponse →</span></summary><div class="ans"><strong>B.</strong> L'<strong>essence</strong>&nbsp;: le montant change selon les kilomètres et le prix à la pompe. Les trois autres reviennent au même montant chaque mois.</div></details>
       </div>
     </div>
   </section>
 
   <section class="block" id="analyse">
-    <div class="h3row"><h3>L'analyse et le suivi</h3></div>
+    <div class="h3row"><h3>L'analyse et le suivi</h3><span class="star">Essentiel</span></div>
     <p>On additionne les revenus, on additionne les dépenses, et on calcule la différence. Trois verdicts possibles&nbsp;:</p>
     <div class="verdicts">
       <div class="verdict ex"><span class="sign">&gt;</span><h4>Excédentaire</h4><span class="f">Revenus &gt; Dépenses</span><p>Il reste de l'argent&nbsp;: l'épargner, rembourser une dette plus vite ou s'offrir un extra.</p></div>
@@ -734,21 +761,26 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <div style="display:grid;gap:12px;min-width:0">
         <p><strong>Cas&nbsp;: le budget de Yasmine</strong>, 25 ans, premier emploi, appartement à Montréal.</p>
         <p>Ses dépenses fixes <strong>compressibles</strong>&nbsp;: le <strong>cellulaire</strong> (téléphone haut de gamme et forfait 15 Go, 115&nbsp;$) et les <strong>abonnements</strong> de streaming (33&nbsp;$).</p>
-        <p>Trois recommandations&nbsp;: un forfait cellulaire moins cher, couper des abonnements, réduire le restaurant (240&nbsp;$ par mois).</p>
+        <p>Trois recommandations&nbsp;:</p>
+        <ul>
+          <li>un <strong>forfait cellulaire</strong> moins cher&nbsp;;</li>
+          <li><strong>couper des abonnements</strong>&nbsp;;</li>
+          <li><strong>réduire le restaurant</strong> (240&nbsp;$ par mois).</li>
+        </ul>
         <p class="muted">Dépenses variables du 1<sup>er</sup> niveau de Maslow&nbsp;: l'épicerie, les médicaments.</p>
       </div>
       <div class="receipt" aria-label="Résumé du budget mensuel de Yasmine">
         <h4>BUDGET DE YASMINE</h4>
         <div class="sub">Par mois · exemple du manuel</div>
-        <div class="row"><span>Salaire</span><span>2 650</span></div>
-        <div class="row"><span>Parents</span><span>200</span></div>
-        <div class="row tot"><span>Revenus</span><span>2 850</span></div>
+        <div class="row"><span>Salaire</span><span>2&nbsp;650&nbsp;$</span></div>
+        <div class="row"><span>Parents</span><span>200&nbsp;$</span></div>
+        <div class="row tot"><span>Revenus</span><span>2&nbsp;850&nbsp;$</span></div>
         <hr>
-        <div class="row"><span>Dépenses fixes</span><span>2 005</span></div>
-        <div class="row"><span>Dépenses variables</span><span>1 025</span></div>
-        <div class="row tot"><span>Dépenses</span><span>3 030</span></div>
+        <div class="row"><span>Dépenses fixes</span><span>2&nbsp;005&nbsp;$</span></div>
+        <div class="row"><span>Dépenses variables</span><span>1&nbsp;025&nbsp;$</span></div>
+        <div class="row tot"><span>Dépenses</span><span>3&nbsp;030&nbsp;$</span></div>
         <hr>
-        <div class="row tot bad"><span>ÉCART</span><span>-180 $</span></div>
+        <div class="row tot bad"><span>ÉCART</span><span>−180&nbsp;$</span></div>
         <div class="stamp">DÉFICITAIRE</div>
       </div>
     </div>
@@ -824,6 +856,21 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   document.querySelector("main").appendChild(src);
   document.querySelector("main").appendChild(key);
 })();
+</script>
+<script>/* Choix de réponse interactifs (relecture du prof, 2026-11-16) */
+document.addEventListener("click", function (e) {
+  var o = e.target.closest(".choix > span[data-ok]"); if (!o) return;
+  e.preventDefault();
+  var d = o.closest("details"), bon = o.dataset.ok === "1";
+  o.classList.remove("bon", "faux"); void o.offsetWidth; o.classList.add(bon ? "bon" : "faux");
+  var reste = d.querySelectorAll('.choix > span[data-ok="1"]:not(.bon)');
+  reste.forEach(function (x) { x.classList.add("attendu"); });
+  var ans = d.querySelector(".ans"), v = ans.querySelector(".verdict-choix");
+  if (!v) { v = document.createElement("b"); ans.insertBefore(v, ans.firstChild); }
+  v.className = "verdict-choix " + (bon ? "oui" : "non");
+  v.textContent = bon ? (reste.length > 1 ? "✓ Bonne réponse! Les autres sont en vert pointillé." : reste.length ? "✓ Bonne réponse! L'autre est en vert pointillé." : "✓ Bonne réponse!") : (reste.length > 1 ? "✗ Pas cette fois. Les bonnes réponses sont en vert pointillé." : "✗ Pas cette fois. La bonne réponse est en vert pointillé.");
+  d.open = true;
+});
 </script>
 <!-- retour-tdb -->
 <script>
