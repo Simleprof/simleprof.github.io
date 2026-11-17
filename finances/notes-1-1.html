@@ -421,6 +421,26 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
 @keyframes choix-non { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
 @media (prefers-reduced-motion: reduce) { .quiz .choix > span { animation: none !important; } }
 @media print { .quiz .choix > span { padding: 3px 8px; border-width: 1px; font-size: 10pt; font-weight: 400; } }
+
+/* Bulle « La pyramide du bonheur » (George Carlin), à côté de Maslow (2026-11-16) */
+.pyr-duo { display: grid; gap: 22px; align-items: center; }
+@media (min-width: 760px) { .pyr-duo { grid-template-columns: 1.15fr 1fr; } }
+.bonheur { position: relative; background: var(--card); border: 2px solid var(--ink); border-radius: 18px; padding: 16px 18px; display: grid; gap: 10px; }
+.bonheur::before { content: ""; position: absolute; left: 50%; top: -11px; width: 18px; height: 18px; background: var(--card); border-left: 2px solid var(--ink); border-top: 2px solid var(--ink); transform: translateX(-50%) rotate(45deg); }
+@media (min-width: 760px) { .bonheur::before { left: -11px; top: 50%; transform: translateY(-50%) rotate(-45deg); } }
+.bonheur .k { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tag); }
+.bonheur blockquote { margin: 0; font-size: 1.1rem; font-weight: 700; line-height: 1.4; }
+.bonheur cite { display: block; margin-top: 4px; font-size: 15px; font-weight: 400; font-style: normal; color: var(--muted); }
+.mini-pyr { display: grid; gap: 4px; justify-items: center; }
+.mini-pyr div { color: #fff; text-align: center; padding: 8px 10px; line-height: 1.2; clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%); }
+.mini-pyr b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.1rem; letter-spacing: .03em; text-transform: uppercase; }
+.mini-pyr span { font-size: 15px; }
+.mini-pyr .h1 { width: 84%; background: #6C4AB6; clip-path: polygon(9% 0, 91% 0, 100% 100%, 0 100%); }
+.mini-pyr .h2 { width: 92%; background: #2F6FB3; }
+.mini-pyr .h3 { width: 100%; background: #255A93; }
+.bonheur p { margin: 0; font-size: 16px; color: var(--muted); }
+@media (min-width: 760px) { .pyr-duo .pyr .l5 { width: 64%; clip-path: polygon(9% 0, 91% 0, 100% 100%, 0 100%); } .pyr-duo .pyr .l4 { width: 74%; } .pyr-duo .pyr .l3 { width: 84%; } .pyr-duo .pyr .l2 { width: 92%; } }
+@media print { .pyr-duo { grid-template-columns: 1.15fr 1fr; } .bonheur { break-inside: avoid; border-width: 1px; } .bonheur::before { display: none; } }
 </style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
@@ -482,12 +502,24 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
   <section class="block" id="maslow">
     <div class="h3row"><h3>La pyramide de Maslow</h3></div>
     <p>Le psychologue Abraham Maslow a classé les besoins humains en <strong>5 étages</strong>. On remplit ceux du bas avant de monter.</p>
+    <div class="pyr-duo">
     <div class="pyr" role="list" aria-label="Pyramide de Maslow, du sommet à la base">
       <div class="l5" role="listitem"><b>5. Accomplissement</b><span>Se réaliser, s'épanouir</span></div>
       <div class="l4" role="listitem"><b>4. Estime</b><span>Confiance en soi, respect, reconnaissance des autres</span></div>
       <div class="l3" role="listitem"><b>3. Appartenance</b><span>Amour, amitié, affection des autres</span></div>
       <div class="l2" role="listitem"><b>2. Sécurité</b><span>Un environnement stable, sans crise ni anxiété</span></div>
       <div class="l1" role="listitem"><b>1. Physiologiques</b><span>Manger, boire, dormir, respirer…</span></div>
+    </div>
+    <aside class="bonheur" aria-label="La pyramide du bonheur, selon George Carlin">
+      <span class="k">La pyramide du bonheur</span>
+      <blockquote>«&nbsp;Le secret du bonheur&nbsp;: faire ce que tu aimes, le faire bien, et être reconnu pour ça.&nbsp;»<cite>George Carlin, humoriste, en entrevue (traduction libre)</cite></blockquote>
+      <div class="mini-pyr">
+        <div class="h1"><b>Faire ce que tu aimes</b><span>Accomplissement</span></div>
+        <div class="h2"><b>Le faire bien</b><span>Estime de soi</span></div>
+        <div class="h3"><b>Être reconnu</b><span>Estime des autres</span></div>
+      </div>
+      <p>Le sommet de Maslow. Il tient seulement si la base est solide.</p>
+    </aside>
     </div>
     <p class="mnemo">De la base au sommet&nbsp;: « <b>P</b>as <b>S</b>ûr, <b>A</b>ppelle <b>E</b>ncore <b>A</b>lex »</p>
     <div class="trap"><b>Piège</b>La pyramide nomme de <strong>grandes catégories</strong> de besoins, pas des produits ni des activités. « Besoin d'un cellulaire » ou « besoin de magasiner », ce n'est pas un étage.</div>
