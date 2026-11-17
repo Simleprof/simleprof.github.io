@@ -311,12 +311,59 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--ligne);color:
 /* Au TBI : tout 1,6 fois plus gros (15 px deviennent 24 px) */
 @media (min-width:1600px){.wrap,.ciel-in{zoom:1.6}.bref{font-size:24px}.bref b{font-size:22px}}
 @media (prefers-reduced-motion:reduce){.retro,.tampon,.globe .mer{animation:none}.bref-fil span{transition:none}}
+
+/* ---------- Mode TBI (2026-11-17, comme en Histoire) ----------
+   Un petit bouton pâle dans le coin de l'en-tête, invisible au cellulaire (#tbi dans l'adresse l'ouvre aussi).
+   L'enseignant choisit l'étape et les sections, puis « Teste-toi » : les questions à écrire et les cartes au doigt,
+   numérotées ; les élèves écrivent sur papier, « Voir la réponse », « Suivante », puis « Comptez vos points! ». Rien n'est gardé. */
+.tbi-btn{display:none;margin-left:auto;align-self:center;padding:8px 12px;border-radius:999px;font-size:15px;font-weight:800;letter-spacing:.06em;color:#fff;opacity:.45;flex:none}
+.tbi-btn:hover{opacity:1;background:rgba(255,255,255,.14)}
+@media (min-width:900px){.tbi-btn{display:inline-flex}}
+body.tbi .tbi-btn{opacity:1;background:#fff;color:#0b1a2b}
+body.tbi .wrap{zoom:1.6}
+body.tbi .ciel-in{padding:12px 16px}
+body.tbi .globe{width:34px;height:34px}
+body.tbi .titre h1{font-size:28px}
+body.tbi .titre p,body.tbi .bref,body.tbi footer,body.tbi .sx-exam{display:none}
+.num-bar{display:flex;flex-wrap:wrap;gap:10px}
+.num-bar b{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:22px;border:3px solid var(--ligne);color:var(--encre-3)}
+.num-bar b.cur{border-color:var(--acc);color:var(--acc)}
+.num-bar b.vu{background:var(--encre-2);border-color:var(--encre-2);color:var(--fond)}
+.tq-tete{display:flex;align-items:center;gap:10px;min-height:30px}
+.pts{margin-left:auto;padding:3px 12px;border-radius:999px;border:2px solid var(--acc);color:var(--acc);font-weight:800;font-size:15px;white-space:nowrap}
+.demande{font-size:22px;font-weight:800;line-height:1.25}
+.num-q{display:inline-grid;place-items:center;min-width:1.5em;height:1.5em;padding:0 .2em;border-radius:12px;background:var(--acc);color:var(--sur-acc);margin-right:12px;vertical-align:middle}
+.tq{background:var(--carte);border:1.5px solid var(--ligne);border-top:6px solid var(--acc);border-radius:var(--r);padding:16px 18px 18px}
+.tq>p{font-size:22px;font-weight:700;line-height:1.35}
+.tbi-cartes{list-style:none;display:grid;gap:9px;margin-top:12px}
+.tbi-cartes li{display:flex;gap:12px;align-items:flex-start;font-weight:700;font-size:19px;line-height:1.3}
+.lettre{flex:none;width:1.6em;height:1.6em;border-radius:50%;background:var(--acc);color:var(--sur-acc);display:grid;place-items:center;font-weight:900}
+.tbi-cols{margin-top:14px;font-weight:900;font-size:19px}
+.tbi-cols span{font-weight:600;color:var(--encre-3)}
+.rep-tbi{border-radius:12px;background:var(--carte);border:3px solid var(--acc);padding:14px 16px;display:flex;flex-direction:column;gap:8px;animation:monte .25s ease-out}
+.rep-tbi .etiq{font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+.reponse{font-size:20px;line-height:1.35}
+.reponse strong{color:var(--acc);font-weight:800}
+.reponse .tete{display:block;font-size:1.35em;line-height:1.15}
+.reponse .par{font-weight:500;color:var(--encre-2)}
+.reponse p+p,.reponse p+ul,.reponse p+ol,.reponse ul+p,.reponse ol+p{margin-top:8px}
+.reponse ul,.reponse ol{padding-left:1.4em}
+.reponse li{margin:5px 0}
+.reponse li::marker{color:var(--acc);font-weight:800}
+.fin-tbi{text-align:center;background:var(--carte);border:1.5px solid var(--ligne);border-radius:var(--r);padding:22px 16px}
+.fin-tbi h2{font-weight:900;font-stretch:78%;font-size:44px;text-transform:uppercase;line-height:1}
+.num-bar.fin-pts{justify-content:center;gap:18px 20px;margin:20px auto 10px}
+.fin-pts span{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:90px}
+.fin-pts em{font-style:normal;font-weight:800;font-size:19px;color:var(--acc);white-space:nowrap}
+.total-pts{font-size:36px;font-weight:700;line-height:1.1;margin-top:6px}
+.total-pts b{font-size:1.5em;font-weight:900;color:var(--acc)}
 </style>
 </head>
 <body>
 <header class="ciel"><div class="ciel-in">
   <svg class="globe" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><g><ellipse class="mer" cx="32" cy="32" rx="12" ry="27"/><ellipse class="mer" cx="32" cy="32" rx="12" ry="27"/><ellipse class="mer" cx="32" cy="32" rx="12" ry="27"/></g><circle cx="32" cy="32" r="27"/><path d="M5 32h54M9 19h46M9 45h46"/></svg>
   <div class="titre"><h1>Tour du monde</h1><p>Monde contemporain · Secondaire 5</p></div>
+  <button class="tbi-btn" id="tbi-btn" title="Mode TBI, pour l'enseignant">TBI</button>
 </div><div class="bref" id="bref" aria-hidden="true"></div></header>
 <div class="wrap">
   <main id="train"><p>Ouvre cette page dans ton navigateur (Safari, Chrome ou Edge) : l'aperçu de ton application ne l'affiche pas.</p></main>
@@ -886,7 +933,8 @@ const choixHtml = opts => `<div class="choix">${opts.map((o, i) => `<button clas
 /* ============ Le joueur ============ */
 function lancer(id) {
   let qs;
-  if (id.startsWith("examen")) {
+  if (tbi()) qs = serieTbi(id === "examen10" ? 10 : 5);
+  else if (id.startsWith("examen")) {
     // Un peu de tout : on pige à tour de rôle dans chaque rubrique.
     // L'écriture arrive par surprise (plan du 2026-11-11) : environ une question sur cinq (1 sur 5, 2 sur 10),
     // jamais en premier, jamais deux de suite, seulement des réponses courtes à comparer. Plus de bouton « Ou écris ».
@@ -905,6 +953,7 @@ function lancer(id) {
   $t("train").scrollIntoView({ block: "start" });
 }
 function montrer() {
+  if (tbi()) return montrerTbi();
   const q = RUN.qs[RUN.i], a = actDe(RUN.id), exam = RUN.id.startsWith("examen");
   RUN.repondu = false;
   $t("train").innerHTML = `<article class="jeu">
@@ -1130,6 +1179,23 @@ function renderTrain() {
   const choix = `<nav class="vue-choix" aria-label="Que veux-tu faire?">${[["notes", "Notes de cours", "Lire la théorie"], ["exercices", "Exercices", "Me tester"]]
     .map(([v, t, s]) => `<button data-vue="${v}" class="${vue === v ? "on" : ""}" aria-pressed="${vue === v}">${t}<small>${s}</small></button>`).join("")}</nav>`;
   const haut = etapesHtml() + choix;
+  const secHtml = `<section><b class="lab">Tes sections</b><div class="secs-g">
+      <button class="sx${tout ? " on" : ""}" data-sx="tout" aria-pressed="${tout}">${Object.keys(SECTIONS).some(s => ENJEUX[s.replace(/\d+$/, "")]) ? "Toute l'étape" : "Tout l'enjeu"}</button>
+      ${Object.entries(SECTIONS).map(([s, t], i, tab) => { const on = !tout && ss.includes(s);
+        // Deux enjeux dans la même étape (r = Richesse, t = Tensions) : chacun son petit titre, sinon les numéros se répètent.
+        const pre = s.replace(/\d+$/, ""), avant = i ? tab[i - 1][0].replace(/\d+$/, "") : null;
+        const titre = ENJEUX[pre] && pre !== avant ? `<b class="lab enj">${ENJEUX[pre]}</b>` : "";
+        return `${titre}<button class="sx${on ? " on" : ""}" data-sx="${s}" aria-pressed="${on}">${num(s)} · ${esc(t)}</button>`; }).join("")}
+    </div>${nxs.length && nxs.join() !== ss.join() && nxs.length < TOUTES.length ? `<button class="sx-exam" data-sx="${nxs.join(",")}">🎯 Seulement la matière de ton ${esc(nx.titre.charAt(0).toLowerCase() + nx.titre.slice(1))} (sections ${nxs.map(num).join(", ")})</button>` : ""}</section>`;
+  // Au TBI : l'étape, les sections vues en classe et les deux séries ; pas de notes, pas d'activités une à une.
+  if (tbi()) {
+    const n = TOUTES.length ? questions("ecris").length + questions("doigt").length : 0, off = n ? "" : " disabled";
+    $t("train").innerHTML = `${etapesHtml()}
+      <section class="intro"><h2>${esc(VUE_ET.titre)} <em>au TBI</em></h2><p>${n ? "Choisis les sections vues en classe. Les élèves écrivent leurs réponses sur une feuille, puis se corrigent." : "Pas encore de questions à écrire pour cette étape."}</p></section>
+      ${TOUTES.length ? secHtml.replace(">Tes sections<", ">Sections vues en classe<") : ""}
+      <section class="go-g"><button class="gros go" data-ex="examen5"${off}>Teste-toi<small>5 questions</small></button><button class="gros go" data-ex="examen10"${off}>Teste-toi<small>10 questions</small></button></section>`;
+    return;
+  }
   if (vue === "notes") {
     $t("train").innerHTML = `${haut}
       <section class="intro"><h2>Tes notes <em>de cours</em></h2><p>${esc(VUE_ET.titre)}.${HUB.notes.some(n => n.etape === VUE_ET.n) ? " Lis une section, puis teste-toi." : ""}</p></section>
@@ -1145,14 +1211,7 @@ function renderTrain() {
   }
   $t("train").innerHTML = `${haut}
     <section class="intro"><h2>Teste-<em>toi</em></h2><p>${esc(VUE_ET.titre)}. Une erreur? Tu vois la bonne réponse et les pages du manuel à relire.</p></section>
-    <section><b class="lab">Tes sections</b><div class="secs-g">
-      <button class="sx${tout ? " on" : ""}" data-sx="tout" aria-pressed="${tout}">${Object.keys(SECTIONS).some(s => ENJEUX[s.replace(/\d+$/, "")]) ? "Toute l'étape" : "Tout l'enjeu"}</button>
-      ${Object.entries(SECTIONS).map(([s, t], i, tab) => { const on = !tout && ss.includes(s);
-        // Deux enjeux dans la même étape (r = Richesse, t = Tensions) : chacun son petit titre, sinon les numéros se répètent.
-        const pre = s.replace(/\d+$/, ""), avant = i ? tab[i - 1][0].replace(/\d+$/, "") : null;
-        const titre = ENJEUX[pre] && pre !== avant ? `<b class="lab enj">${ENJEUX[pre]}</b>` : "";
-        return `${titre}<button class="sx${on ? " on" : ""}" data-sx="${s}" aria-pressed="${on}">${num(s)} · ${esc(t)}</button>`; }).join("")}
-    </div>${nxs.length && nxs.join() !== ss.join() && nxs.length < TOUTES.length ? `<button class="sx-exam" data-sx="${nxs.join(",")}">🎯 Seulement la matière de ton ${esc(nx.titre.charAt(0).toLowerCase() + nx.titre.slice(1))} (sections ${nxs.map(num).join(", ")})</button>` : ""}</section>
+    ${secHtml}
     <section class="go-g"><button class="gros go" data-ex="examen5">Teste-toi<small>5 questions</small></button><button class="gros go" data-ex="examen10">Teste-toi<small>10 questions</small></button></section>
     <details class="types" id="types"${store.get("types") ? " open" : ""}><summary>Ou choisis une activité <i>${ACTS.filter(a => a.id !== "ecris" && questions(a.id).length).length}</i></summary><div class="acts">${ACTS.filter(a => a.id !== "ecris").map(visa).join("")}</div></details>`;
   // Le menu des activités reste ouvert ou fermé, comme l'élève l'a laissé.
@@ -1205,6 +1264,116 @@ const RETOUR = (() => { const q = new URLSearchParams(location.search), r = q.ge
   if (!/^[\w.-]+\.html$/.test(r)) return null;   // seulement une page du même dossier du site
   const s = (q.get("s") || "").split(",")[0]; return r + (s ? "#apres-" + s : ""); })();
 
+/* ============ Le mode TBI (2026-11-17, comme en Histoire) ============ */
+// L'enseignant projette : les élèves écrivent sur papier, se corrigent, puis comptent leurs points. Rien n'est gardé sur l'appareil.
+const tbi = () => document.body.classList.contains("tbi");
+function basculerTbi(on = !tbi()) {
+  document.body.classList.toggle("tbi", on);
+  $t("tbi-btn").textContent = on ? "Quitter TBI" : "TBI";
+  if (on && !document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+  if (!on && document.fullscreenElement) document.exitFullscreen?.();
+  renderTrain(); scrollTo({ top: 0 });
+}
+const LETTRES = "ABCDEFGH";
+// Les points, comme en Histoire : 1 par élément demandé (« Nomme deux… » = 2), +1 si on demande aussi de justifier ;
+// cocher = 1 par bonne réponse, relier = 1 par paire, trier = 2, mettre en ordre = 1.
+const NOMBRES = { deux: 2, trois: 3, quatre: 4, cinq: 5 };
+function points(q) {
+  if (q.type === "coche") return q.bons.length;
+  if (q.type === "lien") return q.paires.length;
+  if (q.type === "tri") return 2;
+  if (q.type !== "ecris") return 1;
+  const n = (q.t.match(/\b(?:nomme|donne|indique|identifie|cite|décris|explique)\s+(deux|trois|quatre|cinq|[2-5])\b/i) || [])[1];
+  let p = n ? NOMBRES[n.toLowerCase()] || +n : 1;
+  if (/\b(?:nomme|donne|indique|identifie)\b/i.test(q.t) && /\b(?:justifie|explique)\b/i.test(q.t)) p++;
+  return p;
+}
+const txtPts = p => `${p} point${p > 1 ? "s" : ""}`;
+const maj = s => s.charAt(0).toUpperCase() + s.slice(1);
+// La réponse mise en forme (celle d'Histoire) : l'essentiel en gras et en couleur, parenthèses plus pâles,
+// « Au choix : » en points de forme, « A → B » en liste numérotée, une idée par ligne.
+function joliReponse(t) {
+  t = String(t).trim();
+  const par = s => s.replace(/\(([^)]*)\)/g, '<span class="par">($1)</span>');
+  const fort = s => `<strong>${par(esc(s))}</strong>`;
+  let m;
+  if (/\*\*/.test(t)) return `<p>${par(esc(t)).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}</p>`;
+  if ((m = t.match(/^(Vrai|Faux)\.?\s*(.*)$/s))) return `<p><strong class="tete">${m[1]}</strong></p>${m[2] ? `<p>${par(esc(m[2]))}</p>` : ""}`;
+  if ((m = t.match(/^Au choix\s*:\s*(.+?)\.?$/s))) {
+    const [liste, ...apres] = m[1].split(/\.\s+(?=[A-ZÀ-ÖØ-Ý])/);
+    return `<p>Au choix :</p><ul>${liste.split(/\s*[,;]\s*/).map(x => `<li>${fort(x)}</li>`).join("")}</ul>${apres.length ? `<p>${par(esc(apres.join(". ")))}.</p>` : ""}`;
+  }
+  if (t.includes("→")) return `<ol>${t.replace(/\.$/, "").split(/\s*→\s*/).map(x => `<li>${fort(x)}</li>`).join("")}</ol>`;
+  const [une, ...reste] = t.split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Ý«])/);
+  const deux = une.length > 90 && une.indexOf(" : ") > 0 && une.indexOf(" : ") < 60;
+  const tete = deux ? une.slice(0, une.indexOf(" : ")) : une, suite = deux ? [maj(une.slice(une.indexOf(" : ") + 3)), ...reste] : reste;
+  return `<p><strong class="${tete.length < 60 ? "tete" : ""}">${par(esc(tete))}</strong></p>${suite.map(s => `<p>${par(esc(s))}</p>`).join("")}`;
+}
+// Une série au TBI : les questions à écrire et les cartes au doigt des sections choisies (affichées comme questions à écrire),
+// à peu près dans leur proportion, jamais deux cartes au doigt de suite si on peut l'éviter.
+function serieTbi(n) {
+  const ec = melange(questions("ecris")), dx = melange(questions("doigt"));
+  const nDx = Math.min(dx.length, Math.max(dx.length ? 1 : 0, Math.round(n * dx.length / (ec.length + dx.length || 1))));
+  const qs = [...ec.slice(0, n - nDx), ...dx.slice(0, nDx)];
+  if (qs.length < n) qs.push(...[...ec.slice(n - nDx), ...dx.slice(nDx)].slice(0, n - qs.length));
+  const out = melange(qs.filter(q => q.type === "ecris")), dxs = qs.filter(q => q.type !== "ecris");
+  for (const q of dxs) { const libres = [...Array(out.length + 1).keys()].filter(p => (p === 0 || out[p - 1].type === "ecris") && (p === out.length || out[p].type === "ecris"));
+    out.splice(libres.length ? libres[Math.floor(Math.random() * libres.length)] : out.length, 0, q); }
+  return out;
+}
+// Les cartes d'une question au doigt, dans un ordre mêlé fixé une fois (les lettres ne bougent plus).
+const cartesDe = q => q.type === "temps" ? q.items : q.type === "coche" ? q.cartes : q.type === "tri" ? q.items.map(x => x[0]) : q.paires.map(p => p[1]);
+function montrerTbi() {
+  const q = RUN.qs[RUN.i], k = RUN.i + 1, a = actDe(RUN.id);
+  const liste = (cartes) => `<ol class="tbi-cartes">${q.aff.map((i, j) => `<li><span class="lettre">${LETTRES[j]}</span>${esc(cartes[i])}</li>`).join("")}</ol>`;
+  let demande, corps;
+  if (q.type === "ecris") {
+    demande = q.g === "Qui suis-je?" ? "Qui suis-je? Écris ta réponse." : "Écris ta réponse.";
+    corps = `<p>${esc(q.t)}</p>`;
+  } else {
+    const c = cartesDe(q);
+    if (!q.aff) { do q.aff = melange(c.map((_, i) => i)); while (q.type === "temps" && c.length > 1 && q.aff.every((x, j) => x === j)); }
+    const relie = /cause/i.test(q.t) ? "Écris le numéro de chaque cause avec la lettre de sa conséquence." : "Écris chaque numéro avec la lettre qui va avec.";
+    demande = { temps: "Écris les lettres dans le bon ordre.", coche: `Écris les lettres des ${q.bons?.length} bonnes réponses.`, tri: "Écris chaque lettre dans la bonne colonne.", lien: relie }[q.type];
+    corps = `<p>${esc(q.t)}</p>` + (q.type === "tri" ? `<p class="tbi-cols">${q.cols.map(esc).join(" <span>ou</span> ")}</p>${liste(c)}`
+      : q.type === "lien" ? `<ol class="tbi-cartes">${q.paires.map(([x], s) => `<li><span class="lettre">${s + 1}</span>${esc(x)}</li>`).join("")}</ol><p class="tbi-cols"><span>Avec quoi?</span></p>${liste(c)}`
+      : liste(c));
+  }
+  $t("train").innerHTML = `<article class="jeu">
+    <header class="jeu-h"><button class="retour" data-menu>← Accueil</button><p class="jeu-t"><strong>${esc(a.nom)}</strong><em>${secs().length === TOUTES.length ? "Toutes les sections" : "Sections " + secs().map(num).join(", ")}</em></p></header>
+    <p class="num-bar">${RUN.qs.map((_, j) => `<b class="${j === RUN.i ? "cur" : j < RUN.i ? "vu" : ""}">${j + 1}</b>`).join("")}</p>
+    <div class="tq-tete">${q.type === "ecris" ? `<span class="q-kick">${esc(q.g)}</span>` : ""}<span class="pts">${txtPts(points(q))}</span></div>
+    <p class="demande"><span class="num-q">${k}</span>${esc(demande)}</p>
+    <div class="tq">${corps}</div>
+    <button class="gros" id="voir">Voir la réponse</button><section id="retro"></section></article>`;
+  $t("voir").onclick = () => {
+    const L = i => LETTRES[q.aff.indexOf(i)], lst = x => `<ul>${x.map(s => `<li><strong>${s}</strong></li>`).join("")}</ul>`;
+    const rep = q.type === "ecris" ? joliReponse(q.r)
+      : (q.type === "temps" ? `<ol>${q.items.map((c, i) => `<li><strong>${L(i)} · ${esc(c)}</strong></li>`).join("")}</ol>`
+        : q.type === "coche" ? lst(q.bons.map((c, i) => `${L(i)} · ${esc(c)}`).sort())
+        : q.type === "tri" ? q.cols.map((c, j) => `<p><strong>${esc(c)}</strong> : ${q.items.map((x, i) => x[1] === j ? L(i) : null).filter(Boolean).sort().join(", ")}</p>`).join("")
+        : lst(q.paires.map((p, s) => `${s + 1} → ${L(s)} · ${esc(p[1])}`))) + (q.ex ? `<p>${gras(q.ex)}</p>` : "");
+    const der = RUN.i === RUN.qs.length - 1;
+    $t("voir").remove();
+    document.querySelector(".num-bar b.cur").className = "vu";
+    $t("retro").innerHTML = `<div class="rep-tbi"><span class="etiq">Réponse ${k} · ${txtPts(points(q))}</span><div class="reponse">${rep}</div>${renvoi(q)}</div>
+      <button class="gros suite" id="suite">${der ? "Comptez vos points →" : "Suivante →"}</button>`;
+    $t("suite").onclick = () => { if (der) finTbi(); else { RUN.i++; montrerTbi(); scrollTo({ top: 0 }); } };
+    $t("retro").scrollIntoView({ block: "nearest", behavior: "smooth" });
+  };
+}
+// Fin au TBI : les numéros des questions, sous chacun ce qu'elle vaut (en mots), puis le total. Les élèves comptent sur leur feuille.
+function finTbi() {
+  const total = RUN.qs.reduce((s, q) => s + points(q), 0);
+  $t("train").innerHTML = `<article class="jeu"><header class="jeu-h"><button class="retour" data-menu>← Accueil</button><p class="jeu-t"><strong>${esc(actDe(RUN.id).nom)}</strong><em>Fin de la série</em></p></header>
+    <section class="fin-tbi"><h2>Comptez vos points!</h2>
+      <p class="num-bar fin-pts">${RUN.qs.map((q, j) => `<span><b class="vu">${j + 1}</b><em>${txtPts(points(q))}</em></span>`).join("")}</p>
+      <p class="total-pts">Sur <b>${total}</b></p></section>
+    <p class="fin-btns"><button class="gros" id="rejouer">↻ ${RUN.qs.length} autres questions</button><button class="gros ghost" data-menu>Menu</button></p></article>`;
+  scrollTo({ top: 0 });
+}
+$t("tbi-btn").onclick = () => basculerTbi();
+
 /* ============ Branchements ============ */
 $t("train").addEventListener("click", e => {
   const b = e.target.closest("button");
@@ -1234,6 +1403,8 @@ if (ancre) {
 if (lancerTout) store.set("vue", "exercices");
 renderTrain();
 if (lancerTout) lancer("examen5");
+// #tbi (la tuile du tableau de bord) ouvre directement le mode TBI.
+if (location.hash === "#tbi") { history.replaceState(null, "", location.pathname + location.search); basculerTbi(true); }
 
 </script>
 </body>
