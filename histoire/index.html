@@ -494,7 +494,7 @@ body.tbi .titre-tbi{display:block}
 @media (max-width:560px){.chap .long{display:none}.chap .court{display:inline}}
 .chap.on span{font-size:15px;opacity:.9}
 .chap.ferme{opacity:.4;border-style:dashed;cursor:default}
-.chap.ferme b,.chap.ferme span{text-decoration:line-through}
+/* Chapitre pas encore sorti : pâle, jamais barré (un trait se lit « erreur », élève fantôme 2026-11-20) */
 /* Question ouverte (banque formative) : on pense, on retourne, on dit si on l'avait */
 .retro.rep{background:color-mix(in srgb,var(--a,var(--c)) 12%,var(--bg))}
 /* Écris, puis compare (2026-11-10) : une case pour écrire avant de voir la réponse. Rien n'est gardé ni comparé par la page. */
@@ -1118,7 +1118,7 @@ function render() {
   $("hero").style.backgroundImage = c === 1 ? `url(${IMAGES.couv})` : "none";
   $("hero").style.backgroundColor = c === 1 ? "" : coul;
   $("hero").innerHTML = `<div><p class="eyebrow">Chapitre ${c} · ${esc(CH.per)}</p><h1>${esc(CH.titre)}</h1>
-    <p>Tu étudies dans ton cahier, tu te testes ici&nbsp;: 2&nbsp;minutes par activité. Une erreur? Tu as la bonne réponse et ${BANQ[c] ? "la page" : "le dossier"} de ton cahier.</p></div>`;
+    <p>Étudie dans ton cahier. Teste-toi ici, en 2&nbsp;minutes. Tu te trompes? Tu vois la bonne réponse et ${BANQ[c] ? "la page" : "le dossier"} du cahier.</p></div>`;
   const faits = store.get("faits") || {};
   const ds = selection(), tout = !ds.length, dz = dossiers();
   let h = `<p class="titre-tbi">Chapitre ${c} · ${esc(CH.titre)}</p><div class="dossiers" style="--c:${coul}">
@@ -1128,7 +1128,7 @@ function render() {
     <button class="dos tout${tout ? " on" : ""}" data-dos="tout" aria-pressed="${tout}">Tout le chapitre</button>
     ${Object.entries(dz).map(([d, t]) => { const on = ds.includes(+d), ferme = !ouvert(c, d);
       return `<button class="dos${on ? " on" : ""}${ferme ? " ferme" : ""}" data-dos="${d}" aria-pressed="${on}"${ferme ? " disabled" : ""}><span class="num">Dossier ${d}</span><b>${esc(t)}</b></button>`; }).join("")}
-    </div><p class="astuce">Touche un ou plusieurs dossiers : tes questions viendront de là.</p></div>`, fam = "";
+    </div><p class="astuce">Tes questions viennent de ce que tu choisis : tout le chapitre, ou un ou plusieurs dossiers.</p></div>`, fam = "";
   // Deux boutons de même valeur, côte à côte : l'élève choisit (2026-10-27) ; les activités par OI sont repliées.
   // Un chapitre sans questions de ce format (ex. chapitres 2 à 4 au cellulaire) : « Bientôt ».
   const dispo = miniTest(choisis(), 10, c).length;
