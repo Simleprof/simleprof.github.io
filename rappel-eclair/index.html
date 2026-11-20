@@ -76,7 +76,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 24px 80px}
 .mt-corps{flex:1;overflow:auto}
 .mt-in{max-width:1500px;margin:0 auto;padding:22px 32px 30px}
 .mt-bas{display:flex;align-items:center;gap:16px;padding:12px 24px;background:#fff;border-top:1px solid var(--rule)}
-.mt-bas .leg{flex:1;text-align:center;font-size:20px;color:var(--muted)}
+.mt-bas .leg{flex:1;text-align:center;font-size:24px;color:var(--muted)}
 .mt-bas .leg b{color:var(--ink)}
 .mt-bas button:disabled{opacity:.35;cursor:default}
 .mt-go{min-width:220px}
@@ -356,6 +356,16 @@ function rendreQ(q,box,cor){
     if(d.au)c.appendChild(el("div","dau",d.au));if(d.src)c.appendChild(el("div","dsrc",d.src));docs.appendChild(c)});
   box.appendChild(docs);
 }
+// Une question courte grossit jusqu'à remplir l'écran (jusqu'à 1,6 fois la taille choisie), sans jamais faire défiler
+function ajuster(){
+  const box=$("mtIn"),corps=$("mtCorps");box.style.fontSize="";
+  const imgs=[...box.querySelectorAll("img")].filter(i=>!i.complete);
+  if(imgs.length){imgs.forEach(i=>i.addEventListener("load",ajuster,{once:true}));}
+  let bas=1,haut=1.6;
+  for(let k=0;k<7;k++){const m=(bas+haut)/2;box.style.fontSize=(fs*m)+"px";if(corps.scrollHeight>corps.clientHeight+1)haut=m;else bas=m}
+  box.style.fontSize=(fs*bas)+"px";
+}
+window.addEventListener("resize",()=>{if(mt&&(mt.etape>=1&&mt.etape<=4||mt.etape>=6&&mt.etape<=9))ajuster()});
 // Étapes : 0 accueil · 1-4 questions · 5 correction · 6-9 corrections · 10 fin
 function ecranMT(){
   const s=mt.etape,box=$("mtIn");box.innerHTML="";$("mtCorps").scrollTop=0;
@@ -377,14 +387,14 @@ function ecranMT(){
     const info="Matière : jusqu'à "+MT.dossiers[mt.d]+(MT.prio.length?" · Reprise visée : "+QPAR[mt.ids[3]].oi:"");
     c.appendChild(el("p","mt-info",info));box.appendChild(c);
   }else if(s<=4){
-    rendreQ(QPAR[mt.ids[s-1]],box,false);
+    rendreQ(QPAR[mt.ids[s-1]],box,false);ajuster();
     leg.append("Sur la feuille, au crayon : ",el("b",null,"ta réponse")," et ",el("b",null,"l'OI"),".");
   }else if(s===5){
     const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Correction"));
     c.appendChild(el("p","mt-sous","Range ton crayon, prends un crayon de couleur."));
     c.appendChild(el("p","mt-info","On n'efface rien : on noircit ses points, puis un code si on en a perdu."));box.appendChild(c);
   }else if(s<=9){
-    rendreQ(QPAR[mt.ids[s-6]],box,true);
+    rendreQ(QPAR[mt.ids[s-6]],box,true);ajuster();
     leg.append("En couleur : ",el("b",null,"tes points"),", puis si tu en as perdu : ",el("b",null,"S")," je ne savais pas · ",el("b",null,"C")," j'ai confondu · ",el("b",null,"L")," j'ai mal lu");
   }else{
     const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Ramasse les feuilles"));
