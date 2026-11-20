@@ -579,7 +579,7 @@ body.tbi .retro .etiq{font-size:18px}
     <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12M6 22h12M7 2c0 5 10 5 10 10S7 17 7 22M17 2c0 5-10 5-10 10s10 5 10 10"/></svg></div>
     <div><span class="eyebrow">3e secondaire · Exercices</span><b>Histoire du Québec et du Canada</b></div>
     <button class="plein-ecran" data-plein></button>
-    <button class="tbi-btn" data-tbi title="Mode TBI, pour l'enseignant">TBI</button>
+    <!-- Plus de bouton TBI (2026-11-20, sa décision) : en classe, c'est le Rappel éclair (simleprof.github.io/rappel-eclair/). -->
   </header>
 
   <main>
@@ -1833,8 +1833,8 @@ obsFeuille.observe($("sheetIn"), { childList: true, subtree: true });
 // Lien direct : #vf, #carte… ouvre une activité
 // Code QR d'une fin de dossier dans le cahier : #c1-d2 choisit ce dossier et lance tout de suite un mini-examen de 5 questions.
 const h = location.hash.slice(1), qr = h.match(/^c1-d([1-4])$/);
-// #tbi (la tuile du tableau de bord) ouvre directement le mode TBI.
-if (h === "tbi") { history.replaceState(null, "", location.pathname + location.search); basculerTbi(true); }
+// #tbi : l'ancien mode TBI est remplacé par le Rappel éclair (2026-11-20) ; l'ancienne adresse y mène.
+if (h === "tbi") location.replace("../rappel-eclair/");
 else if (qr) { store.set("chap", 1); store.set("choix", [+qr[1]]); render(); lancer("examen5"); }
 else if (ACTIVITES.some(a => a.id === h) || h === "ecris" || h === "examen" || h === "examen5" || /^test[1-4]$/.test(h)) lancer(h);
 </script>
