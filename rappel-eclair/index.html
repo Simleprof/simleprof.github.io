@@ -112,11 +112,11 @@ footer a{color:var(--muted)}
   <button class="tbtn" id="bA-" title="Texte plus petit">A−</button>
   <button class="tbtn" id="bA+" title="Texte plus gros">A+</button>
   <button class="tbtn" id="bReg">⚙ Matière vue</button>
-  <button class="tbtn" id="bMT" title="4 questions, feuille-réponse à bulles, correction en couleur">Mini-test</button>
+  <button class="tbtn" id="bMT" title="Rappel éclair numéroté : 4 questions, feuille-réponse à bulles, correction en couleur">Avec la feuille</button>
   <button class="go" id="bGo">Question au hasard</button>
 </header>
 
-<div id="mt" role="dialog" aria-label="Mini-test">
+<div id="mt" role="dialog" aria-label="Rappel éclair avec la feuille">
   <div class="mt-haut">
     <span class="mt-serie" id="mtSerie"></span>
     <span class="mt-etape" id="mtEtape"></span>
@@ -316,7 +316,7 @@ $("bResetEc").onclick=()=>{ecartees.clear();ecrire("ecartees",[]);maj()};
 
 // ───── Mini-test (2026-11-20) ─────
 // 4 questions d'une série du catalogue figé ; les élèves répondent sur la feuille-réponse à bulles
-// (série, numéro, prédiction, OI, points, code S/C/L), puis se corrigent en couleur. Les feuilles scannées
+// (numéro, groupe et élève, réponse, OI, autoévaluation après Q4, points et « pourquoi » en mots), puis se corrigent en couleur. Les feuilles scannées
 // sont lues sur l'ordinateur de l'enseignant (analyser.js) : la page ne garde aucune donnée d'élève.
 const QPAR={};QDATA.forEach(q=>QPAR[q.id]=q);
 const DOS_IDX={};CHAPITRES.flatMap(c=>c.dossiers.map(([,as])=>as.map(a=>cle(c.p,a)))).forEach((ks,i)=>ks.forEach(k=>DOS_IDX[k]=i));
@@ -372,7 +372,7 @@ window.addEventListener("resize",()=>{if(mt&&(mt.etape>=1&&mt.etape<=4||mt.etape
 // Étapes : 0 accueil · 1-4 questions · 5 correction · 6-9 corrections · 10 fin
 function ecranMT(){
   const s=mt.etape,box=$("mtIn");box.innerHTML="";$("mtCorps").scrollTop=0;
-  $("mtSerie").textContent="Mini-test "+mt.code;
+  $("mtSerie").textContent="Rappel éclair n° "+mt.code;
   const et=$("mtEtape");et.className="mt-etape";
   const pos=$("mtPos");pos.innerHTML="";
   const qi=s>=1&&s<=4?s-1:s>=6&&s<=9?s-6:-1;
@@ -383,29 +383,30 @@ function ecranMT(){
   $("mtSuiv").textContent=s===10?"Terminer":s===0?"Commencer →":s===5?"Corriger →":"Suivante →";
   const leg=$("mtLeg");leg.innerHTML="";
   if(s===0){
-    const c=el("div","mt-centre");c.appendChild(el("div","mt-mot","Mini-test"));
+    const c=el("div","mt-centre");c.appendChild(el("div","mt-mot","Rappel éclair n°"));
     const ch=el("div","mt-choix"),moins=el("button","mt-fl","‹"),plus=el("button","mt-fl","›");
-    moins.title="Mini-test précédent";plus.title="Mini-test suivant";
+    moins.title="Numéro précédent";plus.title="Numéro suivant";
     moins.disabled=mt.n<=1;plus.disabled=mt.n>=NB_MT;
     moins.onclick=()=>{mt={...serieDe(mt.n-1),etape:0};ecranMT()};plus.onclick=()=>{mt={...serieDe(mt.n+1),etape:0};ecranMT()};
     ch.append(moins,el("div","mt-code",mt.code),plus);c.appendChild(ch);
     const ol=el("ol","mt-liste");
-    [["Noircis le ","mini-test "+mt.code,"."],["Noircis ton ","groupe"," et ton numéro d'élève."],["Prédis combien de questions tu vas ","réussir au complet","."]].forEach(([a,b,c2])=>{const li=el("li");li.append(a,el("b",null,b),c2);ol.appendChild(li)});
+    const nn=String(mt.n).padStart(2,"0");
+    [["Noircis le n° ",nn," : dizaine "+nn[0]+", unité "+nn[1]+"."],["Noircis ton ","groupe",", puis ton numéro d'élève."],["Écris la ","date","."]].forEach(([a,b,c2])=>{const li=el("li");li.append(a,el("b",null,b),c2);ol.appendChild(li)});
     c.appendChild(ol);
     c.appendChild(el("p","mt-info","Matière : jusqu'à "+MT.dossiers[mt.d]+" · "+mt.code+" sur "+NB_MT));box.appendChild(c);
   }else if(s<=4){
     rendreQ(QPAR[mt.ids[s-1]],box,false);ajuster();
-    leg.append("Sur la feuille, au crayon : ",el("b",null,"ta réponse")," et ",el("b",null,"l'OI"),".");
+    leg.append("Sur la feuille, au crayon : ",el("b",null,"ta réponse")," dans le cadre, puis ",el("b",null,"l'OI")," en dessous.");
   }else if(s===5){
-    const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Correction"));
-    c.appendChild(el("p","mt-sous","Range ton crayon, prends un crayon de couleur."));
-    c.appendChild(el("p","mt-info","On n'efface rien : on noircit ses points, puis un code si on en a perdu."));box.appendChild(c);
+    const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Avant la correction"));
+    c.appendChild(el("p","mt-sous","En bas de la feuille : combien de questions penses-tu avoir réussies au complet ?"));
+    c.appendChild(el("p","mt-info","Puis range ton crayon et prends un crayon de couleur. On n'efface rien."));box.appendChild(c);
   }else if(s<=9){
     rendreQ(QPAR[mt.ids[s-6]],box,true);ajuster();
-    leg.append("En couleur : ",el("b",null,"tes points"),", puis si tu en as perdu : ",el("b",null,"S")," je ne savais pas · ",el("b",null,"C")," j'ai confondu · ",el("b",null,"L")," j'ai mal lu");
+    leg.append("En couleur, dans ",el("b",null,"Correction")," : tes points, puis, si tu en as perdu, pourquoi.");
   }else{
     const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Ramasse les feuilles"));
-    c.appendChild(el("p","mt-sous","Mini-test "+mt.code+" · la feuille sert à t'aider, elle n'est pas évaluée."));box.appendChild(c);
+    c.appendChild(el("p","mt-sous","Rappel éclair n° "+mt.code+" · la feuille sert à t'aider, elle n'est pas évaluée."));box.appendChild(c);
   }
 }
 function ouvrirMT(){mt={...serieDe(numeroPropose()),etape:0};$("mt").classList.add("open");ecranMT()}
