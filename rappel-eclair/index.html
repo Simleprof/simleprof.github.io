@@ -44,8 +44,6 @@ button{font:inherit;cursor:pointer;color:inherit}
 .dos .num{font-size:clamp(15px,.85vw,17px);font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .dos b{font-size:clamp(18px,1.3vw,26px);font-weight:700;line-height:1.2}
 .dos small{font-size:max(15px,.75em);font-weight:500;color:var(--muted)}
-.dos.tout{grid-column:1 / -1;align-items:center;padding:12px}
-.dos.tout b{font-weight:800}
 .dos{position:relative}
 .dos.on{background:color-mix(in srgb,var(--c) 18%,var(--surface));border-color:var(--c);border-width:3px;padding:11px 17px}
 .dos.on::after{content:"";position:absolute;right:16px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--c)}
@@ -57,7 +55,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 .det.partiel{color:var(--c)}
 .det:hover,.det.ouvert{color:var(--ink);background:var(--sable)}
 .dos-w.ouvert{z-index:30}
-.themes{position:absolute;top:calc(100% - 4px);left:0;right:0;z-index:30;padding:10px 14px 14px;border-radius:14px;border:2px solid var(--c);background:var(--surface);box-shadow:0 14px 40px rgba(28,25,23,.18),0 2px 6px rgba(28,25,23,.08);animation:pop .14s ease-out}
+.themes{position:absolute;top:calc(100% - 4px);left:0;right:0;z-index:30;padding:10px 14px 14px;border-radius:14px;border:2px solid var(--c);background:var(--surface);box-shadow:0 14px 40px rgba(28,25,23,.18),0 2px 6px rgba(28,25,23,.08)}
+.themes.anim{animation:pop .14s ease-out}
 @keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .themes .tete{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
 .themes .tt{font-size:clamp(15px,.95vw,19px);font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
@@ -73,7 +72,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .sous{display:flex;align-items:center;gap:16px;margin:16px 2px 0;min-height:34px}
 .mini-sw input{transform:scale(1.15);transform-origin:left center;margin-right:4px}
 .sous .compte{margin-left:auto;font-size:clamp(16px,1vw,20px);color:var(--muted)}
-.mini-sw{display:flex;align-items:center;gap:10px;font-size:clamp(16px,1.2vw,23px);color:var(--muted);cursor:pointer}
+.mini-sw{display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.2vw,23px);color:var(--muted);cursor:pointer}
 .mini-sw input,.sw input{appearance:none;-webkit-appearance:none;flex:none;width:44px;height:26px;border-radius:13px;background:#d6d1cb;position:relative;cursor:pointer;margin:0;transition:background .15s}
 .mini-sw input::after,.sw input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .mini-sw input:checked,.sw input:checked{background:var(--ink)}
@@ -206,6 +205,7 @@ footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
     <nav class="chaps" id="chaps" aria-label="Les chapitres"></nav>
     <div class="dos-g" id="dosG"></div>
     <div class="sous">
+      <label class="mini-sw"><input type="checkbox" id="oTout"> Tout le chapitre</label>
       <label class="mini-sw" id="avantBox"><input type="checkbox" id="oAvant"> Avec les chapitres d'avant</label>
     </div>
     <button class="b1" id="bGo">Question au hasard<small id="compte"></small></button>
@@ -281,7 +281,11 @@ const ecrire=(k,v)=>{try{localStorage.setItem(CLE+k,JSON.stringify(v))}catch(e){
 const COUL=["#E1701A","#1F4E79","#99281E","#1B6B43"];
 
 let chap=Math.min(3,Math.max(0,lire("chap",0)));
-let sel=lire("sel",{});          // {chapitre: [dossiers cochés]} ; rien de coché = tout le chapitre
+// {chapitre: [dossiers cochés]} ; absent = tout coché ; [] = rien (2026-11-21 : les dossiers restent cochés un à un,
+// « Tout le chapitre » est un interrupteur). Ancienne clé « sel » : [] voulait dire tout → convertie une fois.
+let sel=lire("dos",null);
+if(!sel){sel={};const v=lire("sel",{});for(const c in v)if(Array.isArray(v[c])&&v[c].length)sel[c]=v[c]}
+let vientDOuvrir=false;          // la fenêtre des thèmes n'anime qu'à l'ouverture (sinon elle clignote à chaque toucher)
 let off=lire("off",{});          // thèmes retirés d'un dossier : {"chapitre|dossier": [thèmes]}
 let ouvert=-1;                   // dossier dont les thèmes sont ouverts (fermé à chaque retour)
 let avant=lire("avant",false);   // ajouter les chapitres d'avant (discret, éteint par défaut)
@@ -297,37 +301,41 @@ function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=
 function couleurDe(p){document.documentElement.style.setProperty("--accent",COUL[idxP[p]]||"#1c1917")}
 
 // ───── Accueil : chapitre, puis dossiers un à un ─────
-const selDe=c=>(sel[c]||[]).filter(d=>d<CHAPITRES[c].dossiers.length);
+const tousD=c=>CHAPITRES[c].dossiers.map((_,y)=>y);
+const selDe=c=>Array.isArray(sel[c])?sel[c].filter(d=>d<CHAPITRES[c].dossiers.length):tousD(c);
 // Les thèmes d'un dossier (aspects qui ont des questions) ; off["c|d"] = thèmes retirés d'un dossier (2026-11-20, sa demande)
 const COMPTE={};QDATA.forEach(q=>q.as.forEach(a=>{COMPTE[cle(q.p,a)]=(COMPTE[cle(q.p,a)]||0)+1}));
 const themes=(c,d)=>CHAPITRES[c].dossiers[d][1].filter(a=>COMPTE[cle(CHAPITRES[c].p,a)]);
 const offDe=(c,d)=>(off[c+"|"+d]||[]).filter(a=>themes(c,d).includes(a));
-const inclus=(c,d)=>{const s=selDe(c);return !s.length||s.includes(d)};
+const inclus=(c,d)=>selDe(c).includes(d);
 const themeOn=(c,d,a)=>inclus(c,d)&&!offDe(c,d).includes(a);
-const sauver=()=>{ecrire("sel",sel);ecrire("off",off);masquerAvis();maj()};
+const toutDe=c=>selDe(c).length===CHAPITRES[c].dossiers.length&&!CHAPITRES[c].dossiers.some((_,d)=>offDe(c,d).length);
+const sauver=()=>{ecrire("dos",sel);ecrire("off",off);masquerAvis();maj()};
 function calculerCoches(){
   coches=new Set();
   if(avant)for(let c=0;c<chap;c++)CHAPITRES[c].dossiers.forEach(([,as])=>as.forEach(a=>coches.add(cle(CHAPITRES[c].p,a))));
   CHAPITRES[chap].dossiers.forEach(([,as],d)=>{if(inclus(chap,d))as.forEach(a=>{if(!offDe(chap,d).includes(a))coches.add(cle(CHAPITRES[chap].p,a))})});
 }
 function toucherDossier(d){
-  const s=selDe(chap),k=chap+"|"+d,n=CHAPITRES[chap].dossiers.length;
-  let x;
-  if(!s.length)x=[d];
-  else if(s.includes(d))x=offDe(chap,d).length?s:s.filter(y=>y!==d);
-  else x=[...s,d].sort((a,b)=>a-b);
+  // coché en partie → complet ; coché → décoché ; décoché → coché complet
+  const s=selDe(chap),k=chap+"|"+d;
+  if(s.includes(d)&&!offDe(chap,d).length)sel[chap]=s.filter(y=>y!==d);
+  else if(!s.includes(d))sel[chap]=[...s,d].sort((a,b)=>a-b);
   delete off[k];
-  if(x.length===n&&!CHAPITRES[chap].dossiers.some((_,y)=>offDe(chap,y).length))x=[];
-  sel[chap]=x;sauver();
+  sauver();
 }
 function toucherTheme(d,a){
-  const k=chap+"|"+d,tous=themes(chap,d);
-  // Depuis « Tout le chapitre » : tous les dossiers deviennent cochés, puis on retire le thème (le reste du chapitre reste)
-  if(!selDe(chap).length)sel[chap]=CHAPITRES[chap].dossiers.map((_,y)=>y);
-  if(!inclus(chap,d)){sel[chap]=[...selDe(chap),d].sort((a,b)=>a-b);off[k]=tous.filter(t=>t!==a);return sauver()}
-  // Retirer le dernier thème laisse le dossier à « aucun thème » (décoché), jamais « tout le chapitre » (bogue du 2026-11-21)
+  const k=chap+"|"+d,tous=themes(chap,d),s=selDe(chap);
+  if(!s.includes(d)){sel[chap]=[...s,d].sort((x,y)=>x-y);off[k]=tous.filter(t=>t!==a);return sauver()}
+  // Retirer le dernier thème décoche le dossier (jamais « tout le chapitre »)
   let o=offDe(chap,d);o=o.includes(a)?o.filter(t=>t!==a):[...o,a];
-  off[k]=o;if(!o.length)delete off[k];
+  if(o.length>=tous.length){delete off[k];sel[chap]=s.filter(y=>y!==d)}
+  else if(o.length)off[k]=o;else delete off[k];
+  sauver();
+}
+function toucherTout(on){
+  sel[chap]=on?tousD(chap):[];
+  CHAPITRES[chap].dossiers.forEach((_,d)=>delete off[chap+"|"+d]);
   sauver();
 }
 function rendreAccueil(){
@@ -345,11 +353,7 @@ function rendreAccueil(){
   });
   const g=$("dosG");g.innerHTML="";
   const s=selDe(chap),ds=CHAPITRES[chap].dossiers;
-  const toutOn=!s.length&&!ds.some((_,d)=>offDe(chap,d).length);
-  const tout=el("button","dos tout"+(toutOn?" on":""));tout.appendChild(el("b",null,"Tout le chapitre"));
-  tout.onclick=()=>{sel[chap]=[];ds.forEach((_,d)=>delete off[chap+"|"+d]);sauver()};
-  g.appendChild(tout);
-  const tuiles=[];
+  $("oTout").checked=toutDe(chap);
   ds.forEach(([nom],d)=>{
     const m=nom.match(/^D(\d+)\s*·\s*(.*?)(?:\s*\(([^)]*)\))?$/);
     const th=themes(chap,d),o=offDe(chap,d);
@@ -365,11 +369,11 @@ function rendreAccueil(){
     if(th.length>1){
       const det=el("button","det"+(ouvert===d?" ouvert":"")+(partiel?" partiel":""),(partiel?(nb?nb+(nb>1?" thèmes":" thème")+" sur "+th.length:"Aucun thème"):"Thèmes")+" "+(ouvert===d?"▴":"▾"));
       det.setAttribute("aria-expanded",String(ouvert===d));det.title="Choisir les thèmes de ce dossier";
-      det.onclick=e=>{e.stopPropagation();ouvert=ouvert===d?-1:d;rendreAccueil()};
+      det.onclick=e=>{e.stopPropagation();ouvert=ouvert===d?-1:d;vientDOuvrir=ouvert>=0;rendreAccueil()};
       w.appendChild(det);
       // Les thèmes : une petite fenêtre par-dessus le dossier, sans rien décaler (2026-11-21, sa demande)
       if(ouvert===d){
-        const p=el("div","themes");p.setAttribute("role","dialog");p.setAttribute("aria-label","Thèmes du dossier "+(d+1));
+        const p=el("div","themes"+(vientDOuvrir?" anim":""));vientDOuvrir=false;p.setAttribute("role","dialog");p.setAttribute("aria-label","Thèmes du dossier "+(d+1));
         const tete=el("div","tete");tete.appendChild(el("span","tt","Thèmes du dossier "+(m?m[1]:d+1)));
         const x=el("button","ferme","✕");x.title="Fermer";x.setAttribute("aria-label","Fermer");x.onclick=()=>{ouvert=-1;rendreAccueil()};
         tete.appendChild(x);p.appendChild(tete);
@@ -469,6 +473,7 @@ function appliquerFs(){document.documentElement.style.setProperty("--fs",fs+"px"
 $("bA-").onclick=()=>{fs=Math.max(18,fs-2);appliquerFs()};
 $("bA+").onclick=()=>{fs=Math.min(40,fs+2);appliquerFs()};
 
+$("oTout").onchange=()=>toucherTout($("oTout").checked);
 $("oAvant").onchange=()=>{avant=$("oAvant").checked;ecrire("avant",avant);maj()};
 $("bRegl").onclick=e=>{e.stopPropagation();const o=$("regl").classList.toggle("open");$("bRegl").setAttribute("aria-expanded",String(o))};
 $("regl").onclick=e=>e.stopPropagation();
