@@ -60,12 +60,12 @@ svg.bolt{width:1em;height:1em;flex:none}
 .dos.plein .date{color:#C8D5FF}
 .dos.partiel{background:#E6ECFF;border-color:var(--accent)}
 .dos.aucun{opacity:.4;pointer-events:none}
-.dos .ici{display:none;position:absolute;top:-13px;right:12px;align-items:center;gap:5px;background:var(--eclair);color:var(--ink);font-weight:800;font-size:15px;border-radius:6px;padding:3px 10px 3px 7px;box-shadow:0 2px 6px rgba(14,22,38,.18)}
+.dos .ici{display:none;position:absolute;top:-13px;right:12px;align-items:center;gap:5px;background:var(--eclair);color:var(--ink);font-weight:800;font-size:clamp(15px,.95vw,18px);border-radius:6px;padding:3px 10px 3px 7px;box-shadow:0 2px 6px rgba(14,22,38,.18)}
 .dos.rendu .ici{display:flex}
 .piece .dos .ici{display:none}
 .asps{display:none;flex-wrap:wrap;gap:6px;margin-top:6px}
 .piece .asps{display:flex}
-.asp{font-size:15px;font-weight:600;line-height:1.25;border-radius:8px;padding:4px 10px;border:1.5px solid var(--line);background:#fff;color:var(--muted);text-align:left}
+.asp{font-size:clamp(15px,1vw,20px);font-weight:600;line-height:1.25;border-radius:8px;padding:4px 10px;border:1.5px solid var(--line);background:#fff;color:var(--muted);text-align:left}
 .asp.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .dos.plein .asp.on{background:#fff;border-color:#fff;color:var(--accent)}
 
@@ -179,6 +179,9 @@ footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
   .resume{flex-basis:100%}
   .resume b{font-size:17px}
   .b2{font-size:16px}
+  .resume span{display:none}
+  .b1,.b2{white-space:nowrap;font-size:16px;padding:12px 8px;flex:1 1 0;min-width:0}
+  .b1 .bolt{display:none}
   .b1,.b2{flex:1;padding:13px 14px}
   #regl{right:16px}
   main{padding:16px 16px 60px}
@@ -207,8 +210,8 @@ footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
 
   <div class="acc-tete">
     <div>
-      <h1>Où êtes-vous rendus ?</h1>
-      <p id="aide">Touche le dossier que vous venez de voir : tout ce qui précède est compris.</p>
+      <h1>Où en est la classe ?</h1>
+      <p id="aide">Touche le dernier dossier vu en classe : tout ce qui précède est compris.</p>
     </div>
     <div class="seg" role="group" aria-label="Façon de choisir">
       <button id="mSuite">Jusqu'ici</button>
@@ -356,21 +359,21 @@ function maj(){
   ecrire("coches",[...coches]);
   const r=renduIdx();
   document.querySelectorAll(".dos").forEach(b=>{const i=+b.dataset.i,e=etat(DOS[i]);
-    b.className="dos "+e+(i===r?" rendu":"");b.setAttribute("aria-pressed",String(e==="plein"));
+    b.className="dos "+e+(i===r?" rendu":"");b.querySelector(".date").textContent=(DOS[i].date?DOS[i].date+" · ":"")+DOS[i].nq+" questions"+(e==="partiel"?" · en partie":"");b.setAttribute("aria-pressed",String(e==="plein"));
     b.querySelectorAll(".asp").forEach(x=>x.classList.toggle("on",coches.has(x.dataset.k)))});
   $("accueil").classList.toggle("piece",mode==="piece");
   $("mSuite").classList.toggle("on",mode==="suite");$("mPiece").classList.toggle("on",mode==="piece");
-  $("aide").textContent=mode==="suite"?"Touche le dossier que vous venez de voir : tout ce qui précède est compris.":"Touche un dossier, un aspect ou un chapitre pour l'ajouter ou le retirer.";
+  $("aide").textContent=mode==="suite"?"Touche le dernier dossier vu en classe : tout ce qui précède est compris.":"Touche un dossier, un aspect ou un chapitre pour l'ajouter ou le retirer.";
   const a=admissibles(),neuves=a.filter(q=>!tirees.has(q.id)).length;
-  if(r<0){$("resB").textContent="Aucune matière choisie";$("resS").textContent="Touche le dossier où vous êtes rendus."}
+  if(r<0){$("resB").textContent="Aucune matière choisie";$("resS").textContent="Touche le dernier dossier vu en classe."}
   else{
     const d=DOS[r];
     $("resB").textContent=enSuite(r)?"Jusqu'au chapitre "+(d.ci+1)+", "+d.code+" · "+d.nom:"Matière choisie à la pièce";
-    $("resS").textContent=a.length?a.length+" questions · "+neuves+" jamais tirées":"Aucune question complète dans cette matière : ajoute le dossier suivant.";
+    $("resS").textContent=a.length?a.length+" questions · "+neuves+" pas encore tirées":"Aucune question complète dans cette matière : ajoute le dossier suivant.";
   }
   $("bGo").disabled=!a.length;
   $("bMT").innerHTML="";$("bMT").append("Avec la feuille · n° "+numeroPropose());
-  $("stat").textContent=a.length?neuves+" jamais tirées sur "+a.length:"";
+  $("stat").textContent=a.length?neuves+" pas encore tirées sur "+a.length:"";
 }
 
 function avis(txt,btn){$("avisTx").textContent=txt;const b=$("avisBtn");if(btn){b.textContent=btn.txt;b.onclick=btn.fn;b.style.display=""}else b.style.display="none";$("avis").classList.add("open")}
@@ -381,7 +384,7 @@ function allerQuestion(){$("accueil").style.display="none";$("question").style.d
 // Tirage
 function tirer(){
   let pool=admissibles();
-  if(!pool.length){allerAccueil();avis("Aucune question pour cette matière. Touche le dossier où vous êtes rendus.");return}
+  if(!pool.length){allerAccueil();avis("Aucune question pour cette matière. Touche le dernier dossier vu en classe.");return}
   if($("oNeuf").checked){
     const neuves=pool.filter(q=>!tirees.has(q.id));
     if(!neuves.length){allerAccueil();avis("Toutes les questions de cette matière ont déjà été tirées.",{txt:"Les remettre en jeu",fn:()=>{tirees.clear();ecrire("tirees",[]);masquerAvis();maj()}});return}
