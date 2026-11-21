@@ -50,6 +50,18 @@ button{font:inherit;cursor:pointer;color:inherit}
 .dos.on{background:color-mix(in srgb,var(--c) 18%,var(--surface));border-color:var(--c);border-width:3px;padding:11px 17px}
 .dos.on::after{content:"";position:absolute;right:16px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--c)}
 .dos.tout.on{padding:11px}
+.dos.on:not(.tout)::after{display:none}
+.dos.on .num::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:8px;vertical-align:1px}
+.dos-w{position:relative;display:grid;min-width:0}
+.det{position:absolute;top:7px;right:10px;font-size:clamp(15px,.95vw,19px);font-weight:700;color:var(--muted);background:transparent;border:0;border-radius:8px;padding:3px 10px}
+.det.partiel{color:var(--c)}
+.det:hover,.det.ouvert{color:var(--ink);background:var(--sable)}
+.themes{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 14px;border-radius:14px;border:2px dashed color-mix(in srgb,var(--c) 45%,var(--line));background:var(--surface)}
+.themes .tt{font-size:clamp(15px,.95vw,19px);font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.th{font-size:clamp(16px,1.15vw,23px);font-weight:600;padding:8px 14px;border-radius:10px;border:2px solid var(--line);background:var(--surface)}
+.th:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
+.th.on{background:color-mix(in srgb,var(--c) 18%,var(--surface));border-color:var(--c)}
+.th.on::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:8px;vertical-align:2px}
 .dos.on .num{color:var(--c)}
 
 .sous{display:flex;align-items:center;gap:16px;margin:16px 2px 0;min-height:34px}
@@ -264,6 +276,8 @@ const COUL=["#E1701A","#1F4E79","#99281E","#1B6B43"];
 
 let chap=Math.min(3,Math.max(0,lire("chap",0)));
 let sel=lire("sel",{});          // {chapitre: [dossiers cochés]} ; rien de coché = tout le chapitre
+let off=lire("off",{});          // thèmes retirés d'un dossier : {"chapitre|dossier": [thèmes]}
+let ouvert=-1;                   // dossier dont les thèmes sont ouverts (fermé à chaque retour)
 let avant=lire("avant",false);   // ajouter les chapitres d'avant (discret, éteint par défaut)
 let tirees=new Set(lire("tirees",[]));
 let ecartees=new Set(lire("ecartees",[]));
@@ -278,12 +292,37 @@ function couleurDe(p){document.documentElement.style.setProperty("--accent",COUL
 
 // ───── Accueil : chapitre, puis dossiers un à un ─────
 const selDe=c=>(sel[c]||[]).filter(d=>d<CHAPITRES[c].dossiers.length);
+// Les thèmes d'un dossier (aspects qui ont des questions) ; off["c|d"] = thèmes retirés d'un dossier (2026-11-20, sa demande)
+const COMPTE={};QDATA.forEach(q=>q.as.forEach(a=>{COMPTE[cle(q.p,a)]=(COMPTE[cle(q.p,a)]||0)+1}));
+const themes=(c,d)=>CHAPITRES[c].dossiers[d][1].filter(a=>COMPTE[cle(CHAPITRES[c].p,a)]);
+const offDe=(c,d)=>(off[c+"|"+d]||[]).filter(a=>themes(c,d).includes(a));
+const inclus=(c,d)=>{const s=selDe(c);return !s.length||s.includes(d)};
+const themeOn=(c,d,a)=>inclus(c,d)&&!offDe(c,d).includes(a);
+const sauver=()=>{ecrire("sel",sel);ecrire("off",off);masquerAvis();maj()};
 function calculerCoches(){
   coches=new Set();
-  const ajouter=(c,d)=>CHAPITRES[c].dossiers[d][1].forEach(a=>coches.add(cle(CHAPITRES[c].p,a)));
-  if(avant)for(let c=0;c<chap;c++)CHAPITRES[c].dossiers.forEach((_,d)=>ajouter(c,d));
-  const s=selDe(chap);
-  CHAPITRES[chap].dossiers.forEach((_,d)=>{if(!s.length||s.includes(d))ajouter(chap,d)});
+  if(avant)for(let c=0;c<chap;c++)CHAPITRES[c].dossiers.forEach(([,as])=>as.forEach(a=>coches.add(cle(CHAPITRES[c].p,a))));
+  CHAPITRES[chap].dossiers.forEach(([,as],d)=>{if(inclus(chap,d))as.forEach(a=>{if(!offDe(chap,d).includes(a))coches.add(cle(CHAPITRES[chap].p,a))})});
+}
+function toucherDossier(d){
+  const s=selDe(chap),k=chap+"|"+d,n=CHAPITRES[chap].dossiers.length;
+  let x;
+  if(!s.length)x=[d];
+  else if(s.includes(d))x=offDe(chap,d).length?s:s.filter(y=>y!==d);
+  else x=[...s,d].sort((a,b)=>a-b);
+  delete off[k];
+  if(x.length===n&&!CHAPITRES[chap].dossiers.some((_,y)=>offDe(chap,y).length))x=[];
+  sel[chap]=x;sauver();
+}
+function toucherTheme(d,a){
+  const k=chap+"|"+d,tous=themes(chap,d);
+  // Depuis « Tout le chapitre » : tous les dossiers deviennent cochés, puis on retire le thème (le reste du chapitre reste)
+  if(!selDe(chap).length)sel[chap]=CHAPITRES[chap].dossiers.map((_,y)=>y);
+  if(!inclus(chap,d)){sel[chap]=[...selDe(chap),d].sort((a,b)=>a-b);off[k]=tous.filter(t=>t!==a);return sauver()}
+  let o=offDe(chap,d);o=o.includes(a)?o.filter(t=>t!==a):[...o,a];
+  if(o.length>=tous.length){delete off[k];const s=selDe(chap);sel[chap]=(s.length?s:CHAPITRES[chap].dossiers.map((_,y)=>y)).filter(y=>y!==d)}
+  else off[k]=o;
+  sauver();
 }
 function rendreAccueil(){
   const k=COUL[chap];
@@ -295,28 +334,47 @@ function rendreAccueil(){
     const per=c.titre.split(" · ")[1]||"";
     if(i===chap){b.append(el("b",null,"Chapitre "+(i+1)),el("span",null,per))}
     else{b.append(el("span",null,"Chapitre"),el("b",null,String(i+1)))}
-    b.onclick=()=>{chap=i;ecrire("chap",i);masquerAvis();maj()};
+    b.onclick=()=>{chap=i;ouvert=-1;ecrire("chap",i);masquerAvis();maj()};
     nav.appendChild(b);
   });
   const g=$("dosG");g.innerHTML="";
-  const s=selDe(chap);
-  const tout=el("button","dos tout"+(s.length?"":" on"));tout.appendChild(el("b",null,"Tout le chapitre"));
-  tout.onclick=()=>{sel[chap]=[];ecrire("sel",sel);masquerAvis();maj()};
+  const s=selDe(chap),ds=CHAPITRES[chap].dossiers;
+  const toutOn=!s.length&&!ds.some((_,d)=>offDe(chap,d).length);
+  const tout=el("button","dos tout"+(toutOn?" on":""));tout.appendChild(el("b",null,"Tout le chapitre"));
+  tout.onclick=()=>{sel[chap]=[];ds.forEach((_,d)=>delete off[chap+"|"+d]);sauver()};
   g.appendChild(tout);
-  CHAPITRES[chap].dossiers.forEach(([nom],d)=>{
+  const tuiles=[];
+  ds.forEach(([nom],d)=>{
     const m=nom.match(/^D(\d+)\s*·\s*(.*?)(?:\s*\(([^)]*)\))?$/);
-    const b=el("button","dos"+(s.includes(d)?" on":""));b.setAttribute("aria-pressed",String(s.includes(d)));
-    b.appendChild(el("span","num","Dossier "+(m?m[1]:d+1)));
+    const th=themes(chap,d),o=offDe(chap,d),on=s.includes(d)||(!s.length&&o.length>0);
+    const w=el("div","dos-w");
+    const b=el("button","dos"+(on?" on":""));b.setAttribute("aria-pressed",String(on));
+    const nb=th.filter(a=>themeOn(chap,d,a)).length;
+    b.appendChild(el("span","num","Dossier "+(m?m[1]:d+1)));const partiel=inclus(chap,d)&&o.length>0;
     const t=el("b",null,m?m[2]:nom);if(m&&m[3]){t.append(" ",el("small",null,"("+m[3]+")"))}
     b.appendChild(t);
-    b.onclick=()=>{let x=selDe(chap);x=x.includes(d)?x.filter(y=>y!==d):[...x,d].sort((a,b)=>a-b);
-      if(x.length===CHAPITRES[chap].dossiers.length)x=[];sel[chap]=x;ecrire("sel",sel);masquerAvis();maj()};
-    g.appendChild(b);
+    b.onclick=()=>toucherDossier(d);
+    w.appendChild(b);
+    if(th.length>1){
+      const det=el("button","det"+(ouvert===d?" ouvert":"")+(partiel?" partiel":""),(partiel?nb+(nb>1?" thèmes":" thème")+" sur "+th.length:"Thèmes")+" "+(ouvert===d?"▴":"▾"));
+      det.setAttribute("aria-expanded",String(ouvert===d));det.title="Choisir les thèmes de ce dossier";
+      det.onclick=()=>{ouvert=ouvert===d?-1:d;rendreAccueil()};
+      w.appendChild(det);
+    }
+    g.appendChild(w);tuiles.push(w);
   });
+  // Les thèmes du dossier ouvert : une rangée sous sa ligne
+  if(ouvert>=0&&ouvert<ds.length&&themes(chap,ouvert).length>1){
+    const p=el("div","themes");
+    p.appendChild(el("span","tt","Dossier "+(ouvert+1)+" :"));
+    themes(chap,ouvert).forEach(a=>{const on=themeOn(chap,ouvert,a);const x=el("button","th"+(on?" on":""),a);x.setAttribute("aria-pressed",String(on));x.onclick=()=>toucherTheme(ouvert,a);p.appendChild(x)});
+    const seul=matchMedia("(max-width:760px)").matches;
+    const apres=tuiles[seul?ouvert:Math.min(ouvert|1,tuiles.length-1)];
+    apres.after(p);
+  }
   $("avantBox").style.visibility=chap>0?"visible":"hidden";
   $("oAvant").checked=avant;
 }
-
 function admissibles(){
   const court=$("oCourt").checked;
   return QDATA.filter(q=>!ecartees.has(q.id)&&q.as.every(a=>coches.has(cle(q.p,a)))&&(!court||(q.d.length===1&&q.r.type==="lignes")));
