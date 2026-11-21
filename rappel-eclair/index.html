@@ -19,7 +19,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 /* Barre du haut, discrète */
 .top{display:flex;align-items:center;gap:10px;padding:14px 28px;position:relative}
 .marque{font-size:22px;font-weight:900;letter-spacing:-.01em;margin-right:auto;white-space:nowrap}
-.lien{font-size:19px;font-weight:600;background:none;border:0;color:var(--muted);padding:6px 10px;border-radius:8px}
+.lien{font-size:clamp(17px,1.15vw,22px);font-weight:600;background:none;border:0;color:var(--muted);padding:6px 10px;border-radius:8px}
 .lien:hover{color:var(--ink);background:var(--sable)}
 .tbtn{font-size:19px;font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:6px 14px}
 .tbtn:hover{border-color:var(--ink)}
@@ -46,12 +46,16 @@ button{font:inherit;cursor:pointer;color:inherit}
 .dos small{font-size:max(15px,.75em);font-weight:500;color:var(--muted)}
 .dos.tout{grid-column:1 / -1;align-items:center;padding:12px}
 .dos.tout b{font-weight:800}
-.dos.on{background:color-mix(in srgb,var(--c) 11%,var(--surface));border-color:var(--c)}
+.dos{position:relative}
+.dos.on{background:color-mix(in srgb,var(--c) 18%,var(--surface));border-color:var(--c);border-width:3px;padding:11px 17px}
+.dos.on::after{content:"";position:absolute;right:16px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--c)}
+.dos.tout.on{padding:11px}
 .dos.on .num{color:var(--c)}
 
 .sous{display:flex;align-items:center;gap:16px;margin:16px 2px 0;min-height:34px}
+.mini-sw input{transform:scale(1.15);transform-origin:left center;margin-right:4px}
 .sous .compte{margin-left:auto;font-size:clamp(16px,1vw,20px);color:var(--muted)}
-.mini-sw{display:flex;align-items:center;gap:10px;font-size:clamp(16px,1vw,20px);color:var(--muted);cursor:pointer}
+.mini-sw{display:flex;align-items:center;gap:10px;font-size:clamp(16px,1.2vw,23px);color:var(--muted);cursor:pointer}
 .mini-sw input,.sw input{appearance:none;-webkit-appearance:none;flex:none;width:44px;height:26px;border-radius:13px;background:#d6d1cb;position:relative;cursor:pointer;margin:0;transition:background .15s}
 .mini-sw input::after,.sw input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .mini-sw input:checked,.sw input:checked{background:var(--ink)}
@@ -59,13 +63,14 @@ button{font:inherit;cursor:pointer;color:inherit}
 
 .b1{display:block;width:100%;margin-top:16px;font-size:clamp(21px,1.5vw,30px);font-weight:800;background:var(--ink);color:#fff;border:0;border-radius:14px;padding:18px 24px}
 .b1:hover{background:#000}
+.b1 small{display:block;font-size:.62em;font-weight:500;opacity:.75;margin-top:2px}
 .b1:disabled{opacity:.3;cursor:default}
 #avis{display:none;margin-top:12px;font-size:19px;color:var(--ink);background:var(--sable);border-radius:10px;padding:10px 14px}
 #avis.open{display:block}
 #avis button{margin-left:10px;font-size:17px;font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:4px 10px}
 
-.feuille{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 28px 22px;font-size:clamp(16px,1vw,20px);color:var(--muted)}
-.b2{font-size:clamp(17px,1.05vw,21px);font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 18px;color:var(--ink)}
+.feuille{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 28px 22px;font-size:clamp(16px,1.2vw,23px);color:var(--muted)}
+.b2{font-size:clamp(17px,1.2vw,23px);font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 18px;color:var(--ink)}
 .b2:hover{border-color:var(--ink)}
 
 /* Réglages : petit panneau, fermé à chaque retour */
@@ -184,9 +189,8 @@ footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
     <div class="dos-g" id="dosG"></div>
     <div class="sous">
       <label class="mini-sw" id="avantBox"><input type="checkbox" id="oAvant"> Avec les chapitres d'avant</label>
-      <span class="compte" id="compte"></span>
     </div>
-    <button class="b1" id="bGo">Question au hasard</button>
+    <button class="b1" id="bGo">Question au hasard<small id="compte"></small></button>
     <div id="avis"><span id="avisTx"></span><button id="avisBtn"></button></div>
   </div>
 
