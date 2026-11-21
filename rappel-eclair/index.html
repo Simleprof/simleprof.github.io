@@ -7,107 +7,88 @@
 <title>Rappel éclair — HQC 3e</title>
 <link rel="stylesheet" href="../polices/5cc0c2fd0f.css">
 <style>
-/* 2026-11-20 : écran de choix refait (« comme au 21e siècle ») ; questions et mini-test inchangés */
-:root{--accent:#1F4FD6;--accent-dark:#0F2A6B;--ink:#0E1626;--muted:#5A6373;--line:#DCE0E7;--rule:#DCE0E7;--sable:#EEF1F7;--bg:#F2F3F6;--eclair:#FFC629;--ok:#1F7A52;--fs:24px}
+/* 2026-11-20, 2e version de l'écran de choix (sa critique : « oppressant », bleu refusé) :
+   sobre, blanc, seulement les couleurs des chapitres du tableau de bord ; la sélection du site élèves Histoire
+   (chapitre 1 · 2 · 3 · 4, puis dossiers un à un, rien de coché = tout le chapitre). */
+:root{--ink:#1c1917;--muted:#6b6560;--line:#e7e2dc;--bg:#fbfaf8;--surface:#fff;--c:#1c1917;--accent:#1c1917;--accent-dark:#1c1917;--rule:#e7e2dc;--sable:#f3f0ec;--ok:#1B6B43;--fs:24px}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);font-size:var(--fs);line-height:1.45}
-button{font:inherit;cursor:pointer}
-svg.bolt{width:1em;height:1em;flex:none}
+button{font:inherit;cursor:pointer;color:inherit}
 
-/* Barre du haut (commune) */
-.top{display:flex;align-items:center;gap:12px;padding:12px 28px;background:var(--ink);color:#fff;position:relative}
-.marque{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:0}
-.marque .bolt{color:var(--eclair);font-size:32px}
-.marque b{font-size:30px;font-weight:900;letter-spacing:-.02em;white-space:nowrap}
-.marque span{font-size:20px;color:#AEB7C7;font-weight:500;white-space:nowrap}
-.tbtn{font-size:20px;font-weight:700;background:transparent;color:#fff;border:1.5px solid #3A4558;border-radius:10px;padding:7px 14px}
-.tbtn:hover{border-color:#8B97AB}
-.stat{font-size:17px;color:#AEB7C7}
-.go{font-size:21px;font-weight:800;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:11px 22px}
-.go:hover{background:var(--accent-dark)}
+/* Barre du haut, discrète */
+.top{display:flex;align-items:center;gap:10px;padding:14px 28px;position:relative}
+.marque{font-size:22px;font-weight:900;letter-spacing:-.01em;margin-right:auto;white-space:nowrap}
+.lien{font-size:19px;font-weight:600;background:none;border:0;color:var(--muted);padding:6px 10px;border-radius:8px}
+.lien:hover{color:var(--ink);background:var(--sable)}
+.tbtn{font-size:19px;font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:6px 14px}
+.tbtn:hover{border-color:var(--ink)}
+.stat{font-size:17px;color:var(--muted)}
 
-/* ───── Accueil : choisir la matière ───── */
-#accueil{height:100vh;display:flex;flex-direction:column}
-.acc-tete{display:flex;align-items:flex-end;gap:20px 28px;padding:22px 28px 16px;flex-wrap:wrap}
-.acc-tete h1{font-size:clamp(28px,2.1vw,42px);font-weight:900;margin:0;letter-spacing:-.02em;line-height:1.1}
-.acc-tete p{margin:6px 0 0;font-size:clamp(16px,1.25vw,24px);color:var(--muted)}
-.seg{margin-left:auto;display:inline-flex;background:#E2E5EB;border-radius:12px;padding:4px}
-.seg button{border:0;background:transparent;font-weight:700;font-size:clamp(16px,1vw,20px);padding:8px 20px;border-radius:9px;color:var(--muted)}
-.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(14,22,38,.15)}
+/* ───── Accueil ───── */
+#accueil{min-height:100vh;display:flex;flex-direction:column}
+.centre{width:100%;max-width:1240px;margin:0 auto;padding:6px 28px 28px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.chaps{display:grid;gap:10px;margin-bottom:18px}
+.chap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;padding:10px 6px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--muted);text-align:center;line-height:1.15;transition:background .15s,border-color .15s}
+.chap span{font-size:clamp(15px,.9vw,18px);font-weight:700}
+.chap b{font-size:clamp(22px,1.5vw,30px);font-weight:900;color:var(--ink)}
+.chap.on{background:var(--k);border-color:var(--k);color:#fff;padding:12px 10px}
+.chap.on b{color:#fff;white-space:nowrap}
+.chap.on span{opacity:.9}
+.chap:not(.on):hover{border-color:var(--k)}
 
-.grille{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:4px 28px 20px;overflow:auto}
-.col{display:grid;grid-template-rows:auto repeat(5,minmax(0,1fr));gap:10px;min-height:0}
-.piece .grille{align-items:start}
-.piece .col{grid-template-rows:none;grid-auto-rows:auto;align-content:start;align-self:start}
-.piece .dos{min-height:auto}
-.chap-t{display:flex;align-items:center;gap:12px;padding:2px 2px 6px;border:0;background:none;text-align:left;color:var(--ink);cursor:default}
-.piece .chap-t{cursor:pointer}
-.chap-t .num{font-size:clamp(40px,3vw,60px);font-weight:900;line-height:.9;color:var(--accent)}
-.chap-t .tt{display:block;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
-.chap-t .per{display:block;font-size:clamp(18px,1.2vw,24px);font-weight:800;line-height:1.15}
+.dos-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dos{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-width:0;padding:12px 18px;border-radius:14px;border:2px solid var(--line);background:var(--surface);text-align:left;transition:background .15s,border-color .15s,transform .1s}
+.dos:active{transform:scale(.98)}
+.dos:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
+.dos .num{font-size:clamp(15px,.85vw,17px);font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.dos b{font-size:clamp(18px,1.3vw,26px);font-weight:700;line-height:1.2}
+.dos small{font-size:max(15px,.75em);font-weight:500;color:var(--muted)}
+.dos.tout{grid-column:1 / -1;align-items:center;padding:12px}
+.dos.tout b{font-weight:800}
+.dos.on{background:color-mix(in srgb,var(--c) 11%,var(--surface));border-color:var(--c)}
+.dos.on .num{color:var(--c)}
 
-.dos{position:relative;display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:0;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 16px;color:var(--ink);cursor:pointer;user-select:none;transition:background .15s,border-color .15s,color .15s}
-.dos:hover{border-color:var(--accent)}
-.dos:focus-visible{outline:3px solid var(--eclair);outline-offset:2px}
-.dos .l1{display:flex;align-items:baseline;gap:10px}
-.dos .code{font-weight:900;font-size:clamp(15px,.95vw,19px);color:var(--accent);flex:none}
-.dos .nom{font-weight:700;font-size:clamp(17px,1.22vw,24px);line-height:1.15}
-.dos .date{font-size:clamp(15px,1.05vw,20px);color:var(--muted);font-weight:500}
-.dos.vide .nom{color:#384152}
-.dos.plein{background:var(--accent);border-color:var(--accent);color:#fff}
-.dos.plein .code{color:var(--eclair)}
-.dos.plein .date{color:#C8D5FF}
-.dos.partiel{background:#E6ECFF;border-color:var(--accent)}
-.dos.aucun{opacity:.4;pointer-events:none}
-.dos .ici{display:none;position:absolute;top:-13px;right:12px;align-items:center;gap:5px;background:var(--eclair);color:var(--ink);font-weight:800;font-size:clamp(15px,.95vw,18px);border-radius:6px;padding:3px 10px 3px 7px;box-shadow:0 2px 6px rgba(14,22,38,.18)}
-.dos.rendu .ici{display:flex}
-.piece .dos .ici{display:none}
-.asps{display:none;flex-wrap:wrap;gap:6px;margin-top:6px}
-.piece .asps{display:flex}
-.asp{font-size:clamp(15px,1vw,20px);font-weight:600;line-height:1.25;border-radius:8px;padding:4px 10px;border:1.5px solid var(--line);background:#fff;color:var(--muted);text-align:left}
-.asp.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.dos.plein .asp.on{background:#fff;border-color:#fff;color:var(--accent)}
+.sous{display:flex;align-items:center;gap:16px;margin:16px 2px 0;min-height:34px}
+.sous .compte{margin-left:auto;font-size:clamp(16px,1vw,20px);color:var(--muted)}
+.mini-sw{display:flex;align-items:center;gap:10px;font-size:clamp(16px,1vw,20px);color:var(--muted);cursor:pointer}
+.mini-sw input,.sw input{appearance:none;-webkit-appearance:none;flex:none;width:44px;height:26px;border-radius:13px;background:#d6d1cb;position:relative;cursor:pointer;margin:0;transition:background .15s}
+.mini-sw input::after,.sw input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.mini-sw input:checked,.sw input:checked{background:var(--ink)}
+.mini-sw input:checked::after,.sw input:checked::after{left:21px}
 
-#avis{display:none;align-items:center;gap:16px;margin:0 28px 12px;padding:12px 18px;background:#FFF4CC;border:2px solid var(--eclair);border-radius:12px;font-size:19px;font-weight:600}
-#avis.open{display:flex}
-#avis button{margin-left:auto;font-size:17px;font-weight:700;background:var(--ink);color:#fff;border:0;border-radius:9px;padding:7px 14px}
+.b1{display:block;width:100%;margin-top:16px;font-size:clamp(21px,1.5vw,30px);font-weight:800;background:var(--ink);color:#fff;border:0;border-radius:14px;padding:18px 24px}
+.b1:hover{background:#000}
+.b1:disabled{opacity:.3;cursor:default}
+#avis{display:none;margin-top:12px;font-size:19px;color:var(--ink);background:var(--sable);border-radius:10px;padding:10px 14px}
+#avis.open{display:block}
+#avis button{margin-left:10px;font-size:17px;font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:4px 10px}
 
-.barre{display:flex;align-items:center;gap:16px;padding:16px 28px;background:#fff;border-top:1px solid var(--line)}
-.resume{flex:1;min-width:0}
-.resume b{display:block;font-size:clamp(19px,1.3vw,26px);font-weight:800;line-height:1.2}
-.resume span{display:block;font-size:clamp(15px,1.15vw,22px);color:var(--muted);margin-top:2px}
-.b1,.b2{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:14px;white-space:nowrap}
-.b1{font-size:clamp(20px,1.4vw,28px);font-weight:900;background:var(--eclair);color:var(--ink);border:0;padding:16px 30px}
-.b1:hover{background:#FFB800}
-.b2{font-size:clamp(17px,1.1vw,22px);font-weight:700;background:#fff;color:var(--ink);border:2px solid var(--ink);padding:14px 22px}
-.b2:hover{background:var(--sable)}
-.b1:disabled,.b2:disabled{opacity:.35;cursor:default}
+.feuille{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 28px 22px;font-size:clamp(16px,1vw,20px);color:var(--muted)}
+.b2{font-size:clamp(17px,1.05vw,21px);font-weight:700;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 18px;color:var(--ink)}
+.b2:hover{border-color:var(--ink)}
 
-/* Réglages : un petit panneau qui s'ouvre, fermé à chaque retour */
-#regl{display:none;position:absolute;right:28px;top:calc(100% + 8px);z-index:30;background:#fff;color:var(--ink);border-radius:14px;box-shadow:0 14px 44px rgba(14,22,38,.28);padding:8px 20px 16px;width:min(470px,calc(100vw - 32px));font-size:18px}
+/* Réglages : petit panneau, fermé à chaque retour */
+#regl{display:none;position:absolute;right:28px;top:calc(100% - 4px);z-index:30;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px rgba(28,25,23,.14);padding:6px 20px 16px;width:min(450px,calc(100vw - 32px));font-size:18px}
 #regl.open{display:block}
 .sw{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.sw input{appearance:none;-webkit-appearance:none;flex:none;width:52px;height:30px;border-radius:15px;background:#C9CED8;position:relative;cursor:pointer;margin:0;transition:background .15s}
-.sw input::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
-.sw input:checked{background:var(--accent)}
-.sw input:checked::after{left:25px}
-.regl-bas{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.lien{font-size:16px;font-weight:600;background:var(--sable);border:0;border-radius:8px;padding:6px 12px;color:var(--ink)}
-.regl-note{font-size:15px;color:var(--muted);margin:12px 0 0;line-height:1.4}
+.sw small{color:var(--muted)}
+.regl-bas{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.regl-bas button{font-size:16px;font-weight:600;background:var(--sable);border:0;border-radius:8px;padding:6px 12px}
 
 /* ───── Une question ───── */
 #question{display:none}
+#question .top{border-bottom:1px solid var(--line);background:var(--surface)}
 main{max-width:1180px;margin:0 auto;padding:22px 24px 80px}
 .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;font-size:19px}
-.pill{background:var(--sable);border:1px solid var(--line);border-radius:8px;padding:3px 12px;color:var(--accent-dark);font-weight:600}
-.oi-cache{background:#fff;border:1.5px dashed var(--accent);color:var(--accent);border-radius:8px;padding:3px 14px;font-weight:700;font-size:19px}
+.pill{background:var(--sable);border-radius:8px;padding:3px 12px;color:var(--ink);font-weight:600}
+.oi-cache{background:var(--surface);border:1.5px dashed var(--accent);color:var(--accent);border-radius:8px;padding:3px 14px;font-weight:700;font-size:19px}
 .oi-vu{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:3px 14px;font-weight:700;font-size:19px}
-.enonce{font-weight:700;font-size:1.25em;line-height:1.3;margin:0 0 18px;color:var(--ink);white-space:pre-line;letter-spacing:-.01em}
+.enonce{font-weight:700;font-size:1.25em;line-height:1.3;margin:0 0 18px;white-space:pre-line;letter-spacing:-.01em}
 .elements{margin:-6px 0 16px 0;padding-left:1.1em}
 .docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-bottom:18px}
-.doc{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:12px 16px}
-.doc .dt{font-weight:700;color:var(--accent-dark);font-size:.8em;text-transform:uppercase;letter-spacing:1px}
+.doc{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:12px 16px}
+.doc .dt{font-weight:800;color:var(--accent);font-size:.8em;text-transform:uppercase;letter-spacing:1px}
 .doc .dst{font-weight:700;font-size:.85em;margin:2px 0 6px}
 .doc .dtx{font-size:.9em;white-space:pre-line}
 .doc .dau{font-size:.8em;font-style:italic;margin-top:6px}
@@ -115,74 +96,65 @@ main{max-width:1180px;margin:0 auto;padding:22px 24px 80px}
 .doc img,.rimg{display:block;max-width:100%;max-height:52vh;margin:6px auto 0;border-radius:4px}
 .rimg{display:none;margin-bottom:16px}
 .actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:8px 0 16px}
-.actions .b2{font-size:21px}
-#reponse{display:none;background:#EAF5EF;border:1px solid #cfe2d6;border-left:5px solid var(--ok);border-radius:8px;padding:14px 18px}
+.go{font-size:21px;font-weight:800;background:var(--ink);color:#fff;border:none;border-radius:12px;padding:11px 22px}
+.go:hover{background:#000}
+#reponse{display:none;background:#EEF6F1;border:1px solid #d3e6da;border-left:5px solid var(--ok);border-radius:8px;padding:14px 18px}
 #reponse h3{margin:0 0 6px;font-size:.9em;color:var(--ok)}
 #reponse p{margin:.2em 0}
 #reponse table{border-collapse:collapse;margin-top:4px}
-#reponse th,#reponse td{border:1px solid #cfe2d6;padding:5px 12px;text-align:left}
-#reponse th{background:#dcebe1}
+#reponse th,#reponse td{border:1px solid #d3e6da;padding:5px 12px;text-align:left}
+#reponse th{background:#e0efe6}
 .ecarter{font-size:18px;background:none;border:none;color:var(--muted);text-decoration:underline;padding:0}
+footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
 
 /* Mini-test (2026-11-20) : plein écran, une action par geste, boutons toujours au même endroit */
 #mt{position:fixed;inset:0;z-index:40;background:var(--bg);display:none;flex-direction:column}
 #mt.open{display:flex}
-.mt-haut{display:flex;align-items:center;gap:22px;padding:10px 24px;background:var(--ink);color:#fff}
-.mt-serie{font-weight:900;font-size:30px;color:#fff;white-space:nowrap;letter-spacing:-.01em}
-.mt-etape{font-size:24px;font-weight:700;color:#fff;white-space:nowrap}
-.mt-etape.cor{color:#FF8A8F}
+.mt-haut{display:flex;align-items:center;gap:22px;padding:10px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.mt-serie{font-weight:900;font-size:30px;white-space:nowrap;letter-spacing:-.01em}
+.mt-etape{font-size:24px;font-weight:700;white-space:nowrap}
+.mt-etape.cor{color:#B4232A}
 .mt-pos{display:flex;gap:10px;margin-left:auto}
-.mt-pos i{width:18px;height:18px;border-radius:50%;background:#3A4558}
-.mt-pos i.fait{background:#8FA6E8}.mt-pos i.ici{background:var(--eclair)}
+.mt-pos i{width:18px;height:18px;border-radius:50%;background:var(--line)}
+.mt-pos i.fait{background:#b9b2aa}.mt-pos i.ici{background:var(--ink)}
 .mt-corps{flex:1;overflow:auto}
 .mt-in{max-width:1500px;margin:0 auto;padding:22px 32px 30px}
-.mt-bas{display:flex;align-items:center;gap:16px;padding:12px 24px;background:#fff;border-top:1px solid var(--line)}
-.mt-bas .tbtn{color:var(--ink);border-color:var(--line)}
+.mt-bas{display:flex;align-items:center;gap:16px;padding:12px 24px;background:var(--surface);border-top:1px solid var(--line)}
 .mt-bas .leg{flex:1;text-align:center;font-size:24px;color:var(--muted)}
 .mt-bas .leg b{color:var(--ink)}
 .mt-bas button:disabled{opacity:.35;cursor:default}
 .mt-go{min-width:220px}
 .mt-centre{min-height:calc(100vh - 170px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .mt-mot{font-size:26px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:700}
-.mt-code{font-weight:900;font-size:clamp(140px,22vh,240px);line-height:1;color:var(--accent-dark);letter-spacing:.02em;margin:8px 0 22px}
+.mt-code{font-weight:900;font-size:clamp(140px,22vh,240px);line-height:1;letter-spacing:.02em;margin:8px 0 22px}
 .mt-choix{display:flex;align-items:center;gap:40px}
-.mt-fl{font-size:64px;line-height:1;width:88px;height:88px;border-radius:50%;border:2px solid var(--line);background:#fff;color:var(--accent-dark)}
+.mt-fl{font-size:64px;line-height:1;width:88px;height:88px;border-radius:50%;border:2px solid var(--line);background:var(--surface)}
 .mt-fl:disabled{opacity:.3;cursor:default}
 .oi-pic{display:inline-flex;align-items:center;gap:8px}
 .oi-pic img{width:30px;height:30px;background:#fff;border-radius:50%;padding:2px}
 .mt-liste{font-size:28px;text-align:left;margin:0;padding-left:1.3em;line-height:1.6}
 .mt-info{font-size:18px;color:var(--muted);margin-top:30px}
-.mt-gros{font-weight:900;font-size:64px;color:var(--accent-dark);margin:0 0 14px;letter-spacing:-.02em}
+.mt-gros{font-weight:900;font-size:64px;margin:0 0 14px;letter-spacing:-.02em}
 .mt-sous{font-size:28px;margin:0}
-.mt-q{font-weight:900;font-size:44px;color:var(--accent-dark);margin-right:14px}
+.mt-q{font-weight:900;font-size:44px;margin-right:14px}
 .mt-tag{display:inline-block;font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;background:#B4232A;border-radius:6px;padding:2px 10px;vertical-align:middle}
-.mt-rep{background:#EAF5EF;border:1px solid #cfe2d6;border-left:6px solid var(--ok);border-radius:8px;padding:14px 20px;margin:0 0 20px}
+.mt-rep{background:#EEF6F1;border:1px solid #d3e6da;border-left:6px solid var(--ok);border-radius:8px;padding:14px 20px;margin:0 0 20px}
 .mt-rep h3{margin:0 0 6px;font-size:.9em;color:var(--ok)}
 .mt-rep p{margin:.2em 0}
 .mt-rep table{border-collapse:collapse;margin-top:4px}
-.mt-rep th,.mt-rep td{border:1px solid #cfe2d6;padding:5px 12px;text-align:left}
-.mt-rep th{background:#dcebe1}
-footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
+.mt-rep th,.mt-rep td{border:1px solid #d3e6da;padding:5px 12px;text-align:left}
+.mt-rep th{background:#e0efe6}
 
-@media (max-width:900px){
-  #accueil{height:auto;min-height:100vh}
-  .top{padding:10px 16px;flex-wrap:wrap}
-  .marque span{display:none}
-  .marque b{font-size:24px}
-  .acc-tete{padding:18px 16px 12px}
-  .seg{margin-left:0}
-  .grille{grid-template-columns:1fr;overflow:visible;padding:4px 16px 16px;gap:26px}
-  .col{grid-template-rows:none;grid-auto-rows:auto}
-  .dos{padding:12px 14px}
-  #avis{margin:0 16px 12px}
-  .barre{position:sticky;bottom:0;flex-wrap:wrap;padding:12px 16px;gap:10px;box-shadow:0 -6px 18px rgba(14,22,38,.08)}
-  .resume{flex-basis:100%}
-  .resume b{font-size:17px}
-  .b2{font-size:16px}
-  .resume span{display:none}
-  .b1,.b2{white-space:nowrap;font-size:16px;padding:12px 8px;flex:1 1 0;min-width:0}
-  .b1 .bolt{display:none}
-  .b1,.b2{flex:1;padding:13px 14px}
+@media (max-width:760px){
+  .top{padding:12px 16px}
+  .centre{padding:4px 16px 20px;justify-content:flex-start}
+  #question .marque,#question .stat{display:none}
+  #bRetour{margin-right:auto}
+  .chap span{display:none}
+  .chap.on span{display:block}
+  .dos-g{grid-template-columns:1fr}
+  .sous{flex-wrap:wrap}
+  .feuille{flex-direction:column;gap:8px;padding:8px 16px 24px}
   #regl{right:16px}
   main{padding:16px 16px 60px}
   .docs{grid-template-columns:1fr}
@@ -191,49 +163,44 @@ footer{font-size:15px;color:var(--muted);text-align:center;margin-top:40px}
 </head>
 <body>
 
-<!-- ───── Accueil : la matière vue ───── -->
+<!-- ───── Accueil ───── -->
 <section id="accueil">
   <header class="top">
-    <div class="marque"><svg class="bolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 1.5 3.8 13.6h6.8l-1.3 8.9 9.9-12.6h-7z" fill="currentColor"/></svg><b>Rappel éclair</b><span>Histoire du Québec et du Canada · 3e secondaire</span></div>
-    <button class="tbtn" id="bRegl" aria-expanded="false">Réglages</button>
+    <span class="marque">Rappel éclair</span>
+    <button class="lien" id="bRegl" aria-expanded="false">Réglages</button>
     <div id="regl">
-      <label class="sw"><span>Format court seulement<br><small style="color:var(--muted)">1 document, réponse écrite</small></span><input type="checkbox" id="oCourt"></label>
-      <label class="sw"><span>Cacher l'OI au départ<br><small style="color:var(--muted)">Les élèves la nomment d'abord</small></span><input type="checkbox" id="oOI" checked></label>
+      <label class="sw"><span>Format court seulement<br><small>1 document, réponse écrite</small></span><input type="checkbox" id="oCourt"></label>
+      <label class="sw"><span>Cacher l'OI au départ<br><small>Les élèves la nomment d'abord</small></span><input type="checkbox" id="oOI" checked></label>
       <label class="sw"><span>Éviter les questions déjà tirées</span><input type="checkbox" id="oNeuf" checked></label>
       <div class="regl-bas">
-        <button class="lien" id="bResetHist">Remettre en jeu les questions tirées</button>
-        <button class="lien" id="bResetEc">Réintégrer les questions écartées</button>
+        <button id="bResetHist">Remettre en jeu les questions tirées</button>
+        <button id="bResetEc">Réintégrer les questions écartées</button>
       </div>
-      <p class="regl-note">Une question sort seulement si toute sa matière est choisie.</p>
     </div>
   </header>
 
-  <div class="acc-tete">
-    <div>
-      <h1>Où en est la classe ?</h1>
-      <p id="aide">Touche le dernier dossier vu en classe : tout ce qui précède est compris.</p>
+  <div class="centre">
+    <nav class="chaps" id="chaps" aria-label="Les chapitres"></nav>
+    <div class="dos-g" id="dosG"></div>
+    <div class="sous">
+      <label class="mini-sw" id="avantBox"><input type="checkbox" id="oAvant"> Avec les chapitres d'avant</label>
+      <span class="compte" id="compte"></span>
     </div>
-    <div class="seg" role="group" aria-label="Façon de choisir">
-      <button id="mSuite">Jusqu'ici</button>
-      <button id="mPiece">À la pièce</button>
-    </div>
+    <button class="b1" id="bGo">Question au hasard</button>
+    <div id="avis"><span id="avisTx"></span><button id="avisBtn"></button></div>
   </div>
 
-  <div class="grille" id="grille"></div>
-
-  <div id="avis"><span id="avisTx"></span><button id="avisBtn"></button></div>
-  <div class="barre">
-    <div class="resume"><b id="resB"></b><span id="resS"></span></div>
-    <button class="b2" id="bMT" title="4 questions, feuille-réponse à bulles, correction en couleur"></button>
-    <button class="b1" id="bGo"><svg class="bolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 1.5 3.8 13.6h6.8l-1.3 8.9 9.9-12.6h-7z" fill="currentColor"/></svg>Question au hasard</button>
+  <div class="feuille">
+    <span>Avec la feuille-réponse :</span>
+    <button class="b2" id="bMT"></button>
   </div>
 </section>
 
 <!-- ───── Une question ───── -->
 <section id="question">
   <header class="top">
-    <button class="tbtn" id="bRetour">← Matière</button>
-    <div class="marque"><svg class="bolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 1.5 3.8 13.6h6.8l-1.3 8.9 9.9-12.6h-7z" fill="currentColor"/></svg><b>Rappel éclair</b></div>
+    <button class="lien" id="bRetour">← Matière</button>
+    <span class="marque" style="margin-left:6px">Rappel éclair</span>
     <span class="stat" id="stat"></span>
     <button class="tbtn" id="bA-" title="Texte plus petit">A−</button>
     <button class="tbtn" id="bA+" title="Texte plus gros">A+</button>
@@ -288,91 +255,74 @@ const $=id=>document.getElementById(id);
 const CLE="rappel-hqc3-";
 const lire=(k,d)=>{try{const v=localStorage.getItem(CLE+k);return v===null?d:JSON.parse(v)}catch(e){return d}};
 const ecrire=(k,v)=>{try{localStorage.setItem(CLE+k,JSON.stringify(v))}catch(e){}};
-const BOLT='<svg class="bolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 1.5 3.8 13.6h6.8l-1.3 8.9 9.9-12.6h-7z" fill="currentColor"/></svg>';
+// Les couleurs des chapitres, celles du tableau de bord et du site élèves Histoire
+const COUL=["#E1701A","#1F4E79","#99281E","#1B6B43"];
 
-let coches=new Set(lire("coches",[]));
+let chap=Math.min(3,Math.max(0,lire("chap",0)));
+let sel=lire("sel",{});          // {chapitre: [dossiers cochés]} ; rien de coché = tout le chapitre
+let avant=lire("avant",false);   // ajouter les chapitres d'avant (discret, éteint par défaut)
 let tirees=new Set(lire("tirees",[]));
 let ecartees=new Set(lire("ecartees",[]));
 let fs=lire("fs",24);
-let mode=lire("mode","suite");
 let courante=null;
+let coches=new Set();
 
 const cle=(p,a)=>p+"|"+a;
-const compte={};
-QDATA.forEach(q=>q.as.forEach(a=>{const k=cle(q.p,a);compte[k]=(compte[k]||0)+1}));
-const titreP={};CHAPITRES.forEach(c=>titreP[c.p]=c.titre);
-
+const titreP={},idxP={};CHAPITRES.forEach((c,i)=>{titreP[c.p]=c.titre;idxP[c.p]=i});
 function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function couleurDe(p){document.documentElement.style.setProperty("--accent",COUL[idxP[p]]||"#1c1917")}
 
-// Les dossiers des cahiers, dans l'ordre de l'année
-const DOS=[];
-CHAPITRES.forEach((c,ci)=>c.dossiers.forEach(([nom,as])=>{
-  const asq=as.filter(a=>compte[cle(c.p,a)]),cles=asq.map(a=>cle(c.p,a));
-  const m=nom.match(/^(D\d+)\s*·\s*(.*?)(?:\s*\(([^)]*)\))?$/);
-  DOS.push({ci,p:c.p,code:m?m[1]:"",nom:m?m[2]:nom,date:m&&m[3]?m[3]:"",as:asq,cles,
-    nq:QDATA.filter(q=>q.as.some(a=>cles.includes(cle(q.p,a)))).length});
-}));
-function etat(d){if(!d.cles.length)return "aucun";const k=d.cles.filter(x=>coches.has(x)).length;return k===0?"vide":k===d.cles.length?"plein":"partiel"}
-function renduIdx(){let m=-1;DOS.forEach((d,i)=>{const e=etat(d);if(e==="plein"||e==="partiel")m=i});return m}
-// Vrai si la matière choisie est « tout jusqu'à un dossier » (rien à la pièce)
-function enSuite(r){return DOS.every((d,i)=>{const e=etat(d);return i<r?(e==="plein"||e==="aucun"):i===r?e==="plein":(e==="vide"||e==="aucun")})}
-
-// ───── Accueil ─────
-function construireGrille(){
-  const g=$("grille");g.innerHTML="";
-  CHAPITRES.forEach((c,ci)=>{
-    const col=el("div","col");
-    const t=el("button","chap-t");t.type="button";
+// ───── Accueil : chapitre, puis dossiers un à un ─────
+const selDe=c=>(sel[c]||[]).filter(d=>d<CHAPITRES[c].dossiers.length);
+function calculerCoches(){
+  coches=new Set();
+  const ajouter=(c,d)=>CHAPITRES[c].dossiers[d][1].forEach(a=>coches.add(cle(CHAPITRES[c].p,a)));
+  if(avant)for(let c=0;c<chap;c++)CHAPITRES[c].dossiers.forEach((_,d)=>ajouter(c,d));
+  const s=selDe(chap);
+  CHAPITRES[chap].dossiers.forEach((_,d)=>{if(!s.length||s.includes(d))ajouter(chap,d)});
+}
+function rendreAccueil(){
+  const k=COUL[chap];
+  $("accueil").style.setProperty("--c",k);
+  const nav=$("chaps");nav.innerHTML="";
+  nav.style.gridTemplateColumns=CHAPITRES.map((_,i)=>i===chap?"2fr":"1fr").join(" ");
+  CHAPITRES.forEach((c,i)=>{
+    const b=el("button","chap"+(i===chap?" on":""));b.style.setProperty("--k",COUL[i]);b.setAttribute("aria-pressed",String(i===chap));
     const per=c.titre.split(" · ")[1]||"";
-    t.appendChild(el("span","num",String(ci+1)));
-    const tx=el("span");tx.append(el("span","tt","Chapitre "+(ci+1)),el("span","per",per));t.appendChild(tx);
-    t.onclick=()=>{if(mode!=="piece")return;const ds=DOS.filter(d=>d.ci===ci);const tout=ds.every(d=>{const e=etat(d);return e==="plein"||e==="aucun"});ds.forEach(d=>d.cles.forEach(k=>tout?coches.delete(k):coches.add(k)));maj()};
-    col.appendChild(t);
-    DOS.forEach((d,i)=>{if(d.ci!==ci)return;
-      const b=el("div","dos");b.tabIndex=0;b.setAttribute("role","button");b.dataset.i=i;
-      const l1=el("div","l1");l1.append(el("span","code",d.code),el("span","nom",d.nom));b.appendChild(l1);
-      b.appendChild(el("div","date",(d.date?d.date+" · ":"")+d.nq+" questions"));
-      const asps=el("div","asps");
-      d.as.forEach(a=>{const k=cle(d.p,a),x=el("button","asp",a);x.type="button";x.dataset.k=k;
-        x.onclick=e=>{e.stopPropagation();coches.has(k)?coches.delete(k):coches.add(k);maj()};asps.appendChild(x)});
-      b.appendChild(asps);
-      const ici=el("span","ici");ici.innerHTML=BOLT+"Rendu ici";b.appendChild(ici);
-      b.onclick=()=>toucher(i);
-      b.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toucher(i)}};
-      col.appendChild(b);
-    });
-    g.appendChild(col);
+    if(i===chap){b.append(el("b",null,"Chapitre "+(i+1)),el("span",null,per))}
+    else{b.append(el("span",null,"Chapitre"),el("b",null,String(i+1)))}
+    b.onclick=()=>{chap=i;ecrire("chap",i);masquerAvis();maj()};
+    nav.appendChild(b);
   });
+  const g=$("dosG");g.innerHTML="";
+  const s=selDe(chap);
+  const tout=el("button","dos tout"+(s.length?"":" on"));tout.appendChild(el("b",null,"Tout le chapitre"));
+  tout.onclick=()=>{sel[chap]=[];ecrire("sel",sel);masquerAvis();maj()};
+  g.appendChild(tout);
+  CHAPITRES[chap].dossiers.forEach(([nom],d)=>{
+    const m=nom.match(/^D(\d+)\s*·\s*(.*?)(?:\s*\(([^)]*)\))?$/);
+    const b=el("button","dos"+(s.includes(d)?" on":""));b.setAttribute("aria-pressed",String(s.includes(d)));
+    b.appendChild(el("span","num","Dossier "+(m?m[1]:d+1)));
+    const t=el("b",null,m?m[2]:nom);if(m&&m[3]){t.append(" ",el("small",null,"("+m[3]+")"))}
+    b.appendChild(t);
+    b.onclick=()=>{let x=selDe(chap);x=x.includes(d)?x.filter(y=>y!==d):[...x,d].sort((a,b)=>a-b);
+      if(x.length===CHAPITRES[chap].dossiers.length)x=[];sel[chap]=x;ecrire("sel",sel);masquerAvis();maj()};
+    g.appendChild(b);
+  });
+  $("avantBox").style.visibility=chap>0?"visible":"hidden";
+  $("oAvant").checked=avant;
 }
-function toucher(i){
-  if(mode==="suite"){coches.clear();DOS.slice(0,i+1).forEach(d=>d.cles.forEach(k=>coches.add(k)))}
-  else{const d=DOS[i],plein=etat(d)==="plein";d.cles.forEach(k=>plein?coches.delete(k):coches.add(k))}
-  masquerAvis();maj();
-}
-function choisirMode(m){mode=m;ecrire("mode",m);maj()}
 
 function admissibles(){
   const court=$("oCourt").checked;
   return QDATA.filter(q=>!ecartees.has(q.id)&&q.as.every(a=>coches.has(cle(q.p,a)))&&(!court||(q.d.length===1&&q.r.type==="lignes")));
 }
 function maj(){
-  ecrire("coches",[...coches]);
-  const r=renduIdx();
-  document.querySelectorAll(".dos").forEach(b=>{const i=+b.dataset.i,e=etat(DOS[i]);
-    b.className="dos "+e+(i===r?" rendu":"");b.querySelector(".date").textContent=(DOS[i].date?DOS[i].date+" · ":"")+DOS[i].nq+" questions"+(e==="partiel"?" · en partie":"");b.setAttribute("aria-pressed",String(e==="plein"));
-    b.querySelectorAll(".asp").forEach(x=>x.classList.toggle("on",coches.has(x.dataset.k)))});
-  $("accueil").classList.toggle("piece",mode==="piece");
-  $("mSuite").classList.toggle("on",mode==="suite");$("mPiece").classList.toggle("on",mode==="piece");
-  $("aide").textContent=mode==="suite"?"Touche le dernier dossier vu en classe : tout ce qui précède est compris.":"Touche un dossier, un aspect ou un chapitre pour l'ajouter ou le retirer.";
+  calculerCoches();rendreAccueil();
   const a=admissibles(),neuves=a.filter(q=>!tirees.has(q.id)).length;
-  if(r<0){$("resB").textContent="Aucune matière choisie";$("resS").textContent="Touche le dernier dossier vu en classe."}
-  else{
-    const d=DOS[r];
-    $("resB").textContent=enSuite(r)?"Jusqu'au chapitre "+(d.ci+1)+", "+d.code+" · "+d.nom:"Matière choisie à la pièce";
-    $("resS").textContent=a.length?a.length+" questions · "+neuves+" pas encore tirées":"Aucune question complète dans cette matière : ajoute le dossier suivant.";
-  }
+  $("compte").textContent=a.length?a.length+" questions":"Aucune question";
   $("bGo").disabled=!a.length;
-  $("bMT").innerHTML="";$("bMT").append("Avec la feuille · n° "+numeroPropose());
+  $("bMT").textContent="Rappel éclair n° "+numeroPropose()+" →";
   $("stat").textContent=a.length?neuves+" pas encore tirées sur "+a.length:"";
 }
 
@@ -384,10 +334,10 @@ function allerQuestion(){$("accueil").style.display="none";$("question").style.d
 // Tirage
 function tirer(){
   let pool=admissibles();
-  if(!pool.length){allerAccueil();avis("Aucune question pour cette matière. Touche le dernier dossier vu en classe.");return}
+  if(!pool.length){allerAccueil();avis("Aucune question pour ces dossiers.");return}
   if($("oNeuf").checked){
     const neuves=pool.filter(q=>!tirees.has(q.id));
-    if(!neuves.length){allerAccueil();avis("Toutes les questions de cette matière ont déjà été tirées.",{txt:"Les remettre en jeu",fn:()=>{tirees.clear();ecrire("tirees",[]);masquerAvis();maj()}});return}
+    if(!neuves.length){allerAccueil();avis("Toutes les questions de ces dossiers ont déjà été tirées.",{txt:"Les remettre en jeu",fn:()=>{tirees.clear();ecrire("tirees",[]);masquerAvis();maj()}});return}
     pool=neuves;
   }
   let q=pool[Math.floor(Math.random()*pool.length)];
@@ -398,7 +348,7 @@ function tirer(){
 
 function montrerOI(){$("oiBox").innerHTML="";$("oiBox").appendChild(el("span","oi-vu",courante.oi))}
 function afficher(q){
-  courante=q;allerQuestion();
+  courante=q;allerQuestion();couleurDe(q.p);
   const ob=$("oiBox");ob.innerHTML="";
   if($("oOI").checked){const b=el("button","oi-cache","OI ? (afficher)");b.onclick=montrerOI;ob.appendChild(b)}else montrerOI();
   $("mPer").textContent=titreP[q.p];
@@ -447,8 +397,7 @@ function appliquerFs(){document.documentElement.style.setProperty("--fs",fs+"px"
 $("bA-").onclick=()=>{fs=Math.max(18,fs-2);appliquerFs()};
 $("bA+").onclick=()=>{fs=Math.min(40,fs+2);appliquerFs()};
 
-$("mSuite").onclick=()=>choisirMode("suite");
-$("mPiece").onclick=()=>choisirMode("piece");
+$("oAvant").onchange=()=>{avant=$("oAvant").checked;ecrire("avant",avant);maj()};
 $("bRegl").onclick=e=>{e.stopPropagation();const o=$("regl").classList.toggle("open");$("bRegl").setAttribute("aria-expanded",String(o))};
 $("regl").onclick=e=>e.stopPropagation();
 document.addEventListener("click",()=>{$("regl").classList.remove("open");$("bRegl").setAttribute("aria-expanded","false")});
@@ -462,22 +411,22 @@ $("bResetEc").onclick=()=>{ecartees.clear();ecrire("ecartees",[]);maj()};
 ["oCourt","oOI","oNeuf"].forEach(id=>{const v=lire("opt-"+id,null);if(v!==null)$(id).checked=v;$(id).onchange=()=>{ecrire("opt-"+id,$(id).checked);maj()}});
 
 // ───── Mini-test (2026-11-20) ─────
-// 4 questions d'une série du catalogue figé ; les élèves répondent sur la feuille-réponse à bulles
+// 4 questions d'une série du plan figé de 40 ; les élèves répondent sur la feuille-réponse à bulles
 // (numéro, groupe et élève, réponse, OI, autoévaluation après Q4, points et « pourquoi » en mots), puis se corrigent en couleur. Les feuilles scannées
 // sont lues sur l'ordinateur de l'enseignant (analyser.js) : la page ne garde aucune donnée d'élève.
+// La matière d'un Rappel éclair numéroté vient de son numéro (le plan de l'année), jamais des dossiers cochés.
 const QPAR={};QDATA.forEach(q=>QPAR[q.id]=q);
-const DOS_IDX={};CHAPITRES.flatMap(c=>c.dossiers.map(([,as])=>as.map(a=>cle(c.p,a)))).forEach((ks,i)=>ks.forEach(k=>DOS_IDX[k]=i));
 let mt=null;
-function rendu(){let m=-1;coches.forEach(k=>{if(DOS_IDX[k]!=null&&DOS_IDX[k]>m)m=DOS_IDX[k]});return m}
 const NB_MT=Object.keys(MT.tests).length;
-// Le numéro proposé : celui qui suit le dernier fait sur cet appareil ; sinon le premier de la matière cochée
+const DEBUT_CH=[];{let n=0;CHAPITRES.forEach(c=>{DEBUT_CH.push(n);n+=c.dossiers.length})}
+// Le numéro proposé : celui qui suit le dernier fait sur cet appareil ; sinon le premier du chapitre affiché
 function numeroPropose(){
   const der=lire("mt-dernier",0);if(der)return Math.min(NB_MT,der+1);
-  const d=rendu();if(d<0)return 1;
-  const n=Object.keys(MT.tests).map(Number).find(n=>MT.tests[n].d>=d);return n||1;
+  const n=Object.keys(MT.tests).map(Number).find(n=>MT.tests[n].d>=DEBUT_CH[chap]);return n||1;
 }
 function serieDe(n){const t=MT.tests[n];return {code:String(n),n,ids:t.ids,d:t.d}}
 function rendreQ(q,box,cor){
+  couleurDe(q.p);
   const t=el("div");t.style.marginBottom="10px";
   const i=mt.ids.indexOf(q.id);
   t.appendChild(el("span","mt-q","Q"+(i+1)));
@@ -559,7 +508,7 @@ function ecranMT(){
 function ouvrirMT(){mt={...serieDe(numeroPropose()),etape:0};$("mt").classList.add("open");ecranMT()}
 // Le mini-test compte comme fait dès qu'on passe à la première question
 function marquerFait(){ecrire("mt-dernier",mt.n);mt.ids.forEach(id=>tirees.add(id));ecrire("tirees",[...tirees]);maj()}
-function fermerMT(){$("mt").classList.remove("open");mt=null}
+function fermerMT(){$("mt").classList.remove("open");mt=null;maj()}
 $("bMT").onclick=ouvrirMT;
 $("mtQuit").onclick=fermerMT;
 $("mtSuiv").onclick=()=>{if(!mt)return;if(mt.etape>=10)return fermerMT();if(mt.etape===0)marquerFait();mt.etape++;ecranMT()};
@@ -571,7 +520,7 @@ document.addEventListener("keydown",e=>{if(!mt)return;
   else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();$("mtPrec").click()}
   else if(e.key==="Escape")fermerMT()});
 
-construireGrille();appliquerFs();maj();
+appliquerFs();maj();
 })();
 </script>
 </body>
