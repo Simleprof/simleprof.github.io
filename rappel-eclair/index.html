@@ -56,8 +56,14 @@ button{font:inherit;cursor:pointer;color:inherit}
 .det{position:absolute;top:7px;right:10px;font-size:clamp(15px,.95vw,19px);font-weight:700;color:var(--muted);background:transparent;border:0;border-radius:8px;padding:3px 10px}
 .det.partiel{color:var(--c)}
 .det:hover,.det.ouvert{color:var(--ink);background:var(--sable)}
-.themes{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 14px;border-radius:14px;border:2px dashed color-mix(in srgb,var(--c) 45%,var(--line));background:var(--surface)}
-.themes .tt{font-size:clamp(15px,.95vw,19px);font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.dos-w.ouvert{z-index:30}
+.themes{position:absolute;top:calc(100% - 4px);left:0;right:0;z-index:30;padding:10px 14px 14px;border-radius:14px;border:2px solid var(--c);background:var(--surface);box-shadow:0 14px 40px rgba(28,25,23,.18),0 2px 6px rgba(28,25,23,.08);animation:pop .14s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.themes .tete{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.themes .tt{font-size:clamp(15px,.95vw,19px);font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.themes .ferme{font-size:clamp(16px,1vw,20px);font-weight:700;color:var(--muted);background:transparent;border:0;border-radius:8px;padding:2px 10px}
+.themes .ferme:hover{color:var(--ink);background:var(--sable)}
+.themes .liste{display:flex;flex-wrap:wrap;gap:8px}
 .th{font-size:clamp(16px,1.15vw,23px);font-weight:600;padding:8px 14px;border-radius:10px;border:2px solid var(--line);background:var(--surface)}
 .th:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
 .th.on{background:color-mix(in srgb,var(--c) 18%,var(--surface));border-color:var(--c)}
@@ -319,9 +325,9 @@ function toucherTheme(d,a){
   // Depuis « Tout le chapitre » : tous les dossiers deviennent cochés, puis on retire le thème (le reste du chapitre reste)
   if(!selDe(chap).length)sel[chap]=CHAPITRES[chap].dossiers.map((_,y)=>y);
   if(!inclus(chap,d)){sel[chap]=[...selDe(chap),d].sort((a,b)=>a-b);off[k]=tous.filter(t=>t!==a);return sauver()}
+  // Retirer le dernier thème laisse le dossier à « aucun thème » (décoché), jamais « tout le chapitre » (bogue du 2026-11-21)
   let o=offDe(chap,d);o=o.includes(a)?o.filter(t=>t!==a):[...o,a];
-  if(o.length>=tous.length){delete off[k];const s=selDe(chap);sel[chap]=(s.length?s:CHAPITRES[chap].dossiers.map((_,y)=>y)).filter(y=>y!==d)}
-  else off[k]=o;
+  off[k]=o;if(!o.length)delete off[k];
   sauver();
 }
 function rendreAccueil(){
@@ -346,32 +352,36 @@ function rendreAccueil(){
   const tuiles=[];
   ds.forEach(([nom],d)=>{
     const m=nom.match(/^D(\d+)\s*·\s*(.*?)(?:\s*\(([^)]*)\))?$/);
-    const th=themes(chap,d),o=offDe(chap,d),on=s.includes(d)||(!s.length&&o.length>0);
-    const w=el("div","dos-w");
-    const b=el("button","dos"+(on?" on":""));b.setAttribute("aria-pressed",String(on));
+    const th=themes(chap,d),o=offDe(chap,d);
     const nb=th.filter(a=>themeOn(chap,d,a)).length;
+    const on=s.includes(d)&&nb>0;
+    const w=el("div","dos-w"+(ouvert===d?" ouvert":""));
+    const b=el("button","dos"+(on?" on":""));b.setAttribute("aria-pressed",String(on));
     b.appendChild(el("span","num","Dossier "+(m?m[1]:d+1)));const partiel=inclus(chap,d)&&o.length>0;
     const t=el("b",null,m?m[2]:nom);if(m&&m[3]){t.append(" ",el("small",null,"("+m[3]+")"))}
     b.appendChild(t);
     b.onclick=()=>toucherDossier(d);
     w.appendChild(b);
     if(th.length>1){
-      const det=el("button","det"+(ouvert===d?" ouvert":"")+(partiel?" partiel":""),(partiel?nb+(nb>1?" thèmes":" thème")+" sur "+th.length:"Thèmes")+" "+(ouvert===d?"▴":"▾"));
+      const det=el("button","det"+(ouvert===d?" ouvert":"")+(partiel?" partiel":""),(partiel?(nb?nb+(nb>1?" thèmes":" thème")+" sur "+th.length:"Aucun thème"):"Thèmes")+" "+(ouvert===d?"▴":"▾"));
       det.setAttribute("aria-expanded",String(ouvert===d));det.title="Choisir les thèmes de ce dossier";
-      det.onclick=()=>{ouvert=ouvert===d?-1:d;rendreAccueil()};
+      det.onclick=e=>{e.stopPropagation();ouvert=ouvert===d?-1:d;rendreAccueil()};
       w.appendChild(det);
+      // Les thèmes : une petite fenêtre par-dessus le dossier, sans rien décaler (2026-11-21, sa demande)
+      if(ouvert===d){
+        const p=el("div","themes");p.setAttribute("role","dialog");p.setAttribute("aria-label","Thèmes du dossier "+(d+1));
+        const tete=el("div","tete");tete.appendChild(el("span","tt","Thèmes du dossier "+(m?m[1]:d+1)));
+        const x=el("button","ferme","✕");x.title="Fermer";x.setAttribute("aria-label","Fermer");x.onclick=()=>{ouvert=-1;rendreAccueil()};
+        tete.appendChild(x);p.appendChild(tete);
+        const l=el("div","liste");
+        th.forEach(a=>{const ok=themeOn(chap,d,a);const y=el("button","th"+(ok?" on":""),a);y.setAttribute("aria-pressed",String(ok));y.onclick=()=>toucherTheme(d,a);l.appendChild(y)});
+        p.appendChild(l);
+        p.onclick=e=>e.stopPropagation();
+        w.appendChild(p);
+      }
     }
-    g.appendChild(w);tuiles.push(w);
+    g.appendChild(w);
   });
-  // Les thèmes du dossier ouvert : une rangée sous sa ligne
-  if(ouvert>=0&&ouvert<ds.length&&themes(chap,ouvert).length>1){
-    const p=el("div","themes");
-    p.appendChild(el("span","tt","Dossier "+(ouvert+1)+" :"));
-    themes(chap,ouvert).forEach(a=>{const on=themeOn(chap,ouvert,a);const x=el("button","th"+(on?" on":""),a);x.setAttribute("aria-pressed",String(on));x.onclick=()=>toucherTheme(ouvert,a);p.appendChild(x)});
-    const seul=matchMedia("(max-width:760px)").matches;
-    const apres=tuiles[seul?ouvert:Math.min(ouvert|1,tuiles.length-1)];
-    apres.after(p);
-  }
   $("avantBox").style.visibility=chap>0?"visible":"hidden";
   $("oAvant").checked=avant;
 }
@@ -577,6 +587,9 @@ $("mtSuiv").onclick=()=>{if(!mt)return;if(mt.etape>=10)return fermerMT();if(mt.e
 $("mtPrec").onclick=()=>{if(mt&&mt.etape>0){mt.etape--;ecranMT()}};
 $("mtA-").onclick=()=>{fs=Math.max(18,fs-2);appliquerFs()};
 $("mtA+").onclick=()=>{fs=Math.min(40,fs+2);appliquerFs()};
+// La fenêtre des thèmes se ferme d'un toucher ailleurs ou avec Échap
+document.addEventListener("click",()=>{if(ouvert>=0){ouvert=-1;rendreAccueil()}});
+document.addEventListener("keydown",e=>{if(!mt&&ouvert>=0&&e.key==="Escape"){ouvert=-1;rendreAccueil()}});
 document.addEventListener("keydown",e=>{if(!mt)return;
   if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();$("mtSuiv").click()}
   else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();$("mtPrec").click()}
