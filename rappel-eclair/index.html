@@ -400,7 +400,7 @@ function ecranMT(){
   }else if(s===5){
     const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Avant la correction"));
     c.appendChild(el("p","mt-sous","En bas de la feuille : combien de questions penses-tu avoir réussies au complet ?"));
-    c.appendChild(el("p","mt-info","Puis range ton crayon mine et prends un crayon de couleur. On n'efface rien."));box.appendChild(c);
+    c.appendChild(el("p","mt-info","Puis range ton crayon mine et prends un crayon de couleur."));box.appendChild(c);
   }else if(s<=9){
     rendreQ(QPAR[mt.ids[s-6]],box,true);ajuster();
     leg.append("En couleur, dans ",el("b",null,"Correction")," : tes points, puis ton erreur s'il y en a une.");
