@@ -391,19 +391,19 @@ function ecranMT(){
     ch.append(moins,el("div","mt-code",mt.code),plus);c.appendChild(ch);
     const ol=el("ol","mt-liste");
     const nn=String(mt.n).padStart(2,"0");
-    [["Noircis le n° ",nn," : dizaine "+nn[0]+", unité "+nn[1]+"."],["Noircis ton ","groupe",", puis ton numéro d'élève."],["Écris la ","date","."]].forEach(([a,b,c2])=>{const li=el("li");li.append(a,el("b",null,b),c2);ol.appendChild(li)});
+    [["Écris la ","date",", noircis ton groupe."],["Rappel éclair n° ",nn," : dizaine "+nn[0]+", unité "+nn[1]+"."],["Ton ","numéro d'élève",", en dizaine et unité."]].forEach(([a,b,c2])=>{const li=el("li");li.append(a,el("b",null,b),c2);ol.appendChild(li)});
     c.appendChild(ol);
     c.appendChild(el("p","mt-info","Matière : jusqu'à "+MT.dossiers[mt.d]+" · "+mt.code+" sur "+NB_MT));box.appendChild(c);
   }else if(s<=4){
     rendreQ(QPAR[mt.ids[s-1]],box,false);ajuster();
-    leg.append("Sur la feuille, au crayon : ",el("b",null,"ta réponse")," dans le cadre, puis ",el("b",null,"l'OI")," en dessous.");
+    leg.append("Au crayon mine : ",el("b",null,"ta réponse")," dans le cadre, puis ",el("b",null,"l'OI")," en dessous.");
   }else if(s===5){
     const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Avant la correction"));
     c.appendChild(el("p","mt-sous","En bas de la feuille : combien de questions penses-tu avoir réussies au complet ?"));
-    c.appendChild(el("p","mt-info","Puis range ton crayon et prends un crayon de couleur. On n'efface rien."));box.appendChild(c);
+    c.appendChild(el("p","mt-info","Puis range ton crayon mine et prends un crayon de couleur. On n'efface rien."));box.appendChild(c);
   }else if(s<=9){
     rendreQ(QPAR[mt.ids[s-6]],box,true);ajuster();
-    leg.append("En couleur, dans ",el("b",null,"Correction")," : tes points, puis, si tu en as perdu, pourquoi.");
+    leg.append("En couleur, dans ",el("b",null,"Correction")," : tes points, puis ton erreur s'il y en a une.");
   }else{
     const c=el("div","mt-centre");c.appendChild(el("p","mt-gros","Ramasse les feuilles"));
     c.appendChild(el("p","mt-sous","Rappel éclair n° "+mt.code+" · la feuille sert à t'aider, elle n'est pas évaluée."));box.appendChild(c);
