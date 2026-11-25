@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cKYtWXFPvUM4qJMumBPBTMPMQmZMMXngwOukhylkEtc=' 'sha256-PLJO2fP397s2dsNZrwLVzl/A5cCAINxQHjhRSlUd5gQ=' 'sha256-t3dytpje1yYvMOfMnJGhS203abGmq3UuSv3qYwJdXeA=' 'sha256-gO2/mJDZa4hsbC9Q1Eyuvi7MUujVoAgfsPeb4CeD/38='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cKYtWXFPvUM4qJMumBPBTMPMQmZMMXngwOukhylkEtc=' 'sha256-uohgnoxLkLhRsgyQxY1y0NisULS6oh+Tne42pH6NPzA=' 'sha256-PLJO2fP397s2dsNZrwLVzl/A5cCAINxQHjhRSlUd5gQ=' 'sha256-t3dytpje1yYvMOfMnJGhS203abGmq3UuSv3qYwJdXeA=' 'sha256-gO2/mJDZa4hsbC9Q1Eyuvi7MUujVoAgfsPeb4CeD/38='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours chapitres 4 et 5 · Poursuivre ses études</title>
@@ -356,6 +356,8 @@ footer a { color: inherit; }
     --tag: #FF6B6B; --tag-soft: #3D1A1E; --teal: #8B85FF; --teal-soft: #24224A;
     --mint: #3CCB91; --mint-soft: #12352A; --surface-2: #1D2232; --cover: #0B0A22; color-scheme: dark;
   }
+}
+@media screen, print {
   .cover { background: radial-gradient(120% 140% at 85% 0%, #3B2FB8 0%, #14123A 60%); color: #F4F3FF; overflow: hidden; }
   .cover .wrap { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px 28px; align-items: center; }
   .cover .wrap > *:not(.ccard) { grid-column: 1; }
@@ -379,8 +381,68 @@ footer a { color: inherit; }
   .ccard .bot b { display: block; font-size: 1rem; font-weight: 600; }
   .ccard .vif { color: var(--hi); }
 }
-@media print { .ccard { display: none !important; } }
 </style>
+
+<style>
+
+@page { size: letter; margin: .5in .55in .6in;
+  @bottom-center { content: none; }
+  @bottom-left { content: "Étudier : ce que ça coûte, ce que ça rapporte · Notes de cours"; font: 8pt "Atkinson Hyperlegible", sans-serif; color: #5B6175; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 600 8pt "JetBrains Mono", monospace; color: #5B6175; } }
+@media print {
+  :root { --hi: #C8F25A; --cover: #14123A; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #retour-tdb { display: none !important; }
+  
+  main > .section-head:not(:first-child) { break-before: auto !important; padding-top: 22px; }
+  .qr5-affiche { break-before: avoid; }
+  
+  .cover { background: radial-gradient(120% 140% at 85% 0%, #3B2FB8 0%, #14123A 60%) !important; color: #F4F3FF !important; border: 0 !important; border-radius: 14px; overflow: hidden; }
+  .cover .wrap { padding: 26px 26px 28px !important; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) !important; gap: 10px 24px !important; align-items: center; }
+  .cover .wrap > *:not(.ccard) { grid-column: 1 !important; }
+  .cover .ccard { display: grid !important; grid-column: 2 !important; grid-row: 1 / span 3 !important; margin: 0 !important; width: 100%; }
+  .cover .eyebrow { justify-self: start; background: rgba(255,255,255,.14); color: #fff !important; border-radius: 99px; padding: 4px 11px; font-size: 8.5pt; }
+  .cover h1 { font-size: 28pt; }
+  .cover h1 em { color: var(--hi) !important; font-style: normal; }
+  .cover p { opacity: .92; }
+  .ccard .top, .ccard .photo span, .ccard .bot { font-size: 8.5pt !important; }
+  .plan { border-bottom: 0; }
+  .plan h3 { color: var(--teal); }
+  .plan ol a { background: var(--teal-soft) !important; border-radius: 99px; padding: 2px 10px !important; }
+  
+  .section-head h2 { background: linear-gradient(transparent 62%, var(--hi) 62%); justify-self: start; padding: 0 .1em; }
+  
+  .quiz details { background: #F3FBDD !important; border: 0 !important; border-left: 6px solid #9BC53D !important; border-radius: 0 10px 10px 0 !important; }
+  .quiz .q-n { background: #14123A !important; color: var(--hi) !important; padding: 3px 10px !important; border-radius: 99px; }
+  .quiz summary::after { background: repeating-linear-gradient(transparent 0 1.5em, #B9C79A 1.5em calc(1.5em + 1px)) !important; }
+  .quiz .choix > span { background: #fff !important; }
+  
+  .qr5-affiche { background: #14123A !important; color: #F4F3FF !important; border: 0 !important; border-radius: 14px !important; padding: 18px 16px !important; }
+  .qr5-affiche h2 { color: var(--hi) !important; }
+  .qr5-qr figure { color: #F4F3FF; }
+  .qr5-qr svg, .qr5-qr span { background: #fff; border-radius: 4px; }
+  .qr5-qr span { padding: 4px; box-sizing: content-box; }
+  .qr5-qr figure > svg { padding: 4px; box-sizing: content-box; }
+  .garde { break-inside: avoid; }
+  #corrige { break-before: auto !important; margin-top: 26px; padding-top: 14px; border-top: 2px dashed #9AA0AE; }
+  .garde > * + * { margin-top: 9px; }
+  .block:has(> .garde > .section-head) { border-top: 0; padding-top: 0; }
+}
+</style>
+<script>
+window.addEventListener("beforeprint", function() {
+  document.querySelectorAll("main > .section-head").forEach(function(h) {
+    var b = h.nextElementSibling;
+    if (!b || !b.classList.contains("block") || b.querySelector(".garde")) return;
+    var g = document.createElement("div");
+    g.className = "garde";
+    g.appendChild(h);
+    for (var i = 0; i < 2 && b.firstElementChild; i++) g.appendChild(b.firstElementChild);
+    b.insertBefore(g, b.firstChild);
+  });
+});
+</script>
+
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
 <body>
@@ -791,7 +853,7 @@ footer a { color: inherit; }
     </div></div>
   </section>
 
-<section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions par section. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=4.1" id="apres-4.1">Section 4.1 →</a><a href="https://simleprof.github.io/finances/?s=4.2" id="apres-4.2">Section 4.2 →</a><a href="https://simleprof.github.io/finances/?s=4.3" id="apres-4.3">Section 4.3 →</a><a href="https://simleprof.github.io/finances/?s=5.1" id="apres-5.1">Section 5.1 →</a><a href="https://simleprof.github.io/finances/?s=5.2" id="apres-5.2">Section 5.2 →</a></div><div class="qr5-qr"></div></section>
+<section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions par section. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=4.1" id="apres-4.1">Section 4.1 →</a><a href="https://simleprof.github.io/finances/?s=4.2" id="apres-4.2">Section 4.2 →</a><a href="https://simleprof.github.io/finances/?s=4.3" id="apres-4.3">Section 4.3 →</a><a href="https://simleprof.github.io/finances/?s=5.1" id="apres-5.1">Section 5.1 →</a><a href="https://simleprof.github.io/finances/?s=5.2" id="apres-5.2">Section 5.2 →</a></div><div class="qr5-qr" style="flex-wrap:wrap;gap:14px 26px"><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m3 0h1m1 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m4 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h5m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h5m5 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m3 0h1m1 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m4 0h1m1 0h1m2 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M2 11.5h1m1 0h1m2 0h3m2 0h7m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M1 12.5h1m1 0h2m3 0h1m1 0h3m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M1 13.5h2m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h1m3 0h1m1 0h2m1 0h4m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m5 0h8m1 0h2m3 0h1m4 0h2m1 0h2m1 0h1M1 16.5h1m1 0h1m1 0h2m1 0h6m1 0h2m5 0h1m2 0h3m1 0h3M3 17.5h1m1 0h3m1 0h2m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m1 0h1m4 0h5m4 0h4m1 0h1m1 0h3m1 0h2m1 0h1M1 19.5h10m4 0h3m1 0h1m1 0h2m3 0h4m1 0h2M2 20.5h2m2 0h1m5 0h4m1 0h1m2 0h4m2 0h1m1 0h5M1 21.5h2m3 0h4m1 0h1m1 0h2m4 0h1m2 0h1m1 0h1m4 0h2M1 22.5h1m1 0h2m1 0h1m3 0h3m3 0h2m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m1 0h2m1 0h1m4 0h1m2 0h1m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m1 0h3m1 0h2m1 0h1m2 0h3m2 0h3m2 0h8m2 0h1M9 26.5h2m2 0h2m2 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m7 0h4m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h4m2 0h2m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h4m1 0h1m2 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h6m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m4 0h1m1 0h3m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m6 0h1m2 0h1m3 0h1"/></svg></span>Section 4.1</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m5 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m6 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m2 0h7m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h5m5 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m5 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m4 0h1m4 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M1 11.5h2m1 0h1m1 0h13m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M2 12.5h5m1 0h1m1 0h3m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M2 13.5h1m1 0h2m1 0h1m2 0h1m4 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h3m1 0h1m1 0h2m2 0h3m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m5 0h8m1 0h2m3 0h1m3 0h3m1 0h2m1 0h1M1 16.5h1m1 0h1m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m5 0h1m1 0h4m1 0h3M3 17.5h1m1 0h6m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m6 0h4m5 0h4m1 0h1m1 0h3m1 0h2m1 0h1M2 19.5h3m2 0h4m4 0h3m1 0h1m1 0h2m3 0h4m1 0h2M3 20.5h1m2 0h1m3 0h6m1 0h1m2 0h4m2 0h1m1 0h5M1 21.5h2m3 0h5m4 0h1m3 0h1m2 0h1m1 0h1m4 0h2M1 22.5h1m1 0h2m1 0h1m1 0h1m1 0h3m2 0h3m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m5 0h2m6 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m1 0h2m1 0h1m4 0h1m2 0h1m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m2 0h2m1 0h1m2 0h1m1 0h4m2 0h3m2 0h8m2 0h1M9 26.5h1m3 0h1m3 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m2 0h1m3 0h1m1 0h3m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h1m1 0h2m2 0h2m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h1m2 0h3m2 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h2m2 0h4m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m4 0h5m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m4 0h1m1 0h1m1 0h1m6 0h1m2 0h1m3 0h1"/></svg></span>Section 4.2</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m5 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m2 0h1m2 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m4 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h5m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h3m7 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m4 0h1m4 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M1 11.5h2m1 0h7m1 0h7m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M3 12.5h3m2 0h1m3 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M1 13.5h1m2 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h6m3 0h2m1 0h2M2 14.5h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m5 0h2m1 0h2m2 0h1m1 0h2m3 0h1m4 0h2m1 0h2m1 0h1M1 16.5h1m1 0h1m1 0h2m3 0h2m1 0h1m1 0h2m5 0h1m1 0h4m1 0h3M3 17.5h1m1 0h3m1 0h2m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M1 18.5h1m1 0h1m1 0h1m4 0h4m5 0h4m1 0h1m1 0h3m1 0h2m1 0h1M2 19.5h4m1 0h4m3 0h1m1 0h2m1 0h1m1 0h2m3 0h4m1 0h2M2 20.5h2m1 0h2m4 0h3m3 0h1m2 0h4m2 0h1m1 0h5M1 21.5h2m2 0h5m3 0h1m5 0h1m2 0h1m1 0h1m4 0h2M1 22.5h1m1 0h2m4 0h3m1 0h1m2 0h2m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m2 0h1m2 0h3m3 0h1m1 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m4 0h1m1 0h2m1 0h4m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m2 0h2m1 0h1m2 0h1m1 0h4m2 0h3m2 0h8m2 0h1M9 26.5h1m3 0h1m3 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m3 0h1m2 0h5m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h1m1 0h2m1 0h1m1 0h1m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h3m1 0h2m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m4 0h1m1 0h3m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m4 0h1m1 0h1m1 0h1m6 0h1m2 0h1m3 0h1"/></svg></span>Section 4.3</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m2 0h1m2 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m2 0h2m1 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h2m2 0h1m2 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h5m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h3m7 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m4 0h1m4 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M2 11.5h1m1 0h6m2 0h7m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M2 12.5h5m1 0h1m3 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M1 13.5h1m3 0h1m1 0h1m2 0h2m3 0h1m1 0h1m2 0h6m3 0h2m1 0h2M3 14.5h1m8 0h3m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m1 0h2m2 0h5m1 0h2m1 0h2m3 0h1m4 0h2m1 0h2m1 0h1M1 16.5h1m1 0h4m2 0h4m2 0h2m5 0h1m2 0h3m1 0h3M3 17.5h1m1 0h3m1 0h2m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M3 18.5h1m7 0h4m4 0h4m1 0h1m1 0h3m1 0h2m1 0h1M2 19.5h3m1 0h6m2 0h4m1 0h1m1 0h2m3 0h4m1 0h2M1 20.5h1m1 0h1m1 0h2m4 0h5m1 0h1m2 0h4m2 0h1m1 0h5M1 21.5h2m1 0h1m1 0h3m2 0h1m3 0h1m3 0h1m2 0h1m1 0h1m4 0h2M1 22.5h4m1 0h1m3 0h1m1 0h2m1 0h3m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m1 0h1m3 0h3m2 0h2m1 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m2 0h2m1 0h1m2 0h1m2 0h3m2 0h3m2 0h8m2 0h1M9 26.5h2m2 0h1m3 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m3 0h1m2 0h1m1 0h3m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h4m1 0h1m1 0h1m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h4m1 0h1m2 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m5 0h4m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m6 0h2m1 0h1m3 0h1"/></svg></span>Section 5.1</figure><figure style="margin:0;text-align:center;font-weight:700;font-size:10pt;line-height:1.2"><span style="display:block;width:.8in;height:.8in;margin:0 auto 4px"><svg style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m2 0h1m2 0h1m3 0h1m1 0h6m2 0h7M1 2.5h1m5 0h1m2 0h1m2 0h1m2 0h1m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h3m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m2 0h7m2 0h3m3 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h3m7 0h2m1 0h1m1 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m2 0h2m1 0h1m1 0h1m1 0h4m1 0h1M1 9.5h1m1 0h5m5 0h3m2 0h1m1 0h2m1 0h3m1 0h5M1 10.5h1m1 0h1m4 0h1m1 0h1m2 0h2m2 0h2m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1M1 11.5h2m1 0h2m1 0h12m2 0h1m1 0h1m1 0h1m3 0h1m1 0h2M1 12.5h1m1 0h2m3 0h1m3 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h1M5 13.5h3m1 0h1m3 0h1m1 0h1m1 0h1m2 0h6m3 0h2m1 0h2M4 14.5h1m6 0h4m1 0h1m2 0h1m2 0h1m2 0h3m3 0h3M1 15.5h1m1 0h2m2 0h5m1 0h2m1 0h2m3 0h1m3 0h3m1 0h2m1 0h1M1 16.5h1m1 0h4m3 0h2m3 0h2m5 0h1m1 0h4m1 0h3M3 17.5h1m1 0h6m2 0h4m1 0h1m4 0h1m1 0h2m1 0h2m3 0h1M3 18.5h1m1 0h1m5 0h3m5 0h4m1 0h1m1 0h3m1 0h2m1 0h1M1 19.5h5m1 0h5m2 0h4m1 0h1m1 0h2m3 0h4m1 0h2M1 20.5h3m1 0h2m3 0h1m1 0h4m1 0h1m2 0h4m2 0h1m1 0h5M1 21.5h2m1 0h1m1 0h3m1 0h1m2 0h2m4 0h1m2 0h1m1 0h1m4 0h2M1 22.5h4m1 0h1m1 0h1m1 0h1m1 0h2m2 0h2m3 0h1m1 0h6m1 0h2m1 0h1M1 23.5h1m1 0h2m2 0h1m7 0h1m2 0h3m2 0h1m1 0h1m3 0h4M1 24.5h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h6m1 0h2m1 0h5M1 25.5h1m1 0h3m1 0h2m1 0h1m1 0h4m2 0h3m2 0h8m2 0h1M9 26.5h1m3 0h2m2 0h5m3 0h1m3 0h1m1 0h1m1 0h1M1 27.5h7m2 0h2m3 0h4m4 0h3m1 0h1m1 0h1m1 0h2M1 28.5h1m5 0h1m1 0h1m1 0h2m1 0h1m1 0h1m1 0h4m2 0h2m3 0h3m1 0h1M1 29.5h1m1 0h3m1 0h1m1 0h1m2 0h3m2 0h1m2 0h4m1 0h6m1 0h2M1 30.5h1m1 0h3m1 0h1m1 0h8m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1M1 31.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h4m2 0h1m1 0h1m3 0h2m1 0h1M1 32.5h1m5 0h1m6 0h3m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1M1 33.5h7m1 0h1m4 0h1m1 0h1m1 0h1m6 0h2m1 0h1m3 0h1"/></svg></span>Section 5.2</figure></div></section>
 </main>
 
 <footer>

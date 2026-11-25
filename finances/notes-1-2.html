@@ -222,7 +222,7 @@ footer .wrap { padding-block: 18px 40px; font-size: .85rem; color: var(--muted);
 .pq, .key-src, #corrige { display: none; }
 @page {
   size: letter; margin: .55in .6in .6in;
-  @bottom-center { content: "Notes de cours 1.1 + 1.2 · page " counter(page) " de " counter(pages); font: 8.5pt "IBM Plex Mono", Consolas, monospace; color: #5A606E; }
+  @bottom-center { content: "Notes de cours 1.2 · page " counter(page) " de " counter(pages); font: 8.5pt "IBM Plex Mono", Consolas, monospace; color: #5A606E; }
 }
 @media print {
   :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
@@ -404,6 +404,15 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 .tag dt { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
 ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
 </style>
+
+<style>
+
+@media print {
+  #corrige { break-before: auto !important; margin-top: 26px; padding-top: 14px; border-top: 2px dashed #9AA0AE; }
+  .qr5-affiche { break-before: avoid; }
+}
+</style>
+
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
 <body>

@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex">
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cKYtWXFPvUM4qJMumBPBTMPMQmZMMXngwOukhylkEtc=' 'sha256-icU6b0gXOHeZlOvXbFNl9N5bWd7XU7L6DhhTRUZZKgE=' 'sha256-t3dytpje1yYvMOfMnJGhS203abGmq3UuSv3qYwJdXeA=' 'sha256-gO2/mJDZa4hsbC9Q1Eyuvi7MUujVoAgfsPeb4CeD/38='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cKYtWXFPvUM4qJMumBPBTMPMQmZMMXngwOukhylkEtc=' 'sha256-uohgnoxLkLhRsgyQxY1y0NisULS6oh+Tne42pH6NPzA=' 'sha256-icU6b0gXOHeZlOvXbFNl9N5bWd7XU7L6DhhTRUZZKgE=' 'sha256-t3dytpje1yYvMOfMnJGhS203abGmq3UuSv3qYwJdXeA=' 'sha256-gO2/mJDZa4hsbC9Q1Eyuvi7MUujVoAgfsPeb4CeD/38='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Notes de cours chapitres 6, 7 et 8 · Intégrer le monde du travail</title>
@@ -318,6 +318,8 @@ footer a { color: inherit; }
     --tag: #FF6B6B; --tag-soft: #3D1A1E; --teal: #8B85FF; --teal-soft: #24224A;
     --mint: #3CCB91; --mint-soft: #12352A; --surface-2: #1D2232; --cover: #0B0A22; color-scheme: dark;
   }
+}
+@media screen, print {
   .cover { background: radial-gradient(120% 140% at 85% 0%, #3B2FB8 0%, #14123A 60%); color: #F4F3FF; overflow: hidden; }
   .cover .wrap { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px 28px; align-items: center; }
   .cover .wrap > *:not(.ccard) { grid-column: 1; }
@@ -341,8 +343,68 @@ footer a { color: inherit; }
   .ccard .bot b { display: block; font-size: 1rem; font-weight: 600; }
   .ccard .vif { color: var(--hi); }
 }
-@media print { .ccard { display: none !important; } }
 </style>
+
+<style>
+
+@page { size: letter; margin: .5in .55in .6in;
+  @bottom-center { content: none; }
+  @bottom-left { content: "Ton premier emploi : tes droits, ta paie, tes impôts · Notes de cours"; font: 8pt "Atkinson Hyperlegible", sans-serif; color: #5B6175; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 600 8pt "JetBrains Mono", monospace; color: #5B6175; } }
+@media print {
+  :root { --hi: #C8F25A; --cover: #14123A; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #retour-tdb { display: none !important; }
+  
+  main > .section-head:not(:first-child) { break-before: auto !important; padding-top: 22px; }
+  .qr5-affiche { break-before: avoid; }
+  
+  .cover { background: radial-gradient(120% 140% at 85% 0%, #3B2FB8 0%, #14123A 60%) !important; color: #F4F3FF !important; border: 0 !important; border-radius: 14px; overflow: hidden; }
+  .cover .wrap { padding: 26px 26px 28px !important; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) !important; gap: 10px 24px !important; align-items: center; }
+  .cover .wrap > *:not(.ccard) { grid-column: 1 !important; }
+  .cover .ccard { display: grid !important; grid-column: 2 !important; grid-row: 1 / span 3 !important; margin: 0 !important; width: 100%; }
+  .cover .eyebrow { justify-self: start; background: rgba(255,255,255,.14); color: #fff !important; border-radius: 99px; padding: 4px 11px; font-size: 8.5pt; }
+  .cover h1 { font-size: 28pt; }
+  .cover h1 em { color: var(--hi) !important; font-style: normal; }
+  .cover p { opacity: .92; }
+  .ccard .top, .ccard .photo span, .ccard .bot { font-size: 8.5pt !important; }
+  .plan { border-bottom: 0; }
+  .plan h3 { color: var(--teal); }
+  .plan ol a { background: var(--teal-soft) !important; border-radius: 99px; padding: 2px 10px !important; }
+  
+  .section-head h2 { background: linear-gradient(transparent 62%, var(--hi) 62%); justify-self: start; padding: 0 .1em; }
+  
+  .quiz details { background: #F3FBDD !important; border: 0 !important; border-left: 6px solid #9BC53D !important; border-radius: 0 10px 10px 0 !important; }
+  .quiz .q-n { background: #14123A !important; color: var(--hi) !important; padding: 3px 10px !important; border-radius: 99px; }
+  .quiz summary::after { background: repeating-linear-gradient(transparent 0 1.5em, #B9C79A 1.5em calc(1.5em + 1px)) !important; }
+  .quiz .choix > span { background: #fff !important; }
+  
+  .qr5-affiche { background: #14123A !important; color: #F4F3FF !important; border: 0 !important; border-radius: 14px !important; padding: 18px 16px !important; }
+  .qr5-affiche h2 { color: var(--hi) !important; }
+  .qr5-qr figure { color: #F4F3FF; }
+  .qr5-qr svg, .qr5-qr span { background: #fff; border-radius: 4px; }
+  .qr5-qr span { padding: 4px; box-sizing: content-box; }
+  .qr5-qr figure > svg { padding: 4px; box-sizing: content-box; }
+  .garde { break-inside: avoid; }
+  #corrige { break-before: auto !important; margin-top: 26px; padding-top: 14px; border-top: 2px dashed #9AA0AE; }
+  .garde > * + * { margin-top: 9px; }
+  .block:has(> .garde > .section-head) { border-top: 0; padding-top: 0; }
+}
+</style>
+<script>
+window.addEventListener("beforeprint", function() {
+  document.querySelectorAll("main > .section-head").forEach(function(h) {
+    var b = h.nextElementSibling;
+    if (!b || !b.classList.contains("block") || b.querySelector(".garde")) return;
+    var g = document.createElement("div");
+    g.className = "garde";
+    g.appendChild(h);
+    for (var i = 0; i < 2 && b.firstElementChild; i++) g.appendChild(b.firstElementChild);
+    b.insertBefore(g, b.firstChild);
+  });
+});
+</script>
+
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
 <body>
