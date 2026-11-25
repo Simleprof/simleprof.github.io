@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cKYtWXFPvUM4qJMumBPBTMPMQmZMMXngwOukhylkEtc=' 'sha256-OIfQD+r+3etSIzcba7qmAGuw/V5fGd9tIizfsu3dNGM=' 'sha256-w4AG7hmXk43g8VB5LAUkZvk4+LZRcl93eJiQdV4yAd0=' 'sha256-t3dytpje1yYvMOfMnJGhS203abGmq3UuSv3qYwJdXeA='; style-src 'unsafe-inline' 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Notes de cours 1.4 · Le budget</title>
+<title>Notes de cours 1.4 + chapitre 2 · Le budget et le crédit</title>
 <link rel="stylesheet" href="../polices/36a0d5f4b5.css">
 <style>
 
@@ -581,6 +581,16 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 }
 </style>
 
+<style id="credit-ch2">
+
+.receipt.contrat { max-width: 520px; font-size: 1rem; }
+.receipt.contrat .row { flex-wrap: wrap; column-gap: 12px; row-gap: 0; }
+.receipt.contrat .row span:first-child { flex: 1 1 12em; min-width: 0; }
+.receipt.contrat .row span:last-child { margin-left: auto; white-space: nowrap; text-align: right; font-weight: 600; }
+.receipt.contrat .row + .row { margin-top: 4px; }
+ol:not(.ladder):not(.key) { padding-left: 1.4em; display: grid; gap: 6px; max-width: 68ch; }
+@media print { .receipt.contrat { font-size: 9.5pt; max-width: none; -webkit-mask: none; mask: none; border: 1px solid #999; } }
+</style>
 <link rel="stylesheet" href="../polices/d2b6d1b6a0.css">
 </head>
 <body>
@@ -592,9 +602,9 @@ body:has(#retour-tdb) .vue-choix { display: none; }
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Éducation financière · Étape 2 · Le budget</div>
+    <div class="eyebrow">Éducation financière · Étape 2 · Le budget et le crédit</div>
     <h1>Planifier avant de <span>dépenser.</span></h1>
-    <p>La section 1.4 en une fiche. Lis un thème, fais sa petite vérif, continue. À la fin, on teste.</p>
+    <p>Le budget (1.4), puis le crédit (chapitre 2). Lis un thème, fais sa petite vérif, continue. À la fin, on teste.</p>
     <div class="ccard" aria-hidden="true"><div class="top"><span>BUDGET</span><span>1.4</span></div><div class="puce"></div><div><div class="pan">•••• •••• •••• 2026</div><div class="bot"><span>REVENU<b>2&nbsp;000&nbsp;$</b></span><span>DÉPENSES<b>1&nbsp;850&nbsp;$</b></span><span>MARGE<b class="vif">+150&nbsp;$</b></span></div></div></div>
   </div>
 </header>
@@ -610,6 +620,9 @@ body:has(#retour-tdb) .vue-choix { display: none; }
       <li><a href="#postes">Les postes de dépenses</a></li>
       <li><a href="#categories">Fixes, variables, compressibles</a></li>
       <li><a href="#analyse">L'analyse et le suivi</a></li>
+      <li><a href="#s21">2.1 · Le crédit&nbsp;: facile d'accès?</a></li>
+      <li><a href="#s22">2.2 · Comment ça marche?</a></li>
+      <li><a href="#s23">2.3 · Un risque à prendre?</a></li>
     </ul>
   </div>
 </section>
@@ -797,13 +810,243 @@ body:has(#retour-tdb) .vue-choix { display: none; }
   </section>
 
   
+  <div class="section-head" id="s21">
+    <span class="num" aria-hidden="true">2.1</span>
+    <h2>Le crédit&nbsp;: facile d'accès?</h2>
+    <p>Ce qu'est une dette, et comment un prêteur décide s'il te fait confiance.</p>
+  </div>
+
+  <section class="block" id="dette">
+    <div class="h3row"><h3>Dette, endettement, crédit</h3></div>
+    <p>Pas l'argent pour un achat? Tu peux y renoncer, attendre ou <strong>emprunter</strong>. Le crédit sert à obtenir un bien ou un service <strong>tout de suite</strong> et à le payer <strong>plus tard</strong>.</p>
+    <dl class="tags">
+      <div class="tag"><dt>Dette</dt><dd>Une somme qu'on doit à une personne ou à une entreprise.</dd></div>
+      <div class="tag"><dt>Endettement</dt><dd>Le fait de devoir de l'argent. Ce n'est pas un problème en soi.</dd></div>
+      <div class="tag"><dt>Surendettement</dt><dd>S'endetter au-delà de sa capacité de rembourser.</dd></div>
+      <div class="tag"><dt>Crédit</dt><dd>La même dette, vue du côté du <strong>prêteur</strong>&nbsp;: il te «&nbsp;fait crédit&nbsp;».</dd></div>
+    </dl>
+    <p>Une <strong>bonne dette</strong> améliore ta situation financière avec le temps&nbsp;: un prêt étudiant que tu pourras rembourser, une maison à la mesure de tes moyens, le démarrage d'une entreprise. Une <strong>mauvaise dette</strong> te fait vivre au-dessus de tes moyens&nbsp;: une auto ou des électroménagers que tu n'arrives pas à rembourser à temps.</p>
+    <p>Une dette n'est pas bonne parce qu'elle est petite ou que son taux est bas&nbsp;: elle l'est quand elle te permet de bâtir quelque chose.</p>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Classe</span>Bonne ou mauvaise dette? Jade emprunte pour acheter les outils de son métier de coiffeuse. Zack paie ses soupers au resto avec sa carte, sans pouvoir rembourser le solde.<span class="see">Voir la réponse →</span></summary><div class="ans">Jade&nbsp;: <strong>bonne dette</strong>, ses outils l'aident à gagner sa vie. Zack&nbsp;: <strong>mauvaise dette</strong>, il vit au-dessus de ses moyens.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="solvabilite">
+    <div class="h3row"><h3>Ce que le prêteur regarde</h3></div>
+    <p>Avant de prêter, la banque ou la caisse se demande si tu vas la rembourser. Elle juge ta <strong>solvabilité</strong> à partir de cinq éléments&nbsp;:</p>
+    <ol>
+      <li>ton <strong>revenu</strong>&nbsp;: un salaire stable garantit le remboursement&nbsp;;</li>
+      <li>ta <strong>stabilité d'emploi</strong>&nbsp;: une employée permanente inspire plus confiance qu'un stagiaire ou un employé temporaire&nbsp;;</li>
+      <li>ton <strong>ratio d'endettement</strong>&nbsp;;</li>
+      <li>ton <strong>bilan</strong>&nbsp;;</li>
+      <li>ton <strong>dossier de crédit</strong> et son pointage.</li>
+    </ol>
+    <dl class="tags"><div class="tag"><dt>Ratio d'endettement</dt><dd>La part de ton revenu mensuel <strong>brut</strong> (avant déductions) qui sert déjà à rembourser des dettes chaque mois, loyer compris.</dd></div></dl>
+    <p><strong>Éléna</strong> (exemple du manuel) paie 1&nbsp;200&nbsp;$ de dettes par mois et gagne 2&nbsp;800&nbsp;$ brut&nbsp;:</p>
+    <div class="chain" aria-label="1 200 divisé par 2 800, fois 100, égale 42,9 %">
+      <span class="box">1&nbsp;200&nbsp;$</span><span class="op">÷</span><span class="box">2&nbsp;800&nbsp;$</span><span class="op">× 100 =</span><span class="box res">42,9&nbsp;%</span>
+    </div>
+    <p>Quand le ratio <span class="hl">approche 40&nbsp;%</span>, les chances d'obtenir un prêt chutent. Éléna en a donc peu.</p>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Calcul</span>Noah paie 900&nbsp;$ de dettes par mois, loyer compris, et gagne 2&nbsp;500&nbsp;$ brut. Quel est son ratio d'endettement?<span class="see">Voir la réponse →</span></summary><div class="ans">900 ÷ 2&nbsp;500 × 100 = <strong>36&nbsp;%</strong>. Il reste sous le seuil d'environ 40&nbsp;%&nbsp;: ses chances d'obtenir un prêt sont bonnes.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="bilan">
+    <div class="h3row"><h3>Le bilan&nbsp;: actif, passif, avoir</h3></div>
+    <p>Le bilan est une photo de ta situation à une <strong>date précise</strong>. Le budget, lui, couvre une période&nbsp;: un mois, une année.</p>
+    <dl class="tags">
+      <div class="tag"><dt>Actif</dt><dd>Tous tes biens de valeur (maison, auto, meubles) et l'argent accumulé (comptes, placements).</dd></div>
+      <div class="tag"><dt>Passif</dt><dd>Toutes tes dettes&nbsp;: hypothèque, prêts, factures impayées, solde de carte de crédit.</dd></div>
+    </dl>
+    <div class="chain" aria-label="Actif moins passif égale avoir, ou valeur nette">
+      <span class="box">Actif</span><span class="op">−</span><span class="box">Passif</span><span class="op">=</span><span class="box res">Avoir (valeur nette)</span>
+    </div>
+    <p>Un bilan <strong>positif</strong> (actif plus grand que le passif) montre que tu es <strong>solvable</strong>&nbsp;: en vendant tes biens, tu pourrais payer tes dettes. Avec un bilan <strong>négatif</strong>, le prêteur risque de te voir comme <strong>insolvable</strong>.</p>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Classe</span>Actif ou passif? Ton compte d'épargne, le solde de ta carte de crédit, ton auto, ton prêt étudiant.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Actif</strong>&nbsp;: le compte d'épargne et l'auto. <strong>Passif</strong>&nbsp;: le solde de la carte et le prêt étudiant.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="dossier">
+    <div class="h3row"><h3>Le dossier et le pointage de crédit</h3></div>
+    <p>Le bilan montre ta situation d'aujourd'hui&nbsp;; le <strong>dossier de crédit</strong> montre ton <strong>passé</strong> d'emprunteur. Au Canada, deux agences le tiennent&nbsp;: <strong>Equifax</strong> et <strong>TransUnion</strong>. Il s'ouvre à ta première demande de crédit, et seuls toi et les gens à qui tu donnes la permission (une banque, un propriétaire) peuvent le consulter. Le consulter toi-même ne change rien à ton pointage&nbsp;: ça t'aide à le suivre et à repérer une fraude.</p>
+    <p>On y trouve tes renseignements personnels, ton emploi, tes crédits et tes dettes impayées, tes comptes bancaires (les chèques sans provision) et les renseignements publics (faillites, jugements). Ils y restent en général <strong>six ou sept ans</strong>.</p>
+    <div class="rates">
+      <div class="rate"><b>300 à 900</b><span>l'échelle du pointage de crédit</span></div>
+      <div class="rate total"><b>660 et +</b><span>un bon pointage</span></div>
+    </div>
+    <p>Plus le pointage est haut, moins tu es risqué pour le prêteur. Pour le garder haut&nbsp;: payer à temps (factures et contraventions comprises), emprunter selon ta capacité, avoir une carte de crédit, mais pas trop. Régler une dette en retard <strong>n'efface pas</strong> le retard.</p>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Vrai ou faux</span>Consulter ton propre dossier de crédit fait baisser ton pointage.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> Le consulter te permet de le suivre et de repérer une fraude.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="caution">
+    <div class="h3row"><h3>La caution</h3></div>
+    <dl class="tags"><div class="tag"><dt>Caution (ou endosseur)</dt><dd>La personne qui signe avec l'emprunteur et s'engage à payer à sa place s'il n'en est plus capable. Ce contrat s'appelle le <strong>cautionnement</strong>.</dd></div></dl>
+    <p>Le prêteur exige une caution quand l'emprunteur lui semble risqué&nbsp;: une <strong>première demande</strong> de crédit (un dossier vierge), un <strong>passé difficile</strong> de remboursement, la location d'un <strong>premier logement</strong>.</p>
+    <p>Le risque pour la caution&nbsp;: devoir payer <strong>tout le solde</strong> de la dette, parfois d'un coup. Le prêt s'inscrit aussi à <strong>son</strong> dossier et gonfle <strong>son</strong> ratio d'endettement&nbsp;: des parents qui ont endossé leur enfant peuvent se faire refuser un prêt-auto.</p>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Liste</span>Nomme deux situations où un prêteur peut exiger une caution.<span class="see">Voir la réponse →</span></summary><div class="ans">Au choix&nbsp;: une première demande de crédit (aucun dossier), un passé difficile de remboursement, la location d'un premier logement.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head" id="s22">
+    <span class="num" aria-hidden="true">2.2</span>
+    <h2>Le crédit&nbsp;: comment ça marche?</h2>
+    <p>Le contrat, les intérêts et les outils de crédit, du prêt-auto à la carte.</p>
+  </div>
+
+  <section class="block" id="contrat">
+    <div class="h3row"><h3>Le contrat de crédit</h3></div>
+    <p>La loi l'exige&nbsp;: <strong>toute demande de crédit</strong> passe par un <strong>contrat signé</strong>. Il fixe par écrit les conditions du prêt et <strong>protège le prêteur comme l'emprunteur</strong>. Voici ce qui doit s'y trouver, avec le prêt-auto du manuel&nbsp;:</p>
+    <div class="receipt contrat" aria-label="Exemple de contrat de crédit : les renseignements obligatoires">
+      <h4>CONTRAT DE CRÉDIT</h4>
+      <div class="row"><span>Date et lieu de la signature</span><span>12 mars, Victoriaville</span></div>
+      <div class="row"><span>Noms et adresses</span><span>la caisse · toi</span></div>
+      <hr>
+      <div class="row"><span>Somme prêtée</span><span>8&nbsp;000&nbsp;$</span></div>
+      <div class="row"><span>Taux d'intérêt annuel</span><span>10&nbsp;%</span></div>
+      <div class="row"><span>Frais</span><span>0&nbsp;$</span></div>
+      <div class="row tot"><span>Obligation totale</span><span>9&nbsp;744&nbsp;$</span></div>
+      <hr>
+      <div class="row"><span>Date de versement du crédit</span><span>15 mars</span></div>
+      <div class="row"><span>Paiements</span><span>48 × 203&nbsp;$</span></div>
+      <div class="row"><span>Bien en garantie (s'il y a lieu)</span><span>l'auto</span></div>
+      <div class="row"><span>Annulation (s'il y a lieu)</span><span>paiements manqués</span></div>
+      <hr>
+      <div class="row tot"><span>Signatures</span><span>✍&nbsp;&nbsp;✍</span></div>
+    </div>
+    <dl class="tags">
+      <div class="tag"><dt>Capital</dt><dd>Le montant prêté.</dd></div>
+      <div class="tag"><dt>Intérêts</dt><dd>Ce que tu paies au prêteur pour utiliser son argent.</dd></div>
+      <div class="tag"><dt>Taux d'intérêt</dt><dd>Les intérêts en pourcentage par année. Plus le prêt est risqué pour le prêteur, plus le taux est élevé.</dd></div>
+    </dl>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Choix multiples</span>Lequel n'a pas à figurer dans un contrat de crédit?<span class="choix"><span data-ok="0"><b>A</b>le taux d'intérêt</span><span data-ok="0"><b>B</b>le nombre de paiements</span><span data-ok="1"><b>C</b>le salaire de l'emprunteur</span><span data-ok="0"><b>D</b>les signatures</span></span><span class="see">Voir la réponse →</span></summary><div class="ans"><strong>C.</strong> Le contrat fixe les conditions du prêt (somme, taux, frais, paiements) et porte les signatures. Ton salaire n'y figure pas.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="types">
+    <div class="h3row"><h3>Trois types de contrats</h3></div>
+    <dl class="tags">
+      <div class="tag"><dt>Prêt d'argent</dt><dd>Un montant fixe, remboursé avec les intérêts selon un échéancier précis. Le bien t'appartient dès l'achat. <span class="muted">Prêt personnel simple, prêt à versements constants, prêt hypothécaire.</span></dd></div>
+      <div class="tag"><dt>Crédit variable</dt><dd>Le montant et la durée ne sont pas fixés d'avance&nbsp;: ils varient à l'intérieur d'une limite. <span class="muted">Carte de crédit, marge de crédit.</span></dd></div>
+      <div class="tag"><dt>Vente à tempérament</dt><dd>«&nbsp;Achetez maintenant, payez plus tard&nbsp;»&nbsp;: le bien sert de garantie et t'appartient seulement au dernier paiement. <span class="muted">Un téléviseur payé en 12 versements.</span></dd></div>
+    </dl>
+    <p>Le <strong>prêt personnel simple</strong> se rembourse en un seul versement, à la fin. Le <strong>prêt à versements constants</strong> (le prêt-auto) se rembourse chaque mois&nbsp;: plus la période est longue, plus le paiement est bas… et plus tu paies d'intérêts au total.</p>
+    <p>Le <strong>prêt hypothécaire</strong> est garanti par la maison&nbsp;: si tu ne paies plus, le prêteur peut la saisir. Moins risqué pour lui, il a un <strong>taux plus bas</strong> que les autres prêts. Sur une si grosse somme, la durée pèse lourd&nbsp;:</p>
+    <div class="rates">
+      <div class="rate"><b>282&nbsp;222&nbsp;$</b><span>250&nbsp;000&nbsp;$ à 2,5&nbsp;%, remboursés en 10 ans</span></div>
+      <div class="rate total"><b>335&nbsp;763&nbsp;$</b><span>le même prêt, remboursé en 25 ans</span></div>
+    </div>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Type</span>Tu achètes un sofa «&nbsp;payez en 12 versements&nbsp;». Il appartient au magasin jusqu'au dernier versement. Quel type de contrat?<span class="see">Voir la réponse →</span></summary><div class="ans">Une <strong>vente à tempérament</strong>&nbsp;: le sofa sert de garantie et devient à toi seulement à la fin des paiements.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="carte">
+    <div class="h3row"><h3>La carte de crédit</h3></div>
+    <p>Avec la <strong>carte de crédit</strong>, la banque paie ton achat et tu la rembourses plus tard&nbsp;: c'est un <strong>emprunt</strong>. Avec la <strong>carte de débit</strong>, tu dépenses <strong>ton</strong> argent, déjà dans ton compte&nbsp;: ce n'est pas un emprunt. La carte prépayée non plus.</p>
+    <div class="scroll">
+      <table class="mini">
+        <tbody>
+          <tr><td>Période de grâce</td><td>Au moins 21 jours pour tout payer <strong>sans intérêts</strong>. L'<strong>avance de fonds</strong> (retirer de l'argent) fait exception&nbsp;: les intérêts partent dès le retrait.</td></tr>
+          <tr><td>Taux d'intérêt</td><td>Élevé&nbsp;: jusqu'à 20&nbsp;%, et même 29&nbsp;% pour certaines cartes de grands magasins.</td></tr>
+          <tr><td>Paiement minimum</td><td>5&nbsp;% du solde. Payer seulement ce minimum fait durer la dette.</td></tr>
+          <tr><td>Limite de crédit</td><td>Le maximum que tu peux emprunter.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Ses avantages&nbsp;:</strong> acceptée presque partout, ici et à l'étranger&nbsp;; pratique pour acheter en ligne et réserver&nbsp;; sûre, car assurée en cas de perte ou de vol&nbsp;; gratuite si tu paies tout le solde à l'échéance&nbsp;; elle bâtit ton historique de crédit.</p>
+    <p><strong>Ses inconvénients&nbsp;:</strong> des taux plus élevés que presque tous les autres prêts&nbsp;; des intérêts qui s'accumulent si le solde n'est pas payé au complet&nbsp;; il est facile d'y dépenser l'argent qu'on n'a pas&nbsp;; certaines cartes ont des frais annuels.</p>
+    <p>La <strong>marge de crédit</strong>, elle, est une somme que l'institution financière met à ta disposition. Son taux est plus bas que celui de la carte, mais elle n'a <strong>aucune période de grâce</strong>&nbsp;: les intérêts courent dès le premier dollar.</p>
+    <div class="tip"><b>La règle d'or du manuel</b>Aurais-tu pu payer cet achat comptant dans quelques semaines? Sinon, ne le mets pas sur la carte.</div>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Vrai ou faux</span>Léo retire 200&nbsp;$ au guichet avec sa carte de crédit. Comme pour un achat, il a jusqu'à l'échéance pour rembourser sans intérêts.<span class="see">Voir la réponse →</span></summary><div class="ans"><strong>Faux.</strong> C'est une avance de fonds&nbsp;: aucune période de grâce, les intérêts commencent dès le retrait.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head" id="s23">
+    <span class="num" aria-hidden="true">2.3</span>
+    <h2>Le crédit&nbsp;: un risque à prendre?</h2>
+    <p>En 2022, 25&nbsp;433 personnes ont fait faillite au Québec. Les signes à surveiller, puis les solutions.</p>
+  </div>
+
+  <section class="block" id="risques">
+    <div class="h3row"><h3>Les risques et les signes</h3></div>
+    <p>Mal utilisé, le crédit mène à des fins de mois difficiles, à la perte de l'accès au crédit, à un pointage qui baisse, au stress. Trois facteurs de risque&nbsp;:</p>
+    <ol>
+      <li><strong>Les taux élevés.</strong> Sur 1&nbsp;000&nbsp;$ remboursés en un an, tu paies 27,29&nbsp;$ d'intérêts à 5&nbsp;%, mais 111,61&nbsp;$ à 20&nbsp;%. Plus un prêt est facile à obtenir, plus son taux est élevé.</li>
+      <li><strong>Les taux variables.</strong> Un taux <strong>fixe</strong> ne bouge pas. Un taux <strong>variable</strong> est souvent plus bas à la signature, mais il peut monter pendant le contrat, même au-dessus du taux fixe, et briser le budget, surtout sur un long prêt.</li>
+      <li><strong>L'accumulation de dettes.</strong> Le crédit facile fait empiler les dettes au-delà de ce qu'on peut rembourser.</li>
+    </ol>
+    <p class="sub-h">Les signes de surendettement</p>
+    <ul>
+      <li>payer ses factures en retard&nbsp;;</li>
+      <li>faire seulement le paiement minimum sur sa carte&nbsp;;</li>
+      <li>ne plus réussir à épargner&nbsp;;</li>
+      <li>utiliser le crédit pour joindre les deux bouts (l'épicerie sur la carte)&nbsp;;</li>
+      <li>se faire harceler par des créanciers.</li>
+    </ul>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Choix multiples</span>Lequel n'est pas un signe de surendettement?<span class="choix"><span data-ok="0"><b>A</b>payer son épicerie avec sa carte, faute d'argent</span><span data-ok="1"><b>B</b>payer le solde de sa carte au complet chaque mois</span><span data-ok="0"><b>C</b>ne plus réussir à épargner</span><span data-ok="0"><b>D</b>prendre du retard sur ses factures</span></span><span class="see">Voir la réponse →</span></summary><div class="ans"><strong>B.</strong> Payer tout le solde chaque mois, c'est utiliser la carte sans payer d'intérêts&nbsp;: un bon signe.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="solutions">
+    <div class="h3row"><h3>Six solutions au surendettement</h3></div>
+    <p>De la plus douce à la plus sévère. On commence par le haut.</p>
+    <ol class="ladder">
+      <li style="--i:0"><span class="n">1</span><div><b>Le réaménagement budgétaire</b><span>Toi-même&nbsp;: refaire ton budget, couper, savoir exactement combien tu dois et à qui.</span></div></li>
+      <li style="--i:1"><span class="n">2</span><div><b>La vente d'actifs</b><span>Toi-même&nbsp;: vendre un bien (un quad, une motomarine). Souvent limité&nbsp;: l'usagé se revend moins cher.</span></div></li>
+      <li style="--i:2"><span class="n">3</span><div><b>La consolidation de dettes</b><span>Une institution financière&nbsp;: un seul nouveau prêt remplace toutes tes dettes. Un créancier, un paiement, idéalement à un taux plus bas. Il faut encore être capable de rembourser.</span></div></li>
+      <li style="--i:3"><span class="n">4</span><div><b>La proposition de consommateur</b><span>Un syndic en insolvabilité&nbsp;: une offre aux créanciers pour réduire les dettes ou les étaler. Acceptée, elle évite la faillite.</span></div></li>
+      <li style="--i:4"><span class="n">5</span><div><b>Le dépôt volontaire</b><span>La Cour du Québec&nbsp;: tu lui remets une partie de ton revenu, elle paie tes créanciers, à un taux fixé à 5&nbsp;%. Il évite la faillite.</span></div></li>
+      <li style="--i:5" class="court"><span class="n">6</span><div><b>La faillite</b><span>Un syndic en insolvabilité&nbsp;: le dernier recours.</span></div></li>
+    </ol>
+    <p><strong>La consolidation, dans le manuel&nbsp;:</strong> une carte à 21&nbsp;%, un prêt-auto à 6&nbsp;% et un prêt pour une piscine à 11&nbsp;% (10&nbsp;500&nbsp;$, 540&nbsp;$ par mois) deviennent un seul prêt à 10&nbsp;% sur 48 mois&nbsp;: 266&nbsp;$ par mois.</p>
+    <dl class="tags"><div class="tag"><dt>Faillite</dt><dd>Une procédure qui libère une personne de la plupart de ses dettes en échange de ses <strong>biens saisissables</strong>, remis aux créanciers. Un <strong>syndic autorisé en insolvabilité</strong> la mène, selon la Loi sur la faillite et l'insolvabilité. Elle n'est possible que si le passif dépasse l'actif.</dd></div></dl>
+    <p>Pendant environ 9 mois, la personne est protégée contre ses créanciers et rencontre deux fois le syndic (budget, causes de ses dettes, usage du crédit). À la fin, un certificat la libère de ses dettes. Le prix à payer&nbsp;:</p>
+    <ul>
+      <li>la perte de ses biens saisissables&nbsp;;</li>
+      <li>une faillite inscrite à son dossier de crédit pendant des années&nbsp;: emprunter devient très difficile&nbsp;;</li>
+      <li>le stress, parfois un sentiment d'échec.</li>
+    </ul>
+    <div class="pause">
+      <div class="quiz">
+        <details><summary><span class="q-n">Ordre</span>Place de la plus douce à la plus sévère&nbsp;: la faillite, le réaménagement budgétaire, le dépôt volontaire, la consolidation de dettes.<span class="see">Voir la réponse →</span></summary><div class="ans">Le réaménagement budgétaire, la consolidation de dettes, le dépôt volontaire, la faillite.</div></details>
+      </div>
+    </div>
+  </section>
+
 
 
 <section class="qr5-affiche" aria-labelledby="qr5-t"><h2 id="qr5-t">On teste?</h2><p>5 questions. À chaque erreur&nbsp;: la bonne réponse et la page de ton cahier.</p><div class="qr5-btns"><a href="https://simleprof.github.io/finances/?s=1.4" id="apres-1.4">Section 1.4 →</a></div><div class="qr5-qr"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h35v35H0z"/><path stroke="#000000" d="M1 1.5h7m1 0h7m2 0h2m2 0h1m4 0h7M1 2.5h1m5 0h1m1 0h1m1 0h1m1 0h3m3 0h3m5 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m4 0h3m4 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m2 0h1m4 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m3 0h2m1 0h2m4 0h3m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m4 0h2m2 0h5m2 0h1m1 0h1m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 8.5h1m3 0h1m1 0h2m1 0h1m4 0h1M1 9.5h1m2 0h6m1 0h1m1 0h1m1 0h1m1 0h2m2 0h1m2 0h3m2 0h1m1 0h3M1 10.5h1m2 0h2m2 0h4m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m4 0h3M1 11.5h5m1 0h2m1 0h2m1 0h2m1 0h2m5 0h3m1 0h1m1 0h5M1 12.5h1m1 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m2 0h3m1 0h3m2 0h1m1 0h1M2 13.5h3m2 0h3m2 0h1m1 0h1m3 0h1m3 0h1m2 0h3M2 14.5h3m1 0h1m2 0h2m2 0h1m1 0h1m3 0h3m3 0h1m2 0h1m2 0h1M1 15.5h2m2 0h1m1 0h1m1 0h2m1 0h1m3 0h1m3 0h2m1 0h1m1 0h1m1 0h1m2 0h1M1 16.5h1m1 0h2m1 0h1m2 0h1m2 0h2m3 0h1m3 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h1M5 17.5h1m1 0h2m1 0h1m1 0h3m1 0h1m4 0h1m1 0h8M1 18.5h1m1 0h2m1 0h1m3 0h1m2 0h2m1 0h6m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1M4 19.5h1m2 0h1m2 0h3m3 0h1m1 0h3m1 0h3m3 0h1m1 0h2m1 0h1M2 20.5h1m1 0h3m1 0h7m1 0h2m5 0h1m3 0h1m1 0h3m1 0h1M2 21.5h1m1 0h1m2 0h1m1 0h1m3 0h3m1 0h1m1 0h2m1 0h3m1 0h1m3 0h1m1 0h1M1 22.5h5m16 0h1m1 0h3m2 0h3M1 23.5h1m1 0h1m2 0h2m4 0h1m6 0h3m1 0h3m1 0h1m1 0h1m1 0h3M1 24.5h1m3 0h1m4 0h1m2 0h2m1 0h1m1 0h4m4 0h3m2 0h3M1 25.5h2m1 0h1m1 0h6m1 0h1m3 0h1m1 0h1m1 0h1m3 0h5m2 0h1M9 26.5h2m2 0h1m1 0h5m2 0h1m2 0h1m3 0h1m1 0h2M1 27.5h7m1 0h3m2 0h3m1 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1M1 28.5h1m5 0h1m1 0h1m1 0h2m4 0h4m1 0h4m3 0h3M1 29.5h1m1 0h3m1 0h1m1 0h2m2 0h3m1 0h2m1 0h1m1 0h8m2 0h1M1 30.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m3 0h1m1 0h2m1 0h1m1 0h2m1 0h1M1 31.5h1m1 0h3m1 0h1m3 0h4m1 0h1m3 0h1m3 0h1m1 0h1m1 0h2m2 0h2M1 32.5h1m5 0h1m2 0h1m2 0h1m5 0h3m4 0h4m1 0h3M1 33.5h7m1 0h1m1 0h1m4 0h3m1 0h1m2 0h1m1 0h1m2 0h2"/></svg>Section 1.4</figure></div></section>
 </main>
 
 <footer>
-  <div class="wrap">Synthèse de la section 1.4 du cahier <em>Éducation financière</em>, chapitre 1 (p. 27 à 37).</div>
+  <div class="wrap">Synthèse de la section 1.4 (p. 27 à 37) et du chapitre 2 (p. 42 à 63) du cahier <em>Éducation financière</em>.</div>
 </footer>
 
 <script>
