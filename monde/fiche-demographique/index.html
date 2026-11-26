@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Fiche démographique · Projet Migrations</title>
+<link rel="stylesheet" href="../../polices/5cc0c2fd0f.css">
+<style>
+
+:root{
+  --acc:#0E6E6B; --acc2:#0a5553; --pale:#E3F2F0; --pale2:#F2F9F8; --bord:#C9DCDA;
+  --encre:#1C2B2A; --gris:#5d6e6d; --rouge:#b3261e; --fond:#f5f7f6;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--encre);font:17px/1.45 Archivo,"Segoe UI",system-ui,sans-serif}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.page{max-width:1240px;margin:0 auto;padding:22px 20px 60px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}
+@media (max-width:1050px){.page{grid-template-columns:1fr;padding:14px 12px 50px}}
+
+
+.barre{position:sticky;top:0;z-index:30;background:var(--encre);color:#fff}
+.barre .in{max-width:1240px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.barre b{font-size:17px;font-weight:800;letter-spacing:.01em}
+.etat{font-size:15px;color:#b9d8d5;margin-right:auto}
+.btn{border:0;border-radius:6px;padding:10px 16px;font-weight:700;font-size:16px;background:#fff;color:var(--encre)}
+.btn.prim{background:#5fd3c8;color:#062b2a}
+.btn.fant{background:transparent;color:#fff;border:2px solid #4d6463}
+.btn:hover{filter:brightness(1.07)}
+@media (max-width:640px){.barre{position:static}.barre .in{padding:8px 10px;gap:8px;flex-wrap:nowrap}.btn{padding:9px 10px;font-size:15px;flex:1}.barre b,.etat{display:none}
+  .ident label{flex-wrap:nowrap;white-space:nowrap;width:100%}#equipe{flex:1;width:auto}.drapeau{min-height:100px}.drapeau img{max-height:110px}}
+
+.feuille{background:#fff;border:1px solid #dfe6e5;padding:28px 30px 34px}
+@media (max-width:640px){.feuille{padding:16px 14px 24px}}
+
+
+.tete{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:18px;align-items:stretch}
+@media (max-width:640px){.tete{grid-template-columns:1fr}}
+#pays{width:100%;border:0;border-bottom:3px solid var(--bord);background:transparent;padding:2px 0 4px;font-size:40px;font-weight:900;color:var(--acc);text-transform:uppercase;letter-spacing:.01em}
+#pays::placeholder{color:#9fb7b4}
+#pays:focus{outline:none;border-bottom-color:var(--acc)}
+.sous{font-size:21px;font-weight:800;margin:8px 0 0}.sous span{font-weight:500;font-size:16px;color:var(--gris);margin-left:8px}
+.ident{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:14px;align-items:center}
+.ident label{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px}
+#equipe{border:1px solid var(--bord);background:var(--pale);border-radius:4px;padding:8px 10px;min-width:0;width:300px;max-width:100%}
+.gr{display:flex;gap:6px}
+.gr button,.choix2 button{border:1px solid var(--bord);background:#fff;border-radius:4px;padding:7px 14px;font-weight:700;font-size:16px}
+.gr button[aria-pressed="true"],.choix2 button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+
+.drapeau{position:relative;border:2px dashed #9cc3bf;background:var(--pale2);border-radius:6px;min-height:130px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;outline:none}
+.drapeau:focus-visible,.drapeau.survol{border-color:var(--acc);background:var(--pale)}
+.drapeau .vide{font-size:16px;color:var(--gris);line-height:1.35}
+.drapeau .vide b{display:block;color:var(--acc);font-size:17px;margin-bottom:4px}
+.drapeau img{max-width:100%;max-height:150px;display:block;box-shadow:0 0 0 1px #d5dedd}
+.drapeau{flex-direction:column;gap:4px}
+.drapeau .retirer{position:static}
+.lien-btn{border:0;background:none;padding:2px 4px;color:var(--gris);font-size:15px;text-decoration:underline;text-underline-offset:2px}
+.lien-btn:hover{color:var(--rouge)}
+
+.consigne{margin:20px 0 4px;border-left:4px solid var(--acc);background:var(--pale2);padding:10px 14px;font-size:16px}
+.consigne b{color:var(--acc)}
+
+
+h2{margin:26px 0 8px;padding-bottom:4px;border-bottom:3px solid var(--acc);color:var(--acc);font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:baseline;gap:12px}
+h2 small{color:var(--gris);font-size:16px;font-weight:700;text-transform:none;letter-spacing:0}
+h2.grand{border:0;text-transform:none;font-size:25px;margin-top:34px;padding:0}
+
+table.donnees{width:100%;border-collapse:collapse;table-layout:fixed}
+.donnees th{background:var(--acc);color:#fff;text-align:left;font-size:15px;font-weight:700;padding:6px 10px}
+.donnees td{border:1px solid var(--bord);padding:0;vertical-align:middle}
+.donnees td.etiq{padding:8px 10px;font-weight:700;font-size:16px;line-height:1.25}
+.donnees col.c1{width:32%}.donnees col.c3{width:88px}
+@media (max-width:640px){.donnees col.c1{width:36%}.donnees col.c3{width:64px}.donnees td.etiq{font-size:15px;padding:7px 8px}}
+.donnees td.val{background:var(--pale)}
+.donnees td.src{background:var(--pale);text-align:center}
+
+textarea{display:block;width:100%;border:0;background:transparent;resize:none;padding:9px 10px;line-height:1.4;font-size:17px;min-height:42px;overflow:hidden;field-sizing:content}
+textarea::placeholder{color:#8fa3a1}
+textarea:focus,#equipe:focus{outline:2px solid var(--acc);outline-offset:-2px;background:#fff}
+.dest textarea{min-height:38px;padding:6px 10px}
+.dest textarea+textarea{border-top:1px dashed var(--bord)}
+.choix2{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px}
+.choix2 button{font-size:15px;font-weight:600}
+
+
+.srcbtn{width:100%;min-height:42px;height:100%;border:0;background:transparent;font-size:20px;font-weight:800;color:var(--acc);padding:4px}
+.srcbtn.vide{font-size:15px;font-weight:600;color:#8fa3a1}
+.srcbtn:hover,.srcbtn:focus-visible{background:#fff;outline:2px solid var(--acc);outline-offset:-2px}
+
+.reponse{border:1px solid #B7D3D0;background:var(--pale)}
+.reponse textarea{min-height:120px;padding:12px}
+.reponse.long textarea{min-height:200px}
+.q{margin:0 0 8px;font-size:17px}
+
+
+.cote{position:sticky;top:68px;max-height:calc(100vh - 84px);overflow:auto;background:#fff;border:1px solid #dfe6e5;padding:18px 18px 20px}
+@media (max-width:1050px){.cote{position:static;max-height:none}}
+.cote h2{margin-top:0}
+.cote .aide{font-size:15px;color:var(--gris);margin:0 0 12px}
+ol.sources{list-style:none;margin:0;padding:0}
+ol.sources li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:2px 8px;padding:10px 0;border-bottom:1px solid #e6eceb}
+ol.sources .no{grid-row:span 3;font-size:24px;font-weight:900;color:var(--acc);line-height:1.1}
+ol.sources input{width:100%;border:1px solid transparent;border-radius:3px;padding:2px 4px;margin-left:-4px;font-weight:700;font-size:16px;background:transparent}
+ol.sources input:hover{border-color:var(--bord)}
+ol.sources input:focus{outline:2px solid var(--acc);border-color:transparent;background:#fff}
+ol.sources a{font-size:15px;color:#1F5FAD;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+ol.sources .pied{display:flex;gap:10px;align-items:center}
+ol.sources .pied .lien-btn{margin-left:auto}
+.ajout{margin-top:14px}
+.ajout label{display:block;font-weight:700;font-size:15px;margin-bottom:5px}
+.ajout input{width:100%;border:2px dashed #9cc3bf;border-radius:5px;background:var(--pale2);padding:10px 12px;font-size:16px}
+.ajout input:focus{outline:none;border-style:solid;border-color:var(--acc);background:#fff}
+.rien{font-size:15px;color:var(--gris);padding:6px 0 2px}
+
+
+.menu{position:absolute;z-index:50;width:300px;max-width:calc(100vw - 20px);background:#fff;border:1px solid #b9cfcc;box-shadow:0 8px 28px rgba(14,40,38,.18);border-radius:6px;padding:10px}
+.menu p{margin:0 0 6px;font-weight:800;font-size:15px}
+.menu .liste{display:flex;flex-direction:column;gap:3px;max-height:220px;overflow:auto}
+.menu .liste button{display:flex;gap:10px;align-items:baseline;text-align:left;border:1px solid transparent;background:#f3f7f7;border-radius:4px;padding:7px 9px;font-size:15px}
+.menu .liste button b{color:var(--acc);font-size:19px;min-width:22px}
+.menu .liste button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu .liste button:hover,.menu .liste button[aria-pressed="true"]{border-color:var(--acc);background:var(--pale)}
+.menu input{width:100%;margin-top:8px;border:2px dashed #9cc3bf;border-radius:5px;background:var(--pale2);padding:9px 10px;font-size:15px}
+.menu input:focus{outline:none;border-style:solid;border-color:var(--acc);background:#fff}
+.menu .bas{display:flex;justify-content:flex-end;margin-top:6px}
+
+.bulle{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--encre);color:#fff;padding:12px 18px;border-radius:6px;font-size:16px;font-weight:600;transition:.2s;z-index:80;max-width:calc(100vw - 24px);text-align:center}
+.bulle.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+
+dialog{border:0;border-radius:8px;padding:0;max-width:min(560px,calc(100vw - 24px));box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,30,29,.55)}
+dialog .in{padding:24px 24px 20px}
+dialog h3{margin:0 0 10px;font-size:22px;font-weight:900;color:var(--acc)}
+dialog p,dialog li{font-size:16px}
+dialog ol{padding-left:22px;margin:8px 0 14px}
+dialog .zone{border:2px dashed #9cc3bf;background:var(--pale2);border-radius:6px;padding:22px;text-align:center;font-weight:700;color:var(--acc);cursor:pointer}
+dialog .zone.survol{background:var(--pale);border-color:var(--acc)}
+dialog .bas{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+dialog .btn{border:1px solid var(--bord)}
+dialog .btn.prim{background:var(--acc);color:#fff;border-color:var(--acc)}
+.err{color:var(--rouge);font-weight:700}
+
+footer.pied-page{color:var(--gris);font-size:15px;margin-top:26px;border-top:1px solid #e6eceb;padding-top:10px}
+
+@media print{
+  .barre,.ajout,.lien-btn,.cote .aide,footer.pied-page{display:none!important}
+  body{background:#fff;font-size:12pt}
+  .page{display:block;padding:0}
+  .feuille,.cote{border:0;padding:0;position:static;max-height:none}
+  .drapeau{border:0;min-height:0}
+  .drapeau .vide{display:none}
+  td.val,td.src,.reponse,#equipe{background:#fff!important}
+  h2,.donnees th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2.grand{break-before:page}
+  textarea{overflow:visible}
+}
+</style>
+</head>
+<body>
+
+<div class="barre"><div class="in">
+  <b>Fiche démographique</b>
+  <span class="etat" id="etat">Enregistrée sur cet appareil</span>
+  <button class="btn fant" id="b-word">J'ai commencé dans Word</button>
+  <button class="btn prim" id="b-remettre">Télécharger pour Teams</button>
+</div></div>
+
+<div class="page">
+<main class="feuille" id="feuille">
+  <div class="tete">
+    <div>
+      <input id="pays" data-champ="pays" placeholder="Nom de mon pays" autocomplete="off" spellcheck="false" aria-label="Nom de mon pays">
+      <p class="sous">Fiche démographique <span>Monde contemporain · Population</span></p>
+      <div class="ident">
+        <label>Équipe : <input id="equipe" data-champ="equipe" placeholder="Prénoms et noms" autocomplete="off"></label>
+        <span style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px">Groupe : <span class="gr" id="groupe"><button type="button" data-g="02" aria-pressed="false">02</button><button type="button" data-g="03" aria-pressed="false">03</button><button type="button" data-g="04" aria-pressed="false">04</button></span></span>
+      </div>
+    </div>
+    <div class="drapeau" id="drapeau" tabindex="0" aria-label="Drapeau : colle-le ici">
+      <div class="vide"><b>Le drapeau</b>Copie l'image du drapeau,<br>clique ici, puis Ctrl + V.<br><span style="font-size:15px">Ou glisse l'image ici.</span></div>
+    </div>
+  </div>
+
+  <div class="consigne"><b>Pour chaque case :</b> le chiffre, son année et le numéro de sa source, comme sur la fiche du Canada. Colle le lien de ta source dans la case <b>Source</b> : il se range tout seul dans tes sources. <b>Remise :</b> devoir Teams, au plus tard le mardi 22 décembre 2026 (chaque élève). Vaut 20 % de l'étape.</div>
+
+  <h2>1. Qui vit là <small>Fiche : /8</small></h2>
+  <table class="donnees" id="t1"><colgroup><col class="c1"><col><col class="c3"></colgroup>
+    <thead><tr><th>Donnée</th><th>Mon pays</th><th>Source</th></tr></thead><tbody></tbody></table>
+
+  <h2>2. Qui part, et vers où</h2>
+  <table class="donnees" id="t2"><colgroup><col class="c1"><col><col class="c3"></colgroup><tbody></tbody></table>
+
+  <h2 class="grand">Comprendre mon pays</h2>
+  <h2>3. Pourquoi on part <small>/4</small></h2>
+  <p class="q">Explique deux raisons qui poussent les gens à quitter ton pays. Appuie chacune sur un chiffre.</p>
+  <div class="reponse"><textarea data-champ="q3" placeholder="Écris ici."></textarea></div>
+
+  <h2>4. Ce que ça change <small>/3</small></h2>
+  <p class="q">Explique une conséquence de cette émigration pour ton pays, et relie-la à un chiffre de ta fiche.</p>
+  <div class="reponse"><textarea data-champ="q4" placeholder="Écris ici."></textarea></div>
+
+  <h2>5. Un visage, une histoire <small>/5</small></h2>
+  <p class="q">En une dizaine de lignes, invente un personnage réaliste, mais fictif, de ton pays et raconte son histoire : qui il est, pourquoi il part, vers laquelle de tes trois destinations, et l'obstacle qu'il rencontre en arrivant. Ton histoire s'appuie sur au moins deux informations de ta fiche.</p>
+  <div class="reponse long"><textarea data-champ="q5" placeholder="Écris ici."></textarea></div>
+
+  <footer class="pied-page">Ta fiche s'enregistre toute seule dans ce navigateur, sur cet appareil. Pour la remettre ou la continuer ailleurs : « Télécharger pour Teams ».</footer>
+</main>
+
+<aside class="cote" id="cote">
+  <h2>Sources</h2>
+  <p class="aide">Colle un lien : il reçoit un numéro. Écris ce numéro dans la case Source, ou clique la case pour le choisir.</p>
+  <ol class="sources" id="sources"></ol>
+  <div class="ajout"><label for="nouvelle">Ajouter une source</label><input id="nouvelle" placeholder="Colle le lien ici (Ctrl + V)" autocomplete="off" spellcheck="false"></div>
+</aside>
+</div>
+
+<div class="bulle" id="bulle" role="status" aria-live="polite"></div>
+
+<dialog id="d-word"><div class="in">
+  <h3>J'ai commencé dans Word</h3>
+  <p>Ton travail passe ici, sans rien retaper.</p>
+  <ol>
+    <li>Dans Teams, ouvre ta fiche Word, puis <b>Fichier › Télécharger une copie</b> (ou « Enregistrer sous »).</li>
+    <li>Glisse ce fichier ici, ou clique la zone pour le choisir.</li>
+  </ol>
+  <div class="zone" id="zone" tabindex="0">Choisir ma fiche Word (.docx)</div>
+  <input type="file" id="fichier" accept=".docx" hidden>
+  <p class="err" id="err-word" hidden></p>
+  <div class="bas"><button class="btn" id="fermer-word">Fermer</button></div>
+</div></dialog>
+
+<dialog id="d-remettre"><div class="in">
+  <h3>Remettre ma fiche</h3>
+  <p id="manque" hidden></p>
+  <ol>
+    <li>Clique <b>Télécharger</b> : un fichier Word arrive dans tes Téléchargements.</li>
+    <li>Dans Teams, ouvre le devoir, <b>Ajouter un travail › Télécharger à partir de cet appareil</b>, puis choisis ce fichier.</li>
+    <li>Clique <b>Remettre</b>. Chaque élève de l'équipe remet la fiche.</li>
+  </ol>
+  <p style="font-size:15px;color:var(--gris)">Pour continuer sur un autre ordinateur : ouvre ce lien là-bas, puis « J'ai commencé dans Word » avec ce même fichier.</p>
+  <div class="bas"><button class="btn" id="imprimer">Imprimer</button><button class="btn" id="fermer-remettre">Fermer</button><button class="btn prim" id="telecharger">Télécharger</button></div>
+</div></dialog>
+
+<input type="file" id="f-drapeau" accept="image/*" hidden>
+
+<script>
+"use strict";
+
+const RANGEES = {
+  t1: [ {
+    id: "population",
+    etiq: "Population totale"
+  }, {
+    id: "natalite",
+    etiq: "Natalité"
+  }, {
+    id: "mortalite",
+    etiq: "Mortalité"
+  }, {
+    id: "accroissement",
+    etiq: "Accroissement naturel",
+    indice: "À calculer"
+  }, {
+    id: "fecondite",
+    etiq: "Fécondité"
+  }, {
+    id: "ages",
+    etiq: "65 ans et plus"
+  } ],
+  t2: [ {
+    id: "solde",
+    etiq: "Solde migratoire"
+  }, {
+    id: "depart",
+    etiq: "Pays de départ ou d'accueil?",
+    choix: [ "un pays de départ (solde négatif)", "un pays d'accueil (solde positif)" ]
+  }, {
+    id: "emigres",
+    etiq: "Émigrés"
+  }, {
+    id: "part",
+    etiq: "Part des émigrés",
+    indice: "À calculer"
+  }, {
+    id: "destinations",
+    etiq: "Les 3 destinations",
+    trois: true
+  }, {
+    id: "envois",
+    etiq: "Argent envoyé au pays"
+  }, {
+    id: "refugies",
+    etiq: "Réfugiés et demandeurs d'asile"
+  }, {
+    id: "cause",
+    etiq: "Une cause chiffrée du départ",
+    indice: "Laquelle, et son chiffre (année)"
+  } ]
+};
+
+const TOUTES = [ ...RANGEES.t1, ...RANGEES.t2 ];
+
+const CLE = "fiche-demographique-v1";
+
+let E = vierge();
+
+function vierge() {
+  return {
+    pays: "",
+    equipe: "",
+    groupe: "",
+    drapeau: null,
+    valeurs: {},
+    dest: [ "", "", "" ],
+    depart: "",
+    src: {},
+    q3: "",
+    q4: "",
+    q5: "",
+    sources: [],
+    prochain: 1
+  };
+}
+
+try {
+  const s = JSON.parse(localStorage.getItem(CLE) || "null");
+  if (s && typeof s === "object") E = Object.assign(vierge(), s);
+} catch (e) {}
+
+let minuterie = null;
+
+function enregistrer() {
+  clearTimeout(minuterie);
+  minuterie = setTimeout(() => {
+    try {
+      localStorage.setItem(CLE, JSON.stringify(E));
+      etat("Enregistrée sur cet appareil");
+    } catch (e) {
+      etat("Pas enregistrée : télécharge-la pour ne rien perdre");
+    }
+  }, 250);
+}
+
+function etat(t) {
+  document.getElementById("etat").textContent = t;
+}
+
+let bulleMin = null;
+
+function bulle(t) {
+  const b = document.getElementById("bulle");
+  b.textContent = t;
+  b.classList.add("on");
+  clearTimeout(bulleMin);
+  bulleMin = setTimeout(() => b.classList.remove("on"), 3200);
+}
+
+const EXP = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+
+const expo = n => String(n).split("").map(c => EXP[+c]).join("");
+
+const numero = id => E.sources.findIndex(s => s.id === id) + 1;
+
+const URL_RE = /\bhttps?:\/\/[^\s<>"'«»]+|\bwww\.[^\s<>"'«»]+/gi;
+
+function nettoyerUrl(u) {
+  u = u.trim().replace(/[).,;:!?»]+$/, "");
+  if (/^www\./i.test(u)) u = "https://" + u;
+  return u;
+}
+
+function cleUrl(u) {
+  try {
+    const x = new URL(u);
+    return (x.hostname.replace(/^www\./, "") + x.pathname.replace(/\/+$/, "") + x.search).toLowerCase();
+  } catch (e) {
+    return u.toLowerCase();
+  }
+}
+
+const NOMS = [ [ /banquemondiale|worldbank/, "Banque mondiale" ], [ /migrationdataportal/, "Portail sur les données migratoires (ONU)" ], [ /unhcr|hcr\./, "HCR (Nations unies)" ], [ /un\.org|population\.un/, "ONU" ], [ /ilo\.org|ilostat/, "Organisation internationale du travail" ], [ /statcan/, "Statistique Canada" ], [ /wikipedia/, "Wikipédia" ], [ /cia\.gov/, "CIA World Factbook" ], [ /ourworldindata/, "Our World in Data" ], [ /imf\.org/, "Fonds monétaire international" ], [ /oecd|ocde/, "OCDE" ], [ /unicef/, "UNICEF" ], [ /who\.int/, "Organisation mondiale de la santé" ], [ /perspective\.usherbrooke/, "Perspective monde (Université de Sherbrooke)" ], [ /statista/, "Statista" ], [ /indexmundi/, "Index Mundi" ], [ /worldometers/, "Worldometer" ], [ /populationpyramid/, "PopulationPyramid.net" ], [ /macrotrends/, "Macrotrends" ] ];
+
+function nomDe(u) {
+  let h = "";
+  try {
+    h = new URL(u).hostname.replace(/^www\./, "");
+  } catch (e) {
+    return "";
+  }
+  for (const [re, n] of NOMS) if (re.test(h)) return n;
+  return h;
+}
+
+function court(u) {
+  try {
+    const x = new URL(u);
+    const p = decodeURIComponent(x.pathname).replace(/\/+$/, "");
+    return x.hostname.replace(/^www\./, "") + (p ? p : "");
+  } catch (e) {
+    return u;
+  }
+}
+
+function ajouterSource(url, titre) {
+  url = url ? nettoyerUrl(url) : "";
+  if (url) {
+    const k = cleUrl(url);
+    const deja = E.sources.find(s => s.url && cleUrl(s.url) === k);
+    if (deja) return {
+      id: deja.id,
+      nouvelle: false
+    };
+  }
+  const id = "s" + E.prochain++;
+  E.sources.push({
+    id: id,
+    url: url,
+    titre: (titre || "").trim() || nomDe(url) || "Source"
+  });
+  return {
+    id: id,
+    nouvelle: true
+  };
+}
+
+function extraireLiens(texte) {
+  const ids = [];
+  const reste = texte.replace(URL_RE, m => {
+    ids.push(ajouterSource(m).id);
+    return " ";
+  }).replace(/[ \t]{2,}/g, " ").replace(/\s+\n/g, "\n").trim();
+  return [ reste, ids ];
+}
+
+function cellSource(r) {
+  const td = document.createElement("td");
+  td.className = "src";
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "srcbtn";
+  b.dataset.src = r.id;
+  b.setAttribute("aria-label", "Source de : " + r.etiq);
+  td.appendChild(b);
+  return td;
+}
+
+function zone(champ, indice, rangee) {
+  const t = document.createElement("textarea");
+  t.rows = 1;
+  t.placeholder = indice || "Chiffre (année)";
+  t.dataset.champ = champ;
+  if (rangee) t.dataset.rangee = rangee;
+  t.spellcheck = true;
+  return t;
+}
+
+for (const tid of [ "t1", "t2" ]) {
+  const corps = document.querySelector("#" + tid + " tbody");
+  for (const r of RANGEES[tid]) {
+    const tr = document.createElement("tr");
+    tr.dataset.r = r.id;
+    const a = document.createElement("td");
+    a.className = "etiq";
+    a.textContent = r.etiq;
+    tr.appendChild(a);
+    const v = document.createElement("td");
+    v.className = "val";
+    tr.appendChild(v);
+    if (r.choix) {
+      const d = document.createElement("div");
+      d.className = "choix2";
+      r.choix.forEach(c => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = c;
+        b.dataset.depart = c;
+        b.setAttribute("aria-pressed", "false");
+        d.appendChild(b);
+      });
+      v.appendChild(d);
+      v.colSpan = 2;
+    } else if (r.trois) {
+      v.classList.add("dest");
+      for (let k = 0; k < 3; k++) v.appendChild(zone("dest" + k, k + 1 + ". Pays : nombre", r.id));
+      tr.appendChild(cellSource(r));
+    } else {
+      v.appendChild(zone("v-" + r.id, r.indice, r.id));
+      tr.appendChild(cellSource(r));
+    }
+    corps.appendChild(tr);
+  }
+}
+
+function lire(champ) {
+  if (champ.startsWith("v-")) return E.valeurs[champ.slice(2)] || "";
+  if (champ.startsWith("dest")) return E.dest[+champ.slice(4)] || "";
+  return E[champ] || "";
+}
+
+function ecrire(champ, val) {
+  if (champ.startsWith("v-")) E.valeurs[champ.slice(2)] = val; else if (champ.startsWith("dest")) E.dest[+champ.slice(4)] = val; else E[champ] = val;
+}
+
+function grandir(t) {
+  if (t.tagName !== "TEXTAREA" || CSS.supports("field-sizing", "content")) return;
+  t.style.height = "auto";
+  t.style.height = t.scrollHeight + "px";
+}
+
+function dessiner() {
+  document.querySelectorAll("[data-champ]").forEach(el => {
+    if (document.activeElement !== el) el.value = lire(el.dataset.champ);
+    grandir(el);
+  });
+  document.querySelectorAll("#groupe button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.g === E.groupe)));
+  document.querySelectorAll("[data-depart]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.depart === E.depart)));
+  document.querySelectorAll(".srcbtn").forEach(b => {
+    const ids = (E.src[b.dataset.src] || []).filter(id => numero(id));
+    if (ids.length) {
+      b.textContent = ids.map(numero).sort((x, y) => x - y).join(", ");
+      b.classList.remove("vide");
+      b.title = ids.map(id => {
+        const s = E.sources[numero(id) - 1];
+        return numero(id) + ". " + s.titre;
+      }).join("\n");
+    } else {
+      b.textContent = "n°";
+      b.classList.add("vide");
+      b.title = "Choisir la source";
+    }
+  });
+  dessinerSources();
+  dessinerDrapeau();
+}
+
+function dessinerSources() {
+  const ol = document.getElementById("sources");
+  ol.innerHTML = "";
+  if (!E.sources.length) {
+    const li = document.createElement("li");
+    li.className = "rien";
+    li.style.display = "block";
+    li.textContent = "Aucune source pour l'instant.";
+    ol.appendChild(li);
+    return;
+  }
+  E.sources.forEach((s, i) => {
+    const li = document.createElement("li");
+    const no = document.createElement("span");
+    no.className = "no";
+    no.textContent = i + 1;
+    li.appendChild(no);
+    const t = document.createElement("input");
+    t.value = s.titre;
+    t.setAttribute("aria-label", "Titre de la source " + (i + 1));
+    t.addEventListener("input", () => {
+      s.titre = t.value;
+      enregistrer();
+    });
+    li.appendChild(t);
+    if (s.url) {
+      const a = document.createElement("a");
+      a.href = s.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = court(s.url);
+      a.title = s.url;
+      li.appendChild(a);
+    }
+    const pied = document.createElement("div");
+    pied.className = "pied";
+    const r = document.createElement("button");
+    r.type = "button";
+    r.className = "lien-btn";
+    r.textContent = "Retirer";
+    r.addEventListener("click", () => retirerSource(s.id));
+    pied.appendChild(r);
+    li.appendChild(pied);
+    ol.appendChild(li);
+  });
+}
+
+function retirerSource(id) {
+  const n = numero(id);
+  E.sources = E.sources.filter(s => s.id !== id);
+  for (const k in E.src) E.src[k] = (E.src[k] || []).filter(x => x !== id);
+  enregistrer();
+  dessiner();
+  bulle("Source " + n + " retirée. Les numéros suivants ont été décalés.");
+}
+
+function dessinerDrapeau() {
+  const z = document.getElementById("drapeau");
+  z.querySelectorAll("img,.retirer").forEach(x => x.remove());
+  z.querySelector(".vide").hidden = !!E.drapeau;
+  if (E.drapeau) {
+    const im = new Image;
+    im.src = E.drapeau;
+    im.alt = "Drapeau";
+    z.appendChild(im);
+    const r = document.createElement("button");
+    r.type = "button";
+    r.className = "lien-btn retirer";
+    r.textContent = "Changer";
+    r.addEventListener("click", e => {
+      e.stopPropagation();
+      document.getElementById("f-drapeau").click();
+    });
+    z.appendChild(r);
+  }
+}
+
+document.addEventListener("input", e => {
+  const el = e.target;
+  if (!el.dataset || !el.dataset.champ) return;
+  ecrire(el.dataset.champ, el.value);
+  grandir(el);
+  enregistrer();
+});
+
+document.getElementById("groupe").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  E.groupe = E.groupe === b.dataset.g ? "" : b.dataset.g;
+  enregistrer();
+  dessiner();
+});
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-depart]");
+  if (!b) return;
+  E.depart = E.depart === b.dataset.depart ? "" : b.dataset.depart;
+  enregistrer();
+  dessiner();
+});
+
+document.addEventListener("paste", e => {
+  const el = e.target;
+  const cd = e.clipboardData;
+  if (!cd) return;
+  const img = [ ...cd.items ].find(i => i.kind === "file" && i.type.startsWith("image/"));
+  const dansTexte = el && (el.tagName === "TEXTAREA" || el.tagName === "INPUT");
+  if (img && (!dansTexte || el.closest(".drapeau"))) {
+    e.preventDefault();
+    prendreDrapeau(img.getAsFile());
+    return;
+  }
+  if (!dansTexte) {
+    const html = cd.getData("text/html");
+    const m = html && html.match(/<img[^>]+src="([^"]+)"/i);
+    if (m && (el.closest && el.closest(".drapeau") || document.activeElement === document.getElementById("drapeau"))) {
+      e.preventDefault();
+      drapeauDepuisAdresse(m[1].replace(/&amp;/g, "&"));
+    }
+    return;
+  }
+  if (el.id === "nouvelle" || el.closest(".menu")) return;
+  let texte = cd.getData("text/plain");
+  if (!texte) {
+    if (img) {
+      e.preventDefault();
+      bulle("Le drapeau se colle dans la case du drapeau, en haut à droite.");
+    }
+    return;
+  }
+  e.preventDefault();
+  texte = texte.replace(/\r\n?/g, "\n").replace(/ /g, " ");
+  if (el.tagName === "INPUT") texte = texte.replace(/\s*\n\s*/g, " ");
+  let ids = [];
+  if (el.dataset.champ && el.dataset.champ !== "pays" && el.dataset.champ !== "equipe") {
+    [texte, ids] = extraireLiens(texte);
+    if (ids.length) {
+      const rangee = el.dataset.rangee;
+      if (rangee) {
+        E.src[rangee] = [ ...new Set([ ...E.src[rangee] || [], ...ids ]) ];
+      } else {
+        texte = (texte ? texte + " " : "") + "(source " + ids.map(numero).join(", ") + ")";
+      }
+    }
+  }
+  if (texte) {
+    const d = el.selectionStart, f = el.selectionEnd;
+    el.setRangeText(texte, d, f, "end");
+  }
+  ecrire(el.dataset.champ, el.value);
+  grandir(el);
+  enregistrer();
+  dessiner();
+  if (ids.length) bulle(ids.length > 1 ? "Liens rangés dans tes sources : " + ids.map(numero).join(", ") : "Lien rangé dans tes sources : n° " + numero(ids[0]));
+});
+
+const nouvelle = document.getElementById("nouvelle");
+
+function ajouterDepuis(texte) {
+  texte = (texte || "").trim();
+  if (!texte) return;
+  const liens = texte.match(URL_RE) || [];
+  let titre = texte.replace(URL_RE, " ").replace(/\s+/g, " ").replace(/^[\s\-–—:,|]+|[\s\-–—:,|]+$/g, "");
+  const ids = [];
+  if (liens.length) liens.forEach((u, i) => ids.push(ajouterSource(u, i === 0 ? titre : "").id)); else ids.push(ajouterSource("", titre).id);
+  enregistrer();
+  dessiner();
+  bulle(ids.length > 1 ? "Sources " + ids.map(numero).join(", ") + " ajoutées" : "Source n° " + numero(ids[0]) + " ajoutée");
+  return ids;
+}
+
+nouvelle.addEventListener("paste", e => {
+  const t = e.clipboardData && e.clipboardData.getData("text/plain");
+  if (!t) return;
+  e.preventDefault();
+  ajouterDepuis(t);
+  nouvelle.value = "";
+});
+
+nouvelle.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    ajouterDepuis(nouvelle.value);
+    nouvelle.value = "";
+  }
+});
+
+let menu = null;
+
+function fermerMenu() {
+  if (menu) {
+    menu.remove();
+    menu = null;
+  }
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest(".srcbtn");
+  if (menu && !e.target.closest(".menu") && b !== (menu && menu._bouton)) fermerMenu();
+  if (!b) return;
+  if (menu && menu._bouton === b) {
+    fermerMenu();
+    return;
+  }
+  ouvrirMenu(b);
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") fermerMenu();
+});
+
+function ouvrirMenu(b) {
+  fermerMenu();
+  const rangee = b.dataset.src;
+  const m = document.createElement("div");
+  m.className = "menu";
+  m._bouton = b;
+  const choisis = () => new Set(E.src[rangee] || []);
+  const p = document.createElement("p");
+  p.textContent = E.sources.length ? "D'où vient ce chiffre?" : "Colle le lien de ta source :";
+  m.appendChild(p);
+  const liste = document.createElement("div");
+  liste.className = "liste";
+  m.appendChild(liste);
+  function remplir() {
+    liste.innerHTML = "";
+    const ch = choisis();
+    E.sources.forEach((s, i) => {
+      const x = document.createElement("button");
+      x.type = "button";
+      x.setAttribute("aria-pressed", String(ch.has(s.id)));
+      const n = document.createElement("b");
+      n.textContent = i + 1;
+      const t = document.createElement("span");
+      t.textContent = s.titre + (s.url ? " · " + court(s.url) : "");
+      x.append(n, t);
+      x.addEventListener("click", () => {
+        const c = choisis();
+        c.has(s.id) ? c.delete(s.id) : c.add(s.id);
+        E.src[rangee] = [ ...c ];
+        enregistrer();
+        dessiner();
+        fermerMenu();
+      });
+      liste.appendChild(x);
+    });
+  }
+  remplir();
+  const inp = document.createElement("input");
+  inp.placeholder = "Nouveau lien : colle-le ici";
+  inp.autocomplete = "off";
+  inp.spellcheck = false;
+  m.appendChild(inp);
+  const lier = t => {
+    const ids = ajouterDepuis(t);
+    if (ids) {
+      E.src[rangee] = [ ...new Set([ ...E.src[rangee] || [], ...ids ]) ];
+      enregistrer();
+      dessiner();
+      fermerMenu();
+    }
+  };
+  inp.addEventListener("paste", e => {
+    const t = e.clipboardData && e.clipboardData.getData("text/plain");
+    if (!t) return;
+    e.preventDefault();
+    lier(t);
+  });
+  inp.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      lier(inp.value);
+    }
+  });
+  if ((E.src[rangee] || []).length) {
+    const bas = document.createElement("div");
+    bas.className = "bas";
+    const r = document.createElement("button");
+    r.type = "button";
+    r.className = "lien-btn";
+    r.textContent = "Aucune source";
+    r.addEventListener("click", () => {
+      E.src[rangee] = [];
+      enregistrer();
+      dessiner();
+      fermerMenu();
+    });
+    bas.appendChild(r);
+    m.appendChild(bas);
+  }
+  document.body.appendChild(m);
+  menu = m;
+  const rc = b.getBoundingClientRect();
+  const L = Math.min(window.innerWidth - m.offsetWidth - 10, Math.max(10, rc.right - m.offsetWidth));
+  m.style.left = L + scrollX + "px";
+  m.style.top = rc.bottom + scrollY + 4 + "px";
+  if (!E.sources.length) inp.focus();
+}
+
+const zoneDrapeau = document.getElementById("drapeau");
+
+zoneDrapeau.addEventListener("click", e => {
+  if (e.target.closest(".retirer")) return;
+  zoneDrapeau.focus();
+  if (!E.drapeau) bulle("Copie l'image du drapeau (clic droit › Copier l'image), puis Ctrl + V.");
+});
+
+zoneDrapeau.addEventListener("dblclick", () => document.getElementById("f-drapeau").click());
+
+document.getElementById("f-drapeau").addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (f) prendreDrapeau(f);
+  e.target.value = "";
+});
+
+[ "dragenter", "dragover" ].forEach(t => zoneDrapeau.addEventListener(t, e => {
+  e.preventDefault();
+  zoneDrapeau.classList.add("survol");
+}));
+
+[ "dragleave", "drop" ].forEach(t => zoneDrapeau.addEventListener(t, () => zoneDrapeau.classList.remove("survol")));
+
+zoneDrapeau.addEventListener("drop", e => {
+  e.preventDefault();
+  const f = [ ...e.dataTransfer.files ].find(x => x.type.startsWith("image/"));
+  if (f) return prendreDrapeau(f);
+  const html = e.dataTransfer.getData("text/html");
+  const m = html && html.match(/<img[^>]+src="([^"]+)"/i);
+  const u = m ? m[1].replace(/&amp;/g, "&") : e.dataTransfer.getData("text/uri-list");
+  if (u) drapeauDepuisAdresse(u);
+});
+
+function prendreDrapeau(blob) {
+  const url = URL.createObjectURL(blob);
+  const im = new Image;
+  im.onload = () => {
+    const k = Math.min(1, 640 / Math.max(im.naturalWidth || 640, im.naturalHeight || 400));
+    const w = Math.max(1, Math.round((im.naturalWidth || 640) * k)), h = Math.max(1, Math.round((im.naturalHeight || 400) * k));
+    const c = document.createElement("canvas");
+    c.width = w;
+    c.height = h;
+    const x = c.getContext("2d");
+    x.fillStyle = "#fff";
+    x.fillRect(0, 0, w, h);
+    x.drawImage(im, 0, 0, w, h);
+    E.drapeau = c.toDataURL("image/png");
+    if (E.drapeau.length > 9e5) E.drapeau = c.toDataURL("image/jpeg", .9);
+    URL.revokeObjectURL(url);
+    enregistrer();
+    dessiner();
+    bulle("Drapeau ajouté");
+  };
+  im.onerror = () => {
+    URL.revokeObjectURL(url);
+    bulle("Cette image ne s'ouvre pas. Essaie une autre image du drapeau.");
+  };
+  im.src = url;
+}
+
+function drapeauDepuisAdresse(u) {
+  if (/^data:image\//.test(u)) {
+    fetch(u).then(r => r.blob()).then(prendreDrapeau);
+    return;
+  }
+  fetch(u, {
+    mode: "cors",
+    referrerPolicy: "no-referrer"
+  }).then(r => {
+    if (!r.ok) throw 0;
+    return r.blob();
+  }).then(b => {
+    if (!b.type.startsWith("image/")) throw 0;
+    prendreDrapeau(b);
+  }).catch(() => bulle("Ce site bloque la copie. Fais clic droit sur le drapeau › Copier l'image, puis Ctrl + V ici."));
+}
+
+const dWord = document.getElementById("d-word"), dRem = document.getElementById("d-remettre");
+
+document.getElementById("b-word").onclick = () => {
+  document.getElementById("err-word").hidden = true;
+  dWord.showModal();
+};
+
+document.getElementById("fermer-word").onclick = () => dWord.close();
+
+document.getElementById("b-remettre").onclick = () => {
+  const manque = [];
+  if (!E.pays.trim()) manque.push("le nom du pays");
+  const vides = TOUTES.filter(r => r.choix ? !E.depart : r.trois ? E.dest.some(x => !x.trim()) : !(E.valeurs[r.id] || "").trim()).length;
+  if (vides) manque.push(vides === 1 ? "1 case de la fiche" : vides + " cases de la fiche");
+  const sansSrc = TOUTES.filter(r => !r.choix && !r.indice && !(E.src[r.id] || []).filter(numero).length).length;
+  if (sansSrc) manque.push(sansSrc === 1 ? "1 numéro de source" : sansSrc + " numéros de source");
+  [ "q3", "q4", "q5" ].forEach((q, i) => {
+    if (!E[q].trim()) manque.push("la question " + (i + 3));
+  });
+  const p = document.getElementById("manque");
+  p.hidden = !manque.length;
+  p.innerHTML = "";
+  if (manque.length) {
+    const b = document.createElement("b");
+    b.textContent = "Il te manque encore : ";
+    p.append(b, manque.join(", ") + ". Tu peux quand même la télécharger.");
+  }
+  dRem.showModal();
+};
+
+document.getElementById("fermer-remettre").onclick = () => dRem.close();
+
+document.getElementById("imprimer").onclick = () => {
+  dRem.close();
+  setTimeout(() => print(), 80);
+};
+
+document.getElementById("telecharger").onclick = async () => {
+  const blob = await fabriquerWord();
+  const nom = "Fiche démographique - " + (E.pays.trim() || "mon pays").replace(/[\\/:*?"<>|]+/g, "") + ".docx";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = nom;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }, 2e3);
+  dRem.close();
+  bulle("Téléchargée : « " + nom + " ». Remets-la dans le devoir Teams.");
+};
+
+const zoneW = document.getElementById("zone"), fichier = document.getElementById("fichier");
+
+zoneW.onclick = () => fichier.click();
+
+zoneW.onkeydown = e => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    fichier.click();
+  }
+};
+
+fichier.onchange = () => {
+  if (fichier.files[0]) importer(fichier.files[0]);
+  fichier.value = "";
+};
+
+[ "dragenter", "dragover" ].forEach(t => zoneW.addEventListener(t, e => {
+  e.preventDefault();
+  zoneW.classList.add("survol");
+}));
+
+[ "dragleave", "drop" ].forEach(t => zoneW.addEventListener(t, () => zoneW.classList.remove("survol")));
+
+zoneW.addEventListener("drop", e => {
+  e.preventDefault();
+  const f = e.dataTransfer.files[0];
+  if (f) importer(f);
+});
+
+const CRC = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 3988292384 ^ c >>> 1 : c >>> 1;
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+
+function crc32(u) {
+  let c = 4294967295;
+  for (let i = 0; i < u.length; i++) c = CRC[(c ^ u[i]) & 255] ^ c >>> 8;
+  return (c ^ 4294967295) >>> 0;
+}
+
+const enc = new TextEncoder;
+
+function zip(fichiers) {
+  const parts = [], central = [];
+  let pos = 0;
+  for (const [nom, contenu] of fichiers) {
+    const n = enc.encode(nom), d = typeof contenu === "string" ? enc.encode(contenu) : contenu, c = crc32(d);
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 67324752, true);
+    h.setUint16(4, 20, true);
+    h.setUint16(6, 2048, true);
+    h.setUint16(8, 0, true);
+    h.setUint16(10, 0, true);
+    h.setUint16(12, 33, true);
+    h.setUint32(14, c, true);
+    h.setUint32(18, d.length, true);
+    h.setUint32(22, d.length, true);
+    h.setUint16(26, n.length, true);
+    h.setUint16(28, 0, true);
+    parts.push(new Uint8Array(h.buffer), n, d);
+    const g = new DataView(new ArrayBuffer(46));
+    g.setUint32(0, 33639248, true);
+    g.setUint16(4, 20, true);
+    g.setUint16(6, 20, true);
+    g.setUint16(8, 2048, true);
+    g.setUint16(10, 0, true);
+    g.setUint16(12, 0, true);
+    g.setUint16(14, 33, true);
+    g.setUint32(16, c, true);
+    g.setUint32(20, d.length, true);
+    g.setUint32(24, d.length, true);
+    g.setUint16(28, n.length, true);
+    g.setUint32(42, pos, true);
+    central.push(new Uint8Array(g.buffer), n);
+    pos += 30 + n.length + d.length;
+  }
+  const tailleC = central.reduce((s, x) => s + x.length, 0);
+  const fin = new DataView(new ArrayBuffer(22));
+  fin.setUint32(0, 101010256, true);
+  fin.setUint16(8, fichiers.length, true);
+  fin.setUint16(10, fichiers.length, true);
+  fin.setUint32(12, tailleC, true);
+  fin.setUint32(16, pos, true);
+  return new Blob([ ...parts, ...central, new Uint8Array(fin.buffer) ], {
+    type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  });
+}
+
+async function dezipper(buf) {
+  const u = new Uint8Array(buf), v = new DataView(buf);
+  let e = -1;
+  for (let i = u.length - 22; i >= Math.max(0, u.length - 7e4); i--) if (v.getUint32(i, true) === 101010256) {
+    e = i;
+    break;
+  }
+  if (e < 0) throw new Error("pas un zip");
+  const nb = v.getUint16(e + 10, true);
+  let p = v.getUint32(e + 16, true);
+  const out = new Map;
+  const dec = new TextDecoder;
+  for (let k = 0; k < nb; k++) {
+    const meth = v.getUint16(p + 10, true), tc = v.getUint32(p + 20, true), ln = v.getUint16(p + 28, true), le = v.getUint16(p + 30, true), lc = v.getUint16(p + 32, true), off = v.getUint32(p + 42, true);
+    const nom = dec.decode(u.subarray(p + 46, p + 46 + ln));
+    p += 46 + ln + le + lc;
+    const deb = off + 30 + v.getUint16(off + 26, true) + v.getUint16(off + 28, true);
+    const brut = u.subarray(deb, deb + tc);
+    if (meth === 0) out.set(nom, brut); else if (meth === 8) out.set(nom, new Uint8Array(await new Response(new Blob([ brut ]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer()));
+  }
+  return out;
+}
+
+const W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+
+async function importer(f) {
+  const err = document.getElementById("err-word");
+  err.hidden = true;
+  try {
+    const z = await dezipper(await f.arrayBuffer());
+    const dec = new TextDecoder;
+    let N;
+    if (z.has("fiche/donnees.json")) N = Object.assign(vierge(), JSON.parse(dec.decode(z.get("fiche/donnees.json")))); else if (z.has("word/document.xml")) N = lireAncienne(z, dec); else throw new Error("pas un Word");
+    const avant = remplissage(E);
+    if (avant > 3 && !confirm("Ta fiche à l'écran sera remplacée par celle du fichier Word. Continuer?")) return;
+    E = N;
+    localStorage.setItem(CLE, JSON.stringify(E));
+    dessiner();
+    dWord.close();
+    bulle("Ta fiche Word est reprise : " + remplissage(E) + " cases remplies, " + E.sources.length + " sources.");
+  } catch (e) {
+    err.textContent = "Ce fichier ne s'ouvre pas ici. Il faut la fiche démographique en Word (.docx), téléchargée depuis Teams.";
+    err.hidden = false;
+  }
+}
+
+function remplissage(x) {
+  let n = 0;
+  for (const k in x.valeurs) if ((x.valeurs[k] || "").trim()) n++;
+  n += x.dest.filter(d => (d || "").trim()).length + (x.pays.trim() ? 1 : 0) + [ "q3", "q4", "q5" ].filter(q => (x[q] || "").trim()).length;
+  return n;
+}
+
+function texteDe(noeud) {
+  let s = "";
+  (function marche(n) {
+    if (n.nodeType !== 1) return;
+    if (n.localName === "sdt") {
+      const pr = n.getElementsByTagNameNS(W, "sdtPr")[0];
+      if (pr && pr.getElementsByTagNameNS(W, "showingPlcHdr").length) return;
+    }
+    if (n.localName === "sdtPr" || n.localName === "rPr" || n.localName === "pPr" || n.localName === "tcPr") return;
+    if (n.localName === "t") s += n.textContent; else if (n.localName === "tab") s += " "; else if (n.localName === "br" || n.localName === "cr") s += "\n";
+    for (const c of n.childNodes) marche(c);
+    if (n.localName === "p") s += "\n";
+  })(noeud);
+  return s.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function lireAncienne(z, dec) {
+  const doc = (new DOMParser).parseFromString(dec.decode(z.get("word/document.xml")), "application/xml");
+  const corps = doc.getElementsByTagNameNS(W, "body")[0];
+  const N = vierge();
+  const tables = [ ...corps.childNodes ].filter(n => n.localName === "tbl");
+  const cellules = tr => [ ...tr.childNodes ].filter(n => n.localName === "tc" || n.localName === "sdt");
+  const rangees = tbl => [ ...tbl.childNodes ].filter(n => n.localName === "tr");
+  const parAlias = (racine, a) => [ ...racine.getElementsByTagNameNS(W, "sdt") ].filter(s => {
+    const al = s.getElementsByTagNameNS(W, "alias")[0];
+    return al && al.getAttributeNS(W, "val") === a;
+  });
+  const sdtTexte = s => s ? texteDe(s) : "";
+  if (tables[0]) {
+    N.pays = sdtTexte(parAlias(tables[0], "NOM DE MON PAYS")[0]).replace(/\s+/g, " ");
+    N.equipe = sdtTexte(parAlias(tables[0], "Prénoms et noms")[0]).replace(/\s+/g, " ");
+    const g = sdtTexte(parAlias(tables[0], "Choisis")[0]);
+    if (/^0[234]$/.test(g)) N.groupe = g;
+    const blip = tables[0].getElementsByTagNameNS("http://schemas.openxmlformats.org/drawingml/2006/main", "blip")[0];
+    if (blip) {
+      const rid = blip.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "embed");
+      const rels = (new DOMParser).parseFromString(dec.decode(z.get("word/_rels/document.xml.rels") || new Uint8Array), "application/xml");
+      const rel = [ ...rels.getElementsByTagName("Relationship") ].find(r => r.getAttribute("Id") === rid);
+      if (rel) {
+        const chemin = "word/" + rel.getAttribute("Target").replace(/^\/?word\//, "").replace(/^\.\//, "");
+        const im = z.get(chemin);
+        if (im) {
+          const ext = chemin.split(".").pop().toLowerCase();
+          const mime = ext === "png" ? "image/png" : ext === "gif" ? "image/gif" : "image/jpeg";
+          let b = "";
+          for (let i = 0; i < im.length; i += 32768) b += String.fromCharCode.apply(null, im.subarray(i, i + 32768));
+          N.drapeau = "data:" + mime + ";base64," + btoa(b);
+        }
+      }
+    }
+  }
+  const numeros = {};
+  const tSources = tables.find(t => rangees(t).some(r => /^[¹²³⁴]$/.test(texteDe(cellules(r)[0] || r))));
+  let extra = "";
+  if (tSources) {
+    rangees(tSources).forEach(r => {
+      const c = cellules(r);
+      const n = "¹²³⁴".indexOf(texteDe(c[0]).trim()) + 1;
+      const t = c[1] ? texteDe(c[1]) : "";
+      if (!t.trim()) return;
+      const liens = t.match(URL_RE) || [];
+      const titre = t.replace(URL_RE, " ").replace(/\s+/g, " ").replace(/^[\s\-–—:,|]+|[\s\-–—:,|]+$/g, "");
+      if (liens.length) liens.forEach((u, i) => {
+        const id = ajouterA(N, u, i === 0 ? titre : "");
+        if (i === 0 && n) numeros[n] = id;
+      }); else {
+        const id = ajouterA(N, "", titre);
+        if (n) numeros[n] = id;
+      }
+    });
+    let x = tSources.nextSibling;
+    while (x) {
+      if (x.localName === "p" || x.localName === "sdt" || x.localName === "tbl") extra += texteDe(x) + "\n";
+      x = x.nextSibling;
+    }
+  }
+  extra.split(/\n+/).map(s => s.trim()).filter(Boolean).forEach(l => {
+    const liens = l.match(URL_RE) || [];
+    const titre = l.replace(URL_RE, " ").replace(/\s+/g, " ").trim();
+    if (liens.length) liens.forEach((u, i) => ajouterA(N, u, i === 0 ? titre : "")); else if (titre.length > 3) ajouterA(N, "", titre);
+  });
+  const lierNumeros = (rid, texte) => {
+    const ids = [];
+    (texte.match(/\d+|[¹²³⁴⁵⁶⁷⁸⁹]/g) || []).forEach(t => {
+      const n = /\d/.test(t) ? +t : "¹²³⁴⁵⁶⁷⁸⁹".indexOf(t) + 1;
+      let id = numeros[n] || N.sources[n - 1] && N.sources[n - 1].id;
+      if (id) ids.push(id);
+    });
+    if (ids.length) N.src[rid] = [ ...new Set(ids) ];
+  };
+  for (const t of tables) for (const r of rangees(t)) {
+    const c = cellules(r);
+    if (c.length < 2) continue;
+    const etiq = texteDe(c[0]).split("\n")[0].trim();
+    const R = TOUTES.find(x => x.etiq === etiq);
+    if (!R) continue;
+    if (R.choix) {
+      const v = texteDe(c[1]);
+      const ch = R.choix.find(x => v.includes(x)) || (/départ/i.test(v) ? R.choix[0] : /accueil/i.test(v) ? R.choix[1] : "");
+      N.depart = ch;
+      continue;
+    }
+    let v = texteDe(c[1]);
+    const liens = v.match(URL_RE) || [];
+    if (liens.length) {
+      const ids = liens.map(u => ajouterA(N, u, ""));
+      N.src[R.id] = ids;
+      v = v.replace(URL_RE, " ").replace(/[ \t]{2,}/g, " ").trim();
+    }
+    if (R.trois) {
+      const l = v.split("\n").map(s => s.trim()).filter(Boolean);
+      N.dest = [ l[0] || "", l[1] || "", l.slice(2).join(" ") || "" ];
+    } else N.valeurs[R.id] = v;
+    if (c[2]) lierNumeros(R.id, texteDe(c[2]));
+  }
+  const seules = tables.filter(t => rangees(t).length === 1 && cellules(rangees(t)[0]).length === 1);
+  const reponses = seules.filter(t => !/^Pour chaque case/.test(texteDe(t)));
+  [ "q3", "q4", "q5" ].forEach((q, i) => {
+    if (reponses[i]) N[q] = texteDe(reponses[i]);
+  });
+  return N;
+}
+
+function ajouterA(N, url, titre) {
+  const garde = E;
+  E = N;
+  const r = ajouterSource(url, titre).id;
+  E = garde;
+  return r;
+}
+
+const xe = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+function r(texte, o = {}) {
+  const pr = (o.gras ? "<w:b/>" : "") + (o.ital ? "<w:i/>" : "") + (o.couleur ? `<w:color w:val="${o.couleur}"/>` : "") + (o.taille ? `<w:sz w:val="${o.taille * 2}"/>` : "") + (o.exp ? '<w:vertAlign w:val="superscript"/>' : "") + (o.lien ? '<w:u w:val="single"/>' : "");
+  return String(texte).split("\n").map((l, i) => (i ? "<w:r><w:br/></w:r>" : "") + `<w:r>${pr ? "<w:rPr>" + pr + "</w:rPr>" : ""}<w:t xml:space="preserve">${xe(l)}</w:t></w:r>`).join("");
+}
+
+const p = (contenu, o = {}) => `<w:p><w:pPr>${o.style ? `<w:pStyle w:val="${o.style}"/>` : ""}${o.garde ? "<w:keepNext/>" : ""}${o.saut ? "<w:pageBreakBefore/>" : ""}${o.avant != null || o.apres != null ? `<w:spacing w:before="${(o.avant || 0) * 20}" w:after="${(o.apres || 0) * 20}"/>` : ""}${o.bord ? '<w:pBdr><w:bottom w:val="single" w:sz="12" w:space="2" w:color="0E6E6B"/></w:pBdr>' : ""}${o.centre ? '<w:jc w:val="center"/>' : ""}</w:pPr>${contenu}</w:p>`;
+
+const tc = (largeur, contenu, o = {}) => `<w:tc><w:tcPr><w:tcW w:w="${largeur}" w:type="dxa"/>${o.span ? `<w:gridSpan w:val="${o.span}"/>` : ""}${o.fond ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.fond}"/>` : ""}<w:vAlign w:val="${o.haut ? "top" : "center"}"/></w:tcPr>${contenu || "<w:p/>"}</w:tc>`;
+
+function table(largeurs, rangees, bord = "C9DCDA") {
+  return `<w:tbl><w:tblPr><w:tblW w:w="${largeurs.reduce((a, b) => a + b, 0)}" w:type="dxa"/><w:jc w:val="center"/><w:tblBorders>${[ "top", "left", "bottom", "right", "insideH", "insideV" ].map(c => `<w:${c} w:val="single" w:sz="4" w:space="0" w:color="${bord}"/>`).join("")}</w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="60" w:type="dxa"/><w:left w:w="110" w:type="dxa"/><w:bottom w:w="60" w:type="dxa"/><w:right w:w="110" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${largeurs.map(w => `<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>${rangees.map(x => `<w:tr><w:trPr><w:cantSplit/></w:trPr>${x}</w:tr>`).join("")}</w:tbl>`;
+}
+
+function titreSec(t, pts) {
+  return p(r(t.toUpperCase(), {
+    gras: true,
+    taille: 12.5,
+    couleur: "0E6E6B"
+  }) + (pts ? r("   " + pts, {
+    gras: true,
+    taille: 12,
+    couleur: "6B7B7A"
+  }) : ""), {
+    bord: true,
+    garde: true,
+    avant: 10,
+    apres: 4
+  });
+}
+
+async function fabriquerWord() {
+  const rels = [];
+  let nrel = 10;
+  const media = [];
+  const lienRel = url => {
+    const id = "rId" + nrel++;
+    rels.push(`<Relationship Id="${id}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="${xe(url)}" TargetMode="External"/>`);
+    return id;
+  };
+  const W1 = 3740, W2 = 4990, W3 = 1420;
+  const srcTxt = id => (E.src[id] || []).map(numero).filter(Boolean).sort((a, b) => a - b).join(", ");
+  let corps = "";
+  let dessinDrapeau = "";
+  if (E.drapeau) {
+    const [ent, b64] = E.drapeau.split(",");
+    const ext = /png/.test(ent) ? "png" : "jpeg";
+    const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    media.push([ "word/media/drapeau." + ext, bin ]);
+    rels.push(`<Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/drapeau.${ext}"/>`);
+    const im = await new Promise(res => {
+      const i = new Image;
+      i.onload = () => res(i);
+      i.onerror = () => res(null);
+      i.src = E.drapeau;
+    });
+    const ratio = im && im.naturalHeight ? im.naturalWidth / im.naturalHeight : 1.6;
+    let h = 1.7, w = h * ratio;
+    if (w > 4) {
+      w = 4;
+      h = w / ratio;
+    }
+    const cx = Math.round(w * 36e4), cy = Math.round(h * 36e4);
+    dessinDrapeau = `<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:docPr id="1" name="Drapeau"/><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="1" name="drapeau.${ext}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId9"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:ln w="6350"><a:solidFill><a:srgbClr val="D5DEDD"/></a:solidFill></a:ln></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>`;
+  }
+  const gauche = p(r(E.pays.trim() ? E.pays.trim().toUpperCase() : "MON PAYS", {
+    gras: true,
+    taille: 28,
+    couleur: "0E6E6B"
+  })) + p(r("Fiche démographique", {
+    gras: true,
+    taille: 15
+  }) + r("   Monde contemporain · Population", {
+    taille: 11,
+    couleur: "6B7B7A"
+  })) + p(r("Équipe : ", {
+    gras: true
+  }) + r(E.equipe.trim() || "—") + r("     Groupe : ", {
+    gras: true
+  }) + r(E.groupe || "—"), {
+    avant: 5
+  });
+  corps += table([ 7600, 2550 ], [ tc(7600, gauche) + tc(2550, p(dessinDrapeau, {
+    centre: true
+  }), {}) ], "FFFFFF");
+  corps += p("", {
+    apres: 2
+  });
+  const tete = tc(W1, p(r("Donnée", {
+    gras: true,
+    taille: 11,
+    couleur: "FFFFFF"
+  })), {
+    fond: "0E6E6B"
+  }) + tc(W2, p(r("Mon pays", {
+    gras: true,
+    taille: 11,
+    couleur: "FFFFFF"
+  })), {
+    fond: "0E6E6B"
+  }) + tc(W3, p(r("Source", {
+    gras: true,
+    taille: 11,
+    couleur: "FFFFFF"
+  })), {
+    fond: "0E6E6B"
+  });
+  const ligneDe = R => {
+    const a = tc(W1, p(r(R.etiq, {
+      gras: true
+    })));
+    if (R.choix) return a + tc(W2 + W3, p(r(E.depart || "—")), {
+      span: 2
+    });
+    const v = R.trois ? E.dest.map((d, k) => p(r((d || "").trim() || "—"), {
+      apres: k < 2 ? 2 : 0
+    })).join("") : p(r((E.valeurs[R.id] || "").trim() || "—"));
+    return a + tc(W2, v) + tc(W3, p(r(srcTxt(R.id), {
+      gras: true,
+      couleur: "0E6E6B",
+      taille: 13
+    }), {
+      centre: true
+    }));
+  };
+  corps += titreSec("1. Qui vit là", "Fiche : /8") + table([ W1, W2, W3 ], [ tete, ...RANGEES.t1.map(ligneDe) ]);
+  corps += titreSec("2. Qui part, et vers où") + table([ W1, W2, W3 ], RANGEES.t2.map(ligneDe));
+  corps += p(r("Comprendre mon pays", {
+    gras: true,
+    taille: 18,
+    couleur: "0E6E6B"
+  }), {
+    saut: true,
+    apres: 2
+  });
+  const Q = [ [ "q3", "3. Pourquoi on part", "/4", "Explique deux raisons qui poussent les gens à quitter ton pays. Appuie chacune sur un chiffre." ], [ "q4", "4. Ce que ça change", "/3", "Explique une conséquence de cette émigration pour ton pays, et relie-la à un chiffre de ta fiche." ], [ "q5", "5. Un visage, une histoire", "/5", "En une dizaine de lignes, invente un personnage réaliste, mais fictif, de ton pays et raconte son histoire : qui il est, pourquoi il part, vers laquelle de tes trois destinations, et l'obstacle qu'il rencontre en arrivant. Ton histoire s'appuie sur au moins deux informations de ta fiche." ] ];
+  for (const [k, t, pts, cons] of Q) {
+    corps += titreSec(t, pts) + p(r(cons), {
+      garde: true,
+      apres: 4
+    });
+    const paras = (E[k] || "").trim() ? E[k].trim().split(/\n/).map(l => p(r(l), {
+      apres: 3
+    })).join("") : p(r("—", {
+      couleur: "6B7B7A"
+    }));
+    corps += table([ 10150 ], [ tc(10150, paras, {
+      haut: true
+    }) ], "B7D3D0");
+  }
+  corps += titreSec("Sources");
+  if (E.sources.length) {
+    corps += table([ 620, 9530 ], E.sources.map((s, i) => {
+      let c = r(s.titre, {
+        gras: true,
+        taille: 10.5
+      });
+      if (s.url) c += r("  ") + `<w:hyperlink r:id="${lienRel(s.url)}" w:history="1">${r(court(s.url).length > 70 ? court(s.url).slice(0, 68) + "…" : court(s.url), {
+        taille: 9.5,
+        couleur: "1F5FAD",
+        lien: true
+      })}</w:hyperlink>`;
+      return tc(620, p(r(String(i + 1), {
+        gras: true,
+        couleur: "0E6E6B",
+        taille: 12
+      }), {
+        centre: true
+      })) + tc(9530, p(c));
+    }));
+  } else corps += p(r("Aucune source.", {
+    ital: true,
+    couleur: "6B7B7A"
+  }));
+  corps += p("");
+  const NS = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"';
+  const document_ = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${NS}><w:body>${corps}<w:sectPr><w:footerReference w:type="default" r:id="rId8"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="680" w:right="1020" w:bottom="680" w:left="1020" w:header="400" w:footer="400" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  const pied = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:ftr ${NS}>${p(r("Monde contemporain · 5e secondaire · Projet Migrations · Fiche démographique", {
+    taille: 9,
+    couleur: "6B7B7A"
+  }), {
+    centre: true
+  })}</w:ftr>`;
+  const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:eastAsia="Calibri" w:cs="Calibri"/><w:color w:val="1C2B2A"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="fr-CA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="252" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style><w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style></w:styles>`;
+  const docRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId8" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>${rels.join("")}</Relationships>`;
+  const types = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Default Extension="jpeg" ContentType="image/jpeg"/><Default Extension="json" ContentType="application/json"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/></Types>`;
+  const racine = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`;
+  return zip([ [ "[Content_Types].xml", types ], [ "_rels/.rels", racine ], [ "word/document.xml", document_ ], [ "word/styles.xml", styles ], [ "word/footer1.xml", pied ], [ "word/_rels/document.xml.rels", docRels ], ...media, [ "fiche/donnees.json", JSON.stringify(E) ] ]);
+}
+
+dessiner();
+
+window.addEventListener("storage", e => {
+  if (e.key === CLE && e.newValue) {
+    try {
+      E = Object.assign(vierge(), JSON.parse(e.newValue));
+      dessiner();
+    } catch (x) {}
+  }
+});
+</script>
+</body>
+</html>
