@@ -207,7 +207,7 @@ footer.pied-page{color:var(--gris);font-size:15px;margin-top:26px;border-top:1px
   <p class="q">En une dizaine de lignes, invente un personnage réaliste, mais fictif, de ton pays et raconte son histoire : qui il est, pourquoi il part, vers laquelle de tes trois destinations, et l'obstacle qu'il rencontre en arrivant. Ton histoire s'appuie sur au moins deux informations de ta fiche.</p>
   <div class="reponse long"><textarea data-champ="q5" placeholder="Écris ici."></textarea></div>
 
-  <footer class="pied-page">Ta fiche s'enregistre toute seule dans ce navigateur, sur cet appareil. Pour la remettre ou la continuer ailleurs : « Télécharger pour Teams ».</footer>
+  <footer class="pied-page">Ta fiche s'enregistre toute seule dans ce navigateur, sur cet ordinateur seulement. À la fin de chaque période : « Télécharger pour Teams », pour ne rien perdre. Ordinateur partagé? <button type="button" class="lien-btn" id="effacer">Effacer ma fiche de cet ordinateur</button></footer>
 </main>
 
 <aside class="cote" id="cote">
@@ -228,13 +228,14 @@ footer.pied-page{color:var(--gris);font-size:15px;margin-top:26px;border-top:1px
     <li>Glisse ce fichier ici, ou clique la zone pour le choisir.</li>
   </ol>
   <div class="zone" id="zone" tabindex="0">Choisir ma fiche Word (.docx)</div>
+  <p style="font-size:15px;color:var(--gris)">Un Word téléchargé de cette page revient tel qu'il était ici : ce qui a été changé dans Word après n'est pas repris.</p>
   <input type="file" id="fichier" accept=".docx" hidden>
   <p class="err" id="err-word" hidden></p>
   <div class="bas"><button class="btn" id="fermer-word">Fermer</button></div>
 </div></dialog>
 
 <dialog id="d-remettre"><div class="in">
-  <h3>Remettre ma fiche</h3>
+  <h3>Télécharger pour Teams</h3>
   <p id="manque" hidden></p>
   <ol>
     <li>Clique <b>Télécharger</b> : un fichier Word arrive dans tes Téléchargements.</li>
@@ -368,7 +369,8 @@ const numero = id => E.sources.findIndex(s => s.id === id) + 1;
 const URL_RE = /\bhttps?:\/\/[^\s<>"'«»]+|\bwww\.[^\s<>"'«»]+/gi;
 
 function nettoyerUrl(u) {
-  u = u.trim().replace(/[).,;:!?»]+$/, "");
+  u = u.trim().replace(/[.,;:!?»]+$/, "");
+  while (/\)$/.test(u) && (u.match(/\)/g) || []).length > (u.match(/\(/g) || []).length) u = u.slice(0, -1);
   if (/^www\./i.test(u)) u = "https://" + u;
   return u;
 }
@@ -586,6 +588,7 @@ function dessinerSources() {
 
 function retirerSource(id) {
   const n = numero(id);
+  if (!confirm("Retirer la source " + n + "? Les sources suivantes changeront de numéro.")) return;
   E.sources = E.sources.filter(s => s.id !== id);
   for (const k in E.src) E.src[k] = (E.src[k] || []).filter(x => x !== id);
   enregistrer();
@@ -683,8 +686,7 @@ document.addEventListener("paste", e => {
     }
   }
   if (texte) {
-    const d = el.selectionStart, f = el.selectionEnd;
-    el.setRangeText(texte, d, f, "end");
+    if (!(document.execCommand && document.execCommand("insertText", false, texte))) el.setRangeText(texte, el.selectionStart, el.selectionEnd, "end");
   }
   ecrire(el.dataset.champ, el.value);
   grandir(el);
@@ -833,8 +835,27 @@ function ouvrirMenu(b) {
   const L = Math.min(window.innerWidth - m.offsetWidth - 10, Math.max(10, rc.right - m.offsetWidth));
   m.style.left = L + scrollX + "px";
   m.style.top = rc.bottom + scrollY + 4 + "px";
-  if (!E.sources.length) inp.focus();
+  inp.focus();
 }
+
+document.addEventListener("paste", e => {
+  const b = e.target.closest && e.target.closest(".srcbtn");
+  if (!b) return;
+  const t = e.clipboardData && e.clipboardData.getData("text/plain");
+  if (!t) return;
+  e.preventDefault();
+  const ids = ajouterDepuis(t);
+  if (!ids) return;
+  const k = b.dataset.src;
+  E.src[k] = [ ...new Set([ ...E.src[k] || [], ...ids ]) ];
+  enregistrer();
+  dessiner();
+  fermerMenu();
+}, true);
+
+[ "dragover", "drop" ].forEach(t => window.addEventListener(t, e => {
+  if (!e.target.closest || !e.target.closest(".drapeau,#zone")) e.preventDefault();
+}));
 
 const zoneDrapeau = document.getElementById("drapeau");
 
@@ -941,6 +962,17 @@ document.getElementById("b-remettre").onclick = () => {
     p.append(b, manque.join(", ") + ". Tu peux quand même la télécharger.");
   }
   dRem.showModal();
+};
+
+document.getElementById("effacer").onclick = () => {
+  if (!confirm("Effacer ta fiche de cet ordinateur? Télécharge-la d'abord pour la garder.")) return;
+  E = vierge();
+  try {
+    localStorage.removeItem(CLE);
+  } catch (x) {}
+  dessiner();
+  scrollTo(0, 0);
+  bulle("Fiche effacée de cet ordinateur.");
 };
 
 document.getElementById("fermer-remettre").onclick = () => dRem.close();
@@ -1095,7 +1127,9 @@ async function importer(f) {
     const avant = remplissage(E);
     if (avant > 3 && !confirm("Ta fiche à l'écran sera remplacée par celle du fichier Word. Continuer?")) return;
     E = N;
-    localStorage.setItem(CLE, JSON.stringify(E));
+    try {
+      localStorage.setItem(CLE, JSON.stringify(E));
+    } catch (x) {}
     dessiner();
     dWord.close();
     bulle("Ta fiche Word est reprise : " + remplissage(E) + " cases remplies, " + E.sources.length + " sources.");
@@ -1250,7 +1284,7 @@ function r(texte, o = {}) {
   return String(texte).split("\n").map((l, i) => (i ? "<w:r><w:br/></w:r>" : "") + `<w:r>${pr ? "<w:rPr>" + pr + "</w:rPr>" : ""}<w:t xml:space="preserve">${xe(l)}</w:t></w:r>`).join("");
 }
 
-const p = (contenu, o = {}) => `<w:p><w:pPr>${o.style ? `<w:pStyle w:val="${o.style}"/>` : ""}${o.garde ? "<w:keepNext/>" : ""}${o.saut ? "<w:pageBreakBefore/>" : ""}${o.avant != null || o.apres != null ? `<w:spacing w:before="${(o.avant || 0) * 20}" w:after="${(o.apres || 0) * 20}"/>` : ""}${o.bord ? '<w:pBdr><w:bottom w:val="single" w:sz="12" w:space="2" w:color="0E6E6B"/></w:pBdr>' : ""}${o.centre ? '<w:jc w:val="center"/>' : ""}</w:pPr>${contenu}</w:p>`;
+const p = (contenu, o = {}) => `<w:p><w:pPr>${o.style ? `<w:pStyle w:val="${o.style}"/>` : ""}${o.garde ? "<w:keepNext/>" : ""}${o.saut ? "<w:pageBreakBefore/>" : ""}${o.bord ? '<w:pBdr><w:bottom w:val="single" w:sz="12" w:space="2" w:color="0E6E6B"/></w:pBdr>' : ""}${o.avant != null || o.apres != null ? `<w:spacing w:before="${(o.avant || 0) * 20}" w:after="${(o.apres || 0) * 20}"/>` : ""}${o.centre ? '<w:jc w:val="center"/>' : ""}</w:pPr>${contenu}</w:p>`;
 
 const tc = (largeur, contenu, o = {}) => `<w:tc><w:tcPr><w:tcW w:w="${largeur}" w:type="dxa"/>${o.span ? `<w:gridSpan w:val="${o.span}"/>` : ""}${o.fond ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.fond}"/>` : ""}<w:vAlign w:val="${o.haut ? "top" : "center"}"/></w:tcPr>${contenu || "<w:p/>"}</w:tc>`;
 
