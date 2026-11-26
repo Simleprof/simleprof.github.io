@@ -469,7 +469,6 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
 <section class="plan" aria-labelledby="plan-t">
   <div class="wrap">
     <h2 id="plan-t">Le plan de match</h2>
-    <p>Lis un thème, puis fais sa <strong>petite vérif</strong>. À la fin de la note, on teste.</p>
     <ul>
       <li><a href="#besoins">Besoin ou désir</a></li>
       <li><a href="#maslow">La pyramide de Maslow</a></li>
@@ -516,16 +515,6 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
       <div class="l2" role="listitem"><b>2. Sécurité</b><span>Un environnement stable, sans crise ni anxiété</span></div>
       <div class="l1" role="listitem"><b>1. Physiologiques</b><span>Manger, boire, dormir, respirer…</span></div>
     </div>
-    <aside class="bonheur" aria-label="La pyramide du bonheur, selon George Carlin">
-      <span class="k">La pyramide du bonheur</span>
-      <blockquote>«&nbsp;Le secret du bonheur&nbsp;: faire ce que tu aimes, le faire bien, et être reconnu pour ça.&nbsp;»<cite>George Carlin (traduction libre)</cite></blockquote>
-      <div class="mini-pyr">
-        <div class="h1"><b>Faire ce que tu aimes</b><span>Accomplissement</span></div>
-        <div class="h2"><b>Le faire bien</b><span>Estime de soi</span></div>
-        <div class="h3"><b>Être reconnu</b><span>Estime des autres</span></div>
-      </div>
-      <p>Le sommet de Maslow. Il tient seulement si la base est solide.</p>
-    </aside>
     </div>
     <p class="mnemo">De la base au sommet&nbsp;: « <b>P</b>as <b>S</b>ûr, <b>A</b>ppelle <b>E</b>ncore <b>A</b>lex »</p>
     <div class="trap"><b>Piège</b>La pyramide nomme de <strong>grandes catégories</strong> de besoins, pas des produits ni des activités. « Besoin d'un cellulaire » ou « besoin de magasiner », ce n'est pas un étage.</div>
@@ -553,7 +542,7 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
     <dl class="tags"><div class="tag"><dt>Pouvoir d'achat</dt><dd>La <strong>quantité de biens et de services</strong> que ton argent te permet d'acheter. Il dépend de ton <strong>revenu</strong>, des <strong>prix</strong> et des <strong>taxes</strong>.</dd></div></dl>
     <div class="cols3">
       <div class="card"><h4>Le revenu</h4><p>On consomme selon nos moyens. Moins on gagne, plus le logement et la nourriture prennent de place dans le budget.</p></div>
-      <div class="card"><h4>Le prix</h4><p>Le prix monte → on achète moins. Il baisse → on achète plus.</p><p class="ex">Chou-fleur trop cher en hiver? On prend des carottes.</p></div>
+      <div class="card"><h4>Le prix</h4><p>Le prix monte → on achète moins. Il baisse → on achète plus.</p></div>
       <div class="card"><h4>Les taxes</h4><p>Elles s'ajoutent au prix, donc elles réduisent ce que tu peux acheter.</p></div>
     </div>
     <div class="tip"><b>Bonus&nbsp;: l'inflation</b>C'est la <strong>hausse générale des prix</strong> avec le temps. Avec le même 20&nbsp;$, tu achètes moins qu'avant&nbsp;: ton pouvoir d'achat baisse.</div>
@@ -585,18 +574,7 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
       </dl>
     </div>
     <p>Le prix se fixe là où l'offre et la demande <span class="hl">s'équilibrent</span>.</p>
-    <div class="scroll">
-      <table class="rules">
-        <thead><tr><th>Si…</th><th>et…</th><th>alors le prix…</th></tr></thead>
-        <tbody>
-          <tr><td>la demande <span class="up">↑</span></td><td>l'offre reste pareille</td><td class="arrow up">↑ monte</td></tr>
-          <tr><td>la demande <span class="down">↓</span></td><td>l'offre reste pareille</td><td class="arrow down">↓ baisse</td></tr>
-          <tr><td>l'offre <span class="up">↑</span></td><td>la demande reste pareille</td><td class="arrow down">↓ baisse</td></tr>
-          <tr><td>l'offre <span class="down">↓</span></td><td>la demande reste pareille</td><td class="arrow up">↑ monte</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="tip"><b>Exemple</b>Au bal des finissants, plein d'élèves veulent louer une limousine (demande <span class="up">↑</span>), mais il n'y en a pas plus (offre =). Le prix de location <strong>monte</strong>.</div>
+    <p>Si la demande <strong>monte</strong> (et que l'offre reste pareille), le prix <strong>monte</strong>&nbsp;; si elle baisse, le prix baisse. Si l'offre <strong>monte</strong>, le prix <strong>baisse</strong>&nbsp;; si elle baisse, le prix monte.</p>
     <div class="pause">
       <div class="quiz">
         <details><summary><span class="q-n">Explique</span>Pourquoi les voyages dans le Sud coûtent plus cher pendant la relâche?<span class="see">Voir la réponse →</span></summary><div class="ans">Tout le monde veut partir en même temps (demande <span class="up">↑</span>), mais il n'y a pas plus de places (offre =). Le prix <strong class="up">monte</strong>.</div></details>
@@ -615,22 +593,10 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
       <div style="display:grid;gap:14px;min-width:0">
         <p><strong>Tout n'est pas taxé!</strong> Le gouvernement protège l'accès aux produits et services de base.</p>
         <table class="mini">
-          <tr><td>Pas taxé</td><td>Aliments de base (fruits, légumes, viande, pain), soins de santé (médecin, dentiste)</td></tr>
+          <tr><td>Pas taxé</td><td>Aliments de base (fruits, légumes, viande, pain), soins de santé (médecin, dentiste), médicaments sur ordonnance</td></tr>
           <tr><td>Taxé</td><td>Ce qui est transformé, emballé ou en format individuel (chips, boisson gazeuse…)</td></tr>
-          <tr><td>Nouveau</td><td>Depuis le 15 juillet 2026, Québec a retiré la <strong>TVQ</strong> (pas la TPS) sur quelques collations&nbsp;: muffins et viennoiseries à l'unité, barres granola, noix salées, fruits coupés.</td></tr>
         </table>
-      </div>
-      <div class="receipt" aria-label="Exemple de facture">
-        <h4>RESTO LA FONDUE</h4>
-        <div class="sub">Souper pour 4 · exemple du manuel</div>
-        <div class="row"><span>Repas</span><span>150,00&nbsp;$</span></div>
-        <hr>
-        <div class="row"><span>TPS 5 %</span><span>7,50&nbsp;$</span></div>
-        <div class="row"><span>TVQ 9,975 %</span><span>14,96&nbsp;$</span></div>
-        <hr>
-        <div class="row tot"><span>TOTAL</span><span>172,46 $</span></div>
-      </div>
-    </div>
+      </div></div>
     <dl class="tags"><div class="tag"><dt>Taxe d'accise</dt><dd>Une taxe <strong>cachée dans le prix</strong>&nbsp;: elle n'apparaît pas sur ta facture. Elle vise surtout&nbsp;:<ul class="lst"><li>l'<strong>essence</strong>&nbsp;;</li><li>l'<strong>alcool</strong>&nbsp;;</li><li>le <strong>tabac</strong>&nbsp;;</li><li>les <strong>véhicules énergivores</strong>.</li></ul></dd></div></dl>
     <p><strong>Pourquoi des taxes?</strong> Pour <strong>payer les services publics</strong> (école, santé, environnement) et pour <strong>influencer ce qu'on achète</strong>&nbsp;: taxer moins l'essentiel, taxer plus ce qu'on veut décourager (pollution, tabac, alcool).</p>
     <div class="pause">
@@ -644,7 +610,7 @@ ul.lst { display: grid; gap: 3px; margin: 4px 0 8px; padding-left: 1.2em; }
     <div class="h3row"><h3>Les facteurs socioculturels</h3></div>
     <p>L'argent n'explique pas tout. <strong>Trois</strong> autres facteurs influencent ce que tu achètes&nbsp;:</p>
     <div class="cols3">
-      <div class="card"><h4>La culture</h4><p>Les valeurs, traditions et habitudes de ton groupe (langue, musique, bouffe).</p><p class="ex">Popcorn au cinéma au Québec, réglisse salée aux Pays-Bas.</p></div>
+      <div class="card"><h4>La culture</h4><p>Les valeurs, traditions et habitudes de ton groupe (langue, musique, bouffe).</p></div>
       <div class="card"><h4>Les groupes sociaux</h4><p>Famille, amis, équipe, collègues. On achète parfois pour <strong>appartenir</strong> au groupe.</p><p class="ex">Porter le chandail de son équipe.</p></div>
       <div class="card"><h4>Les facteurs individuels</h4><p>Ce qui t'est propre&nbsp;: personnalité, histoire, <strong>valeurs</strong>.</p><p class="ex">Acheter local, recycler, éviter l'inutile.</p></div>
     </div>
